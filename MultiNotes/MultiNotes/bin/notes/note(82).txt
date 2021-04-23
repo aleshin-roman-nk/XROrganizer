@@ -1,0 +1,1 @@
+{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":1,"date":1612620653235,"datemod":1612620667934,"gdid":"10y404yg5fYrlvE8V5pnChDTzQ_ZQniG2","id":148,"notetxt":"Делать презентации, и рассказы.","pass":false,"sellist":0,"status":0,"timer":0}

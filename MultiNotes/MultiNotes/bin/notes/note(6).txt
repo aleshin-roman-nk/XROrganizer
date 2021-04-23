@@ -1,0 +1,1 @@
+{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":2,"date":1615008566483,"datemod":1615008639606,"gdid":"1x3tw5VleGhuv5CORB7CaCe0P5G0m-za8","id":218,"notetxt":"Средство описания и разделения как делать задачу. ","pass":false,"sellist":0,"status":0,"text_span":"","timer":0,"title_span":""}

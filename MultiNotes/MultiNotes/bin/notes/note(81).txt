@@ -1,0 +1,1 @@
+{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":1,"date":1612621021255,"datemod":1612621046166,"gdid":"1AZRM4lkNVgWtb2lSEBgVAo6Tk5VPbigF","id":149,"notetxt":"Конспектирование записанных речей. Запоминать и пересказывать. ","pass":false,"sellist":2,"status":0,"timer":0}

@@ -1,0 +1,1 @@
+{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":0,"date":1611119418081,"datemod":1611119437544,"gdid":"1cQds3twv12FgJvzhPF-_5Xj2_O3zqxqm","id":99,"notetxt":"Раздел главные задачи. Напр учёт фин","pass":false,"sellist":1,"status":0,"timer":0}

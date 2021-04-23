@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":2,"date":1607802123315,"datemod":1607802209113,"gdid":"1XspCZQw_X_3TeSD0YgC7b2Y3QiKFjQ6P","id":42,"notetxt":"Изучать англ видео про паттернов, учить выражения. Замечать выражения на англ, переводить их на русский и запоминать как моя мысль на русском может быть выражена англ. ","pass":false,"sellist":2,"status":0,"timer":0}

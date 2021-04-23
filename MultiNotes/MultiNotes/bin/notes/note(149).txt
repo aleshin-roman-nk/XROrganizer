@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1609605349740,"datemod":1609605374252,"gdid":"125gV_WAAE21dA9vqO8WTwOqhswTZHnrk","id":69,"notetxt":"Собирать олнородные слова. Например описание размеров. ","pass":false,"sellist":3,"status":0,"timer":0}

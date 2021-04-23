@@ -1,0 +1,1 @@
+{"boardid":"1SJ-5Hz_ecJOjlwQU6J61nYWEN7TJLagA","color":2,"date":1607445289506,"datemod":1607445315704,"gdid":"1J3cisfUEtiiXUGhxp-h6Z4QXuWNnXgMD","id":33,"notetxt":"Вообще серьёзно заняться экономикой. Отдельный проект идей. ","pass":false,"sellist":7,"status":0,"timer":0}

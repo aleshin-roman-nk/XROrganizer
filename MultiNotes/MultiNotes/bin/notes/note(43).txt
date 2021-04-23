@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":2,"date":1612395528415,"datemod":1612418396904,"gdid":"1djPLeA4ddbNmOVoZ2A0_c0hGugIl-56V","id":118,"notetxt":"Стратегия изучения языка. Изучить 3, 4 правила в неделю, выучить 100 слов в неделю. Оттренировать, закрепить, следующий шаг. ","pass":false,"sellist":6,"status":0,"text_span":"","timer":0,"title_span":""}

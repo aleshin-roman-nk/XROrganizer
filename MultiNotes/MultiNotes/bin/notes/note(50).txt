@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":0,"date":1611462556381,"datemod":1612418396898,"gdid":"1Af62GFDQQUi8zGVsZ7g0yAnVdGVswYhs","id":104,"notetxt":"Много раз повторять обзатц.\nДелать разбор.\nСлушать, слушать.\nПростые предложения по картинке. ","pass":false,"sellist":3,"status":0,"text_span":"","timer":0,"title_span":""}

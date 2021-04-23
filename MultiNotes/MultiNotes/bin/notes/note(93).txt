@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1612594346440,"datemod":1612594377316,"gdid":"1quy_PqmYaG0tqlHvJ0SM1_h-yirJCrTm","id":137,"notetxt":"Слова и выражения учить так долго, чтобы они стали естественным родными для меня. ","pass":false,"sellist":7,"status":0,"timer":0}

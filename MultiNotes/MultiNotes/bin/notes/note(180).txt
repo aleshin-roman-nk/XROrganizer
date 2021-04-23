@@ -1,0 +1,1 @@
+{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":1,"date":1608216534273,"datemod":1608216603161,"gdid":"1LV7gW1u_eJ3nX3C2g3r2VZ07-tiVz9aR","id":59,"notetxt":"Мой Майн цели: принадлежать Иегове; программирование; английский, турецкий. ","pass":false,"sellist":7,"status":0,"timer":0}

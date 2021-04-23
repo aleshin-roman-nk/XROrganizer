@@ -1,0 +1,1 @@
+{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":6,"date":1612674290507,"datemod":1612674356598,"gdid":"1yXJN8-necaZA6XF3f_DPqgpfTMi74nw6","id":156,"notetxt":"Можно сделать приёмный буфер, общий лист заметок, общий документ, затем который можно заметки рассылать по направлениям. ","pass":false,"sellist":1,"status":0,"timer":0}

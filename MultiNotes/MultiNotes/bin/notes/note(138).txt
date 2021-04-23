@@ -1,0 +1,1 @@
+{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":5,"date":1609935654304,"datemod":1609935868674,"gdid":"1Xa9zYcNQESuiZ02ZbkjNCp9AMuIRFMrT","id":76,"notetxt":"Проект, часть проекта, если он сильно большой. Задачи это конкретные объёмы, конкретно что делать. А как же заметки по проекту? ","pass":false,"sellist":2,"status":0,"timer":0}

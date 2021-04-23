@@ -1,0 +1,1 @@
+{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1605257626392,"datemod":1606464146603,"gdid":"1aS5j8gEkzfdjboO3D8jEx00bvLsunQek","id":8,"notetxt":"В екселе записывать время отчёт о выполнении. ","pass":false,"sellist":5,"status":0,"timer":0}

@@ -1,0 +1,1 @@
+{"boardid":"1gWlILSfGAIX975Y-NAcUeH8hIprtNH7h","color":1,"date":1607958452801,"datemod":1607958503816,"gdid":"1dsYoUpQ79UZ8uIuQzjxImRxXJu9oMGvv","id":55,"notetxt":"Из бд брать просто коллекцию древоскщностей. И только презентер отдаёт её во вью и вью показывает её как дерево. ","pass":false,"sellist":4,"status":0,"timer":0}

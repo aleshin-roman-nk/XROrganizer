@@ -1,0 +1,1 @@
+{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":1,"date":1608985151279,"datemod":1608985221871,"gdid":"1p-sQkQ8KQYtJmE5vRF6iBFQAYsJcKPBl","id":64,"notetxt":"Учиться получать и усваивать много информации. Читать, смотреть. Пересказывать, Конспектировать ключевые и важные мысли, сведения. ","pass":false,"sellist":5,"status":0,"timer":0}

@@ -1,0 +1,1 @@
+{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":1,"date":1612618854161,"datemod":1612618871993,"gdid":"1lshRRCc4CVlzLQEUSJLJkj5lvTlQjwxe","id":147,"notetxt":"Документ дня. Что сделать, что сделано. ","pass":false,"sellist":3,"status":0,"timer":0}

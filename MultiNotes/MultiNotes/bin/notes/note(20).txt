@@ -1,0 +1,1 @@
+{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":2,"date":1614775218426,"datemod":1614775272918,"gdid":"1aDN18I5FFMb0b18BzRkhCafWSdeBwTS_","id":208,"notetxt":"Составлять документацию всех моих решений, составленный инструкции моих способов организации времени. ","pass":false,"sellist":2,"status":0,"text_span":"","timer":0,"title_span":""}

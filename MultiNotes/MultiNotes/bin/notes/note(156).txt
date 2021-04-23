@@ -1,0 +1,1 @@
+{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":0,"date":1610128715656,"datemod":1610128779584,"gdid":"1XvTvtePvjhp2hh8qZlAR5kYeB05oVrnY","id":84,"notetxt":"Писать статьи.\nМелкие рассказики каждый день с использованием коллекции слов и конструкций данной недели. ","pass":false,"sellist":7,"status":0,"timer":0}

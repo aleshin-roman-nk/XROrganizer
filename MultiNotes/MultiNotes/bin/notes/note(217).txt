@@ -1,0 +1,1 @@
+{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":1,"date":1606977935879,"datemod":1606978005591,"gdid":"1FlBPIOy2eEFIf3mzcpa3f_62JOxmt2Vo","id":18,"notetxt":"Найдя мысль на рус, предположить, как её перевести на англ. Затем посмотреть её выражение. И зафиксировать себе в коллекцию, как такая рус мысль можно выразить на иняз. ","pass":false,"sellist":3,"status":0,"timer":0}

@@ -1,0 +1,1 @@
+{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":1,"date":1612674248457,"datemod":1612674289528,"gdid":"1ChjnLYkVyKe8xqK5AVXfxbgClHXIy4vI","id":155,"notetxt":"Разработать типовую программу практических занятий по англ. ","pass":false,"sellist":0,"status":0,"timer":0}

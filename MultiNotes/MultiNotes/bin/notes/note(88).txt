@@ -1,0 +1,1 @@
+{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":1,"date":1612617685037,"datemod":1612617796182,"gdid":"19KD1oFj8j8F1u5fIzrQPqmhee0gU9TBF","id":142,"notetxt":"Банк заметок и задач. ","pass":false,"sellist":1,"status":0,"timer":0}

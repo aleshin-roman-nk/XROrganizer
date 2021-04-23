@@ -1,0 +1,1 @@
+{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":1,"date":1612617797655,"datemod":1612617856863,"gdid":"1hMc2FJF5Eer-uidGH2NflfBDSA1-9z7H","id":143,"notetxt":"Разбирать материалы и рассказывать. Учить. Тренировать речь. ","pass":false,"sellist":4,"status":0,"timer":0}

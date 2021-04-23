@@ -1,0 +1,1 @@
+{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":2,"date":1607373936928,"datemod":1607373967737,"gdid":"1_IUW3BnZsQMj3YIhMwCTrMeLQ1PE24AQ","id":30,"notetxt":" Нужно просто привыкнуть к ежедневному распорядку. ","pass":false,"sellist":5,"status":0,"timer":0}

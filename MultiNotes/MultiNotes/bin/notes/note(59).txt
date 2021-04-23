@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":6,"date":1612947016484,"datemod":1612947059139,"gdid":"1z_RAiQi5w6OCQIeI9E92aHom21QmhyFM","id":170,"notetxt":"Каждый день тренировать использования слов определённой группы. То есть набора. Выражений. ","pass":false,"sellist":3,"status":0,"timer":0}

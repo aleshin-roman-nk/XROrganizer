@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1612594604267,"datemod":1612595093560,"gdid":"1GxriMhgqZIjE-RafYW3N4VfE3GWsGG4y","id":139,"notetxt":"Примечательный шаблон.\nJesus was the first of many to be raised from death to heavenly life.\n","pass":false,"sellist":7,"status":0,"timer":0}

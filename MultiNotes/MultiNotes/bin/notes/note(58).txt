@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":6,"date":1612956993768,"datemod":1612957126294,"gdid":"1-0Leb31zQqQnZrN7Wp7fOCbzZKOeNu4R","id":172,"notetxt":"!!! Проект может состоять из умений. Часть называется умения, каждое умение набирает часы наработки. Например сегодня я слушал только, идёт добавление в скилл слушание. ","pass":false,"sellist":0,"status":0,"timer":0}

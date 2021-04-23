@@ -1,0 +1,1 @@
+{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":1,"date":1609060131456,"datemod":1609060162134,"gdid":"","id":65,"notetxt":"Держать Стек крупных проектов для каждодневной нагрузки. ","pass":false,"sellist":1,"status":0,"timer":0}

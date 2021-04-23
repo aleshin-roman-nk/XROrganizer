@@ -1,0 +1,1 @@
+{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1609935318491,"datemod":1609935395514,"gdid":"1OPhLClJf4tLxtvmoR6DZf3MhV2Y6h6Zt","id":74,"notetxt":"Можно писать статьи, рассказывая придуманные истории, писать истории по картинкам. Так же коллекционировать фразы из фильмов, нативных текстов, как носители говорят. ","pass":false,"sellist":5,"status":0,"timer":0}

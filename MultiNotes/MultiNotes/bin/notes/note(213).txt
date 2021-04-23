@@ -1,0 +1,1 @@
+{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":1,"date":1607156764067,"datemod":1607156817328,"gdid":"1XqkPs_c0PgrvNttY-xdVddE4_tMcwKGB","id":24,"notetxt":"Тщательно читать статьи. Запоминать главные мысли, пересказывать. Ввести этот подход в привычку. ","pass":false,"sellist":5,"status":0,"timer":0}

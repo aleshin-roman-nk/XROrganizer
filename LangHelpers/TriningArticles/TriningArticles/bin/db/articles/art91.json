@@ -1,0 +1,9 @@
+﻿{
+  "Id": 91,
+  "Name": "001.Turkish.Vocab.0-100",
+  "Lang": null,
+  "Content": "{\\rtf1\\ansi\\ansicpg1251\\deff0\\nouicompat\\deflang1049{\\fonttbl{\\f0\\fnil\\fcharset0 Roboto Condensed;}{\\f1\\fnil\\fcharset162 Roboto Condensed;}{\\f2\\fnil\\fcharset204 Roboto Condensed;}{\\f3\\fnil\\fcharset238 Roboto Condensed;}}\r\n{\\colortbl ;\\red255\\green255\\blue0;}\r\n{\\*\\generator Riched20 10.0.19041}\\viewkind4\\uc1 \r\n\\pard\\cf1\\f0\\fs24\\lang1033 ### 001.Turkish.Vocab\\f1\\lang1055 .0-100\\f0\\lang1033\\par\r\n\\f2\\lang1049\\par\r\n\\f0\\lang1033 eng - tur\\f2\\lang1049\\par\r\n\\par\r\n\\f0\\lang1033 meat - et: You eat the meat. Sen eti yersin.\\par\r\n\\f1\\lang1055 peaynir\\par\r\nk\\f0\\lang1033\\'f6\\f1\\lang1055 pek\\par\r\nadam\\par\r\nde\\f3\\u287?\\f1 il\\par\r\nbu\\par\r\nk\\f3\\u305?\\f1 z\\par\r\nkad\\f3\\u305?\\f1 n\\par\r\nkedi\\par\r\n\\f0\\lang1033\\par\r\n\\f2\\lang1049\\par\r\n\\par\r\n}\r\n",
+  "WorkText": "{\\rtf1\\ansi\\ansicpg1251\\deff0\\nouicompat\\deflang1049{\\fonttbl{\\f0\\fnil\\fcharset204 Roboto Condensed;}}\r\n{\\colortbl ;\\red124\\green252\\blue0;}\r\n{\\*\\generator Riched20 10.0.19041}\\viewkind4\\uc1 \r\n\\pard\\cf1\\f0\\fs24\\par\r\n}\r\n",
+  "TxtContent": "### 001.Turkish.Vocab.0-100\n\neng - tur\n\nmeat - et: You eat the meat. Sen eti yersin.\npeaynir\nköpek\nadam\ndeğil\nbu\nkız\nkadın\nkedi\n\n\n",
+  "DateTime": "0001-01-01T00:00:00"
+}

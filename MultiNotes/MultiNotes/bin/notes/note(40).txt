@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":0,"date":1612002848357,"datemod":1612418396901,"gdid":"1gctPghdZBQIMkqx4H8IeDXFwCQuvNL6d","id":113,"notetxt":"Практиковать выразительно чтение","pass":false,"sellist":5,"status":0,"text_span":"","timer":0,"title_span":""}

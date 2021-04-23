@@ -1,0 +1,1 @@
+{"boardid":"1mv1OOz_zQDGdPvuUpJQgJWPUTQdhfQEu","color":2,"date":1614156243280,"datemod":1614156272485,"gdid":"1FvSjNYlinSPhF-OLhmNc7pvIP52Lo3NS","id":201,"notetxt":"В день 100 предложений на 50 слов и пару грамматики. ","pass":false,"sellist":2,"status":0,"text_span":"","timer":0,"title_span":""}

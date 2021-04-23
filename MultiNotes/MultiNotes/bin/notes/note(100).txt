@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1612506126271,"datemod":1612506257946,"gdid":"1L-WxSVN4gHi2w9ntRVyf_XQYzxveyBgH","id":130,"notetxt":"Бить конкретно в цель, то есть если в плане найти работу, качать обзор для интервью, рассказ технологий, своих проектов. ","pass":false,"sellist":4,"status":0,"timer":0}

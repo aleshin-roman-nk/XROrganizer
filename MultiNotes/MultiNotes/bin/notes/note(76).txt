@@ -1,0 +1,1 @@
+{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":1,"date":1612674040125,"datemod":1612674082212,"gdid":"16Bw-xxpwQEYKHDhh6kS6M-gdPcNkX7Lr","id":154,"notetxt":"Сделать скомпилированныц центр моего опыта и рассортировать все заметки, собрать их в мои правила, статьи. ","pass":false,"sellist":5,"status":0,"timer":0}

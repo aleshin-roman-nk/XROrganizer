@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":2,"date":1607802287903,"datemod":1607802323892,"gdid":"1zLWrgF4FJAYfP7Xr7zQV3ToM4K9Djf-r","id":43,"notetxt":"Читать вслух, потом проговаривать наизусть. Перед этим проанализировать грамматику","pass":false,"sellist":6,"status":0,"timer":0}

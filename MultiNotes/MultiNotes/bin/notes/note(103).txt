@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1612494776397,"datemod":1612494819414,"gdid":"1-j96VEQRfuEVRM_a3M_eow89dmQBskHq","id":127,"notetxt":"Практика составления обстоятельств. Местоположения, направления, времени. ","pass":false,"sellist":2,"status":0,"timer":0}

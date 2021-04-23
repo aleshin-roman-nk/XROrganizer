@@ -1,0 +1,1 @@
+{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":0,"date":1611325373478,"datemod":1611325433441,"gdid":"1PfiLVweFsWoaV-QHkDWxb4LddybalM25","id":102,"notetxt":"Чётко проговаривать то, что я делаю. Обьяснять мои решения, действия. Так же делать это на англ. Чётко и точно описывать текстом задачи проекта. ","pass":false,"sellist":5,"status":0,"timer":0}

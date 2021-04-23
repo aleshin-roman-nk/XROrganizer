@@ -1,0 +1,1 @@
+{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":2,"date":1607786591429,"datemod":1607786633686,"gdid":"16-wJR8p3ZX_lRwcZe107hBVjGQKu5Lyw","id":37,"notetxt":"Выделить время чтобы подготовить программу недели. Объёмы, и как делать ","pass":false,"sellist":2,"status":0,"timer":0}

@@ -1,0 +1,1 @@
+{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":6,"date":1612945160131,"datemod":1612945230073,"gdid":"1uAx0yGmioXJiARFrEC8UIiQv-JYqOmZV","id":168,"notetxt":"!!! Если не успел прописать программу задач дня, может помочь абстрактный график, в котором указаны часы, выделенные на основные крупные проекты. ","pass":false,"sellist":0,"status":0,"timer":0}

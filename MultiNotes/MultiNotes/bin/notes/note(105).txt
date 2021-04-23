@@ -1,0 +1,1 @@
+{"boardid":"1Id5gRUMo3WKPl6EYbqacuZIcoEjpiBf7","color":2,"date":1612432755388,"datemod":1612432866191,"gdid":"1AQ6oiCBUrKe6sKYhyNHPXhiGSGzK6qOr","id":125,"notetxt":"Построить полное описание всех моих достижений, умений. ","pass":false,"sellist":5,"status":0,"timer":0}

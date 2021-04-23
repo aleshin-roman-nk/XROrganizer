@@ -1,0 +1,1 @@
+{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":1,"date":1609583199535,"datemod":1609583240571,"gdid":"1ORAZ1xXQo8pG0By_84fBr-6qLAIpukCk","id":67,"notetxt":"Задавать вопросы, и делать развёрнутые ответы. ","pass":false,"sellist":2,"status":0,"timer":0}

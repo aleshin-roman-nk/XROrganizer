@@ -1,0 +1,1 @@
+{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":5,"date":1609936125054,"datemod":1609936168072,"gdid":"1zhEiyOsad1Hm9TBIqgDMJLVF-1Ftr_wQ","id":77,"notetxt":"Писать себе конкретный план недели. Может сразу не получается но я научусь организовывать свое время. ","pass":false,"sellist":3,"status":0,"timer":0}

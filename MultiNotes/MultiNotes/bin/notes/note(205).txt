@@ -1,0 +1,1 @@
+{"boardid":"1SJ-5Hz_ecJOjlwQU6J61nYWEN7TJLagA","color":2,"date":1607445153327,"datemod":1607445276872,"gdid":"1Zz1jzqk9X-SeDyzEoNbCgnGa5Bn1Ob98","id":32,"notetxt":"Устанавливать бюджет месяца и дня. Изображать срез превышения. Анализировать, что не влезло в бюджет. Тем самым оченивпть, где перерасход.","pass":false,"sellist":3,"status":0,"timer":0}

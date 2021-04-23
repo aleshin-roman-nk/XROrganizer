@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":0,"date":1611595819091,"datemod":1612418396900,"gdid":"1mlIF5l3R0BrN8DthLpIS9E_vzfKoIWfn","id":107,"notetxt":"Практика применения конструкций и слов моего словаря. ","pass":false,"sellist":0,"status":0,"text_span":"","timer":0,"title_span":""}

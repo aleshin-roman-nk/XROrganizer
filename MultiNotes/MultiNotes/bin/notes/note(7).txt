@@ -1,0 +1,1 @@
+{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":2,"date":1615008521486,"datemod":1615008565536,"gdid":"1AIHM5dwGS8V8Obnfi9gRrD-2m09np1tY","id":217,"notetxt":"Элемент директории имеет указатель на директорию и свой тип.","pass":false,"sellist":7,"status":0,"text_span":"","timer":0,"title_span":""}

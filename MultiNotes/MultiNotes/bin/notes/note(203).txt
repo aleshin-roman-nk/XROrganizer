@@ -1,0 +1,1 @@
+{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":2,"date":1607445720553,"datemod":1607445771351,"gdid":"1gZObClgO_9pDttzkwKC7cTZhtypevhoC","id":34,"notetxt":"Много раз повторять наизусть вслух предложения осмысленно. Учить обрывки фраз. ","pass":false,"sellist":5,"status":0,"timer":0}

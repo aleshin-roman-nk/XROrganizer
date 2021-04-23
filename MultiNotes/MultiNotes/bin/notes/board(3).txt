@@ -1,0 +1,1 @@
+{"backcolor":0,"backnum":1,"backpath":"","color":2,"colorfont":0,"datemod":1615103704908,"gdid":"1gWlILSfGAIX975Y-NAcUeH8hIprtNH7h","icon":0,"id":7,"numord":6,"title":"Программирование"}
