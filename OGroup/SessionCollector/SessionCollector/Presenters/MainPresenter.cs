@@ -1,6 +1,7 @@
 ﻿using SessionCollector.BL;
 using SessionCollector.BL.Entities;
 using SessionCollector.BL.Services;
+using SessionCollector.Tools;
 using SessionCollector.Views;
 using System;
 using System.Collections.Generic;
@@ -37,16 +38,15 @@ namespace SessionCollector
 
 		private void _view_CommandWorkSession(object sender, OSession e)
 		{
-			var res = _sessionview.Go(e);
+			var res = _sessionview.Go(e.Clone());
 
 			if (res.Accept)
 			{
-				_mainRepository.Sessions.Save(res.Data);
+				e.Accept(res.Data);
+
+				_mainRepository.Sessions.Save(e);
 
 				displaySessions(_view.CurrentDateTime);
-
-				//var items = _mainRepository.Sessions.GetByDay(_view.CurrentDateTime);
-				//_view.DisplaySessions(items, _services.SessionSortService.GetAllocatedHours(items));
 			}
 		}
 

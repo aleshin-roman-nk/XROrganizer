@@ -29,15 +29,12 @@ namespace TimeTickerCounter
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StopwatchForm));
 			this.btnPlay = new System.Windows.Forms.Button();
 			this.btnPause = new System.Windows.Forms.Button();
 			this.lblOut = new System.Windows.Forms.Label();
 			this.btnReset = new System.Windows.Forms.Button();
-			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.btnClipboard = new System.Windows.Forms.Button();
-			this.timer2 = new System.Windows.Forms.Timer(this.components);
 			this.label1 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
@@ -88,10 +85,6 @@ namespace TimeTickerCounter
 			this.btnReset.UseVisualStyleBackColor = true;
 			this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
 			// 
-			// timer1
-			// 
-			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-			// 
 			// btnClipboard
 			// 
 			this.btnClipboard.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClipboard.BackgroundImage")));
@@ -105,17 +98,13 @@ namespace TimeTickerCounter
 			this.btnClipboard.UseVisualStyleBackColor = true;
 			this.btnClipboard.Click += new System.EventHandler(this.btnClipboard_Click);
 			// 
-			// timer2
-			// 
-			this.timer2.Interval = 200;
-			this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label1.Location = new System.Drawing.Point(15, 42);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(13, 13);
+			this.label1.Size = new System.Drawing.Size(20, 23);
 			this.label1.TabIndex = 5;
 			this.label1.Text = ">";
 			// 
@@ -149,9 +138,7 @@ namespace TimeTickerCounter
 		private System.Windows.Forms.Button btnPause;
 		private System.Windows.Forms.Label lblOut;
 		private System.Windows.Forms.Button btnReset;
-		private System.Windows.Forms.Timer timer1;
 		private System.Windows.Forms.Button btnClipboard;
-		private System.Windows.Forms.Timer timer2;
 		private System.Windows.Forms.Label label1;
 	}
 }

@@ -38,10 +38,11 @@ namespace TaskBank
 			taskCollectionView.SaveTaskNeeded += TaskCollectionView_SaveTaskNeeded;
 			taskCollectionView.MoveTaskCollection += TaskCollectionView_MoveTaskCollection;
 
-			directories.Add(new RmDirectiry {Name = "Программирование", Id = 1 });
-			directories.Add(new RmDirectiry { Name = "Турецкий", Id = 2 });
-			directories.Add(new RmDirectiry { Name = "Английский", Id = 3});
-			directories.Add(new RmDirectiry { Name = "Организатор", Id = 4 });
+			directories.Add(new RmDirectiry { Name = "INBOX", Id = 1 });
+			directories.Add(new RmDirectiry { Name = "Программирование", Id = 2 });
+			directories.Add(new RmDirectiry { Name = "Турецкий", Id = 3 });
+			directories.Add(new RmDirectiry { Name = "Английский", Id = 4});
+			directories.Add(new RmDirectiry { Name = "Организатор", Id = 5 });
 
 			bsDir.DataSource = directories;
 			bsDirDest.DataSource = directories;

@@ -30,17 +30,9 @@ namespace SessionCollector
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvSessions = new System.Windows.Forms.DataGridView();
-			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.planStartDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.planHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.planFinishDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.actualHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.closedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.oSessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnNewSession = new System.Windows.Forms.Button();
 			this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
 			this.btnSaveDayImage = new System.Windows.Forms.Button();
@@ -51,10 +43,18 @@ namespace SessionCollector
 			this.label1 = new System.Windows.Forms.Label();
 			this.lblAllocatedTime = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.TotalWorkTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.planStartDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.planHoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.planFinishDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.closedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.oSessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dgvSessions)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.oSessionBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dgvDirectories)).BeginInit();
 			this.panel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.oSessionBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// dgvSessions
@@ -70,71 +70,17 @@ namespace SessionCollector
             this.planStartDataGridViewTextBoxColumn,
             this.planHoursDataGridViewTextBoxColumn,
             this.planFinishDataGridViewTextBoxColumn,
-            this.actualHoursDataGridViewTextBoxColumn,
+            this.TotalWorkTime,
             this.closedDataGridViewCheckBoxColumn});
 			this.dgvSessions.DataSource = this.oSessionBindingSource;
 			this.dgvSessions.Location = new System.Drawing.Point(240, 46);
 			this.dgvSessions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.dgvSessions.Name = "dgvSessions";
 			this.dgvSessions.RowTemplate.Height = 28;
-			this.dgvSessions.Size = new System.Drawing.Size(1149, 287);
+			this.dgvSessions.Size = new System.Drawing.Size(1059, 287);
 			this.dgvSessions.TabIndex = 0;
 			this.dgvSessions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSessions_CellFormatting);
 			this.dgvSessions.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvSessions_KeyDown);
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			// 
-			// descriptionDataGridViewTextBoxColumn
-			// 
-			this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-			this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-			this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-			this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
-			this.descriptionDataGridViewTextBoxColumn.Width = 300;
-			// 
-			// planStartDataGridViewTextBoxColumn
-			// 
-			this.planStartDataGridViewTextBoxColumn.DataPropertyName = "PlanStart";
-			dataGridViewCellStyle7.Format = "dd.MM.yyyy \\ HH:mm";
-			this.planStartDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle7;
-			this.planStartDataGridViewTextBoxColumn.HeaderText = "PlanStart";
-			this.planStartDataGridViewTextBoxColumn.Name = "planStartDataGridViewTextBoxColumn";
-			this.planStartDataGridViewTextBoxColumn.Width = 200;
-			// 
-			// planHoursDataGridViewTextBoxColumn
-			// 
-			this.planHoursDataGridViewTextBoxColumn.DataPropertyName = "PlanHours";
-			this.planHoursDataGridViewTextBoxColumn.HeaderText = "PlanHours";
-			this.planHoursDataGridViewTextBoxColumn.Name = "planHoursDataGridViewTextBoxColumn";
-			// 
-			// planFinishDataGridViewTextBoxColumn
-			// 
-			this.planFinishDataGridViewTextBoxColumn.DataPropertyName = "PlanFinish";
-			dataGridViewCellStyle8.Format = "HH:mm";
-			this.planFinishDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle8;
-			this.planFinishDataGridViewTextBoxColumn.HeaderText = "PlanFinish";
-			this.planFinishDataGridViewTextBoxColumn.Name = "planFinishDataGridViewTextBoxColumn";
-			this.planFinishDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// actualHoursDataGridViewTextBoxColumn
-			// 
-			this.actualHoursDataGridViewTextBoxColumn.DataPropertyName = "ActualHours";
-			this.actualHoursDataGridViewTextBoxColumn.HeaderText = "ActualHours";
-			this.actualHoursDataGridViewTextBoxColumn.Name = "actualHoursDataGridViewTextBoxColumn";
-			// 
-			// closedDataGridViewCheckBoxColumn
-			// 
-			this.closedDataGridViewCheckBoxColumn.DataPropertyName = "Closed";
-			this.closedDataGridViewCheckBoxColumn.HeaderText = "Closed";
-			this.closedDataGridViewCheckBoxColumn.Name = "closedDataGridViewCheckBoxColumn";
-			// 
-			// oSessionBindingSource
-			// 
-			this.oSessionBindingSource.DataSource = typeof(SessionCollector.BL.Entities.OSession);
 			// 
 			// btnNewSession
 			// 
@@ -156,7 +102,7 @@ namespace SessionCollector
 			// 
 			// btnSaveDayImage
 			// 
-			this.btnSaveDayImage.Location = new System.Drawing.Point(1206, 677);
+			this.btnSaveDayImage.Location = new System.Drawing.Point(934, 677);
 			this.btnSaveDayImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btnSaveDayImage.Name = "btnSaveDayImage";
 			this.btnSaveDayImage.Size = new System.Drawing.Size(183, 41);
@@ -188,7 +134,7 @@ namespace SessionCollector
 			this.txtDescription.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.txtDescription.Location = new System.Drawing.Point(0, 0);
 			this.txtDescription.Name = "txtDescription";
-			this.txtDescription.Size = new System.Drawing.Size(1147, 324);
+			this.txtDescription.Size = new System.Drawing.Size(1057, 324);
 			this.txtDescription.TabIndex = 6;
 			this.txtDescription.Text = "";
 			// 
@@ -227,14 +173,69 @@ namespace SessionCollector
 			this.panel1.Controls.Add(this.txtDescription);
 			this.panel1.Location = new System.Drawing.Point(240, 341);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(1149, 326);
+			this.panel1.Size = new System.Drawing.Size(1059, 326);
 			this.panel1.TabIndex = 10;
+			// 
+			// TotalWorkTime
+			// 
+			this.TotalWorkTime.DataPropertyName = "TotalWorkTime";
+			this.TotalWorkTime.HeaderText = "TotalWorkTime";
+			this.TotalWorkTime.Name = "TotalWorkTime";
+			this.TotalWorkTime.ReadOnly = true;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// descriptionDataGridViewTextBoxColumn
+			// 
+			this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+			this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+			this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+			this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+			this.descriptionDataGridViewTextBoxColumn.Width = 300;
+			// 
+			// planStartDataGridViewTextBoxColumn
+			// 
+			this.planStartDataGridViewTextBoxColumn.DataPropertyName = "PlanStart";
+			dataGridViewCellStyle1.Format = "dd.MM.yyyy \\ HH:mm";
+			this.planStartDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+			this.planStartDataGridViewTextBoxColumn.HeaderText = "PlanStart";
+			this.planStartDataGridViewTextBoxColumn.Name = "planStartDataGridViewTextBoxColumn";
+			this.planStartDataGridViewTextBoxColumn.Width = 200;
+			// 
+			// planHoursDataGridViewTextBoxColumn
+			// 
+			this.planHoursDataGridViewTextBoxColumn.DataPropertyName = "PlanHours";
+			this.planHoursDataGridViewTextBoxColumn.HeaderText = "PlanHours";
+			this.planHoursDataGridViewTextBoxColumn.Name = "planHoursDataGridViewTextBoxColumn";
+			// 
+			// planFinishDataGridViewTextBoxColumn
+			// 
+			this.planFinishDataGridViewTextBoxColumn.DataPropertyName = "PlanFinish";
+			dataGridViewCellStyle2.Format = "HH:mm";
+			this.planFinishDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+			this.planFinishDataGridViewTextBoxColumn.HeaderText = "PlanFinish";
+			this.planFinishDataGridViewTextBoxColumn.Name = "planFinishDataGridViewTextBoxColumn";
+			this.planFinishDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// closedDataGridViewCheckBoxColumn
+			// 
+			this.closedDataGridViewCheckBoxColumn.DataPropertyName = "Closed";
+			this.closedDataGridViewCheckBoxColumn.HeaderText = "Closed";
+			this.closedDataGridViewCheckBoxColumn.Name = "closedDataGridViewCheckBoxColumn";
+			// 
+			// oSessionBindingSource
+			// 
+			this.oSessionBindingSource.DataSource = typeof(SessionCollector.BL.Entities.OSession);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1449, 740);
+			this.ClientSize = new System.Drawing.Size(1332, 740);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.lblAllocatedTime);
 			this.Controls.Add(this.label1);
@@ -252,9 +253,9 @@ namespace SessionCollector
 			this.Text = "Form1";
 			this.Shown += new System.EventHandler(this.MainForm_Shown);
 			((System.ComponentModel.ISupportInitialize)(this.dgvSessions)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.oSessionBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dgvDirectories)).EndInit();
 			this.panel1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.oSessionBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -270,17 +271,17 @@ namespace SessionCollector
 		private System.Windows.Forms.BindingSource oSessionBindingSource;
 		private System.Windows.Forms.Label txtCurrentDate;
 		private System.Windows.Forms.RichTextBox txtDescription;
+		private System.Windows.Forms.Button btnSortAndAlign;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label lblAllocatedTime;
+		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn planStartDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn planHoursDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn planFinishDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn actualHoursDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn TotalWorkTime;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn closedDataGridViewCheckBoxColumn;
-		private System.Windows.Forms.Button btnSortAndAlign;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label lblAllocatedTime;
-		private System.Windows.Forms.Panel panel1;
 	}
 }
 

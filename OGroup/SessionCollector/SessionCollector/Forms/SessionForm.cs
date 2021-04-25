@@ -10,16 +10,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TimeTickerCounter;
 
 namespace SessionCollector.Forms
 {
 	public partial class SessionForm : Form, ISessionView
 	{
 		OSession _ent;
-
+		TickCounterController timerController;
 		public SessionForm()
 		{
 			InitializeComponent();
+
+			timerController = new TickCounterController();
+			timerController.IsRunningShow = TimeIsTicking;
+			timerController.TimeShow = lblTime;
 		}
 
 		private void _set(OSession e)
@@ -30,6 +35,7 @@ namespace SessionCollector.Forms
 			txtPlanHours.Text = e.PlanHours.ToString();
 			txtPlanFinish.Text = e.PlanFinish.ToString("dd.MM.yyyy HH:mm");
 			txtDescription.Text = e.Description;
+			lblSessionTotalTimeString.Text = e.TotalWorkTime;
 		}
 
 		private OSession _get()
@@ -45,6 +51,7 @@ namespace SessionCollector.Forms
 		{
 			_set(e);
 			bool ok = DialogResult.OK == this.ShowDialog();
+			timerController.Stop();
 			return new ViewResult<OSession> { Accept = ok, Data = _get() };
 		}
 
@@ -63,6 +70,23 @@ namespace SessionCollector.Forms
 
 				e.Handled = true;
 			}
+		}
+
+		private void btnPlay_Click(object sender, EventArgs e)
+		{
+			timerController.Play();
+		}
+
+		private void btnPause_Click(object sender, EventArgs e)
+		{
+			timerController.Pause();
+		}
+
+		private void btnStop_Click(object sender, EventArgs e)
+		{
+			_ent.TotalSeconds += timerController.TotalSeconds;
+			lblSessionTotalTimeString.Text = _ent.TotalWorkTime;
+			timerController.Stop();
 		}
 	}
 }

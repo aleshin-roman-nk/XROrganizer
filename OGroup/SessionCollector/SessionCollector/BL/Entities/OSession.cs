@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using SessionCollector.Tools;
 
 namespace SessionCollector.BL.Entities
 {
@@ -24,7 +25,33 @@ namespace SessionCollector.BL.Entities
 			}
 		}
 		// Фактический счетчик
-		public decimal ActualHours { get; set; }
+		public decimal TotalHours
+		{
+			get
+			{
+				return TotalSeconds / (60.0m * 60.0m);
+			}
+		}
+		public int TotalSeconds { get; set; }
 		public bool Closed { get; set; }
+		public string TotalWorkTime
+		{
+			get
+			{
+				var res = TimeSpan.FromSeconds(TotalSeconds);
+				return $"{res.Hours:d2}:{res.Minutes:d2}:{res.Seconds:d2}";
+			}
+		}
+
+		public OSession Clone()
+		{
+			return JsonTool.Clone(this);
+		}
+
+		public void Accept(OSession o)
+		{
+			//PropertyCopy.Copy(o, this);
+			o.CopyPropertiesTo(this);
+		}
 	}
 }

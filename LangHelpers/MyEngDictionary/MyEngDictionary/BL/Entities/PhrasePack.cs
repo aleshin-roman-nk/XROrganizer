@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyEngDictionary.BL.Entities
 {
-	public class PhrasePack
+	public class PhrasePack// rename to "S(rudy)Module". Because we better work with modules. Module by module, I am improving my english... turkish. 
 	{
 		public PhrasePack()
 		{
