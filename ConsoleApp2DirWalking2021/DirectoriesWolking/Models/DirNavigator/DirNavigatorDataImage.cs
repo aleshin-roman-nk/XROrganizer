@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DirectoriesWolking
+namespace DirectoriesWolking.Models.DirNavigator
 {
 	// Один образ состояние. При любом изменении, образ задается новый. Или просто меняются переменные образа по запросу view
 	public class DirNavigatorDataImage

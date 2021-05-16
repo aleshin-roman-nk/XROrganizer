@@ -19,9 +19,9 @@ namespace SessionCollector.BL
 		public MainRepository(string app_data_path)
 		{
 			_appData = new AppData(app_data_path);
-#if DEBUG
-			_appData.Database.Log = Logger.Write;
-#endif
+//#if DEBUG
+//			_appData.Database.Log = Logger.Write;
+//#endif
 			Directories = new DirectoryRepository(_appData);
 			Sessions = new SessionRepository(_appData);
 		}

@@ -30,8 +30,8 @@ namespace TriningArticles
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.panelHead = new System.Windows.Forms.Panel();
 			this.label1 = new System.Windows.Forms.Label();
@@ -40,6 +40,7 @@ namespace TriningArticles
 			this.btnClose = new System.Windows.Forms.Button();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.dgvArticles = new System.Windows.Forms.DataGridView();
+			this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnDeleteArticle = new System.Windows.Forms.Button();
 			this.btnSaveArticle = new System.Windows.Forms.Button();
 			this.btnAddArticle = new System.Windows.Forms.Button();
@@ -52,9 +53,9 @@ namespace TriningArticles
 			this.label2 = new System.Windows.Forms.Label();
 			this.rtbPractice = new System.Windows.Forms.RichTextBox();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.articleBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.articleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.panel5 = new System.Windows.Forms.Panel();
 			this.panelHead.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvArticles)).BeginInit();
@@ -70,13 +71,14 @@ namespace TriningArticles
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.articleBindingSource)).BeginInit();
+			this.panel5.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panelHead
 			// 
 			this.panelHead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.panelHead.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.panelHead.Controls.Add(this.label1);
+			this.panelHead.Controls.Add(this.panel5);
 			this.panelHead.Controls.Add(this.btnMin);
 			this.panelHead.Controls.Add(this.btnMax);
 			this.panelHead.Controls.Add(this.btnClose);
@@ -92,7 +94,7 @@ namespace TriningArticles
 			this.label1.AutoSize = true;
 			this.label1.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label1.ForeColor = System.Drawing.Color.Lime;
-			this.label1.Location = new System.Drawing.Point(253, 8);
+			this.label1.Location = new System.Drawing.Point(11, 8);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(49, 19);
 			this.label1.TabIndex = 3;
@@ -153,7 +155,7 @@ namespace TriningArticles
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(298, 708);
+			this.panel1.Size = new System.Drawing.Size(298, 688);
 			this.panel1.TabIndex = 1;
 			// 
 			// dgvArticles
@@ -167,27 +169,27 @@ namespace TriningArticles
 			this.dgvArticles.AutoGenerateColumns = false;
 			this.dgvArticles.BackgroundColor = System.Drawing.Color.Gray;
 			this.dgvArticles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gray;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Yellow;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Gray;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Yellow;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dgvArticles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle5.BackColor = System.Drawing.Color.Gray;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Yellow;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Gray;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Yellow;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.dgvArticles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
 			this.dgvArticles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvArticles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
             this.ColumnName});
 			this.dgvArticles.DataSource = this.articleBindingSource;
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle2.BackColor = System.Drawing.Color.Gray;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Yellow;
-			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Gainsboro;
-			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.DarkGreen;
-			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.dgvArticles.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle6.BackColor = System.Drawing.Color.Gray;
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Yellow;
+			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Gainsboro;
+			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.DarkGreen;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dgvArticles.DefaultCellStyle = dataGridViewCellStyle6;
 			this.dgvArticles.EnableHeadersVisualStyles = false;
 			this.dgvArticles.GridColor = System.Drawing.Color.Lime;
 			this.dgvArticles.Location = new System.Drawing.Point(0, 40);
@@ -197,8 +199,16 @@ namespace TriningArticles
 			this.dgvArticles.RowHeadersVisible = false;
 			this.dgvArticles.RowTemplate.Height = 26;
 			this.dgvArticles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvArticles.Size = new System.Drawing.Size(298, 665);
+			this.dgvArticles.Size = new System.Drawing.Size(298, 648);
 			this.dgvArticles.TabIndex = 4;
+			// 
+			// ColumnName
+			// 
+			this.ColumnName.DataPropertyName = "Name";
+			this.ColumnName.HeaderText = "Name";
+			this.ColumnName.Name = "ColumnName";
+			this.ColumnName.ReadOnly = true;
+			this.ColumnName.Width = 200;
 			// 
 			// btnDeleteArticle
 			// 
@@ -207,24 +217,23 @@ namespace TriningArticles
 			this.btnDeleteArticle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnDeleteArticle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.btnDeleteArticle.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteArticle.Image")));
-			this.btnDeleteArticle.Location = new System.Drawing.Point(46, 3);
+			this.btnDeleteArticle.Location = new System.Drawing.Point(96, 4);
 			this.btnDeleteArticle.Name = "btnDeleteArticle";
-			this.btnDeleteArticle.Size = new System.Drawing.Size(37, 31);
+			this.btnDeleteArticle.Size = new System.Drawing.Size(40, 30);
 			this.btnDeleteArticle.TabIndex = 3;
 			this.btnDeleteArticle.UseVisualStyleBackColor = false;
 			this.btnDeleteArticle.Click += new System.EventHandler(this.btnDeleteArticle_Click);
 			// 
 			// btnSaveArticle
 			// 
-			this.btnSaveArticle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnSaveArticle.BackColor = System.Drawing.Color.DarkGreen;
 			this.btnSaveArticle.FlatAppearance.BorderSize = 0;
 			this.btnSaveArticle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnSaveArticle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.btnSaveArticle.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveArticle.Image")));
-			this.btnSaveArticle.Location = new System.Drawing.Point(255, 3);
+			this.btnSaveArticle.Location = new System.Drawing.Point(50, 4);
 			this.btnSaveArticle.Name = "btnSaveArticle";
-			this.btnSaveArticle.Size = new System.Drawing.Size(37, 31);
+			this.btnSaveArticle.Size = new System.Drawing.Size(40, 30);
 			this.btnSaveArticle.TabIndex = 2;
 			this.btnSaveArticle.UseVisualStyleBackColor = false;
 			this.btnSaveArticle.Click += new System.EventHandler(this.btnSaveArticle_Click);
@@ -234,9 +243,9 @@ namespace TriningArticles
 			this.btnAddArticle.BackColor = System.Drawing.Color.Lime;
 			this.btnAddArticle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnAddArticle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.btnAddArticle.Location = new System.Drawing.Point(3, 1);
+			this.btnAddArticle.Location = new System.Drawing.Point(4, 4);
 			this.btnAddArticle.Name = "btnAddArticle";
-			this.btnAddArticle.Size = new System.Drawing.Size(37, 31);
+			this.btnAddArticle.Size = new System.Drawing.Size(40, 30);
 			this.btnAddArticle.TabIndex = 1;
 			this.btnAddArticle.Text = "+";
 			this.btnAddArticle.UseVisualStyleBackColor = false;
@@ -249,7 +258,7 @@ namespace TriningArticles
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(0, 0);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(621, 708);
+			this.panel2.Size = new System.Drawing.Size(621, 688);
 			this.panel2.TabIndex = 2;
 			// 
 			// splitContainer1
@@ -267,8 +276,8 @@ namespace TriningArticles
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.panel4);
-			this.splitContainer1.Size = new System.Drawing.Size(621, 708);
-			this.splitContainer1.SplitterDistance = 331;
+			this.splitContainer1.Size = new System.Drawing.Size(621, 688);
+			this.splitContainer1.SplitterDistance = 321;
 			this.splitContainer1.TabIndex = 0;
 			// 
 			// panel3
@@ -278,7 +287,7 @@ namespace TriningArticles
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel3.Location = new System.Drawing.Point(0, 0);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(621, 331);
+			this.panel3.Size = new System.Drawing.Size(621, 321);
 			this.panel3.TabIndex = 1;
 			// 
 			// rtbHead
@@ -290,7 +299,7 @@ namespace TriningArticles
 			this.rtbHead.ForeColor = System.Drawing.Color.Yellow;
 			this.rtbHead.Location = new System.Drawing.Point(0, 0);
 			this.rtbHead.Name = "rtbHead";
-			this.rtbHead.Size = new System.Drawing.Size(619, 329);
+			this.rtbHead.Size = new System.Drawing.Size(619, 319);
 			this.rtbHead.TabIndex = 0;
 			this.rtbHead.Text = "";
 			this.rtbHead.TextChanged += new System.EventHandler(this.rtbHead_TextChanged);
@@ -305,7 +314,7 @@ namespace TriningArticles
 			this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel4.Location = new System.Drawing.Point(0, 0);
 			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(621, 373);
+			this.panel4.Size = new System.Drawing.Size(621, 363);
 			this.panel4.TabIndex = 1;
 			// 
 			// txtTotalSentenses
@@ -314,7 +323,7 @@ namespace TriningArticles
 			this.txtTotalSentenses.AutoSize = true;
 			this.txtTotalSentenses.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.txtTotalSentenses.ForeColor = System.Drawing.Color.Yellow;
-			this.txtTotalSentenses.Location = new System.Drawing.Point(147, 330);
+			this.txtTotalSentenses.Location = new System.Drawing.Point(147, 320);
 			this.txtTotalSentenses.Name = "txtTotalSentenses";
 			this.txtTotalSentenses.Size = new System.Drawing.Size(19, 23);
 			this.txtTotalSentenses.TabIndex = 2;
@@ -326,7 +335,7 @@ namespace TriningArticles
 			this.label2.AutoSize = true;
 			this.label2.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.label2.ForeColor = System.Drawing.Color.Yellow;
-			this.label2.Location = new System.Drawing.Point(3, 330);
+			this.label2.Location = new System.Drawing.Point(3, 320);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(138, 23);
 			this.label2.TabIndex = 1;
@@ -343,7 +352,7 @@ namespace TriningArticles
 			this.rtbPractice.ForeColor = System.Drawing.Color.LawnGreen;
 			this.rtbPractice.Location = new System.Drawing.Point(0, 0);
 			this.rtbPractice.Name = "rtbPractice";
-			this.rtbPractice.Size = new System.Drawing.Size(619, 327);
+			this.rtbPractice.Size = new System.Drawing.Size(619, 317);
 			this.rtbPractice.TabIndex = 0;
 			this.rtbPractice.Text = "";
 			this.rtbPractice.TextChanged += new System.EventHandler(this.rtbHead_TextChanged);
@@ -364,14 +373,9 @@ namespace TriningArticles
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.panel2);
-			this.splitContainer2.Size = new System.Drawing.Size(923, 708);
+			this.splitContainer2.Size = new System.Drawing.Size(923, 688);
 			this.splitContainer2.SplitterDistance = 298;
 			this.splitContainer2.TabIndex = 3;
-			// 
-			// articleBindingSource
-			// 
-			this.articleBindingSource.DataSource = typeof(TriningArticles.BL.Article);
-			this.articleBindingSource.CurrentItemChanged += new System.EventHandler(this.articleBindingSource_CurrentItemChanged);
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -381,13 +385,20 @@ namespace TriningArticles
 			this.idDataGridViewTextBoxColumn.ReadOnly = true;
 			this.idDataGridViewTextBoxColumn.Width = 70;
 			// 
-			// ColumnName
+			// articleBindingSource
 			// 
-			this.ColumnName.DataPropertyName = "Name";
-			this.ColumnName.HeaderText = "Name";
-			this.ColumnName.Name = "ColumnName";
-			this.ColumnName.ReadOnly = true;
-			this.ColumnName.Width = 200;
+			this.articleBindingSource.DataSource = typeof(TriningArticles.BL.Article);
+			this.articleBindingSource.CurrentItemChanged += new System.EventHandler(this.articleBindingSource_CurrentItemChanged);
+			// 
+			// panel5
+			// 
+			this.panel5.BackColor = System.Drawing.Color.Gray;
+			this.panel5.Controls.Add(this.label1);
+			this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
+			this.panel5.Location = new System.Drawing.Point(0, 0);
+			this.panel5.Name = "panel5";
+			this.panel5.Size = new System.Drawing.Size(149, 33);
+			this.panel5.TabIndex = 4;
 			// 
 			// MainForm
 			// 
@@ -405,7 +416,6 @@ namespace TriningArticles
 			this.Text = "Training English";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
 			this.panelHead.ResumeLayout(false);
-			this.panelHead.PerformLayout();
 			this.panel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgvArticles)).EndInit();
 			this.panel2.ResumeLayout(false);
@@ -421,6 +431,8 @@ namespace TriningArticles
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.articleBindingSource)).EndInit();
+			this.panel5.ResumeLayout(false);
+			this.panel5.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -449,6 +461,7 @@ namespace TriningArticles
 		private System.Windows.Forms.SplitContainer splitContainer2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+		private System.Windows.Forms.Panel panel5;
 	}
 }
 

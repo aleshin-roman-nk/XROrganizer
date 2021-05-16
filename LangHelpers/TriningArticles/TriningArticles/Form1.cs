@@ -49,6 +49,9 @@ namespace TriningArticles
 		{
 			InitializeComponent();
 
+			this.DoubleBuffered = true;
+			this.SetStyle(ControlStyles.ResizeRedraw, true);
+
 			articleService = new ArticleService();
 
 			string db_path;
@@ -93,17 +96,18 @@ namespace TriningArticles
 					return;
 				}
 			}
-
-			//switch (m.Msg)
-			//{
-			//	case 0x84:
-			//		base.WndProc(ref m);
-			//		if ((int)m.Result == 0x1)
-			//			m.Result = (IntPtr)0x2;
-			//		return;
-			//}
-
 			base.WndProc(ref m);
+		}
+
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			Rectangle rc = new Rectangle(this.ClientSize.Width - cGrip, this.ClientSize.Height - cGrip, cGrip, cGrip);
+
+			Color ccc = Color.FromArgb(0xf6b93b);
+
+			ControlPaint.DrawSizeGrip(e.Graphics, ccc, rc);
+			rc = new Rectangle(0, 0, this.ClientSize.Width, cCaption);
+			e.Graphics.FillRectangle(Brushes.Red, rc);
 		}
 
 		private void panelHead_MouseMove(object sender, MouseEventArgs e)

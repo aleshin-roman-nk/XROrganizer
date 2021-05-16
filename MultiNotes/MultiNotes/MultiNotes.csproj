@@ -60,6 +60,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="repository.cs" />
+    <Compile Include="tools\GetNoteHashCode.cs" />
     <Compile Include="tools\JsonTool.cs" />
     <Compile Include="tools\ObjectReadWrite.cs" />
     <Compile Include="UIHelpers\DataGridViewEx.cs" />

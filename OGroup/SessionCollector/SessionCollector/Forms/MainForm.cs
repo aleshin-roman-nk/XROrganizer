@@ -1,4 +1,6 @@
 ﻿using SessionCollector.BL.Entities;
+using SessionCollector.Forms;
+using SessionCollector.Tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,10 +33,14 @@ namespace SessionCollector
 		public event EventHandler<DateTime> CommandDateChanged;
 		public event EventHandler<DateTime> CommandOrderAndAlign;
 		public event EventHandler<OSession> CommandWorkSession;
+		public event EventHandler<OSession> CommandDeleteSession;
+		public event EventHandler<OSession> CommandStartSessionTick;
+
+
 
 		//public event EventHandler NotifyShown;
 
-		public void DisplaySessions(IEnumerable<OSession> list, decimal hours)
+		public void DisplaySessions(IEnumerable<OSession> list, decimal hours, DateTime? eod)
 		{
 			bs.DataSource = list;
 			dgvSessions.DataSource = bs;
@@ -43,6 +49,8 @@ namespace SessionCollector
 			txtDescription.DataBindings.Add("Text", bs, "Description");
 
 			lblAllocatedTime.Text = hours.ToString();
+
+			lblEndOfDay.Text = !eod.HasValue ? "нет сессий" : eod.Value.ToString("HH:mm '/' dd.MM.yy");
 		}
 
 		private void btnNewSession_Click(object sender, EventArgs e)
@@ -75,9 +83,19 @@ namespace SessionCollector
 		{
 			if (_current_session == null) return;
 
-			if(e.KeyCode == Keys.Enter)
+			if (e.Control && e.KeyCode == Keys.Enter)
+			{
+				CommandStartSessionTick?.Invoke(this, _current_session);
+				e.Handled = true;
+			}
+			else if (e.KeyCode == Keys.Enter)// Если комплексная сессия - вход в нее - нормально. Если надо редактировать, ентер+контрол.
 			{
 				CommandWorkSession?.Invoke(this, _current_session);
+				e.Handled = true;
+			}
+			else if (e.KeyCode == Keys.Delete)
+			{
+				CommandDeleteSession?.Invoke(this, _current_session);
 				e.Handled = true;
 			}
 		}
@@ -94,6 +112,30 @@ namespace SessionCollector
 			//	row.Cells["closedDataGridViewCheckBoxColumn"].Style.Font.Style = FontStyle.Strikeout;
 			//else
 			//	row.Cells["closedDataGridViewCheckBoxColumn"].Style.BackColor = Color;
+		}
+
+		public bool UserAnsweredYes(string qstr)
+		{
+			return MessageBox.Show(qstr, "WARNUNG", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+		}
+
+		public void ShowMessage(string msg)
+		{
+			MessageBox.Show(msg, "WARNUNG", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+		}
+
+		private void panel1_Paint(object sender, PaintEventArgs e)
+		{
+			var p = sender as Panel;
+			//MessageBox.Show(p.Name);
+			ControlPaint.DrawBorder(e.Graphics, p.ClientRectangle, Color.Yellow, ButtonBorderStyle.Solid);
+		}
+
+		private void dgvSessions_Paint(object sender, PaintEventArgs e)
+		{
+			var p = sender as DataGridView;
+			//MessageBox.Show(p.Name);
+			ControlPaint.DrawBorder(e.Graphics, p.ClientRectangle, Color.Yellow, ButtonBorderStyle.Solid);
 		}
 	}
 }

@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":5,"date":1609939256642,"datemod":1609939277960,"gdid":"1rNsGiWI4h6a641s-LYtFl6TgoDDDrqir","id":79,"notetxt":"Разработать программу недели, матрица чек лист. ","pass":false,"sellist":7,"status":0,"timer":0}

@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":0,"date":1610128509202,"datemod":1612418396892,"gdid":"12klaX2P6aNQrRX2egDa5zkzhVrYoqxGr","id":83,"notetxt":"Упражнение\nИзучая статью, продумывать варианты слов, которыми можно перевести слово с рус на англ. ","pass":false,"sellist":3,"status":0,"text_span":"","timer":0,"title_span":""}

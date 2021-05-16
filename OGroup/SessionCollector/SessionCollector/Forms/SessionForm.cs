@@ -17,31 +17,27 @@ namespace SessionCollector.Forms
 	public partial class SessionForm : Form, ISessionView
 	{
 		OSession _ent;
-		TickCounterController timerController;
+
 		public SessionForm()
 		{
 			InitializeComponent();
-
-			timerController = new TickCounterController();
-			timerController.IsRunningShow = TimeIsTicking;
-			timerController.TimeShow = lblTime;
 		}
 
 		private void _set(OSession e)
 		{
 			_ent = e;
 
-			dateTimePickerPlanStart.Value = e.PlanStart;
-			txtPlanHours.Text = e.PlanHours.ToString();
-			txtPlanFinish.Text = e.PlanFinish.ToString("dd.MM.yyyy HH:mm");
+			dateTimePickerPlanStart.Value = e.Start;
+			txtPlanHours.Text = e.ReservedHours.ToString();
+			txtPlanFinish.Text = e.Finish.ToString("dd.MM.yyyy HH:mm");
 			txtDescription.Text = e.Description;
 			lblSessionTotalTimeString.Text = e.TotalWorkTime;
 		}
 
 		private OSession _get()
 		{
-			_ent.PlanHours = get_plan_hours(txtPlanHours.Text);
-			_ent.PlanStart = dateTimePickerPlanStart.Value;
+			_ent.ReservedHours = get_plan_hours(txtPlanHours.Text);
+			_ent.Start = dateTimePickerPlanStart.Value;
 			_ent.Description = txtDescription.Text;
 
 			return _ent;
@@ -51,8 +47,10 @@ namespace SessionCollector.Forms
 		{
 			_set(e);
 			bool ok = DialogResult.OK == this.ShowDialog();
-			timerController.Stop();
-			return new ViewResult<OSession> { Accept = ok, Data = _get() };
+			if(ok)
+				return new ViewResult<OSession> { Accept = ok, Data = _get() };
+			else
+				return new ViewResult<OSession> { Accept = ok, Data = null };
 		}
 
 		decimal get_plan_hours(string v)
@@ -64,29 +62,38 @@ namespace SessionCollector.Forms
 		{
 			if (e.KeyCode == Keys.Enter)
 			{
-				_ent.PlanHours = get_plan_hours(txtPlanHours.Text);
-				txtPlanFinish.Text = _ent.PlanFinish.ToString("dd.MM.yyyy HH:mm");
-
+				_ent.ReservedHours = get_plan_hours(txtPlanHours.Text);
+				txtPlanFinish.Text = _ent.Finish.ToString("dd.MM.yyyy HH:mm");
 
 				e.Handled = true;
 			}
 		}
 
-		private void btnPlay_Click(object sender, EventArgs e)
+		private void label6_Click(object sender, EventArgs e)
 		{
-			timerController.Play();
+			InputDataDialog dlg = new InputDataDialog();
+
+			if(dlg.ShowWithValidation(@"^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$") == DialogResult.OK)
+			{
+				_ent.TotalSeconds = Convert.ToInt32(TimeSpan.Parse(dlg.InputText).TotalSeconds);
+				lblSessionTotalTimeString.Text = _ent.TotalWorkTime;
+			}
 		}
 
-		private void btnPause_Click(object sender, EventArgs e)
+		Color label6Backgfround;
+
+		private void label6_MouseEnter(object sender, EventArgs e)
 		{
-			timerController.Pause();
+			var lbl = sender as Label;
+
+			label6Backgfround = lbl.BackColor;
+			lbl.BackColor = ColorTranslator.FromHtml("#b8e994");
 		}
 
-		private void btnStop_Click(object sender, EventArgs e)
+		private void label6_MouseLeave(object sender, EventArgs e)
 		{
-			_ent.TotalSeconds += timerController.TotalSeconds;
-			lblSessionTotalTimeString.Text = _ent.TotalWorkTime;
-			timerController.Stop();
+			var lbl = sender as Label;
+			lbl.BackColor = label6Backgfround;
 		}
 	}
 }

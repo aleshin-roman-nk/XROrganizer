@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DirectoriesWolking.tools
+namespace DirectoryNavigator.tools
 {
 	public static class JsonDebug
 	{

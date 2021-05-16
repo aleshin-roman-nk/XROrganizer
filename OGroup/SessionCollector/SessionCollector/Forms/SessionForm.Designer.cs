@@ -42,11 +42,6 @@ namespace SessionCollector.Forms
 			this.btnChangeDirectory = new System.Windows.Forms.Button();
 			this.btnSave = new System.Windows.Forms.Button();
 			this.btn = new System.Windows.Forms.Button();
-			this.lblTime = new System.Windows.Forms.Label();
-			this.TimeIsTicking = new System.Windows.Forms.Label();
-			this.btnPause = new System.Windows.Forms.Button();
-			this.btnPlay = new System.Windows.Forms.Button();
-			this.btnStop = new System.Windows.Forms.Button();
 			this.label6 = new System.Windows.Forms.Label();
 			this.lblSessionTotalTimeString = new System.Windows.Forms.Label();
 			this.SuspendLayout();
@@ -166,67 +161,23 @@ namespace SessionCollector.Forms
 			this.btn.Text = "Отмена";
 			this.btn.UseVisualStyleBackColor = true;
 			// 
-			// lblTime
-			// 
-			this.lblTime.AutoSize = true;
-			this.lblTime.Location = new System.Drawing.Point(12, 291);
-			this.lblTime.Name = "lblTime";
-			this.lblTime.Size = new System.Drawing.Size(19, 23);
-			this.lblTime.TabIndex = 13;
-			this.lblTime.Text = "0";
-			// 
-			// TimeIsTicking
-			// 
-			this.TimeIsTicking.AutoSize = true;
-			this.TimeIsTicking.Location = new System.Drawing.Point(12, 314);
-			this.TimeIsTicking.Name = "TimeIsTicking";
-			this.TimeIsTicking.Size = new System.Drawing.Size(19, 23);
-			this.TimeIsTicking.TabIndex = 14;
-			this.TimeIsTicking.Text = "0";
-			// 
-			// btnPause
-			// 
-			this.btnPause.Location = new System.Drawing.Point(254, 291);
-			this.btnPause.Name = "btnPause";
-			this.btnPause.Size = new System.Drawing.Size(44, 35);
-			this.btnPause.TabIndex = 15;
-			this.btnPause.Text = "||";
-			this.btnPause.UseVisualStyleBackColor = true;
-			this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
-			// 
-			// btnPlay
-			// 
-			this.btnPlay.Location = new System.Drawing.Point(204, 291);
-			this.btnPlay.Name = "btnPlay";
-			this.btnPlay.Size = new System.Drawing.Size(44, 35);
-			this.btnPlay.TabIndex = 16;
-			this.btnPlay.Text = ">";
-			this.btnPlay.UseVisualStyleBackColor = true;
-			this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
-			// 
-			// btnStop
-			// 
-			this.btnStop.Location = new System.Drawing.Point(304, 291);
-			this.btnStop.Name = "btnStop";
-			this.btnStop.Size = new System.Drawing.Size(44, 35);
-			this.btnStop.TabIndex = 17;
-			this.btnStop.Text = "[]";
-			this.btnStop.UseVisualStyleBackColor = true;
-			this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-			// 
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(12, 349);
+			this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.label6.Location = new System.Drawing.Point(12, 266);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(175, 23);
+			this.label6.Size = new System.Drawing.Size(177, 25);
 			this.label6.TabIndex = 18;
 			this.label6.Text = "Общее время сессии";
+			this.label6.Click += new System.EventHandler(this.label6_Click);
+			this.label6.MouseEnter += new System.EventHandler(this.label6_MouseEnter);
+			this.label6.MouseLeave += new System.EventHandler(this.label6_MouseLeave);
 			// 
 			// lblSessionTotalTimeString
 			// 
 			this.lblSessionTotalTimeString.AutoSize = true;
-			this.lblSessionTotalTimeString.Location = new System.Drawing.Point(200, 349);
+			this.lblSessionTotalTimeString.Location = new System.Drawing.Point(200, 266);
 			this.lblSessionTotalTimeString.Name = "lblSessionTotalTimeString";
 			this.lblSessionTotalTimeString.Size = new System.Drawing.Size(19, 23);
 			this.lblSessionTotalTimeString.TabIndex = 19;
@@ -239,11 +190,6 @@ namespace SessionCollector.Forms
 			this.ClientSize = new System.Drawing.Size(967, 536);
 			this.Controls.Add(this.lblSessionTotalTimeString);
 			this.Controls.Add(this.label6);
-			this.Controls.Add(this.btnStop);
-			this.Controls.Add(this.btnPlay);
-			this.Controls.Add(this.btnPause);
-			this.Controls.Add(this.TimeIsTicking);
-			this.Controls.Add(this.lblTime);
 			this.Controls.Add(this.btn);
 			this.Controls.Add(this.btnSave);
 			this.Controls.Add(this.btnChangeDirectory);
@@ -282,11 +228,6 @@ namespace SessionCollector.Forms
 		private System.Windows.Forms.Button btnChangeDirectory;
 		private System.Windows.Forms.Button btnSave;
 		private System.Windows.Forms.Button btn;
-		private System.Windows.Forms.Label lblTime;
-		private System.Windows.Forms.Label TimeIsTicking;
-		private System.Windows.Forms.Button btnPause;
-		private System.Windows.Forms.Button btnPlay;
-		private System.Windows.Forms.Button btnStop;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label lblSessionTotalTimeString;
 	}

@@ -52,6 +52,7 @@
     <Compile Include="DirNavigator\DirNavigatorView.cs" />
     <Compile Include="DirNavigator\EnterDirEventArg.cs" />
     <Compile Include="DirNavigator\HostRequest.cs" />
+    <Compile Include="DirNavigator\IconProvider.cs" />
     <Compile Include="DirNavigator\IDirNavigatorView.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
@@ -59,20 +60,24 @@
     <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\IMainView.cs" />
+    <Compile Include="IUServices\EntityRouter.cs" />
     <Compile Include="Presenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tools\Logger.cs" />
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -92,6 +97,21 @@
       <Project>{179d3d88-7364-425f-bb4b-566e7dd643d0}</Project>
       <Name>DirectoriesWolking</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons8-folder-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons8-folder-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons8-task-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons8-arrow-up-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

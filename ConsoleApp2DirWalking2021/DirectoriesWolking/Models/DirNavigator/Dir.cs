@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DirectoriesWolking
+namespace DirectoriesWolking.Models.DirNavigator
 {
 	public class Dir: BaseDir
 	{

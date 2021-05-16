@@ -16,6 +16,9 @@ namespace WindowsFormsAppTest
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+
+			Logger.Clear();
+
 			Application.Run(new Form1());
 		}
 	}

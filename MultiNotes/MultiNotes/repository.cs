@@ -1,5 +1,6 @@
 ﻿using aleshin_rv.tools;
 using MultiNotes.Entities;
+using MultiNotes.tools;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,13 +35,15 @@ namespace MultiNotes
 
 		private bool exists(MNote note)
 		{
-			return _notes.FirstOrDefault(x => x.id.Equals(note.id)) != null;
+			var nHC = GetNoteHashCode.Calculate(note.notetxt);
+			return _notes.FirstOrDefault(x => GetNoteHashCode.Calculate(x.notetxt) == nHC) != null;
+
+			//return _notes.FirstOrDefault(x => x.id.Equals(note.id)) != null;
 		}
 
 		public void LoadContent()
 		{
 			LoadAllNotes();
-
 		}
 
 		private void LoadAllNotes()
@@ -49,8 +52,10 @@ namespace MultiNotes
 			foreach (var file in files)
 			{
 				var o = ObjectReadWrite.Read<MNote>(file);
-				if(!exists(o))
+				if (!exists(o))
 					_notes.Add(o);
+				else
+					File.Delete(file);
 			}
 
 			//_notes = _notes.OrderBy(x => x.id).ToList();

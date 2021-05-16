@@ -19,7 +19,8 @@ namespace SessionCollector.BL
 
 		public void Delete(OSession e)
 		{
-			throw new NotImplementedException();
+			_appData.Sessions.Remove(e);
+			_appData.SaveChanges();
 		}
 
 		public IEnumerable<OSession> Get()
@@ -36,7 +37,7 @@ namespace SessionCollector.BL
 		{
 			DateTime dt1 = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0);
 			DateTime dt2 = dt1.AddDays(1);
-			return _appData.Sessions.Where(x => x.PlanStart >= dt1 && x.PlanStart < dt2).OrderBy(x=>x.PlanStart).ToList();
+			return _appData.Sessions.Where(x => x.Start >= dt1 && x.Start < dt2).OrderBy(x=>x.Start).ToList();
 		}
 
 		public void Save(OSession e)

@@ -33,6 +33,8 @@ namespace WindowsFormsAppTest
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.txtPath = new System.Windows.Forms.TextBox();
 			this.btnCreatDir = new System.Windows.Forms.Button();
+			this.btnHideIcons = new System.Windows.Forms.Button();
+			this.btnShowIcons = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -73,11 +75,33 @@ namespace WindowsFormsAppTest
 			this.btnCreatDir.UseVisualStyleBackColor = true;
 			this.btnCreatDir.Click += new System.EventHandler(this.btnCreatDir_Click);
 			// 
+			// btnHideIcons
+			// 
+			this.btnHideIcons.Location = new System.Drawing.Point(896, 137);
+			this.btnHideIcons.Name = "btnHideIcons";
+			this.btnHideIcons.Size = new System.Drawing.Size(119, 43);
+			this.btnHideIcons.TabIndex = 3;
+			this.btnHideIcons.Text = "hide icons";
+			this.btnHideIcons.UseVisualStyleBackColor = true;
+			this.btnHideIcons.Click += new System.EventHandler(this.btnHideIcons_Click);
+			// 
+			// btnShowIcons
+			// 
+			this.btnShowIcons.Location = new System.Drawing.Point(896, 186);
+			this.btnShowIcons.Name = "btnShowIcons";
+			this.btnShowIcons.Size = new System.Drawing.Size(119, 43);
+			this.btnShowIcons.TabIndex = 4;
+			this.btnShowIcons.Text = "show icons";
+			this.btnShowIcons.UseVisualStyleBackColor = true;
+			this.btnShowIcons.Click += new System.EventHandler(this.btnShowIcons_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1053, 592);
+			this.Controls.Add(this.btnShowIcons);
+			this.Controls.Add(this.btnHideIcons);
 			this.Controls.Add(this.btnCreatDir);
 			this.Controls.Add(this.txtPath);
 			this.Controls.Add(this.dataGridView1);
@@ -85,6 +109,7 @@ namespace WindowsFormsAppTest
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.Name = "Form1";
 			this.Text = "Form1";
+			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -96,6 +121,8 @@ namespace WindowsFormsAppTest
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.TextBox txtPath;
 		private System.Windows.Forms.Button btnCreatDir;
+		private System.Windows.Forms.Button btnHideIcons;
+		private System.Windows.Forms.Button btnShowIcons;
 	}
 }
 

@@ -47,6 +47,7 @@ namespace MultiNotes
 			dataGridView2.AddCol(150, "Date", "_Date", "Date");
 			dataGridView2.AddCol(800, "Text", "notetxt", "notetxt");
 
+			bindTextViewer(bsNoteView);
 
 			displayBoards(repo.Boards);
 		}
@@ -85,8 +86,6 @@ namespace MultiNotes
 		private void displayNotes(IEnumerable<MNote> notes)
 		{
 			bsNoteView.DataSource = notes;
-			
-			bindTextViewer(bsNoteView);
 		}
 
 		private void displayBoards(IEnumerable<MBoard> brds)

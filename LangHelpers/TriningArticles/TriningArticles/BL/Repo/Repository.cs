@@ -75,11 +75,12 @@ namespace TriningArticles.BL.Repo
 		{
 			var names = Directory.GetFiles(_dir, "art*.json").OrderByDescending(x => x).Select(x => Path.GetFileName(x));
 
+			List<Article> arts = new List<Article>();
+
 			foreach (var item in names)
-			{
-				var a = LoadArticle(item);
-				yield return a;
-			}
+				arts.Add(LoadArticle(item));
+
+			return arts.OrderByDescending(x=>x.Id);
 		}
 		public Article Create()
 		{

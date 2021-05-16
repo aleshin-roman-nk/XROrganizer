@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1609935132535,"datemod":1609935233945,"gdid":"1E_Th0084r5Yxt_nCDz69jPyJuah5ekab","id":73,"notetxt":"Каждый день делать хоть небольшие речи. На русском и английском. Придумывать истории. Преподносить изученный материал. Много раз прочитать изучить и рассказать. ","pass":false,"sellist":5,"status":0,"timer":0}

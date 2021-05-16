@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1609935425390,"datemod":1609935437678,"gdid":"1Kp3RfGsbkeFs0xpb4nk8b6Cf7XD8uv2v","id":75,"notetxt":"Писать практику по грамматике. ","pass":false,"sellist":4,"status":0,"timer":0}

@@ -9,6 +9,7 @@ namespace MultiNotes.Entities
 	public class MNote
 	{
 		public string boardid { get; set; }
+		public string gdid { get; set; }
 		public int color { get; set; }
 		public long date { get; set; }
 		public long datemod { get; set; }

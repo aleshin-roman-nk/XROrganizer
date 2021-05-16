@@ -15,7 +15,7 @@ namespace SessionCollector.BL.Services
 		{
 			if (list.Count() <= 1) return list;
 
-			var res = list.OrderBy(x=>x.PlanStart).ToList();
+			var res = list.OrderBy(x=>x.Start).ToList();
 
 			/*
 			 * Сортированный список выравнять по времени
@@ -26,8 +26,8 @@ namespace SessionCollector.BL.Services
 
 			for(int i = 1; i < res.Count; i++)
 			{
-				if(res[i - 1].PlanFinish >= res[i].PlanStart )
-					res[i].PlanStart = res[i - 1].PlanFinish.AddMinutes(10);
+				if(res[i - 1].Finish >= res[i].Start )
+					res[i].Start = res[i - 1].Finish.AddMinutes(10);
 			}
 
 			return res;
@@ -35,12 +35,13 @@ namespace SessionCollector.BL.Services
 
 		public decimal GetAllocatedHours(IEnumerable<OSession> l)
 		{
-			return l.Sum(x => x.PlanHours);
+			return l.Sum(x => x.ReservedHours);
 		}
 
-		public DateTime GetLastSessionFinish(IEnumerable<OSession> l)
+		public DateTime? GetLastSessionFinish(IEnumerable<OSession> l)
 		{
-			return l.Max(x => x.PlanFinish);
+			if (l.Count() == 0) return null;
+			return l.Max(x => x.Finish);
 		}
 	}
 }

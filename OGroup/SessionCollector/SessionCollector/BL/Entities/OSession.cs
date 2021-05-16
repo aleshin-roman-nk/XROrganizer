@@ -12,16 +12,25 @@ namespace SessionCollector.BL.Entities
 	public class OSession
 	{
 		public int Id { get; set; }
-		//public int OwnerId { get; set; }
+		//public int OwnerId { get; set; }// любой объект из таблицы в которой задачи, заметки, идеи.
+											// можно создать сессию без хозяина. но привязать можно только к записи внутри проекта.
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public DateTime PlanStart { get; set; }
-		public decimal PlanHours { get; set; }
-		public DateTime PlanFinish
+		public DateTime Start { get; set; }
+		public decimal ReservedHours { get; set; }
+		public string ShorName
 		{
 			get
 			{
-				return PlanStart + TimeSpan.FromHours(Convert.ToDouble(PlanHours));
+				if (Description.Length < 10) return Description;
+				return Description.Substring(0, 10);
+			}
+		}
+		public DateTime Finish
+		{
+			get
+			{
+				return Start + TimeSpan.FromHours(Convert.ToDouble(ReservedHours));
 			}
 		}
 		// Фактический счетчик
@@ -39,7 +48,8 @@ namespace SessionCollector.BL.Entities
 			get
 			{
 				var res = TimeSpan.FromSeconds(TotalSeconds);
-				return $"{res.Hours:d2}:{res.Minutes:d2}:{res.Seconds:d2}";
+				//return $"{res.Hours:d2}:{res.Minutes:d2}:{res.Seconds:d2}";
+				return $"{res.Hours:d2}:{res.Minutes:d2}";
 			}
 		}
 

@@ -1,4 +1,5 @@
-﻿using DirectoriesWolking;
+﻿using DirectoriesWolking.Models.DirNavigator;
+using DirectoryNavigator;
 using System;
 using System.Collections.Generic;
 using System.Linq;

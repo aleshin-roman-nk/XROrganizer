@@ -77,19 +77,33 @@
     <Compile Include="BL\Services\Services.cs" />
     <Compile Include="BL\Services\SessionService.cs" />
     <Compile Include="BL\SessionRepository.cs" />
+    <Compile Include="Forms\InputDataDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InputDataDialog.Designer.cs">
+      <DependentUpon>InputDataDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SessionTickerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SessionTickerForm.Designer.cs">
+      <DependentUpon>SessionTickerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\SingleSessionTicker.cs" />
     <Compile Include="Forms\SessionForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SessionForm.Designer.cs">
       <DependentUpon>SessionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TickCounterController.cs" />
+    <Compile Include="Forms\TickCounterAnimator.cs" />
     <Compile Include="mvp-base\IEntityEditView.cs" />
     <Compile Include="Tools\JsonTool.cs" />
     <Compile Include="Tools\Logger.cs" />
     <Compile Include="Tools\PropertyCopy.cs" />
     <Compile Include="Views\IMainView.cs" />
     <Compile Include="BL\MainConfig.cs" />
+    <Compile Include="Views\ISessionTickerView.cs" />
     <Compile Include="Views\ISessionView.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="BL\MainRepository.cs" />
@@ -104,11 +118,17 @@
     <Compile Include="mvp-base\ViewResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\InputDataDialog.resx">
+      <DependentUpon>InputDataDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SessionForm.resx">
       <DependentUpon>SessionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SessionTickerForm.resx">
+      <DependentUpon>SessionTickerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
