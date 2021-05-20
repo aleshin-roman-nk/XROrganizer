@@ -107,11 +107,11 @@ namespace SessionCollector
 
 		private void dgvSessions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
-			//var row = dgvSessions.Rows[e.RowIndex];
-			//if ((row.DataBoundItem as OSession).Closed)
-			//	row.Cells["closedDataGridViewCheckBoxColumn"].Style.Font.Style = FontStyle.Strikeout;
-			//else
-			//	row.Cells["closedDataGridViewCheckBoxColumn"].Style.BackColor = Color;
+			var data = dgvSessions.Rows[e.RowIndex].DataBoundItem as OSession;
+			if (data.Closed)
+			{
+				e.CellStyle.ForeColor = ColorTranslator.FromHtml("#78e08f");
+			}
 		}
 
 		public bool UserAnsweredYes(string qstr)

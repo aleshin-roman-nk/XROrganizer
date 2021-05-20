@@ -148,6 +148,8 @@
 			// 
 			// btnCreate
 			// 
+			this.btnCreate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+			this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnCreate.Location = new System.Drawing.Point(13, 22);
 			this.btnCreate.Name = "btnCreate";
 			this.btnCreate.Size = new System.Drawing.Size(75, 23);
@@ -183,7 +185,7 @@
 			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle4;
 			this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Top;
-			this.dataGridView3.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+			this.dataGridView3.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(153)))), ((int)(((byte)(146)))));
 			this.dataGridView3.Location = new System.Drawing.Point(0, 0);
 			this.dataGridView3.Name = "dataGridView3";
 			this.dataGridView3.ReadOnly = true;
@@ -247,7 +249,7 @@
 			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle5;
 			this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.dataGridView2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+			this.dataGridView2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(153)))), ((int)(((byte)(146)))));
 			this.dataGridView2.Location = new System.Drawing.Point(0, 0);
 			this.dataGridView2.Name = "dataGridView2";
 			this.dataGridView2.ReadOnly = true;

@@ -31,13 +31,11 @@ namespace SessionCollector
 		{
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvSessions = new System.Windows.Forms.DataGridView();
-			this.ShorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Start = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ReservedHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.TotalWorkTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.oSessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnNewSession = new System.Windows.Forms.Button();
 			this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
 			this.btnSaveDayImage = new System.Windows.Forms.Button();
@@ -49,12 +47,15 @@ namespace SessionCollector
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.label2 = new System.Windows.Forms.Label();
 			this.lblEndOfDay = new System.Windows.Forms.Label();
-			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ShorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Start = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ReservedHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Finish = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.TotalWorkTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.closedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.oSessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dgvSessions)).BeginInit();
-			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.oSessionBindingSource)).BeginInit();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// dgvSessions
@@ -75,21 +76,21 @@ namespace SessionCollector
 			this.dgvSessions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.dgvSessions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvSessions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nameDataGridViewTextBoxColumn,
             this.ShorName,
             this.Start,
             this.ReservedHours,
+            this.Finish,
             this.TotalWorkTime,
             this.closedDataGridViewCheckBoxColumn});
 			this.dgvSessions.DataSource = this.oSessionBindingSource;
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(99)))), ((int)(((byte)(130)))));
-			dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(211)))), ((int)(((byte)(144)))));
-			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(153)))), ((int)(((byte)(146)))));
-			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(211)))), ((int)(((byte)(144)))));
-			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.dgvSessions.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(99)))), ((int)(((byte)(130)))));
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(211)))), ((int)(((byte)(144)))));
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(153)))), ((int)(((byte)(146)))));
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(211)))), ((int)(((byte)(144)))));
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dgvSessions.DefaultCellStyle = dataGridViewCellStyle4;
 			this.dgvSessions.EnableHeadersVisualStyles = false;
 			this.dgvSessions.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(211)))), ((int)(((byte)(144)))));
 			this.dgvSessions.Location = new System.Drawing.Point(183, 46);
@@ -103,36 +104,9 @@ namespace SessionCollector
 			this.dgvSessions.Paint += new System.Windows.Forms.PaintEventHandler(this.dgvSessions_Paint);
 			this.dgvSessions.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvSessions_KeyDown);
 			// 
-			// ShorName
+			// oSessionBindingSource
 			// 
-			this.ShorName.DataPropertyName = "ShorName";
-			this.ShorName.HeaderText = "Name";
-			this.ShorName.Name = "ShorName";
-			this.ShorName.ReadOnly = true;
-			this.ShorName.Width = 300;
-			// 
-			// Start
-			// 
-			this.Start.DataPropertyName = "Start";
-			dataGridViewCellStyle2.Format = "HH:mm  dd.MM.yy";
-			this.Start.DefaultCellStyle = dataGridViewCellStyle2;
-			this.Start.HeaderText = "Start";
-			this.Start.Name = "Start";
-			this.Start.Width = 150;
-			// 
-			// ReservedHours
-			// 
-			this.ReservedHours.DataPropertyName = "ReservedHours";
-			this.ReservedHours.HeaderText = "Hrs";
-			this.ReservedHours.Name = "ReservedHours";
-			this.ReservedHours.Width = 50;
-			// 
-			// TotalWorkTime
-			// 
-			this.TotalWorkTime.DataPropertyName = "TotalWorkTime";
-			this.TotalWorkTime.HeaderText = "Total";
-			this.TotalWorkTime.Name = "TotalWorkTime";
-			this.TotalWorkTime.ReadOnly = true;
+			this.oSessionBindingSource.DataSource = typeof(SessionCollector.BL.Entities.OSession);
 			// 
 			// btnNewSession
 			// 
@@ -252,22 +226,52 @@ namespace SessionCollector
 			this.lblEndOfDay.TabIndex = 12;
 			this.lblEndOfDay.Text = "0";
 			// 
-			// nameDataGridViewTextBoxColumn
+			// ShorName
 			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "Dir";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			this.ShorName.DataPropertyName = "ShorName";
+			this.ShorName.HeaderText = "Name";
+			this.ShorName.Name = "ShorName";
+			this.ShorName.ReadOnly = true;
+			this.ShorName.Width = 300;
+			// 
+			// Start
+			// 
+			this.Start.DataPropertyName = "Start";
+			dataGridViewCellStyle2.Format = "HH:mm  dd.MM.yy";
+			this.Start.DefaultCellStyle = dataGridViewCellStyle2;
+			this.Start.HeaderText = "Start";
+			this.Start.Name = "Start";
+			this.Start.Width = 150;
+			// 
+			// ReservedHours
+			// 
+			this.ReservedHours.DataPropertyName = "ReservedHours";
+			this.ReservedHours.HeaderText = "Hrs";
+			this.ReservedHours.Name = "ReservedHours";
+			this.ReservedHours.Width = 50;
+			// 
+			// Finish
+			// 
+			this.Finish.DataPropertyName = "Finish";
+			dataGridViewCellStyle3.Format = "HH:mm  dd.MM.yy";
+			this.Finish.DefaultCellStyle = dataGridViewCellStyle3;
+			this.Finish.HeaderText = "Finish";
+			this.Finish.Name = "Finish";
+			this.Finish.ReadOnly = true;
+			this.Finish.Width = 150;
+			// 
+			// TotalWorkTime
+			// 
+			this.TotalWorkTime.DataPropertyName = "TotalWorkTime";
+			this.TotalWorkTime.HeaderText = "Total";
+			this.TotalWorkTime.Name = "TotalWorkTime";
+			this.TotalWorkTime.ReadOnly = true;
 			// 
 			// closedDataGridViewCheckBoxColumn
 			// 
 			this.closedDataGridViewCheckBoxColumn.DataPropertyName = "Closed";
 			this.closedDataGridViewCheckBoxColumn.HeaderText = "Closed";
 			this.closedDataGridViewCheckBoxColumn.Name = "closedDataGridViewCheckBoxColumn";
-			// 
-			// oSessionBindingSource
-			// 
-			this.oSessionBindingSource.DataSource = typeof(SessionCollector.BL.Entities.OSession);
 			// 
 			// MainForm
 			// 
@@ -293,8 +297,8 @@ namespace SessionCollector
 			this.Text = "Form1";
 			this.Shown += new System.EventHandler(this.MainForm_Shown);
 			((System.ComponentModel.ISupportInitialize)(this.dgvSessions)).EndInit();
-			this.panel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.oSessionBindingSource)).EndInit();
+			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -316,14 +320,14 @@ namespace SessionCollector
 		private System.Windows.Forms.DataGridViewTextBoxColumn planStartDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn planHoursDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn planFinishDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label lblEndOfDay;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ShorName;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Start;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ReservedHours;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Finish;
 		private System.Windows.Forms.DataGridViewTextBoxColumn TotalWorkTime;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn closedDataGridViewCheckBoxColumn;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label lblEndOfDay;
 	}
 }
 

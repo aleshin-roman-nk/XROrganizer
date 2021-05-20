@@ -153,7 +153,7 @@ namespace TaskBank.ViewModules
 			if (!savingObserver.Saved)
 			{
 				task.Text = _taskBody.Text;
-				if (SaveTaskNeeded == null) throw new ArgumentNullException("SaveTaskNeeded must be subscribed but it does not.");
+				if (SaveTaskNeeded == null) throw new ArgumentNullException("SaveTaskNeeded must be subscribed but it is not.");
 				SaveTaskNeeded.Invoke(this, task);// спросить ответ что действительно сохранено.
 				savingObserver.Saved = true;
 			}
