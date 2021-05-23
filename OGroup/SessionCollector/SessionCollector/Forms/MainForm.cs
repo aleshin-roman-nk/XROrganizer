@@ -48,7 +48,7 @@ namespace SessionCollector
 			txtDescription.DataBindings.Clear();
 			txtDescription.DataBindings.Add("Text", bs, "Description");
 
-			lblAllocatedTime.Text = hours.ToString();
+			lblAllocatedTime.Text = TimeSpan.FromHours(Convert.ToDouble(hours)).ToString(@"hh\:mm");
 
 			lblEndOfDay.Text = !eod.HasValue ? "нет сессий" : eod.Value.ToString("HH:mm '/' dd.MM.yy");
 		}

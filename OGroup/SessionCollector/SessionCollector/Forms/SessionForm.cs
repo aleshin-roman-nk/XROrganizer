@@ -28,7 +28,10 @@ namespace SessionCollector.Forms
 			_ent = e;
 
 			dateTimePickerPlanStart.Value = e.Start;
-			txtPlanHours.Text = e.ReservedHours.ToString();
+			//txtPlanHours.Text = e.ReservedHours.ToString();
+
+			mtxtPlanHrs.Text = TimeSpan.FromHours(Convert.ToDouble(e.ReservedHours)).ToString(@"hh\:mm");
+
 			txtPlanFinish.Text = e.Finish.ToString("dd.MM.yyyy HH:mm");
 			txtDescription.Text = e.Description;
 			lblSessionTotalTimeString.Text = e.TotalWorkTime;
@@ -36,7 +39,8 @@ namespace SessionCollector.Forms
 
 		private OSession _get()
 		{
-			_ent.ReservedHours = get_plan_hours(txtPlanHours.Text);
+			//_ent.ReservedHours = get_plan_hours(txtPlanHours.Text);
+			_ent.ReservedHours = get_plan_hours(mtxtPlanHrs.Text);
 			_ent.Start = dateTimePickerPlanStart.Value;
 			_ent.Description = txtDescription.Text;
 
@@ -55,14 +59,14 @@ namespace SessionCollector.Forms
 
 		decimal get_plan_hours(string v)
 		{
-			return decimal.Parse(v);
+			return Convert.ToDecimal(TimeSpan.Parse(v).TotalHours);
 		}
 
 		private void txtPlanDuration_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Enter)
 			{
-				_ent.ReservedHours = get_plan_hours(txtPlanHours.Text);
+				_ent.ReservedHours = get_plan_hours(mtxtPlanHrs.Text);
 				txtPlanFinish.Text = _ent.Finish.ToString("dd.MM.yyyy HH:mm");
 
 				e.Handled = true;

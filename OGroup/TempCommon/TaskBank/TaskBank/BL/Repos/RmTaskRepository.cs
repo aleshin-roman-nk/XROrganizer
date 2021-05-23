@@ -19,7 +19,7 @@ namespace TaskBank.BL.Repos
 		//}
 
 #if DEBUG
-		string src = @"Data Source = ..\..\..\..\db\debug\data.db";
+		string src = @"Data Source = ..\..\..\..\db\_debug\data.db";
 #else
 		string src = @"Data Source = ..\..\..\..\db\data.db";
 #endif

@@ -29,7 +29,6 @@ namespace SessionCollector.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.txtPlanHours = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.dateTimePickerPlanStart = new System.Windows.Forms.DateTimePicker();
 			this.label2 = new System.Windows.Forms.Label();
@@ -44,15 +43,8 @@ namespace SessionCollector.Forms
 			this.btn = new System.Windows.Forms.Button();
 			this.label6 = new System.Windows.Forms.Label();
 			this.lblSessionTotalTimeString = new System.Windows.Forms.Label();
+			this.mtxtPlanHrs = new System.Windows.Forms.MaskedTextBox();
 			this.SuspendLayout();
-			// 
-			// txtPlanHours
-			// 
-			this.txtPlanHours.Location = new System.Drawing.Point(215, 143);
-			this.txtPlanHours.Name = "txtPlanHours";
-			this.txtPlanHours.Size = new System.Drawing.Size(96, 30);
-			this.txtPlanHours.TabIndex = 0;
-			this.txtPlanHours.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPlanDuration_KeyDown);
 			// 
 			// label1
 			// 
@@ -183,11 +175,21 @@ namespace SessionCollector.Forms
 			this.lblSessionTotalTimeString.TabIndex = 19;
 			this.lblSessionTotalTimeString.Text = "0";
 			// 
+			// mtxtPlanHrs
+			// 
+			this.mtxtPlanHrs.Location = new System.Drawing.Point(215, 143);
+			this.mtxtPlanHrs.Mask = "90:00";
+			this.mtxtPlanHrs.Name = "mtxtPlanHrs";
+			this.mtxtPlanHrs.Size = new System.Drawing.Size(88, 30);
+			this.mtxtPlanHrs.TabIndex = 20;
+			this.mtxtPlanHrs.ValidatingType = typeof(System.DateTime);
+			// 
 			// SessionForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(967, 536);
+			this.Controls.Add(this.mtxtPlanHrs);
 			this.Controls.Add(this.lblSessionTotalTimeString);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.btn);
@@ -202,7 +204,6 @@ namespace SessionCollector.Forms
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.dateTimePickerPlanStart);
 			this.Controls.Add(this.label1);
-			this.Controls.Add(this.txtPlanHours);
 			this.Font = new System.Drawing.Font("Roboto Condensed", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.Name = "SessionForm";
@@ -214,8 +215,6 @@ namespace SessionCollector.Forms
 		}
 
 		#endregion
-
-		private System.Windows.Forms.TextBox txtPlanHours;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.DateTimePicker dateTimePickerPlanStart;
 		private System.Windows.Forms.Label label2;
@@ -230,5 +229,6 @@ namespace SessionCollector.Forms
 		private System.Windows.Forms.Button btn;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label lblSessionTotalTimeString;
+		private System.Windows.Forms.MaskedTextBox mtxtPlanHrs;
 	}
 }

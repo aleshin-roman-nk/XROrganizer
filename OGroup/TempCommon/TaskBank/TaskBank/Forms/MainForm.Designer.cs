@@ -33,6 +33,7 @@
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -74,7 +75,7 @@
 			this.richTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(164)))), ((int)(((byte)(14)))));
 			this.richTextBox1.Location = new System.Drawing.Point(0, 0);
 			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(962, 173);
+			this.richTextBox1.Size = new System.Drawing.Size(851, 173);
 			this.richTextBox1.TabIndex = 0;
 			this.richTextBox1.Text = "";
 			// 
@@ -85,7 +86,7 @@
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(964, 175);
+			this.panel1.Size = new System.Drawing.Size(853, 175);
 			this.panel1.TabIndex = 1;
 			// 
 			// dataGridView1
@@ -125,7 +126,7 @@
 			this.dataGridView1.RowTemplate.DividerHeight = 10;
 			this.dataGridView1.RowTemplate.Height = 80;
 			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView1.Size = new System.Drawing.Size(964, 449);
+			this.dataGridView1.Size = new System.Drawing.Size(853, 449);
 			this.dataGridView1.TabIndex = 2;
 			// 
 			// splitContainer1
@@ -142,7 +143,7 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.panel1);
-			this.splitContainer1.Size = new System.Drawing.Size(964, 628);
+			this.splitContainer1.Size = new System.Drawing.Size(853, 628);
 			this.splitContainer1.SplitterDistance = 449;
 			this.splitContainer1.TabIndex = 3;
 			// 
@@ -165,7 +166,7 @@
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(0, 0);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(267, 628);
+			this.panel2.Size = new System.Drawing.Size(237, 628);
 			this.panel2.TabIndex = 5;
 			// 
 			// dataGridView3
@@ -191,7 +192,7 @@
 			this.dataGridView3.ReadOnly = true;
 			this.dataGridView3.RowHeadersVisible = false;
 			this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView3.Size = new System.Drawing.Size(265, 622);
+			this.dataGridView3.Size = new System.Drawing.Size(235, 622);
 			this.dataGridView3.TabIndex = 1;
 			// 
 			// splitContainer2
@@ -209,8 +210,8 @@
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.panel2);
-			this.splitContainer2.Size = new System.Drawing.Size(1235, 628);
-			this.splitContainer2.SplitterDistance = 964;
+			this.splitContainer2.Size = new System.Drawing.Size(1094, 628);
+			this.splitContainer2.SplitterDistance = 853;
 			this.splitContainer2.TabIndex = 6;
 			// 
 			// btnDel
@@ -289,7 +290,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1511, 691);
+			this.ClientSize = new System.Drawing.Size(1370, 691);
 			this.Controls.Add(this.lblDir);
 			this.Controls.Add(this.lblSaved);
 			this.Controls.Add(this.label1);
@@ -297,6 +298,7 @@
 			this.Controls.Add(this.btnDel);
 			this.Controls.Add(this.splitContainer2);
 			this.Controls.Add(this.btnCreate);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Task bank";

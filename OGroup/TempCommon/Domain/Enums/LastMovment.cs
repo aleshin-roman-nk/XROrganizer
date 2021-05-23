@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataTypes
+namespace Domain.Enums
 {
-    public class Class1
-    {
-    }
+	public enum LastMovment
+	{
+		next = 0,
+		prev = 1,
+		nomovement = 2
+	}
 }
