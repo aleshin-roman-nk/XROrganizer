@@ -42,55 +42,70 @@ namespace DirectoriesWolking.Models.DirNavigator
 
 	public class DirectoryNavigatorService
 	{
-		DirectoryRepository _repo;
-		Stack<IDir> owners = new Stack<IDir>();
+		NodeRepository _repo;
+		Stack<INode> owners = new Stack<INode>();
 
-		readonly IDir _root = new BaseDir { name = "root", id = 0, type = NodeType._sys_root_dir };
-		readonly IDir _exit_top_dir = new BaseDir { name = "..", id = -1, type = NodeType.exit_dir };
+		readonly INode _root = new BaseDir { name = "", id = 0, type = NType._sys_root_dir };
+		readonly INode _exit_top_dir = new BaseDir { name = "..", id = -1, type = NType.exit_dir };
 
-		public event EventHandler<IDir> CurrentDirChanged;
+		private INode _highlightedDir;
 
-		public DirectoryNavigatorService(DirectoryRepository r)
+		public DirectoryNavigatorService(NodeRepository r)
 		{
 			_repo = r;
-			owners.Push(_root);
 		}
 
-		private IDir _previous_owner;
+		public event EventHandler<NodesImage> CurrentNodeChanged;
 
-		private IDir GetPreviousOwner()
+		public INode CurrentOwner
 		{
-			return _previous_owner;
+			get
+			{
+				if (!owners.Any()) return _root;
+				return owners.Peek();
+			}
 		}
 
-		public IDir GetCurrentDir()
+		public void Update()
 		{
-			return owners.Peek();
+			OnCurrentNodeChanged();
 		}
 
-		private DirNavigatorDataImage dirNavigatorDataImage = new DirNavigatorDataImage();
-
-		public DirNavigatorDataImage GetDataImage()
+		public void EnterDir(INode dir)
 		{
-			updateImage();
-			return dirNavigatorDataImage;
+			if (dir == null)
+				return;
+
+			// если на входе выходная директория
+			// попытаться выйти на уровень вверх.
+			if (IsTopExit(dir))
+				tryToJumpBack();
+			else
+			{
+				owners.Push(dir);
+				_highlightedDir = _exit_top_dir;
+				OnCurrentNodeChanged();
+			}
 		}
 
-		private void OnCurrentDirChanged()
+		public void JumpBack()
 		{
-			CurrentDirChanged?.Invoke(this, GetCurrentDir());
+			tryToJumpBack();
 		}
-
-		private void updateImage()
+		private void OnCurrentNodeChanged()
 		{
-			dirNavigatorDataImage.CurrentBranch = GetCurrentBranch();
-			dirNavigatorDataImage.CurrentBranchName = GetCurrentBranchName();
-			dirNavigatorDataImage.PreviousOwner = GetPreviousOwner();
-			dirNavigatorDataImage.LastMovment = LastMovment;
-			dirNavigatorDataImage.CurrentDir = GetCurrentDir();
+			NodesImage arg = new NodesImage
+			{
+				CurrentBranch = GetCurrentBranch(),
+				CurrentBranchName = GetCurrentBranchName(),
+				CurrentOwner = CurrentOwner,
+				HighlightedDir = _highlightedDir
+			};
+
+			CurrentNodeChanged?.Invoke(this, arg);
 		}
 
-		private IEnumerable<IDir> GetCurrentBranch()
+		private IEnumerable<INode> GetCurrentBranch()
 		{
 			if(!StackIsOnRoot())
 				return select(owners.Peek().id);
@@ -112,61 +127,30 @@ namespace DirectoriesWolking.Models.DirNavigator
 			return res;
 		}
 
-		private bool IsTopExit(IDir r)
+		private bool IsTopExit(INode r)
 		{
 			return r.id == _exit_top_dir.id;
 		}
 
 		private bool StackIsOnRoot()
 		{
-			return owners.Peek().id == _root.id;
+			return !owners.Any();
 		}
-
-		public void EnterDir(IDir dir)
-		{
-			if (dir == null)
-			{
-				LastMovment = LastMovment.nomovement;
-				return;
-			}
-
-			// если на входе выходная директория
-			// попытаться выйти на уровень вверх.
-			if (IsTopExit(dir))
-				tryToJumpBack();
-			else
-			{
-				owners.Push(dir);
-				LastMovment = LastMovment.next;
-				_previous_owner = dir;
-				OnCurrentDirChanged();
-			}
-		}
-
-		public void JumpBack()
-		{
-			tryToJumpBack();
-		}
-
 		private void tryToJumpBack()
 		{
 			// если сейчас мы не находимся на корневой директории
 			// вернуться на уровень вверх
 			if (!StackIsOnRoot())
 			{
-				_previous_owner = owners.Pop();
-				LastMovment = LastMovment.prev;
-				OnCurrentDirChanged();
+				_highlightedDir = owners.Pop();
+				OnCurrentNodeChanged();
 			}
-			else
-				LastMovment = LastMovment.nomovement;
 		}
 
-		private LastMovment LastMovment { get; set; } = LastMovment.nomovement;
-		private IEnumerable<IDir> select(int own_id)
+		private IEnumerable<INode> select(int own_id)
 		{
-			List<IDir> res = new List<IDir>();
-			if (owners.Peek() != _root)
+			List<INode> res = new List<INode>();
+			if (!StackIsOnRoot())
 				res.Add(_exit_top_dir);
 
 			var all_items = _repo.all;

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace DirectoriesWolking.Models.DirNavigator
 {
-	public class BaseDir : IDir
+	public class BaseDir : INode
 	{
 		public int id { get; set; }
 		public int owner_id { get; set; }
 		public string name { get; set; }
-		public NodeType type { get; set; }
+		public NType type { get; set; }
 	}
 }

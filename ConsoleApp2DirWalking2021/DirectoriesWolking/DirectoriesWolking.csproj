@@ -49,15 +49,13 @@
     <Compile Include="Models\DirNavigator\BaseDir.cs" />
     <Compile Include="Models\DirNavigator\Dir.cs" />
     <Compile Include="Models\DirNavigator\DirectoryNavigatorService.cs" />
-    <Compile Include="Models\DirNavigator\DirNavigatorDataImage.cs" />
-    <Compile Include="Models\DirNavigator\IDir.cs" />
-    <Compile Include="Models\DirNavigator\LastMovment.cs" />
-    <Compile Include="Models\DirNavigator\NodeType.cs" />
+    <Compile Include="Models\DirNavigator\NodesImage.cs" />
+    <Compile Include="Models\DirNavigator\INode.cs" />
+    <Compile Include="Models\DirNavigator\NType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repos\DirectoryRepository.cs" />
-    <Compile Include="Repos\IDirectoryReadOnlyRepository.cs" />
-    <Compile Include="Repos\IDirectoryRepository.cs" />
+    <Compile Include="Repos\INodeRepository.cs" />
+    <Compile Include="Repos\NodeRepository.cs" />
     <Compile Include="tools\JsonDebug.cs" />
   </ItemGroup>
   <ItemGroup>

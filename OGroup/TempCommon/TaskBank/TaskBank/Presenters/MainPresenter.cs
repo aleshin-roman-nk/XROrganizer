@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Domain.Entities;
+using Domain.Repos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaskBank.BL.Entities;
-using TaskBank.BL.Repos;
 using TaskBank.Views;
 
 namespace TaskBank
@@ -30,7 +30,7 @@ namespace TaskBank
 		{
 			_mainView.CreateNoteCommand += _mainView_CreateNoteCommand;
 			_mainView.DeleteNoteCommand += _mainView_DeleteNoteCommand;
-			_mainView.SaveTaskCommand += _mainView_SaveTaskCommand;
+			_mainView.SaveNoteCommand += _mainView_SaveTaskCommand;
 		}
 
 		private void _mainView_SaveTaskCommand(object sender, OTask e)

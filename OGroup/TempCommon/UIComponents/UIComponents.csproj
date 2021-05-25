@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DirNavigator\DirNavigatorView.cs" />
-    <Compile Include="DirNavigator\IDirNavigatorView.cs" />
+    <Compile Include="NodesNavigator\DirNavigatorView.cs" />
+    <Compile Include="NodesNavigator\IDirNavigatorView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +52,9 @@
       <Project>{0D7F46D1-2C0C-42FE-8FED-38A4DA845CC4}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserControls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Domain.Repos;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TaskBank.BL.Repos;
-using TaskBank.BL.Tools;
 using TaskBank.Dlg.forms;
 
 namespace TaskBank
@@ -30,7 +29,7 @@ namespace TaskBank
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			Debugger.init();
+			Domain.Tools.Debugger.init();
 
 			MainForm mf = new MainForm();
 			RmTaskRepository r = new RmTaskRepository();

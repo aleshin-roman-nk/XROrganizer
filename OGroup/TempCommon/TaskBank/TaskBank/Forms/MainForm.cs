@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,12 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TaskBank.BL;
-using TaskBank.BL.Entities;
-using TaskBank.BL.Services;
 using TaskBank.Dlg;
 using TaskBank.Dlg.forms;
-using TaskBank.ViewModules;
+using TaskBank.ViewComponents;
 
 namespace TaskBank
 {
@@ -20,15 +18,10 @@ namespace TaskBank
 	{
 		TaskCollectionView taskCollectionView;
 
-		List<ODirectiry> directories = new List<ODirectiry>();
-
-
-		BindingSource bsDir = new BindingSource();
-		BindingSource bsDirDest = new BindingSource();
-
 		public event EventHandler<DateTime> CreateNoteCommand;
-		public event EventHandler<OTask> SaveTaskCommand;
+		public event EventHandler<OTask> SaveNoteCommand;
 		public event EventHandler<OTask> DeleteNoteCommand;
+		public event EventHandler<string> CreateDir;
 
 		public MainForm()
 		{
@@ -37,75 +30,46 @@ namespace TaskBank
 			taskCollectionView = new TaskCollectionView(dataGridView1, lblSaved, richTextBox1);
 			taskCollectionView.SaveTaskNeeded += TaskCollectionView_SaveTaskNeeded;
 			taskCollectionView.MoveTaskCollection += TaskCollectionView_MoveTaskCollection;
-
-			directories.Add(new ODirectiry { Name = "INBOX", Id = 1 });
-			directories.Add(new ODirectiry { Name = "Программирование", Id = 2 });
-			directories.Add(new ODirectiry { Name = "Турецкий", Id = 3 });
-			directories.Add(new ODirectiry { Name = "Английский", Id = 4});
-			directories.Add(new ODirectiry { Name = "Организатор", Id = 5 });
-
-			bsDir.DataSource = directories;
-			bsDirDest.DataSource = directories;
-
-			lblDir.DataBindings.Add("Text", bsDir, "Name");
-
-			DataGridViewTextBoxColumn cDir = new DataGridViewTextBoxColumn
-			{
-				Width = 200,
-				HeaderText = "Проекты",
-				DataPropertyName = "Name"
-			};
-			dataGridView2.Columns.Add(cDir);
-			dataGridView2.AutoGenerateColumns = false;
-			dataGridView2.DataSource = bsDir;
-
-			DataGridViewTextBoxColumn cDir1 = new DataGridViewTextBoxColumn
-			{
-				Width = 200,
-				HeaderText = "Проекты",
-				DataPropertyName = "Name"
-			};
-			dataGridView3.Columns.Add(cDir1);
-			dataGridView3.AutoGenerateColumns = false;
-			dataGridView3.DataSource = bsDirDest;
 		}
 
 		private void TaskCollectionView_MoveTaskCollection(object sender, IEnumerable<OTask> e)
 		{
-			foreach (var item in e)
-			{
-				item.DirectoryId = (bsDirDest.Current as ODirectiry).Id;
-			}
+
 		}
 
 		private void TaskCollectionView_SaveTaskNeeded(object sender, OTask e)
 		{
-			_userCommandSaveNote(e);
+			OnSaveNote(e);
 		}
 
 		private void btnCreate_Click(object sender, EventArgs e)
 		{
-			_userCommandCreateNote();
+			OnCreateNote();
 		}
 
-		private void _userCommandSaveNote(OTask rm)
+		private void OnSaveNote(OTask rm)
 		{
-			SaveTaskCommand?.Invoke(this, rm);
+			SaveNoteCommand?.Invoke(this, rm);
 		}
 
-		private void _userCommandCreateNote()
+		private void OnCreateNote()
 		{
 			CreateNoteCommand?.Invoke(this, DateTime.Now);
 		}
 
-		private void _userCommandDeleteNote(OTask rm)
+		private void OnDeleteNote(OTask rm)
 		{
 			DeleteNoteCommand?.Invoke(this, rm);
 		}
 
+		private void OnNewDir(string dir)
+		{
+			CreateDir?.Invoke(this, dir);
+		}
+
 		private void btnDel_Click(object sender, EventArgs e)
 		{
-			_userCommandDeleteNote(taskCollectionView.CurrentTask);
+			OnDeleteNote(taskCollectionView.CurrentTask);
 		}
 
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -116,6 +80,13 @@ namespace TaskBank
 		public void DisplayTaskCollection(IEnumerable<OTask> tlist)
 		{
 			taskCollectionView.DisplayTaskCollection(tlist);
+		}
+
+		private void btnNewDir_Click(object sender, EventArgs e)
+		{
+			var str = InputBoxes.InputBox.Show("Enter new directory name");
+			if (!string.IsNullOrEmpty(str))
+				OnNewDir(str);
 		}
 	}
 }

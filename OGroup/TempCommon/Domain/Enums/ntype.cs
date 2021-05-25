@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Enums
 {
-	public enum ntype
+	public enum NType
 	{
 		exit_dir = -3,
 		_sys_root_dir = -2,

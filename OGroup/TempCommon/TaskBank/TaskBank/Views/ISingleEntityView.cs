@@ -1,4 +1,6 @@
-﻿using TaskBank.BL.Entities;
+﻿
+
+using Domain.Entities;
 
 namespace TaskBank.Views
 {

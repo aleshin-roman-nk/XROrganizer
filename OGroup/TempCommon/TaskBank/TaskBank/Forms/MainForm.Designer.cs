@@ -47,7 +47,7 @@
 			this.dataGridView2 = new System.Windows.Forms.DataGridView();
 			this.label1 = new System.Windows.Forms.Label();
 			this.lblSaved = new System.Windows.Forms.Label();
-			this.lblDir = new System.Windows.Forms.Label();
+			this.btnNewDir = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -151,7 +151,7 @@
 			// 
 			this.btnCreate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
 			this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnCreate.Location = new System.Drawing.Point(13, 22);
+			this.btnCreate.Location = new System.Drawing.Point(264, 6);
 			this.btnCreate.Name = "btnCreate";
 			this.btnCreate.Size = new System.Drawing.Size(75, 23);
 			this.btnCreate.TabIndex = 4;
@@ -216,7 +216,7 @@
 			// 
 			// btnDel
 			// 
-			this.btnDel.Location = new System.Drawing.Point(175, 22);
+			this.btnDel.Location = new System.Drawing.Point(345, 6);
 			this.btnDel.Name = "btnDel";
 			this.btnDel.Size = new System.Drawing.Size(75, 23);
 			this.btnDel.TabIndex = 8;
@@ -228,9 +228,9 @@
 			// 
 			this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.panel3.Controls.Add(this.dataGridView2);
-			this.panel3.Location = new System.Drawing.Point(3, 76);
+			this.panel3.Location = new System.Drawing.Point(3, 52);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(256, 603);
+			this.panel3.Size = new System.Drawing.Size(256, 627);
 			this.panel3.TabIndex = 9;
 			// 
 			// dataGridView2
@@ -277,21 +277,24 @@
 			this.lblSaved.TabIndex = 11;
 			this.lblSaved.Text = "0";
 			// 
-			// lblDir
+			// btnNewDir
 			// 
-			this.lblDir.AutoSize = true;
-			this.lblDir.Location = new System.Drawing.Point(1, 60);
-			this.lblDir.Name = "lblDir";
-			this.lblDir.Size = new System.Drawing.Size(35, 13);
-			this.lblDir.TabIndex = 16;
-			this.lblDir.Text = "label2";
+			this.btnNewDir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+			this.btnNewDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnNewDir.Location = new System.Drawing.Point(3, 6);
+			this.btnNewDir.Name = "btnNewDir";
+			this.btnNewDir.Size = new System.Drawing.Size(75, 23);
+			this.btnNewDir.TabIndex = 12;
+			this.btnNewDir.Text = "create dir";
+			this.btnNewDir.UseVisualStyleBackColor = true;
+			this.btnNewDir.Click += new System.EventHandler(this.btnNewDir_Click);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1370, 691);
-			this.Controls.Add(this.lblDir);
+			this.Controls.Add(this.btnNewDir);
 			this.Controls.Add(this.lblSaved);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.panel3);
@@ -336,8 +339,8 @@
 		private System.Windows.Forms.DataGridView dataGridView2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label lblSaved;
-		private System.Windows.Forms.Label lblDir;
 		private System.Windows.Forms.DataGridView dataGridView3;
+		private System.Windows.Forms.Button btnNewDir;
 	}
 }
 

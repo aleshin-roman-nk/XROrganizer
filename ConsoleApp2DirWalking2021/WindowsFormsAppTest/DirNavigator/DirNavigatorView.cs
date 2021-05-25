@@ -38,15 +38,15 @@ namespace WindowsFormsAppTest.FormComponent
 
 		BindingSource bs = new BindingSource();
 
-		DirNavigatorDataImage _dirDataImage;
+		NodesImage _dirDataImage;
 
 		// Так как внутри коллекции элемент выходной директории BaseDir, то при приведении типов получается null
 		// Кажется нелогичным в этом модуле работы с разнотипными элементами коллекции в этом месте работать с конкретным типом.
 		// Поэтому здесь необходтио работать с IDir
-		IDir _current_dir => bs.Current as IDir;
+		INode _current_dir => bs.Current as INode;
 
-		private Dictionary<NodeType, Image> _icons = null;
-		public Dictionary<NodeType, Image> Icons
+		private Dictionary<NType, Image> _icons = null;
+		public Dictionary<NType, Image> Icons
 		{
 			get
 			{
@@ -61,11 +61,15 @@ namespace WindowsFormsAppTest.FormComponent
 					return;
 				}
 
+				if (_icons != null)
+					removeImgCol();
+
 				addImgCol();
 				_icons = value;
+				markRowsWithIcons();
 			}
 		}
-		public Dictionary<NodeType, Color> RowColors { get; set; } = null;
+		public Dictionary<NType, Color> RowColors { get; set; } = null;
 		public DirNavigatorView(DataGridView grid, Control curbanchname)
 		{
 			_grid = grid;
@@ -75,8 +79,6 @@ namespace WindowsFormsAppTest.FormComponent
 			_grid.KeyDown += _grid_KeyDown;
 
 			_grid.CellFormatting += _grid_CellFormatting;
-
-			//addImgCol();
 		}
 
 		//Добавлять автоматически, если устанвливается Icons. Если делается Icons = null, удалять колонку
@@ -89,6 +91,7 @@ namespace WindowsFormsAppTest.FormComponent
 			ic.Name = img_col;
 			ic.Width = 50;
 			_grid.Columns.Add(ic);
+			_grid.Columns[img_col].DisplayIndex = 0;
 		}
 		private void removeImgCol()
 		{
@@ -102,7 +105,7 @@ namespace WindowsFormsAppTest.FormComponent
 
 			var row = _grid.Rows[e.RowIndex];
 
-			NodeType t = (row.DataBoundItem as IDir).type;
+			NType t = (row.DataBoundItem as INode).type;
 
 			Color clr = getColor(t);
 			if (clr == Color.Empty) return;
@@ -110,10 +113,10 @@ namespace WindowsFormsAppTest.FormComponent
 			e.CellStyle.ForeColor = clr;
 		}
 
-		public event EventHandler<IDir> CommandEnterDir;
-		public event EventHandler CommandExitDir;
+		public event EventHandler<INode> ActivateNode;
+		public event EventHandler ExitNode;
 
-		public void SetDirImage(DirNavigatorDataImage dataImage)
+		public void SetDirImage(NodesImage dataImage)
 		{
 			updateData(dataImage);
 		}
@@ -126,7 +129,7 @@ namespace WindowsFormsAppTest.FormComponent
 
 			foreach (DataGridViewRow row in _grid.Rows)
 			{
-				var t = (row.DataBoundItem as IDir).type;
+				var t = (row.DataBoundItem as INode).type;
 
 				DataGridViewImageCell cell = row.Cells[img_col] as DataGridViewImageCell;
 
@@ -134,7 +137,7 @@ namespace WindowsFormsAppTest.FormComponent
 			}
 		}
 
-		private Image getImg(NodeType icontype)
+		private Image getImg(NType icontype)
 		{
 			if (Icons == null) return null;
 
@@ -144,7 +147,7 @@ namespace WindowsFormsAppTest.FormComponent
 			return Icons[icontype];
 		}
 
-		private Color getColor(NodeType icontype)
+		private Color getColor(NType icontype)
 		{
 			if (RowColors == null) return Color.Empty;
 
@@ -154,39 +157,36 @@ namespace WindowsFormsAppTest.FormComponent
 			return RowColors[icontype];
 		}
 
-		private void updateData(DirNavigatorDataImage image)
+		private void updateData(NodesImage image)
 		{
 			_dirDataImage = image;
-			IDir d = bs.Current as IDir;
-			bs.DataSource = null;// происходит сбой текущей позиции при таком привоении. придется хранить текущий id, чтобы впоследствии вернуть курсор.
+			bs.DataSource = null;// происходит сброс текущей позиции при таком привоении. придется хранить текущий id, чтобы впоследствии вернуть курсор.
 			bs.DataSource = _dirDataImage.CurrentBranch;
-			selectRowWithDir(d);
+			placeCursor();
 			_txtCurrentBranchName.Text = _dirDataImage.CurrentBranchName;
 			markRowsWithIcons();
 		}
 
-		private void OnEnterDir(IDir d)
+		private void OnActivateNode(INode d)
 		{
-			CommandEnterDir?.Invoke(this, d);
+			ActivateNode?.Invoke(this, d);
 		}
 
-		private void OnExitDir()
+		private void OnExitNode()
 		{
-			CommandExitDir?.Invoke(this, EventArgs.Empty);
+			ExitNode?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void _grid_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Enter)
 			{
-				// Важная операция по изменению состояния образа данных
-				OnEnterDir(_current_dir);
-				placeCursor();
+				OnActivateNode(_current_dir);
 				e.Handled = true;
 			}
 			else if(e.KeyCode == Keys.Back)
 			{
-				OnExitDir();
+				OnExitNode();
 				placeCursor();
 				e.Handled = true;
 			}
@@ -194,22 +194,10 @@ namespace WindowsFormsAppTest.FormComponent
 
 		private void placeCursor()
 		{
-			// анализируем резальтат перемещения после вызова OnEnterDir
-			// если вынырнули, поместить курсор на родительсткой директории
-			if (_dirDataImage.LastMovment == LastMovment.prev)
-			{
-				// select prev owner row
-				selectRowWithDir(_dirDataImage.PreviousOwner);
-			}
-			// если вошли в директорию, помещаем курсор на верхней ".."
-			else if (_dirDataImage.LastMovment == LastMovment.next)
-			{
-				// set cursor on the first row
-				point_row(0);
-			}
+			selectRowWithDir(_dirDataImage.HighlightedDir);
 		}
 
-		private void selectRowWithDir(IDir d)
+		private void selectRowWithDir(INode d)
 		{
 			if (d == null) return;
 
@@ -217,20 +205,15 @@ namespace WindowsFormsAppTest.FormComponent
 
 			DataGridViewRow row = _grid.Rows
 				.Cast<DataGridViewRow>()
-				.Where(r => (r.DataBoundItem as IDir).id == d.id)
+				.Where(r => (r.DataBoundItem as INode).id == d.id)
 				.FirstOrDefault();
 
 			if (row == null) return;
 
 			rowIndex = row.Index;
 
-			point_row(rowIndex);
-		}
-
-		private void point_row(int row_index)
-		{
-			_grid.Rows[row_index].Selected = true;
-			_grid.CurrentCell = _grid[1, row_index];
+			_grid.Rows[rowIndex].Selected = true;
+			_grid.CurrentCell = _grid[1, rowIndex];
 		}
 	}
 }

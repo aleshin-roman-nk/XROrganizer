@@ -29,13 +29,17 @@ namespace WindowsFormsAppTest
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.txtPath = new System.Windows.Forms.TextBox();
 			this.btnCreatDir = new System.Windows.Forms.Button();
 			this.btnHideIcons = new System.Windows.Forms.Button();
 			this.btnShowIcons = new System.Windows.Forms.Button();
+			this.iNodeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.iNodeBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// dataGridView1
@@ -45,8 +49,12 @@ namespace WindowsFormsAppTest
 			this.dataGridView1.AllowUserToResizeRows = false;
 			dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
 			this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+			this.dataGridView1.AutoGenerateColumns = false;
 			this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameDataGridViewTextBoxColumn});
+			this.dataGridView1.DataSource = this.iNodeBindingSource;
 			this.dataGridView1.Location = new System.Drawing.Point(64, 59);
 			this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.dataGridView1.MultiSelect = false;
@@ -95,6 +103,18 @@ namespace WindowsFormsAppTest
 			this.btnShowIcons.UseVisualStyleBackColor = true;
 			this.btnShowIcons.Click += new System.EventHandler(this.btnShowIcons_Click);
 			// 
+			// iNodeBindingSource
+			// 
+			this.iNodeBindingSource.DataSource = typeof(DirectoriesWolking.Models.DirNavigator.INode);
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			this.nameDataGridViewTextBoxColumn.Width = 200;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
@@ -111,6 +131,7 @@ namespace WindowsFormsAppTest
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.iNodeBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -123,6 +144,8 @@ namespace WindowsFormsAppTest
 		private System.Windows.Forms.Button btnCreatDir;
 		private System.Windows.Forms.Button btnHideIcons;
 		private System.Windows.Forms.Button btnShowIcons;
+		private System.Windows.Forms.BindingSource iNodeBindingSource;
+		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
 	}
 }
 

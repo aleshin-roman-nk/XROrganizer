@@ -11,7 +11,7 @@ namespace Domain.Entities
 	{
 		int id { get; set; }
 		int owner_id { get; set; }
-		ntype type { get; set; }
+		NType type { get; set; }
 		string name { get; set; }
 		string description { get; set; }
 		DateTime date { get; set; }
