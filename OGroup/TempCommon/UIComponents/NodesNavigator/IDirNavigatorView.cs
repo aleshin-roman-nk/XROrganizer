@@ -16,5 +16,11 @@ namespace UIComponents.NodesNavigator
 		event EventHandler ExitNode;
 
 		void SetDirImage(NodesImage dataImage);
+
+		/*
+		 * >>> 29-05-2021 00:36
+		 * Icons и RowColors жить должны здесь. IDirNavigatorView дергает методы IGridCustomizer для кастомизации.
+		 */
+		IGridCustomizer GridCustomizer { get; set; }
 	}
 }

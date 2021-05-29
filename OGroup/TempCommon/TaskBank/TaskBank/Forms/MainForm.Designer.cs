@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -44,10 +45,14 @@
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.btnDel = new System.Windows.Forms.Button();
 			this.panel3 = new System.Windows.Forms.Panel();
-			this.dataGridView2 = new System.Windows.Forms.DataGridView();
+			this.dgvDirectories = new System.Windows.Forms.DataGridView();
 			this.label1 = new System.Windows.Forms.Label();
 			this.lblSaved = new System.Windows.Forms.Label();
 			this.btnNewDir = new System.Windows.Forms.Button();
+			this.txtDirName = new System.Windows.Forms.TextBox();
+			this.dirBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -61,7 +66,8 @@
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
 			this.panel3.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvDirectories)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dirBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// richTextBox1
@@ -75,7 +81,7 @@
 			this.richTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(164)))), ((int)(((byte)(14)))));
 			this.richTextBox1.Location = new System.Drawing.Point(0, 0);
 			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(851, 173);
+			this.richTextBox1.Size = new System.Drawing.Size(787, 165);
 			this.richTextBox1.TabIndex = 0;
 			this.richTextBox1.Text = "";
 			// 
@@ -86,7 +92,7 @@
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(853, 175);
+			this.panel1.Size = new System.Drawing.Size(789, 167);
 			this.panel1.TabIndex = 1;
 			// 
 			// dataGridView1
@@ -126,7 +132,7 @@
 			this.dataGridView1.RowTemplate.DividerHeight = 10;
 			this.dataGridView1.RowTemplate.Height = 80;
 			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView1.Size = new System.Drawing.Size(853, 449);
+			this.dataGridView1.Size = new System.Drawing.Size(789, 426);
 			this.dataGridView1.TabIndex = 2;
 			// 
 			// splitContainer1
@@ -143,15 +149,15 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.panel1);
-			this.splitContainer1.Size = new System.Drawing.Size(853, 628);
-			this.splitContainer1.SplitterDistance = 449;
+			this.splitContainer1.Size = new System.Drawing.Size(789, 597);
+			this.splitContainer1.SplitterDistance = 426;
 			this.splitContainer1.TabIndex = 3;
 			// 
 			// btnCreate
 			// 
 			this.btnCreate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
 			this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnCreate.Location = new System.Drawing.Point(264, 6);
+			this.btnCreate.Location = new System.Drawing.Point(486, 53);
 			this.btnCreate.Name = "btnCreate";
 			this.btnCreate.Size = new System.Drawing.Size(75, 23);
 			this.btnCreate.TabIndex = 4;
@@ -166,7 +172,7 @@
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(0, 0);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(237, 628);
+			this.panel2.Size = new System.Drawing.Size(220, 597);
 			this.panel2.TabIndex = 5;
 			// 
 			// dataGridView3
@@ -192,7 +198,7 @@
 			this.dataGridView3.ReadOnly = true;
 			this.dataGridView3.RowHeadersVisible = false;
 			this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView3.Size = new System.Drawing.Size(235, 622);
+			this.dataGridView3.Size = new System.Drawing.Size(218, 622);
 			this.dataGridView3.TabIndex = 1;
 			// 
 			// splitContainer2
@@ -200,7 +206,7 @@
 			this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.splitContainer2.Location = new System.Drawing.Point(264, 51);
+			this.splitContainer2.Location = new System.Drawing.Point(345, 82);
 			this.splitContainer2.Name = "splitContainer2";
 			// 
 			// splitContainer2.Panel1
@@ -210,13 +216,13 @@
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.panel2);
-			this.splitContainer2.Size = new System.Drawing.Size(1094, 628);
-			this.splitContainer2.SplitterDistance = 853;
+			this.splitContainer2.Size = new System.Drawing.Size(1013, 597);
+			this.splitContainer2.SplitterDistance = 789;
 			this.splitContainer2.TabIndex = 6;
 			// 
 			// btnDel
 			// 
-			this.btnDel.Location = new System.Drawing.Point(345, 6);
+			this.btnDel.Location = new System.Drawing.Point(567, 53);
 			this.btnDel.Name = "btnDel";
 			this.btnDel.Size = new System.Drawing.Size(75, 23);
 			this.btnDel.TabIndex = 8;
@@ -227,20 +233,25 @@
 			// panel3
 			// 
 			this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.panel3.Controls.Add(this.dataGridView2);
-			this.panel3.Location = new System.Drawing.Point(3, 52);
+			this.panel3.Controls.Add(this.dgvDirectories);
+			this.panel3.Location = new System.Drawing.Point(3, 82);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(256, 627);
+			this.panel3.Size = new System.Drawing.Size(336, 597);
 			this.panel3.TabIndex = 9;
 			// 
-			// dataGridView2
+			// dgvDirectories
 			// 
-			this.dataGridView2.AllowUserToAddRows = false;
-			this.dataGridView2.AllowUserToDeleteRows = false;
-			this.dataGridView2.AllowUserToResizeRows = false;
-			this.dataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(224)))));
-			this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView2.ColumnHeadersVisible = false;
+			this.dgvDirectories.AllowUserToAddRows = false;
+			this.dgvDirectories.AllowUserToDeleteRows = false;
+			this.dgvDirectories.AllowUserToResizeRows = false;
+			this.dgvDirectories.AutoGenerateColumns = false;
+			this.dgvDirectories.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(224)))));
+			this.dgvDirectories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvDirectories.ColumnHeadersVisible = false;
+			this.dgvDirectories.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameDataGridViewTextBoxColumn,
+            this.dateDataGridViewTextBoxColumn});
+			this.dgvDirectories.DataSource = this.dirBindingSource;
 			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(224)))));
 			dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -248,21 +259,21 @@
 			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(142)))), ((int)(((byte)(135)))));
 			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(226)))), ((int)(((byte)(199)))));
 			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle5;
-			this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.dataGridView2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(153)))), ((int)(((byte)(146)))));
-			this.dataGridView2.Location = new System.Drawing.Point(0, 0);
-			this.dataGridView2.Name = "dataGridView2";
-			this.dataGridView2.ReadOnly = true;
-			this.dataGridView2.RowHeadersVisible = false;
-			this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView2.Size = new System.Drawing.Size(254, 622);
-			this.dataGridView2.TabIndex = 0;
+			this.dgvDirectories.DefaultCellStyle = dataGridViewCellStyle5;
+			this.dgvDirectories.Dock = System.Windows.Forms.DockStyle.Top;
+			this.dgvDirectories.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(153)))), ((int)(((byte)(146)))));
+			this.dgvDirectories.Location = new System.Drawing.Point(0, 0);
+			this.dgvDirectories.Name = "dgvDirectories";
+			this.dgvDirectories.ReadOnly = true;
+			this.dgvDirectories.RowHeadersVisible = false;
+			this.dgvDirectories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgvDirectories.Size = new System.Drawing.Size(334, 622);
+			this.dgvDirectories.TabIndex = 0;
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(262, 32);
+			this.label1.Location = new System.Drawing.Point(344, 65);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(39, 13);
 			this.label1.TabIndex = 10;
@@ -271,7 +282,7 @@
 			// lblSaved
 			// 
 			this.lblSaved.AutoSize = true;
-			this.lblSaved.Location = new System.Drawing.Point(306, 32);
+			this.lblSaved.Location = new System.Drawing.Point(388, 65);
 			this.lblSaved.Name = "lblSaved";
 			this.lblSaved.Size = new System.Drawing.Size(13, 13);
 			this.lblSaved.TabIndex = 11;
@@ -281,7 +292,7 @@
 			// 
 			this.btnNewDir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
 			this.btnNewDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnNewDir.Location = new System.Drawing.Point(3, 6);
+			this.btnNewDir.Location = new System.Drawing.Point(3, 53);
 			this.btnNewDir.Name = "btnNewDir";
 			this.btnNewDir.Size = new System.Drawing.Size(75, 23);
 			this.btnNewDir.TabIndex = 12;
@@ -289,11 +300,39 @@
 			this.btnNewDir.UseVisualStyleBackColor = true;
 			this.btnNewDir.Click += new System.EventHandler(this.btnNewDir_Click);
 			// 
+			// txtDirName
+			// 
+			this.txtDirName.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.txtDirName.Location = new System.Drawing.Point(4, 12);
+			this.txtDirName.Name = "txtDirName";
+			this.txtDirName.ReadOnly = true;
+			this.txtDirName.Size = new System.Drawing.Size(1354, 27);
+			this.txtDirName.TabIndex = 13;
+			// 
+			// dirBindingSource
+			// 
+			this.dirBindingSource.DataSource = typeof(Domain.Entities.Dir);
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// dateDataGridViewTextBoxColumn
+			// 
+			this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+			this.dateDataGridViewTextBoxColumn.HeaderText = "date";
+			this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1370, 691);
+			this.Controls.Add(this.txtDirName);
 			this.Controls.Add(this.btnNewDir);
 			this.Controls.Add(this.lblSaved);
 			this.Controls.Add(this.label1);
@@ -319,7 +358,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
 			this.panel3.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvDirectories)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dirBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -336,11 +376,15 @@
 		private System.Windows.Forms.SplitContainer splitContainer2;
 		private System.Windows.Forms.Button btnDel;
 		private System.Windows.Forms.Panel panel3;
-		private System.Windows.Forms.DataGridView dataGridView2;
+		private System.Windows.Forms.DataGridView dgvDirectories;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label lblSaved;
 		private System.Windows.Forms.DataGridView dataGridView3;
 		private System.Windows.Forms.Button btnNewDir;
+		private System.Windows.Forms.TextBox txtDirName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+		private System.Windows.Forms.BindingSource dirBindingSource;
 	}
 }
 

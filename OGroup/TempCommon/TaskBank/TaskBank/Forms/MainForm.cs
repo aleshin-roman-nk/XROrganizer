@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using InputBoxes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,7 @@ using System.Windows.Forms;
 using TaskBank.Dlg;
 using TaskBank.Dlg.forms;
 using TaskBank.ViewComponents;
+using UIComponents.NodesNavigator;
 
 namespace TaskBank
 {
@@ -18,9 +20,14 @@ namespace TaskBank
 	{
 		TaskCollectionView taskCollectionView;
 
-		public event EventHandler<DateTime> CreateNoteCommand;
-		public event EventHandler<OTask> SaveNoteCommand;
-		public event EventHandler<OTask> DeleteNoteCommand;
+		IDirNavigatorView _DirNavigator; 
+
+		public IDirNavigatorView DirNavigator => _DirNavigator;
+
+		public event EventHandler<DateTime> NewTask;
+		public event EventHandler<Note> SaveTask;
+		public event EventHandler<Note> DeleteTask;
+		// Все что связанно с работой одного модуля должно быть упаковынным в свой usercontrol или component
 		public event EventHandler<string> CreateDir;
 
 		public MainForm()
@@ -30,14 +37,16 @@ namespace TaskBank
 			taskCollectionView = new TaskCollectionView(dataGridView1, lblSaved, richTextBox1);
 			taskCollectionView.SaveTaskNeeded += TaskCollectionView_SaveTaskNeeded;
 			taskCollectionView.MoveTaskCollection += TaskCollectionView_MoveTaskCollection;
+
+			_DirNavigator = new DirNavigatorView(dgvDirectories, txtDirName);
 		}
 
-		private void TaskCollectionView_MoveTaskCollection(object sender, IEnumerable<OTask> e)
+		private void TaskCollectionView_MoveTaskCollection(object sender, IEnumerable<Note> e)
 		{
 
 		}
 
-		private void TaskCollectionView_SaveTaskNeeded(object sender, OTask e)
+		private void TaskCollectionView_SaveTaskNeeded(object sender, Note e)
 		{
 			OnSaveNote(e);
 		}
@@ -47,19 +56,19 @@ namespace TaskBank
 			OnCreateNote();
 		}
 
-		private void OnSaveNote(OTask rm)
+		private void OnSaveNote(Note rm)
 		{
-			SaveNoteCommand?.Invoke(this, rm);
+			SaveTask?.Invoke(this, rm);
 		}
 
 		private void OnCreateNote()
 		{
-			CreateNoteCommand?.Invoke(this, DateTime.Now);
+			NewTask?.Invoke(this, DateTime.Now);
 		}
 
-		private void OnDeleteNote(OTask rm)
+		private void OnDeleteNote(Note rm)
 		{
-			DeleteNoteCommand?.Invoke(this, rm);
+			DeleteTask?.Invoke(this, rm);
 		}
 
 		private void OnNewDir(string dir)
@@ -77,16 +86,18 @@ namespace TaskBank
 			taskCollectionView.CommitAndSave();
 		}
 
-		public void DisplayTaskCollection(IEnumerable<OTask> tlist)
+		public void DisplayTaskCollection(IEnumerable<Note> tlist)
 		{
 			taskCollectionView.DisplayTaskCollection(tlist);
 		}
 
 		private void btnNewDir_Click(object sender, EventArgs e)
 		{
-			var str = InputBoxes.InputBox.Show("Enter new directory name");
+			var str = InputBox.Show("Enter new directory name");
 			if (!string.IsNullOrEmpty(str))
 				OnNewDir(str);
+
+			dgvDirectories.Focus();
 		}
 	}
 }

@@ -9,6 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/*
+ * DataGridService dgvS = new DataGridService().AddService().AddIconCustomizer(icons).AddColorCustomizer(colors).Build();
+ * 
+ * 
+ */
+
 namespace UIComponents.NodesNavigator
 {
 	public class DirNavigatorView : IDirNavigatorView
@@ -50,6 +56,8 @@ namespace UIComponents.NodesNavigator
 			}
 		}
 		public Dictionary<NType, Color> RowColors { get; set; } = null;
+		public IGridCustomizer GridCustomizer { get; set; } = null;
+
 		public DirNavigatorView(DataGridView grid, Control curbanchname)
 		{
 			_grid = grid;
@@ -195,5 +203,6 @@ namespace UIComponents.NodesNavigator
 			_grid.Rows[rowIndex].Selected = true;
 			_grid.CurrentCell = _grid[1, rowIndex];
 		}
+
 	}
 }

@@ -32,10 +32,11 @@ namespace TaskBank
 			Domain.Tools.Debugger.init();
 
 			MainForm mf = new MainForm();
-			RmTaskRepository r = new RmTaskRepository();
+			NotesRepository r = new NotesRepository();
 			RmTaskForm tf = new RmTaskForm();
+			DirectoryRepository dirsrepo = new DirectoryRepository();
 
-			MainPresenter pr = new MainPresenter(mf, r, tf);
+			MainPresenter pr = new MainPresenter(mf, tf, r, dirsrepo);
 
 			Application.Run(mf);
 		}

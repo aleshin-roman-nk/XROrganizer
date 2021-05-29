@@ -15,7 +15,7 @@ namespace Domain.DBContexts
 
 		}
 
-		public DbSet<OTask> OTasks { get; set; }
-		public DbSet<ODirectiry> ODirectiries { get; set; }
+		public DbSet<Note> Notes { get; set; }
+		public DbSet<Dir> Dirs { get; set; }
 	}
 }

@@ -36,8 +36,9 @@ namespace WindowsFormsAppTest
 			this.btnCreatDir = new System.Windows.Forms.Button();
 			this.btnHideIcons = new System.Windows.Forms.Button();
 			this.btnShowIcons = new System.Windows.Forms.Button();
-			this.iNodeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.component11 = new WindowsFormsAppTest.Component1(this.components);
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.iNodeBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.iNodeBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -103,9 +104,9 @@ namespace WindowsFormsAppTest
 			this.btnShowIcons.UseVisualStyleBackColor = true;
 			this.btnShowIcons.Click += new System.EventHandler(this.btnShowIcons_Click);
 			// 
-			// iNodeBindingSource
+			// component11
 			// 
-			this.iNodeBindingSource.DataSource = typeof(DirectoriesWolking.Models.DirNavigator.INode);
+			this.component11.Grid = this.dataGridView1;
 			// 
 			// nameDataGridViewTextBoxColumn
 			// 
@@ -114,6 +115,10 @@ namespace WindowsFormsAppTest
 			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
 			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
 			this.nameDataGridViewTextBoxColumn.Width = 200;
+			// 
+			// iNodeBindingSource
+			// 
+			this.iNodeBindingSource.DataSource = typeof(DirectoriesWolking.Models.DirNavigator.INode);
 			// 
 			// Form1
 			// 
@@ -146,6 +151,7 @@ namespace WindowsFormsAppTest
 		private System.Windows.Forms.Button btnShowIcons;
 		private System.Windows.Forms.BindingSource iNodeBindingSource;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private Component1 component11;
 	}
 }
 

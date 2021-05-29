@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="NodesNavigator\DirNavigatorView.cs" />
     <Compile Include="NodesNavigator\IDirNavigatorView.cs" />
+    <Compile Include="NodesNavigator\IGridCustomizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

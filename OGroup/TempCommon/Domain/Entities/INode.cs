@@ -14,6 +14,6 @@ namespace Domain.Entities
 		NType type { get; set; }
 		string name { get; set; }
 		string description { get; set; }
-		DateTime date { get; set; }
+		DateTime? date { get; set; }
 	}
 }

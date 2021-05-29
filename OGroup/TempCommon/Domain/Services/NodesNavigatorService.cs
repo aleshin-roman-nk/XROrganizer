@@ -8,15 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Domain.Services
 {
 	public class NodesNavigatorService
 	{
-		INodeRepositoryReadOnly _repo;
+		IDirectoryRepository _repo;
 		Stack<INode> owners = new Stack<INode>();
 
-		readonly INode _root = new BaseNode { name = "", id = 0, type = NType._sys_root_dir };
-		readonly INode _exit_top_dir = new BaseNode { name = "..", id = -1, type = NType.exit_dir };
+		readonly Dir _root = new Dir { name = "", id = 0, type = NType._sys_root_dir };
+		readonly Dir _exit_top_dir = new Dir { name = "..", id = -1, type = NType.exit_dir };
 
 		public event EventHandler<NodesImage> CurrentNodeChanged;
 
@@ -34,7 +35,11 @@ namespace Domain.Services
 			}
 		}
 
-		public NodesNavigatorService(INodeRepositoryReadOnly r)
+		// >>> 27-05-2021 23:43
+		// И здесь должен стоять специфический репозиторий, который возвращает по алгоритму.
+		//	К примеру нужны не только директории, но и задачи в одном пространстве структуры.
+
+		public NodesNavigatorService(IDirectoryRepository r)
 		{
 			_repo = r;
 		}
@@ -125,7 +130,7 @@ namespace Domain.Services
 			if (!StackIsOnRoot())
 				res.Add(_exit_top_dir);
 
-			var all_items = _repo.All;
+			var all_items = _repo.GetDirs();
 
 			var items = (from d in all_items where d.owner_id == own_id select d).OrderBy(x => x.type).ThenBy(x => x.name).ToList();
 

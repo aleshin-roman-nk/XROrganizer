@@ -27,11 +27,11 @@ namespace TaskBank.ViewComponents
 		SavingObserver savingObserver;
 		BindingSource bs;
 
-		public OTask CurrentTask => bs.Current as OTask;
-		OTask _previousTask { get; set; }
+		public Note CurrentTask => bs.Current as Note;
+		Note _previousTask { get; set; }
 
-		public event EventHandler<OTask> SaveTaskNeeded;
-		public event EventHandler<IEnumerable<OTask>> MoveTaskCollection;
+		public event EventHandler<Note> SaveTaskNeeded;
+		public event EventHandler<IEnumerable<Note>> MoveTaskCollection;
 
 		public TaskCollectionView(DataGridView task_grid, Control saveIndicator, RichTextBox taskBody)
 		{
@@ -66,12 +66,12 @@ namespace TaskBank.ViewComponents
 				Name = "Id"
 			};
 
-			DataGridViewTextBoxColumn cMarker = new DataGridViewTextBoxColumn
-			{
-				Width = 30,
-				HeaderText = "!",
-				Name = "Imp"
-			};
+			//DataGridViewTextBoxColumn cMarker = new DataGridViewTextBoxColumn
+			//{
+			//	Width = 30,
+			//	HeaderText = "!",
+			//	Name = "Imp"
+			//};
 
 			DataGridViewTextBoxColumn c2 = new DataGridViewTextBoxColumn
 			{
@@ -82,18 +82,18 @@ namespace TaskBank.ViewComponents
 				Name = "Text"
 			};
 
-			DataGridViewTextBoxColumn c3 = new DataGridViewTextBoxColumn
-			{
-				Width = 80,
-				HeaderText = "Дир",
-				DataPropertyName = "DirectoryId",
-				Name = "DirId"
-			};
+			//DataGridViewTextBoxColumn c3 = new DataGridViewTextBoxColumn
+			//{
+			//	Width = 80,
+			//	HeaderText = "Дир",
+			//	DataPropertyName = "DirectoryId",
+			//	Name = "DirId"
+			//};
 
 			_grid.Columns.Add(c1);
-			_grid.Columns.Add(cMarker);
+			//_grid.Columns.Add(cMarker);
 			_grid.Columns.Add(c2);
-			_grid.Columns.Add(c3);
+			//_grid.Columns.Add(c3);
 			_grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 			_grid.Columns["Text"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 		}
@@ -110,22 +110,22 @@ namespace TaskBank.ViewComponents
 
 		private void _grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
-			var row = _grid.Rows[e.RowIndex];
-			row.Cells["Imp"].Style.BackColor = imp_to_color((row.DataBoundItem as OTask).Imp);
-			row.Cells["Imp"].Style.SelectionBackColor = imp_to_color((row.DataBoundItem as OTask).Imp);
+			//var row = _grid.Rows[e.RowIndex];
+			//row.Cells["Imp"].Style.BackColor = imp_to_color((row.DataBoundItem as Node).Imp);
+			//row.Cells["Imp"].Style.SelectionBackColor = imp_to_color((row.DataBoundItem as Node).Imp);
 
-			//row.Cells["Imp"].Value = "=>";// работает. для указания, что этот период сейчас текущий по времени
+			////row.Cells["Imp"].Value = "=>";// работает. для указания, что этот период сейчас текущий по времени
 		}
 
 		// In module
-		private Color imp_to_color(ImportanceLevel imp)
-		{
-			if (imp == ImportanceLevel.Total) return Color.Red;
-			else if (imp == ImportanceLevel.Middle) return Color.BlueViolet;
-			else if (imp == ImportanceLevel.Low) return Color.Green;
+		//private Color imp_to_color(ImportanceLevel imp)
+		//{
+		//	if (imp == ImportanceLevel.Total) return Color.Red;
+		//	else if (imp == ImportanceLevel.Middle) return Color.BlueViolet;
+		//	else if (imp == ImportanceLevel.Low) return Color.Green;
 
-			return Color.LightGreen;
-		}
+		//	return Color.LightGreen;
+		//}
 
 		private void _taskBody_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -148,11 +148,11 @@ namespace TaskBank.ViewComponents
 			_previousTask = CurrentTask;
 		}
 
-		private void _commitAndSave(OTask task)
+		private void _commitAndSave(Note task)
 		{
 			if (!savingObserver.Saved)
 			{
-				task.Text = _taskBody.Text;
+				task.description = _taskBody.Text;
 				if (SaveTaskNeeded == null) throw new ArgumentNullException("SaveTaskNeeded must be subscribed but it is not.");
 				SaveTaskNeeded.Invoke(this, task);// спросить ответ что действительно сохранено.
 				savingObserver.Saved = true;
@@ -165,17 +165,17 @@ namespace TaskBank.ViewComponents
 				_commitAndSave(CurrentTask);
 		}
 
-		private void _put(OTask task)
+		private void _put(Note task)
 		{
-			_taskBody.Text = task.Text;
+			_taskBody.Text = task.description;
 			savingObserver.Saved = true;
 		}
 
-		private IEnumerable<OTask> _getSelectedTasks()
+		private IEnumerable<Note> _getSelectedTasks()
 		{
 			//List<RmTask> res = new List<RmTask>();
 
-			return _grid.SelectedRows.Cast<DataGridViewRow>().Select(x=>x.DataBoundItem as OTask);
+			return _grid.SelectedRows.Cast<DataGridViewRow>().Select(x=>x.DataBoundItem as Note);
 
 			//foreach (DataGridViewRow item in _grid.SelectedRows)
 			//{
@@ -183,7 +183,7 @@ namespace TaskBank.ViewComponents
 			//}
 		}
 
-		public void DisplayTaskCollection(IEnumerable<OTask> tcollection)
+		public void DisplayTaskCollection(IEnumerable<Note> tcollection)
 		{
 			savingObserver.Saved = true;
 			bs.DataSource = tcollection;

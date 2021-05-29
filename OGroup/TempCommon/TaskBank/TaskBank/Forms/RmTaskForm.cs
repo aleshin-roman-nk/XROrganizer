@@ -12,27 +12,27 @@ using TaskBank.Views;
 
 namespace TaskBank.Dlg.forms
 {
-	public partial class RmTaskForm : Form, ISingleEntityView<OTask>
+	public partial class RmTaskForm : Form, ISingleEntityView<Note>
 	{
-		OTask _rmTask;
+		Note _rmTask;
 
 		public RmTaskForm()
 		{
 			InitializeComponent();
 		}
 
-		private void placeObject(OTask tsk)
+		private void placeObject(Note tsk)
 		{
-			richTextBox1.Text = tsk.Text;
-			richTextBox1.SelectionStart = richTextBox1.Text.Length;
+			textBox1.Text = tsk.description;
+			textBox1.SelectionStart = textBox1.Text.Length;
 		}
 
 		private void acceptObject()
 		{
-			_rmTask.Text = richTextBox1.Text;
+			_rmTask.description = textBox1.Text;
 		}
 
-		ViewResult<OTask> ISingleEntityView<OTask>.Go(OTask tsk)
+		ViewResult<Note> ISingleEntityView<Note>.Go(Note tsk)
 		{
 			_rmTask = tsk;
 			placeObject(_rmTask);
@@ -42,13 +42,18 @@ namespace TaskBank.Dlg.forms
 			if (ok)
 			{
 				acceptObject();
-				var res = new ViewResult<OTask>(_rmTask, true);
+				var res = new ViewResult<Note>(_rmTask, true);
 				return res;
 			}
 			else
 			{
-				return new ViewResult<OTask>(null, false);
+				return new ViewResult<Note>(null, false);
 			}
+		}
+
+		private void RmTaskForm_Load(object sender, EventArgs e)
+		{
+			textBox1.Select();
 		}
 	}
 }

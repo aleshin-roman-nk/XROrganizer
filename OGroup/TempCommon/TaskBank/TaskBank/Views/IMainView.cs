@@ -4,16 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using UIComponents.NodesNavigator;
 
 namespace TaskBank
 {
 	public interface IMainView
 	{
-		event EventHandler<DateTime> CreateNoteCommand;
-		event EventHandler<OTask> SaveNoteCommand;
-		event EventHandler<OTask> DeleteNoteCommand;
+		event EventHandler<DateTime> NewTask;
+		event EventHandler<Note> SaveTask;
+		event EventHandler<Note> DeleteTask;
 		event EventHandler<string> CreateDir;
-		void DisplayTaskCollection(IEnumerable<OTask> tlist);
+		void DisplayTaskCollection(IEnumerable<Note> tlist);
+
+		IDirNavigatorView DirNavigator { get; }
 	}
 }

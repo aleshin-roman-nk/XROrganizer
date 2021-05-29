@@ -6,6 +6,6 @@ namespace TaskBank.Views
 {
 	public interface ISingleEntityView<T>
 	{
-		ViewResult<T> Go(OTask tsk);
+		ViewResult<T> Go(Note tsk);
 	}
 }

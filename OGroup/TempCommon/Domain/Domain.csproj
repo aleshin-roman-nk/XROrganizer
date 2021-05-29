@@ -69,17 +69,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cfg\Settings.cs" />
     <Compile Include="DBContexts\MainContext.cs" />
     <Compile Include="DBContexts\SQLiteConfig.cs" />
-    <Compile Include="Entities\BaseNode.cs" />
+    <Compile Include="Entities\Dir.cs" />
     <Compile Include="Entities\INode.cs" />
-    <Compile Include="Entities\ODirectiry.cs" />
-    <Compile Include="Entities\OTask.cs" />
+    <Compile Include="Entities\Note.cs" />
     <Compile Include="Enums\NType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repos\INodeRepositoryReadOnly.cs" />
-    <Compile Include="Repos\IRmTaskRepository.cs" />
-    <Compile Include="Repos\RmTaskRepository.cs" />
+    <Compile Include="Repos\DirectoryRepository.cs" />
+    <Compile Include="Repos\IDirectoryRepository.cs" />
+    <Compile Include="Repos\INotesRepository.cs" />
+    <Compile Include="Repos\NotesRepository.cs" />
     <Compile Include="Services\Entities\NodesImage.cs" />
     <Compile Include="Services\NodesNavigatorService.cs" />
     <Compile Include="Services\RmTaskModel.cs" />

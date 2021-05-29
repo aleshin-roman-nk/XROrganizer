@@ -10,26 +10,28 @@ namespace Domain.Services
 {
 	public class RmTaskModel
 	{
-		OTask _obj;
+		Note _obj;
 
-		public RmTaskModel(OTask t)
+		public RmTaskModel(Note t)
 		{
 			_obj = t;
 		}
 
-		public OTask Clone()
+		public Note Clone()
 		{
-			return CloneObject.Clone<OTask>(_obj);
+			return CloneObject.Clone<Note>(_obj);
 		}
 
-		public void Accept(OTask t)
+		public void Accept(Note t)
 		{
-			if (t.Id != _obj.Id) throw new ArgumentException("Id does not fit to observable instance.");
+			if (t.id != _obj.id) throw new ArgumentException("Id does not fit to observable instance.");
 
-			_obj.Imp = t.Imp;
-			_obj.Text = t.Text;
-			_obj.DateTime = t.DateTime;
-			_obj.Title = t.Title;
+			//_obj.Imp = t.Imp;
+			_obj.description = t.description;
+			_obj.date = t.date;
+			_obj.name = t.name;
+			_obj.owner_id = t.owner_id;
+			_obj.type = t.type;
 		}
 	}
 }
