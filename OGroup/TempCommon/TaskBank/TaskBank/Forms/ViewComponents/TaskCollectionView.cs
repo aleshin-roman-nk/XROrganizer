@@ -56,46 +56,46 @@ namespace TaskBank.ViewComponents
 
 		private void _buildColumns()
 		{
-			_grid.AutoGenerateColumns = false;
+			//_grid.AutoGenerateColumns = false;
 
-			DataGridViewTextBoxColumn c1 = new DataGridViewTextBoxColumn
-			{
-				Width = 40,
-				HeaderText = "#",
-				DataPropertyName = "Id",
-				Name = "Id"
-			};
-
-			//DataGridViewTextBoxColumn cMarker = new DataGridViewTextBoxColumn
+			//DataGridViewTextBoxColumn c1 = new DataGridViewTextBoxColumn
 			//{
-			//	Width = 30,
-			//	HeaderText = "!",
-			//	Name = "Imp"
+			//	Width = 40,
+			//	HeaderText = "#",
+			//	DataPropertyName = "Id",
+			//	Name = "Id"
 			//};
 
-			DataGridViewTextBoxColumn c2 = new DataGridViewTextBoxColumn
-			{
-				Width = 800,
-				HeaderText = "Задачи",
-				DataPropertyName = "MiniText",
-				//DataPropertyName = "Text",
-				Name = "Text"
-			};
+			////DataGridViewTextBoxColumn cMarker = new DataGridViewTextBoxColumn
+			////{
+			////	Width = 30,
+			////	HeaderText = "!",
+			////	Name = "Imp"
+			////};
 
-			//DataGridViewTextBoxColumn c3 = new DataGridViewTextBoxColumn
+			//DataGridViewTextBoxColumn c2 = new DataGridViewTextBoxColumn
 			//{
-			//	Width = 80,
-			//	HeaderText = "Дир",
-			//	DataPropertyName = "DirectoryId",
-			//	Name = "DirId"
+			//	Width = 800,
+			//	HeaderText = "Задачи",
+			//	DataPropertyName = "MiniText",
+			//	//DataPropertyName = "Text",
+			//	Name = "Text"
 			//};
 
-			_grid.Columns.Add(c1);
-			//_grid.Columns.Add(cMarker);
-			_grid.Columns.Add(c2);
-			//_grid.Columns.Add(c3);
-			_grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-			_grid.Columns["Text"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+			////DataGridViewTextBoxColumn c3 = new DataGridViewTextBoxColumn
+			////{
+			////	Width = 80,
+			////	HeaderText = "Дир",
+			////	DataPropertyName = "DirectoryId",
+			////	Name = "DirId"
+			////};
+
+			//_grid.Columns.Add(c1);
+			////_grid.Columns.Add(cMarker);
+			//_grid.Columns.Add(c2);
+			////_grid.Columns.Add(c3);
+			//_grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+			//_grid.Columns["Text"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 		}
 
 		private void _grid_KeyDown(object sender, KeyEventArgs e)

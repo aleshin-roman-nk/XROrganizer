@@ -21,7 +21,10 @@ namespace TaskBank
 
 		NodesNavigatorService dirNavigator;
 
-		public MainPresenter(IMainView mv, ISingleEntityView<Note> task_view, INotesRepository repo, IDirectoryRepository dir_repo)
+		public MainPresenter(IMainView mv, 
+			ISingleEntityView<Note> task_view, 
+			INotesRepository repo, 
+			IDirectoryRepository dir_repo)
 		{
 			_mainView = mv;
 			_taskRepo = repo;
@@ -73,6 +76,9 @@ namespace TaskBank
 
 		private void _mainView_CreateDir(object sender, string e)
 		{
+			// >>> 30-05-2021 01:28
+			// method like currentDir.CreateChild(string name) is better
+			// it means that we have to have a service providing dir-children mechanism
 			_dirRepo.Create(dirNavigator.CurrentOwner.id, e, DateTime.Now );
 			dirNavigator.Update();
 		}

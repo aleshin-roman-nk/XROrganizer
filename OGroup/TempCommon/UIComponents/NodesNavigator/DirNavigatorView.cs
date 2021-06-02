@@ -28,7 +28,7 @@ namespace UIComponents.NodesNavigator
 
 		// Так как внутри коллекции элемент выходной директории BaseDir, то при приведении типов получается null
 		// Кажется нелогичным в этом модуле работы с разнотипными элементами коллекции в этом месте работать с конкретным типом.
-		// Поэтому здесь необходтио работать с IDir
+		// Поэтому здесь необходтио работать с INode
 		INode _current_dir => bs.Current as INode;
 
 		private Dictionary<NType, Image> _icons = null;
@@ -201,7 +201,7 @@ namespace UIComponents.NodesNavigator
 			rowIndex = row.Index;
 
 			_grid.Rows[rowIndex].Selected = true;
-			_grid.CurrentCell = _grid[1, rowIndex];
+			_grid.CurrentCell = _grid[0, rowIndex];
 		}
 
 	}

@@ -49,5 +49,10 @@ namespace Domain.Repos
 
 			//return d;
 		}
+
+		public IEnumerable<Dir> GetTrackedDirs()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

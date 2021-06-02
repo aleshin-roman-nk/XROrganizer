@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Services
 {
-	public class NodesNavigatorService
+	public class NodesNavigatorService// generics is better. why? because we can have a class with particular entity.
+									  // and we can inherit this class to have a service that provides navi logic AND creation a child of current dir.
+									  // then, repo must provide create child method in additional to having a method to get objects with  type ntype
 	{
 		IDirectoryRepository _repo;
 		Stack<INode> owners = new Stack<INode>();

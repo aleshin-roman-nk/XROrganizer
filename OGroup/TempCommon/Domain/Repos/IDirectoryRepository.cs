@@ -13,6 +13,7 @@ namespace Domain.Repos
 	public interface IDirectoryRepository
 	{
 		IEnumerable<Dir> GetDirs();
+		IEnumerable<Dir> GetTrackedDirs();
 		void Save(Dir dir);
 		void Delete(Dir dir);
 		void Create(int owner_id, string name, DateTime date);
