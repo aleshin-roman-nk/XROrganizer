@@ -17,14 +17,16 @@ using System.Windows.Forms;
 
 namespace UIComponents.NodesNavigator
 {
-	public class DirNavigatorView : IDirNavigatorView
+	public class NodeNavigatorView : INodeNavigatorView
 	{
+//		Stack<INode> _stackOfHighlithed = new Stack<INode>();
+
 		DataGridView _grid;
 		Control _txtCurrentBranchName;
 
 		BindingSource bs = new BindingSource();
 
-		NodesImage _dirDataImage;
+		//NodesNavigatorImage _dirDataImage;
 
 		// Так как внутри коллекции элемент выходной директории BaseDir, то при приведении типов получается null
 		// Кажется нелогичным в этом модуле работы с разнотипными элементами коллекции в этом месте работать с конкретным типом.
@@ -58,7 +60,9 @@ namespace UIComponents.NodesNavigator
 		public Dictionary<NType, Color> RowColors { get; set; } = null;
 		public IGridCustomizer GridCustomizer { get; set; } = null;
 
-		public DirNavigatorView(DataGridView grid, Control curbanchname)
+		public INode CurrentNode => bs.Current as INode;
+
+		public NodeNavigatorView(DataGridView grid, Control curbanchname)
 		{
 			_grid = grid;
 			_txtCurrentBranchName = curbanchname;
@@ -104,9 +108,9 @@ namespace UIComponents.NodesNavigator
 		public event EventHandler<INode> ActivateNode;
 		public event EventHandler ExitNode;
 
-		public void SetDirImage(NodesImage dataImage)
+		public void DisplayData(NodeNavigatorImage dataImage)
 		{
-			updateData(dataImage);
+			update(dataImage);
 		}
 
 		// Внешний модуль. Настраивыается и подключается извне.
@@ -145,13 +149,13 @@ namespace UIComponents.NodesNavigator
 			return RowColors[icontype];
 		}
 
-		private void updateData(NodesImage image)
+		private void update(NodeNavigatorImage image)
 		{
-			_dirDataImage = image;
 			bs.DataSource = null;// происходит сброс текущей позиции при таком привоении. придется хранить текущий id, чтобы впоследствии вернуть курсор.
-			bs.DataSource = _dirDataImage.CurrentBranch;
-			placeCursor();
-			_txtCurrentBranchName.Text = _dirDataImage.CurrentBranchName;
+			bs.DataSource = image.CurrentBranch;
+			if (_txtCurrentBranchName != null)
+				_txtCurrentBranchName.Text = image.CurrentDirFullName;
+			placeCursor(image.HighlightedDir);
 			markRowsWithIcons();
 		}
 
@@ -169,31 +173,35 @@ namespace UIComponents.NodesNavigator
 		{
 			if (e.KeyCode == Keys.Enter)
 			{
+				//if (_current_dir.type != NType.exit_dir)
+				//	_stackOfHighlithed.Push(_current_dir);// Проблема. Если это задача или какой то невходимый тип, мы его поместим в стек
+				//else if (_current_dir.type == NType.exit_dir)
+				//{
+				//	if (_stackOfHighlithed.Any())
+				//		placeCursor(_stackOfHighlithed.Pop());
+				//}
+
 				OnActivateNode(_current_dir);
 				e.Handled = true;
 			}
 			else if (e.KeyCode == Keys.Back)
 			{
 				OnExitNode();
-				placeCursor();
 				e.Handled = true;
 			}
+
+
 		}
 
-		private void placeCursor()
+		private void placeCursor(INode n)
 		{
-			selectRowWithDir(_dirDataImage.HighlightedDir);
-		}
-
-		private void selectRowWithDir(INode d)
-		{
-			if (d == null) return;
+			if (n == null) return;
 
 			int rowIndex = -1;
 
 			DataGridViewRow row = _grid.Rows
 				.Cast<DataGridViewRow>()
-				.Where(r => (r.DataBoundItem as INode).id == d.id)
+				.Where(r => (r.DataBoundItem as INode).id == n.id)
 				.FirstOrDefault();
 
 			if (row == null) return;
@@ -201,8 +209,7 @@ namespace UIComponents.NodesNavigator
 			rowIndex = row.Index;
 
 			_grid.Rows[rowIndex].Selected = true;
-			_grid.CurrentCell = _grid[0, rowIndex];
+			_grid.CurrentCell = _grid[0, rowIndex];			
 		}
-
 	}
 }

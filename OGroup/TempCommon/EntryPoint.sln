@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputBoxes", "InputBoxes\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestView", "TestView\TestView.csproj", "{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresenterServices", "PresenterServices\PresenterServices.csproj", "{481AC604-A5DB-4586-9B2E-3E5931488213}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{481AC604-A5DB-4586-9B2E-3E5931488213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{481AC604-A5DB-4586-9B2E-3E5931488213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{481AC604-A5DB-4586-9B2E-3E5931488213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{481AC604-A5DB-4586-9B2E-3E5931488213}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

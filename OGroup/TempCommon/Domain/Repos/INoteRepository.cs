@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Repos
 {
-	public interface IDirectoryRepository: IRepository<Dir>, IRepository
+	public interface INoteRepository: IObservableCollection<Note>, IRepository<Note>
 	{
-		
 	}
 }

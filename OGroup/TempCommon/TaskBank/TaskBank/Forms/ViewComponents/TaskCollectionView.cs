@@ -167,7 +167,9 @@ namespace TaskBank.ViewComponents
 
 		private void _put(Note task)
 		{
-			_taskBody.Text = task.description;
+			if (task == null) _taskBody.Clear();
+			else
+				_taskBody.Text = task.description;
 			savingObserver.Saved = true;
 		}
 
@@ -185,6 +187,7 @@ namespace TaskBank.ViewComponents
 
 		public void DisplayTaskCollection(IEnumerable<Note> tcollection)
 		{
+			_put(null);
 			savingObserver.Saved = true;
 			bs.DataSource = tcollection;
 			_previousTask = CurrentTask;

@@ -10,12 +10,16 @@ namespace TaskBank
 {
 	public interface IMainView
 	{
-		event EventHandler<DateTime> NewTask;
+		event EventHandler NewTask;
 		event EventHandler<Note> SaveTask;
 		event EventHandler<Note> DeleteTask;
+
 		event EventHandler<string> CreateDir;
+		event EventHandler<Dir> DeleteDir;
 		void DisplayTaskCollection(IEnumerable<Note> tlist);
 
-		IDirNavigatorView DirNavigator { get; }
+		INodeNavigatorView DirNavigator { get; }
+
+		INodeNavigatorView TargetDirs { get; }
 	}
 }

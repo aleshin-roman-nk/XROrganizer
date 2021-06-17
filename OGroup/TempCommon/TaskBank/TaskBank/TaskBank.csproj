@@ -242,7 +242,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\ViewComponents\DirServiceView.cs" />
     <Compile Include="Views\ISingleEntityView.cs" />
     <Compile Include="Forms\RmTaskForm.cs">
       <SubType>Form</SubType>
@@ -318,6 +317,10 @@
     <ProjectReference Include="..\..\InputBoxes\InputBoxes.csproj">
       <Project>{9d845bd0-d295-45e7-b786-77fcc299893e}</Project>
       <Name>InputBoxes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PresenterServices\PresenterServices.csproj">
+      <Project>{481ac604-a5db-4586-9b2e-3e5931488213}</Project>
+      <Name>PresenterServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\UIComponents\UIComponents.csproj">
       <Project>{c886c63e-000f-4b56-8371-355056455ddb}</Project>

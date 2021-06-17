@@ -50,12 +50,15 @@
 			this.btnDel = new System.Windows.Forms.Button();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.dgvDirectories = new System.Windows.Forms.DataGridView();
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dirBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.label1 = new System.Windows.Forms.Label();
 			this.lblSaved = new System.Windows.Forms.Label();
 			this.btnNewDir = new System.Windows.Forms.Button();
 			this.txtDirName = new System.Windows.Forms.TextBox();
-			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnDeleteDir = new System.Windows.Forms.Button();
+			this.dirBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+			this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.noteBindingSource)).BeginInit();
@@ -72,6 +75,7 @@
 			this.panel3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvDirectories)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dirBindingSource)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dirBindingSource1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// richTextBox1
@@ -85,7 +89,7 @@
 			this.richTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(164)))), ((int)(((byte)(14)))));
 			this.richTextBox1.Location = new System.Drawing.Point(0, 0);
 			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(787, 165);
+			this.richTextBox1.Size = new System.Drawing.Size(913, 165);
 			this.richTextBox1.TabIndex = 0;
 			this.richTextBox1.Text = "";
 			// 
@@ -96,7 +100,7 @@
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(789, 167);
+			this.panel1.Size = new System.Drawing.Size(915, 167);
 			this.panel1.TabIndex = 1;
 			// 
 			// dataGridView1
@@ -141,7 +145,7 @@
 			this.dataGridView1.RowTemplate.DividerHeight = 5;
 			this.dataGridView1.RowTemplate.Height = 86;
 			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView1.Size = new System.Drawing.Size(789, 426);
+			this.dataGridView1.Size = new System.Drawing.Size(915, 426);
 			this.dataGridView1.TabIndex = 2;
 			// 
 			// dateDataGridViewTextBoxColumn1
@@ -179,7 +183,7 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.panel1);
-			this.splitContainer1.Size = new System.Drawing.Size(789, 597);
+			this.splitContainer1.Size = new System.Drawing.Size(915, 597);
 			this.splitContainer1.SplitterDistance = 426;
 			this.splitContainer1.TabIndex = 3;
 			// 
@@ -202,7 +206,7 @@
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(0, 0);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(220, 597);
+			this.panel2.Size = new System.Drawing.Size(394, 597);
 			this.panel2.TabIndex = 5;
 			// 
 			// dataGridView3
@@ -210,9 +214,13 @@
 			this.dataGridView3.AllowUserToAddRows = false;
 			this.dataGridView3.AllowUserToDeleteRows = false;
 			this.dataGridView3.AllowUserToResizeRows = false;
+			this.dataGridView3.AutoGenerateColumns = false;
 			this.dataGridView3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(224)))));
 			this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView3.ColumnHeadersVisible = false;
+			this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nameDataGridViewTextBoxColumn1});
+			this.dataGridView3.DataSource = this.dirBindingSource1;
 			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(224)))));
 			dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -228,7 +236,7 @@
 			this.dataGridView3.ReadOnly = true;
 			this.dataGridView3.RowHeadersVisible = false;
 			this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView3.Size = new System.Drawing.Size(218, 622);
+			this.dataGridView3.Size = new System.Drawing.Size(392, 622);
 			this.dataGridView3.TabIndex = 1;
 			// 
 			// splitContainer2
@@ -246,8 +254,8 @@
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.panel2);
-			this.splitContainer2.Size = new System.Drawing.Size(1013, 597);
-			this.splitContainer2.SplitterDistance = 789;
+			this.splitContainer2.Size = new System.Drawing.Size(1313, 597);
+			this.splitContainer2.SplitterDistance = 915;
 			this.splitContainer2.TabIndex = 6;
 			// 
 			// btnDel
@@ -299,6 +307,14 @@
 			this.dgvDirectories.Size = new System.Drawing.Size(334, 622);
 			this.dgvDirectories.TabIndex = 0;
 			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			this.nameDataGridViewTextBoxColumn.Width = 300;
+			// 
 			// dirBindingSource
 			// 
 			this.dirBindingSource.DataSource = typeof(Domain.Entities.Dir);
@@ -342,19 +358,36 @@
 			this.txtDirName.Size = new System.Drawing.Size(1354, 27);
 			this.txtDirName.TabIndex = 13;
 			// 
-			// nameDataGridViewTextBoxColumn
+			// btnDeleteDir
 			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "name";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-			this.nameDataGridViewTextBoxColumn.Width = 300;
+			this.btnDeleteDir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+			this.btnDeleteDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnDeleteDir.Location = new System.Drawing.Point(84, 53);
+			this.btnDeleteDir.Name = "btnDeleteDir";
+			this.btnDeleteDir.Size = new System.Drawing.Size(75, 23);
+			this.btnDeleteDir.TabIndex = 14;
+			this.btnDeleteDir.Text = "del dir";
+			this.btnDeleteDir.UseVisualStyleBackColor = true;
+			this.btnDeleteDir.Click += new System.EventHandler(this.btnDeleteDir_Click);
+			// 
+			// dirBindingSource1
+			// 
+			this.dirBindingSource1.DataSource = typeof(Domain.Entities.Dir);
+			// 
+			// nameDataGridViewTextBoxColumn1
+			// 
+			this.nameDataGridViewTextBoxColumn1.DataPropertyName = "name";
+			this.nameDataGridViewTextBoxColumn1.HeaderText = "name";
+			this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+			this.nameDataGridViewTextBoxColumn1.ReadOnly = true;
+			this.nameDataGridViewTextBoxColumn1.Width = 200;
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1370, 691);
+			this.ClientSize = new System.Drawing.Size(1670, 691);
+			this.Controls.Add(this.btnDeleteDir);
 			this.Controls.Add(this.txtDirName);
 			this.Controls.Add(this.btnNewDir);
 			this.Controls.Add(this.lblSaved);
@@ -384,6 +417,7 @@
 			this.panel3.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dgvDirectories)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dirBindingSource)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dirBindingSource1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -411,6 +445,9 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn miniTextDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.Button btnDeleteDir;
+		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
+		private System.Windows.Forms.BindingSource dirBindingSource1;
 	}
 }
 

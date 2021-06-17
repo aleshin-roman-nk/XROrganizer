@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace UIComponents.NodesNavigator
 {
-	public interface IDirNavigatorView
+	public interface INodeNavigatorView
 	{
 		Dictionary<NType, Image> Icons { get; set; }
 		Dictionary<NType, Color> RowColors { get; set; }
@@ -15,7 +15,12 @@ namespace UIComponents.NodesNavigator
 		event EventHandler<INode> ActivateNode;
 		event EventHandler ExitNode;
 
-		void SetDirImage(NodesImage dataImage);
+		/// <summary>
+		/// Node under the cursor
+		/// </summary>
+		INode CurrentNode { get; }
+
+		void DisplayData(NodeNavigatorImage dataImage);
 
 		/*
 		 * >>> 29-05-2021 00:36

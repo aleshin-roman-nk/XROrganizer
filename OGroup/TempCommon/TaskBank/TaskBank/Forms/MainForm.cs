@@ -20,15 +20,20 @@ namespace TaskBank
 	{
 		TaskCollectionView taskCollectionView;
 
-		IDirNavigatorView _DirNavigator; 
+		INodeNavigatorView _DirNavigator;
 
-		public IDirNavigatorView DirNavigator => _DirNavigator;
+		INodeNavigatorView _targetDirs;
 
-		public event EventHandler<DateTime> NewTask;
+		public INodeNavigatorView DirNavigator => _DirNavigator;
+
+		public INodeNavigatorView TargetDirs => _targetDirs;
+
+		public event EventHandler NewTask;
 		public event EventHandler<Note> SaveTask;
 		public event EventHandler<Note> DeleteTask;
 		// Все что связанно с работой одного модуля должно быть упаковынным в свой usercontrol или component
 		public event EventHandler<string> CreateDir;
+		public event EventHandler<Dir> DeleteDir;
 
 		public MainForm()
 		{
@@ -38,7 +43,9 @@ namespace TaskBank
 			taskCollectionView.SaveTaskNeeded += TaskCollectionView_SaveTaskNeeded;
 			taskCollectionView.MoveTaskCollection += TaskCollectionView_MoveTaskCollection;
 
-			_DirNavigator = new DirNavigatorView(dgvDirectories, txtDirName);
+			_DirNavigator = new NodeNavigatorView(dgvDirectories, txtDirName);
+
+			_targetDirs = new NodeNavigatorView(dataGridView3, null);
 		}
 
 		private void TaskCollectionView_MoveTaskCollection(object sender, IEnumerable<Note> e)
@@ -63,7 +70,7 @@ namespace TaskBank
 
 		private void OnCreateNote()
 		{
-			NewTask?.Invoke(this, DateTime.Now);
+			NewTask?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void OnDeleteNote(Note rm)
@@ -74,6 +81,11 @@ namespace TaskBank
 		private void OnNewDir(string dir)
 		{
 			CreateDir?.Invoke(this, dir);
+		}
+
+		private void OnDelDir(Dir d)
+		{
+			DeleteDir?.Invoke(this, d);
 		}
 
 		private void btnDel_Click(object sender, EventArgs e)
@@ -98,6 +110,11 @@ namespace TaskBank
 				OnNewDir(str);
 
 			dgvDirectories.Focus();
+		}
+
+		private void btnDeleteDir_Click(object sender, EventArgs e)
+		{
+			OnDelDir(_DirNavigator.CurrentNode as Dir);
 		}
 	}
 }
