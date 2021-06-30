@@ -22,5 +22,17 @@ namespace InputBoxes
 			else
 				return string.Empty;
 		}
+
+		public static bool UserAnsweredYes(string q)
+		{
+			DialogResult dr = MessageBox.Show(q, "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+			return DialogResult.Yes == dr;
+		}
+
+		public static void ShowMessage(string msg)
+		{
+			MessageBox.Show(msg);
+		}
 	}
 }

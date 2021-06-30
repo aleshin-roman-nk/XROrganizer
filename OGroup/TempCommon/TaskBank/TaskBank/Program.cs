@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TaskBank.Dlg.forms;
+using TaskBank.Presenters;
 
 namespace TaskBank
 {
@@ -34,9 +35,7 @@ namespace TaskBank
 			MainForm mf = new MainForm();
 			RmTaskForm tf = new RmTaskForm();
 
-
-
-			MainPresenter pr = new MainPresenter(mf, tf);
+			MainPresenter pr = new MainPresenter(mf);
 
 			Application.Run(mf);
 		}

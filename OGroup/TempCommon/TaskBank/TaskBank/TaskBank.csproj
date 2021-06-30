@@ -242,6 +242,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Presenters\DirectoryFilesPresenter.cs" />
+    <Compile Include="Presenters\DirectoriesPresenter.cs" />
     <Compile Include="Views\ISingleEntityView.cs" />
     <Compile Include="Forms\RmTaskForm.cs">
       <SubType>Form</SubType>
@@ -260,8 +262,6 @@
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\ViewComponents\SavingObserver.cs" />
-    <Compile Include="Forms\ViewComponents\TaskCollectionView.cs" />
     <EmbeddedResource Include="Forms\RmTaskForm.resx">
       <DependentUpon>RmTaskForm.cs</DependentUpon>
     </EmbeddedResource>

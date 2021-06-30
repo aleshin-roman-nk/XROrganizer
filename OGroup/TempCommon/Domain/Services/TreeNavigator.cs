@@ -27,13 +27,13 @@ namespace Domain.Services
 	 * 
 	 */
 
-	public class NodeNavigator : INodeNavigator
+	public class TreeNavigator : ITreeNavigator
 	{
 		Stack<INode> owners = new Stack<INode>();
 
 		public event EventHandler OwnerChanged;
 
-		public NodeNavigator()
+		public TreeNavigator()
 		{
 			OnCurrentOwnerChanged();
 		}
@@ -82,7 +82,7 @@ namespace Domain.Services
 		{
 			get
 			{
-				if (!owners.Any()) return RootNode.Value;
+				if (!owners.Any()) return Dir.Root;
 				return owners.Peek();
 			}
 		}
@@ -114,6 +114,11 @@ namespace Domain.Services
 				_highlightedDir = owners.Pop();
 				OnCurrentOwnerChanged();
 			}
+		}
+
+		public void Update()
+		{
+			OnCurrentOwnerChanged();
 		}
 	}
 }

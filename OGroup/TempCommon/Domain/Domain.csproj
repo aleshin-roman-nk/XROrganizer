@@ -72,32 +72,31 @@
     <Compile Include="Cfg\Settings.cs" />
     <Compile Include="DBContexts\MainContext.cs" />
     <Compile Include="DBContexts\SQLiteConfig.cs" />
-    <Compile Include="Entities\RootNode.cs" />
-    <Compile Include="Entities\TopExitNode.cs" />
     <Compile Include="Entities\Dir.cs" />
     <Compile Include="Entities\INode.cs" />
     <Compile Include="Entities\Note.cs" />
     <Compile Include="Entities\TrackedDir.cs" />
-    <Compile Include="Enums\CRUDOperation.cs" />
     <Compile Include="Enums\NType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\DirectoryRepository.cs" />
     <Compile Include="Repos\IDirectoryRepository.cs" />
     <Compile Include="Repos\INoteRepository.cs" />
     <Compile Include="Repos\IRepository.cs" />
-    <Compile Include="Services\NavigatorService.cs" />
-    <Compile Include="Services\INodeNavigator.cs" />
+    <Compile Include="Repos\IRoutableRepository.cs" />
+    <Compile Include="Repos\IRoutingRepository.cs" />
+    <Compile Include="Services\INodeHandlerModule.cs" />
+    <Compile Include="Services\INodeRouter.cs" />
+    <Compile Include="Services\IDirectoryFilesService.cs" />
+    <Compile Include="Services\DirectoriesService.cs" />
+    <Compile Include="Services\ITreeNavigator.cs" />
     <Compile Include="Services\IObservableCollection.cs" />
-    <Compile Include="Repos\ICRUD.cs" />
     <Compile Include="Repos\NotesRepository.cs" />
-    <Compile Include="Services\Entities\TaskBankImage.cs" />
     <Compile Include="Services\Entities\NodeNavigatorImage.cs" />
-    <Compile Include="Services\INavigatorService.cs" />
-    <Compile Include="Services\IDirectoryService.cs" />
+    <Compile Include="Services\IDirectoriesService.cs" />
     <Compile Include="Services\INotesService.cs" />
-    <Compile Include="Services\NodeNavigator.cs" />
+    <Compile Include="Services\TreeNavigator.cs" />
     <Compile Include="Services\NodeTypeRouter.cs" />
-    <Compile Include="Services\NoteCollectionService.cs" />
+    <Compile Include="Services\DirectoryFilesService.cs" />
     <Compile Include="Tools\CloneObject.cs" />
     <Compile Include="Tools\Debugger.cs" />
   </ItemGroup>
@@ -108,9 +107,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\TaskBank\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

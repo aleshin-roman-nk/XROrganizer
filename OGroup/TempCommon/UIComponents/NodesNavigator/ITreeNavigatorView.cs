@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace UIComponents.NodesNavigator
 {
-	public interface INodeNavigatorView
+	public interface ITreeNavigatorView
 	{
 		Dictionary<NType, Image> Icons { get; set; }
 		Dictionary<NType, Color> RowColors { get; set; }

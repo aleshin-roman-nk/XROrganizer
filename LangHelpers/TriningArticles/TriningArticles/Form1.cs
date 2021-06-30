@@ -213,6 +213,10 @@ namespace TriningArticles
 		{
 			if (currentArticle == null) return;
 
+			DialogResult r = MessageBox.Show($"Article {currentArticle.Name} will be removed. Are you sure?", "Deleting", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+			if (r != DialogResult.Yes) return;
+
 			repo.DeleteArticle(currentArticle);
 
 			putArticle(null);

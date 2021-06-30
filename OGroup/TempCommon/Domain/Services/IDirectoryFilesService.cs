@@ -1,15 +1,15 @@
 ﻿using Domain.Entities;
-using Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Repos
+namespace Domain.Services
 {
-	public interface IDirectoryRepository: IRepository<Dir>
+	public interface IDirectoryFilesService: IObservableCollection<Note>
 	{
-		bool HasChildren(Dir d);
+		void Save(Note n);
+		void Delete(Note n);
 	}
 }

@@ -43,19 +43,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NodesNavigator\NodeNavigatorView.cs" />
-    <Compile Include="NodesNavigator\INodeNavigatorView.cs" />
+    <Compile Include="IDirectoriesView.cs" />
+    <Compile Include="IDirectoryFilesView.cs" />
+    <Compile Include="NodesNavigator\TreeNavigatorView.cs" />
+    <Compile Include="NodesNavigator\ITreeNavigatorView.cs" />
     <Compile Include="NodesNavigator\IGridCustomizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SavingObserver.cs" />
+    <Compile Include="ItemsCollectionController.cs" />
+    <Compile Include="UserControls\DirectoriesViewUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DirectoriesViewUC.Designer.cs">
+      <DependentUpon>DirectoriesViewUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DirectoryFilesViewUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DirectoryFilesViewUC.Designer.cs">
+      <DependentUpon>DirectoryFilesViewUC.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{0D7F46D1-2C0C-42FE-8FED-38A4DA845CC4}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InputBoxes\InputBoxes.csproj">
+      <Project>{9d845bd0-d295-45e7-b786-77fcc299893e}</Project>
+      <Name>InputBoxes</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UserControls\" />
+    <None Include="Properties\DataSources\Domain.Entities.INode.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UserControls\DirectoriesViewUC.resx">
+      <DependentUpon>DirectoriesViewUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DirectoryFilesViewUC.resx">
+      <DependentUpon>DirectoryFilesViewUC.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -17,7 +17,7 @@ using System.Windows.Forms;
 
 namespace UIComponents.NodesNavigator
 {
-	public class NodeNavigatorView : INodeNavigatorView
+	public class TreeNavigatorView: ITreeNavigatorView
 	{
 //		Stack<INode> _stackOfHighlithed = new Stack<INode>();
 
@@ -62,7 +62,7 @@ namespace UIComponents.NodesNavigator
 
 		public INode CurrentNode => bs.Current as INode;
 
-		public NodeNavigatorView(DataGridView grid, Control curbanchname)
+		public TreeNavigatorView(DataGridView grid, Control curbanchname)
 		{
 			_grid = grid;
 			_txtCurrentBranchName = curbanchname;
@@ -152,7 +152,7 @@ namespace UIComponents.NodesNavigator
 		private void update(NodeNavigatorImage image)
 		{
 			bs.DataSource = null;// происходит сброс текущей позиции при таком привоении. придется хранить текущий id, чтобы впоследствии вернуть курсор.
-			bs.DataSource = image.CurrentBranch;
+			bs.DataSource = image.Items;
 			if (_txtCurrentBranchName != null)
 				_txtCurrentBranchName.Text = image.CurrentDirFullName;
 			placeCursor(image.HighlightedDir);

@@ -11,31 +11,11 @@ namespace Domain.Repos
 {
 	public class NotesRepository : INoteRepository
 	{
-		public event EventHandler CollectionChanged;
 		public event EventHandler Changed;
 
-		NodeNavigator _nodeNavi;
-		public void SetNodeNavigator(NodeNavigator nvi)
+		private void OnChanged()
 		{
-			_nodeNavi = nvi;
-			//_nodeNavi.OwnerChanged += _nodeNavi_CurrentOwnerChanged; ;
-		}
-
-		IEnumerable<Note> _currentCollection;
-		public IEnumerable<Note> Items => _currentCollection;
-
-		private INode CurrentOwner { get; set; }
-
-		private void _nodeNavi_CurrentOwnerChanged(object sender, INode e)
-		{
-			CurrentOwner = e;
-			OnCollectionChanged();
-		}
-
-		private void OnCollectionChanged()
-		{
-			_currentCollection = GetItemsByParentId(CurrentOwner.id);
-			CollectionChanged?.Invoke(this, EventArgs.Empty);
+			Changed?.Invoke(this, EventArgs.Empty);
 		}
 		public void Save(Note t)
 		{
@@ -43,7 +23,7 @@ namespace Domain.Repos
 			{
 				db.Entry(t).State = t.id == 0 ? System.Data.Entity.EntityState.Added : System.Data.Entity.EntityState.Modified;
 				db.SaveChanges();
-				OnCollectionChanged();
+				OnChanged();
 			}
 		}
 
@@ -53,11 +33,16 @@ namespace Domain.Repos
 			{
 				db.Entry(t).State = System.Data.Entity.EntityState.Deleted;
 				db.SaveChanges();
-				OnCollectionChanged();
+				OnChanged();
 			}
 		}
 
-		private IEnumerable<Note> GetItemsByParentId(int parent)
+		public Note Create(INode own, string name, DateTime dd)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IEnumerable<Note> SelectByOwner(INode owner)
 		{
 			using (MainContext db = new MainContext(Settings.DbPath))
 			{
@@ -71,20 +56,9 @@ namespace Domain.Repos
 				//}
 				//db.SaveChanges();
 
-				return db.Notes.Where(x => x.owner_id == parent && x.owner_type == Enums.NType.Dir)
+				return db.Notes.Where(x => x.owner_id == owner.id)
 					.OrderByDescending(x => x.id).ToList();
 			}
-		}
-
-		public Note Create(string name)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void AttachToHost(INode n)
-		{
-			n.owner_id = CurrentOwner.id;
-			n.owner_type = CurrentOwner.owner_type;
 		}
 	}
 }

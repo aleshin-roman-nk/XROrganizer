@@ -30,21 +30,21 @@ using System.Threading.Tasks;
 
 namespace Domain.Services
 {
-	public class NavigatorService : INavigatorService
+	public class DirectoriesService : IDirectoriesService
 	{
-		NodeNavigator _navigator = new NodeNavigator();
-		IRepository _repo;
+		TreeNavigator _navigator = new TreeNavigator();
+		IDirectoryRepository _repo;
 
 		public IEnumerable<INode> Items { get; private set; }
 		public event EventHandler CollectionChanged;
 
-		public INodeNavigator Navigator => _navigator;
+		public ITreeNavigator Navigator => _navigator;
 
-		public NavigatorService(IRepository r)
+		public DirectoriesService(IDirectoryRepository r)
 		{
 			_repo = r;
 			_repo.Changed += _repo_Changed;
-			_navigator.OwnerChanged += _navigator_OwnerChanged;
+			_navigator.OwnerChanged += _navigator_OwnerChanged;// должно быть внутри сервиса. интерфейс сервиса должен быть плоским.
 		}
 
 		private void _repo_Changed(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace Domain.Services
 		{
 			List<INode> res = new List<INode>();
 			if (own.type != NType._sys_root_dir)
-				res.Add(TopExitNode.Value);
+				res.Add(Dir.ExitTopDir);
 
 			res.AddRange(_repo.SelectByOwner(own));
 
@@ -85,6 +85,27 @@ namespace Domain.Services
 		{
 			Items = select(Navigator.CurrentOwner);
 			OnCollectionChanged();
+			Navigator.Update();
+		}
+
+		public void Create(string name, DateTime d)
+		{
+			_repo.Create(Navigator.CurrentOwner, name, d);
+		}
+
+		public void Save(Dir d)
+		{
+			_repo.Save(d);
+		}
+
+		public void Delete(Dir d)
+		{
+			_repo.Delete(d);
+		}
+
+		public bool HasChildren(Dir d)
+		{
+			return _repo.HasChildren(d);
 		}
 	}
 }

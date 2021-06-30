@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Repos
 {
-	public interface INoteRepository: IObservableCollection<Note>, IRepository<Note>
+	public interface INoteRepository: IRepository<Note>
 	{
 	}
 }

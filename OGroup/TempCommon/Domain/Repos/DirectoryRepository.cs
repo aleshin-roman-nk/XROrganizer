@@ -49,9 +49,9 @@ namespace Domain.Repos
 			}
 		}
 
-		public Dir Create(string name)
+		public Dir Create(INode owner, string name, DateTime dt)
 		{
-			Dir d = new Dir { name = name };
+			Dir d = new Dir { name = name, date = dt, owner_id = owner.id, owner_type = owner.type };
 
 			using (MainContext db = new MainContext(Settings.DbPath))
 			{
@@ -63,13 +63,22 @@ namespace Domain.Repos
 			return d;
 		}
 
-		public IEnumerable<INode> SelectByOwner(INode owner)
+		public IEnumerable<Dir> SelectByOwner(INode owner)
 		{
 			using (MainContext db = new MainContext(Settings.DbPath))
 			{
 				var r = (from d in db.Dirs where d.owner_id == owner.id select d).ToList().OrderBy(x => x.type).ThenBy(x => x.name).ToList();
 
 				return r;
+			}
+		}
+
+		public bool HasChildren(Dir d)
+		{
+			using (MainContext db = new MainContext(Settings.DbPath))
+			{
+				var r = db.Dirs.FirstOrDefault(x => x.owner_id == d.id);
+				return !(r == null);
 			}
 		}
 	}

@@ -3,7 +3,7 @@ using System;
 
 namespace Domain.Services
 {
-	public interface INodeNavigator
+	public interface ITreeNavigator
 	{
 		string CurrentNodeFullName { get; }
 		INode HighlightedNode { get; }
@@ -12,5 +12,6 @@ namespace Domain.Services
 		INode CurrentOwner { get; }
 		void Enter(INode n);
 		void JumpBack();
+		void Update();
 	}
 }

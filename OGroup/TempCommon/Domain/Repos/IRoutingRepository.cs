@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Repos
 {
-	public interface IDirectoryRepository: IRepository<Dir>
+	public interface IRoutingRepository
 	{
-		bool HasChildren(Dir d);
+		void Save(INode n);
+		void Delete(INode n);
+		void AddRepository(IRoutableRepository rr);
 	}
 }
