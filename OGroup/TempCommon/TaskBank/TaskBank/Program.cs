@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TaskBank.Dlg.forms;
 using TaskBank.Presenters;
+using Unity;
 
 namespace TaskBank
 {
@@ -29,6 +30,10 @@ namespace TaskBank
 
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+
+			IUnityContainer container = new UnityContainer();
+
+
 
 			Domain.Tools.Debugger.init();
 

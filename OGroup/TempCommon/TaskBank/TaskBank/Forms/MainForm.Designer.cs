@@ -31,11 +31,12 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.directoriesViewUC1 = new UIComponents.UserControls.DirectoriesViewUC();
-			this.directoryFilesViewUC1 = new UIComponents.UserControls.DirectoryFilesViewUC();
+			this.directoriesViewUC1 = new CommonUIComponents.UserControls.DirectoriesViewUC();
+			this.directoryFilesViewUC1 = new CommonUIComponents.UserControls.FilesViewUC();
 			this.noteBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.dirBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
 			this.dirBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnHotBank = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -50,9 +51,9 @@
 			this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.splitContainer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(224)))));
+			this.splitContainer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(200)))));
 			this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.splitContainer1.Location = new System.Drawing.Point(1, 28);
+			this.splitContainer1.Location = new System.Drawing.Point(1, 32);
 			this.splitContainer1.Name = "splitContainer1";
 			// 
 			// splitContainer1.Panel1
@@ -62,7 +63,7 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.directoryFilesViewUC1);
-			this.splitContainer1.Size = new System.Drawing.Size(1667, 661);
+			this.splitContainer1.Size = new System.Drawing.Size(1667, 657);
 			this.splitContainer1.SplitterDistance = 637;
 			this.splitContainer1.TabIndex = 15;
 			// 
@@ -73,7 +74,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.directoriesViewUC1.Location = new System.Drawing.Point(0, 3);
 			this.directoriesViewUC1.Name = "directoriesViewUC1";
-			this.directoriesViewUC1.Size = new System.Drawing.Size(632, 653);
+			this.directoriesViewUC1.Size = new System.Drawing.Size(632, 649);
 			this.directoriesViewUC1.TabIndex = 0;
 			// 
 			// directoryFilesViewUC1
@@ -83,12 +84,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.directoryFilesViewUC1.Location = new System.Drawing.Point(3, 3);
 			this.directoryFilesViewUC1.Name = "directoryFilesViewUC1";
-			this.directoryFilesViewUC1.Size = new System.Drawing.Size(1018, 653);
+			this.directoryFilesViewUC1.Size = new System.Drawing.Size(1018, 649);
 			this.directoryFilesViewUC1.TabIndex = 0;
 			// 
 			// noteBindingSource
 			// 
-			this.noteBindingSource.DataSource = typeof(Domain.Entities.Note);
+			this.noteBindingSource.DataSource = typeof(Domain.Entities.FNote);
 			// 
 			// dirBindingSource1
 			// 
@@ -98,12 +99,24 @@
 			// 
 			this.dirBindingSource.DataSource = typeof(Domain.Entities.Dir);
 			// 
+			// btnHotBank
+			// 
+			this.btnHotBank.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnHotBank.Location = new System.Drawing.Point(2, 3);
+			this.btnHotBank.Name = "btnHotBank";
+			this.btnHotBank.Size = new System.Drawing.Size(69, 23);
+			this.btnHotBank.TabIndex = 16;
+			this.btnHotBank.Text = "Горячие";
+			this.btnHotBank.UseVisualStyleBackColor = true;
+			this.btnHotBank.Click += new System.EventHandler(this.btnHotBank_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(224)))));
 			this.ClientSize = new System.Drawing.Size(1670, 691);
+			this.Controls.Add(this.btnHotBank);
 			this.Controls.Add(this.splitContainer1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
@@ -126,8 +139,9 @@
 		private System.Windows.Forms.BindingSource noteBindingSource;
 		private System.Windows.Forms.BindingSource dirBindingSource1;
 		private System.Windows.Forms.SplitContainer splitContainer1;
-		private UIComponents.UserControls.DirectoriesViewUC directoriesViewUC1;
-		private UIComponents.UserControls.DirectoryFilesViewUC directoryFilesViewUC1;
+		private CommonUIComponents.UserControls.DirectoriesViewUC directoriesViewUC1;
+		private CommonUIComponents.UserControls.FilesViewUC directoryFilesViewUC1;
+		private System.Windows.Forms.Button btnHotBank;
 	}
 }
 

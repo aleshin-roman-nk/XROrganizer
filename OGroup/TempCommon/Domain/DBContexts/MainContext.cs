@@ -15,7 +15,9 @@ namespace Domain.DBContexts
 
 		}
 
-		public DbSet<Note> Notes { get; set; }
+		public DbSet<Node> Nodes { get; set; }
+		public DbSet<FNote> Notes { get; set; }
 		public DbSet<Dir> Dirs { get; set; }
+		public DbSet<FTask> Tasks { get; set; }
 	}
 }

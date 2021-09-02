@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SessionCollector.Tools
 {
@@ -22,6 +23,11 @@ namespace SessionCollector.Tools
 		public static T Clone<T>(T o)
 		{
 			return Deserialize<T>(Serialize(o));
+		}
+
+		public static void ShowObject(object o)
+		{
+			MessageBox.Show(Serialize(o));
 		}
 	}
 }

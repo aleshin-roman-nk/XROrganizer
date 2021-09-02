@@ -18,5 +18,7 @@ namespace SessionCollector.BL.Db
 
 		public DbSet<ODirectory> Directories { get; set; }
 		public DbSet<OSession> Sessions { get; set; }
+		public DbSet<OTask> OTasks { get; set; }
+		public DbSet<Node> Nodes { get; set; }
 	}
 }

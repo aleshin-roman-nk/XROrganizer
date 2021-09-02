@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,22 +26,33 @@ namespace SessionCollector
 		{
 			InitializeComponent();
 
+			//this.DoubleBuffered = true;
+			//this.SetStyle(ControlStyles.ResizeRedraw, true);
+
+			typeof(Control).GetProperty("ResizeRedraw", BindingFlags.NonPublic | BindingFlags.Instance)
+			   .SetValue(panel1, true, null);
+
+			typeof(Panel).GetProperty("DoubleBuffered",
+						  BindingFlags.NonPublic | BindingFlags.Instance)
+			 .SetValue(panel1, true, null);
+
 			txtCurrentDate.Text = monthCalendar1.SelectionStart.ToString("dd MMMM yyyy");
 		}
 
-		public event EventHandler<DateTime> CommandCreateSession;
-		public event EventHandler CommandSaveDayImage;
-		public event EventHandler<DateTime> CommandDateChanged;
-		public event EventHandler<DateTime> CommandOrderAndAlign;
-		public event EventHandler<OSession> CommandWorkSession;
-		public event EventHandler<OSession> CommandDeleteSession;
-		public event EventHandler<OSession> CommandStartSessionTick;
+		public event EventHandler<DateTime> CreateSession;
+		public event EventHandler SaveDayImage;
+		public event EventHandler<DateTime> DateChanged;
+		public event EventHandler<DateTime> OrderAndAlign;
+		public event EventHandler<OSession> EditSession;
+		public event EventHandler<OSession> DeleteSession;
+		public event EventHandler<OSession> StartSessionTick;
+		public event EventHandler<DateTime> ShowStata;
 
 
 
 		//public event EventHandler NotifyShown;
 
-		public void DisplaySessions(IEnumerable<OSession> list, decimal hours, DateTime? eod)
+		public void DisplaySessions(IEnumerable<OSession> list, decimal hours, decimal doneSecnds, DateTime? eod)
 		{
 			bs.DataSource = list;
 			dgvSessions.DataSource = bs;
@@ -51,6 +63,8 @@ namespace SessionCollector
 			lblAllocatedTime.Text = TimeSpan.FromHours(Convert.ToDouble(hours)).ToString(@"hh\:mm");
 
 			lblEndOfDay.Text = !eod.HasValue ? "нет сессий" : eod.Value.ToString("HH:mm '/' dd.MM.yy");
+
+			txtActualDoneWord.Text = TimeSpan.FromSeconds(Convert.ToDouble(doneSecnds)).ToString(@"hh\:mm");
 		}
 
 		private void btnNewSession_Click(object sender, EventArgs e)
@@ -60,23 +74,23 @@ namespace SessionCollector
 
 			DateTime dt = new DateTime(sel.Year, sel.Month, sel.Day, now.Hour, now.Minute, now.Second);
 
-			CommandCreateSession?.Invoke(this, dt);
+			CreateSession?.Invoke(this, dt);
 		}
 
 		private void btnSaveDayImage_Click(object sender, EventArgs e)
 		{
-			CommandSaveDayImage?.Invoke(this, EventArgs.Empty);
+			SaveDayImage?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
 		{
-			CommandDateChanged?.Invoke(this, e.Start);
+			DateChanged?.Invoke(this, e.Start);
 			txtCurrentDate.Text = e.Start.ToString("dd MMMM yyyy");
 		}
 
 		private void MainForm_Shown(object sender, EventArgs e)
 		{
-			CommandDateChanged?.Invoke(this, monthCalendar1.SelectionStart);
+			DateChanged?.Invoke(this, monthCalendar1.SelectionStart);
 		}
 
 		private void dgvSessions_KeyDown(object sender, KeyEventArgs e)
@@ -85,24 +99,24 @@ namespace SessionCollector
 
 			if (e.Control && e.KeyCode == Keys.Enter)
 			{
-				CommandStartSessionTick?.Invoke(this, _current_session);
+				StartSessionTick?.Invoke(this, _current_session);
 				e.Handled = true;
 			}
 			else if (e.KeyCode == Keys.Enter)// Если комплексная сессия - вход в нее - нормально. Если надо редактировать, ентер+контрол.
 			{
-				CommandWorkSession?.Invoke(this, _current_session);
+				EditSession?.Invoke(this, _current_session);
 				e.Handled = true;
 			}
 			else if (e.KeyCode == Keys.Delete)
 			{
-				CommandDeleteSession?.Invoke(this, _current_session);
+				DeleteSession?.Invoke(this, _current_session);
 				e.Handled = true;
 			}
 		}
 
 		private void btnSortAndAlign_Click(object sender, EventArgs e)
 		{
-			CommandOrderAndAlign?.Invoke(this, monthCalendar1.SelectionStart);
+			OrderAndAlign?.Invoke(this, monthCalendar1.SelectionStart);
 		}
 
 		private void dgvSessions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -127,15 +141,18 @@ namespace SessionCollector
 		private void panel1_Paint(object sender, PaintEventArgs e)
 		{
 			var p = sender as Panel;
-			//MessageBox.Show(p.Name);
-			ControlPaint.DrawBorder(e.Graphics, p.ClientRectangle, Color.Yellow, ButtonBorderStyle.Solid);
+			ControlPaint.DrawBorder(e.Graphics, p.ClientRectangle, Color.Yellow, ButtonBorderStyle.Solid);			
 		}
 
 		private void dgvSessions_Paint(object sender, PaintEventArgs e)
 		{
 			var p = sender as DataGridView;
-			//MessageBox.Show(p.Name);
 			ControlPaint.DrawBorder(e.Graphics, p.ClientRectangle, Color.Yellow, ButtonBorderStyle.Solid);
+		}
+
+		private void btnStata_Click(object sender, EventArgs e)
+		{
+			ShowStata?.Invoke(this, monthCalendar1.SelectionStart);
 		}
 	}
 }

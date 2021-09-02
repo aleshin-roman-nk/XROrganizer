@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace mvp_base
 {
-	public class ViewResult<TData>
+	public class ViewResult<TResult>
 	{
-		public bool Accept { get; set; }
-		public TData Data { get; set; }
+		public bool Ok { get; set; }
+		public TResult Result { get; set; }
 	}
 }

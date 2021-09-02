@@ -16,12 +16,13 @@ namespace SessionCollector.BL
 		public DirectoryRepository Directories { get; }
 		public SessionRepository Sessions { get; }
 
-		public MainRepository(string app_data_path)
+		public MainRepository(IDbConf db_src)
 		{
-			_appData = new AppData(app_data_path);
-//#if DEBUG
-//			_appData.Database.Log = Logger.Write;
-//#endif
+			_appData = new AppData(db_src.DbSource);
+
+			//#if DEBUG
+			//			_appData.Database.Log = Logger.Write;
+			//#endif
 			Directories = new DirectoryRepository(_appData);
 			Sessions = new SessionRepository(_appData);
 		}

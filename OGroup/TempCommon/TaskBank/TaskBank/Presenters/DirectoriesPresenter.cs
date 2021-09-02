@@ -8,30 +8,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UIComponents;
-using UIComponents.NodesNavigator;
+using CommonUIComponents;
+using CommonUIComponents.NodesNavigator;
+using Domain.Services.Directory;
 
 namespace TaskBank.Presenters
 {
-	/*
-	 * отдлельить логику н6авигации и логику репозитория димреорий,
-	 * то есть отдельно композиция навигатора и добавлятеля в текущую что то.
-	 * 
-	 */
-
 	public class DirectoriesPresenter
 	{
 		IDirectoriesView _view;
 		IDirectoriesService _service;
+		Hub _hub;
 
 		NodeNavigatorImage Image { get; } = new NodeNavigatorImage();
 
-		public DirectoriesPresenter(IDirectoriesService s, IDirectoriesView v)
-			// сервис сделать более универсальным. моя цель - использовать алгоритм для реализации любой древовидной коллекции
-			// например статьи, мой словарь, бюджет (категории - покупки).
+		public DirectoriesPresenter(IDirectoriesService s, IDirectoriesView v, Hub h)
 		{
 			_view = v;
 			_service = s;
+			_hub = h;
 
 			_view.Navigator.ActivateNode += _dirNaviView_ActivateNode;
 			_view.Navigator.ExitNode += _dirNaviView_ExitNode;
@@ -40,7 +35,7 @@ namespace TaskBank.Presenters
 			_view.Delete += _view_Delete;
 
 			_service.CollectionChanged += _service_CollectionChanged;
-
+			
 			_service.Update();
 		}
 
@@ -56,28 +51,30 @@ namespace TaskBank.Presenters
 
 		private void _view_Create(object sender, string e)
 		{
-			_service.Create(e, DateTime.Now);
+			_service.Create(new Dir { name = e, date = DateTime.Now });
 		}
 
 		private void _service_CollectionChanged(object sender, EventArgs e)
 		{
+			_hub.ChangeCurrent(_service.Parent as Dir);
+
 			Image.Items = _service.Items;
-			Image.CurrentDirFullName = _service.Navigator.CurrentNodeFullName;
-			Image.HighlightedDir = _service.Navigator.HighlightedNode;
+			Image.CurrentDirFullName = _service.CurrentParentFullName;
+			Image.HighlightedDir = _service.HighlightedNode;
 
 			_view.Navigator.DisplayData(Image);
 		}
 
 		private void _dirNaviView_ExitNode(object sender, EventArgs e)
 		{
-			_service.Navigator.JumpBack();
+			_service.JumpBack();
 		}
 
 		private void _dirNaviView_ActivateNode(object sender, INode e)
 		{
 			if (e.type == NType.Dir || e.type == NType.exit_dir)
 			{
-				_service.Navigator.Enter(e);
+				_service.Enter(e);
 			}
 		}
 	}

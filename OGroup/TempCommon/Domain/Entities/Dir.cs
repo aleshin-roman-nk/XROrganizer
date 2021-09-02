@@ -1,22 +1,21 @@
 ﻿using Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-	public class Dir : INode
+	[Table("Dirs")]
+	public class Dir : Node
 	{
-		private NType _type = NType.Dir;
-		public int id { get; set; }
-		public NType type => _type;
-		public int owner_id { get; set; }
-		public NType owner_type { get; set; }
-		public string name { get; set; }
-		public string description { get; set; }
-		public DateTime? date { get; set; }
+		public Dir()
+		{
+			_type = NType.Dir;
+			_canHaveChildren = true;
+		}
 
 		private static Dir _root = null;
 		private static Dir _exit_top = null;

@@ -56,6 +56,7 @@
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.txtTotalWordCount = new System.Windows.Forms.ToolStripStatusLabel();
+			this.btnGetModulePath = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -81,7 +82,7 @@
 			this.panel1.Controls.Add(this.splitContainer1);
 			this.panel1.Location = new System.Drawing.Point(12, 41);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(791, 327);
+			this.panel1.Size = new System.Drawing.Size(1277, 664);
 			this.panel1.TabIndex = 0;
 			// 
 			// splitContainer1
@@ -100,8 +101,8 @@
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.panelTranslate);
 			this.splitContainer1.Panel2.Controls.Add(this.panelDashboard);
-			this.splitContainer1.Size = new System.Drawing.Size(789, 325);
-			this.splitContainer1.SplitterDistance = 260;
+			this.splitContainer1.Size = new System.Drawing.Size(1275, 662);
+			this.splitContainer1.SplitterDistance = 477;
 			this.splitContainer1.TabIndex = 0;
 			// 
 			// panel2
@@ -111,7 +112,7 @@
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel2.Location = new System.Drawing.Point(0, 0);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(260, 39);
+			this.panel2.Size = new System.Drawing.Size(477, 39);
 			this.panel2.TabIndex = 1;
 			// 
 			// txtCurrPhrase
@@ -130,7 +131,7 @@
 			this.btnAddPhrase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.btnAddPhrase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnAddPhrase.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
-			this.btnAddPhrase.Location = new System.Drawing.Point(8, 295);
+			this.btnAddPhrase.Location = new System.Drawing.Point(8, 632);
 			this.btnAddPhrase.Name = "btnAddPhrase";
 			this.btnAddPhrase.Size = new System.Drawing.Size(45, 23);
 			this.btnAddPhrase.TabIndex = 0;
@@ -150,7 +151,7 @@
 			this.listPhrases.Location = new System.Drawing.Point(0, 38);
 			this.listPhrases.MultiSelect = false;
 			this.listPhrases.Name = "listPhrases";
-			this.listPhrases.Size = new System.Drawing.Size(260, 251);
+			this.listPhrases.Size = new System.Drawing.Size(477, 588);
 			this.listPhrases.TabIndex = 0;
 			this.listPhrases.UseCompatibleStateImageBehavior = false;
 			this.listPhrases.View = System.Windows.Forms.View.List;
@@ -164,7 +165,7 @@
 			this.panelTranslate.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelTranslate.Location = new System.Drawing.Point(0, 70);
 			this.panelTranslate.Name = "panelTranslate";
-			this.panelTranslate.Size = new System.Drawing.Size(525, 255);
+			this.panelTranslate.Size = new System.Drawing.Size(794, 592);
 			this.panelTranslate.TabIndex = 1;
 			// 
 			// splitContainer2
@@ -183,8 +184,8 @@
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.txtExercises);
 			this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel1);
-			this.splitContainer2.Size = new System.Drawing.Size(523, 253);
-			this.splitContainer2.SplitterDistance = 227;
+			this.splitContainer2.Size = new System.Drawing.Size(792, 590);
+			this.splitContainer2.SplitterDistance = 342;
 			this.splitContainer2.TabIndex = 0;
 			// 
 			// txtExplanation
@@ -195,7 +196,7 @@
 			this.txtExplanation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.txtExplanation.Location = new System.Drawing.Point(0, 23);
 			this.txtExplanation.Name = "txtExplanation";
-			this.txtExplanation.Size = new System.Drawing.Size(225, 228);
+			this.txtExplanation.Size = new System.Drawing.Size(340, 565);
 			this.txtExplanation.TabIndex = 1;
 			this.txtExplanation.Text = "";
 			this.txtExplanation.TextChanged += new System.EventHandler(this.txtExplanation_TextChanged);
@@ -220,7 +221,7 @@
 			this.txtExercises.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.txtExercises.Location = new System.Drawing.Point(0, 32);
 			this.txtExercises.Name = "txtExercises";
-			this.txtExercises.Size = new System.Drawing.Size(290, 219);
+			this.txtExercises.Size = new System.Drawing.Size(444, 556);
 			this.txtExercises.TabIndex = 2;
 			this.txtExercises.Text = "";
 			this.txtExercises.TextChanged += new System.EventHandler(this.txtExercises_TextChanged);
@@ -238,7 +239,7 @@
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(290, 32);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(444, 32);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// label2
@@ -248,7 +249,7 @@
 			this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
 			this.label2.Location = new System.Drawing.Point(3, 0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(78, 32);
+			this.label2.Size = new System.Drawing.Size(120, 23);
 			this.label2.TabIndex = 0;
 			this.label2.Text = "Упражнения";
 			// 
@@ -257,7 +258,7 @@
 			this.txtExercisesCount.AutoSize = true;
 			this.txtExercisesCount.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.txtExercisesCount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
-			this.txtExercisesCount.Location = new System.Drawing.Point(93, 0);
+			this.txtExercisesCount.Location = new System.Drawing.Point(141, 0);
 			this.txtExercisesCount.Name = "txtExercisesCount";
 			this.txtExercisesCount.Size = new System.Drawing.Size(20, 23);
 			this.txtExercisesCount.TabIndex = 1;
@@ -276,7 +277,7 @@
 			this.panelDashboard.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelDashboard.Location = new System.Drawing.Point(0, 0);
 			this.panelDashboard.Name = "panelDashboard";
-			this.panelDashboard.Size = new System.Drawing.Size(525, 70);
+			this.panelDashboard.Size = new System.Drawing.Size(794, 70);
 			this.panelDashboard.TabIndex = 0;
 			// 
 			// txtPhrase
@@ -396,9 +397,9 @@
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.txtTotalWordCount});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 388);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 725);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(815, 24);
+			this.statusStrip1.Size = new System.Drawing.Size(1301, 24);
 			this.statusStrip1.TabIndex = 4;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
@@ -418,12 +419,26 @@
 			this.txtTotalWordCount.Size = new System.Drawing.Size(27, 19);
 			this.txtTotalWordCount.Text = "20";
 			// 
+			// btnGetModulePath
+			// 
+			this.btnGetModulePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnGetModulePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnGetModulePath.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(210)))), ((int)(((byte)(214)))));
+			this.btnGetModulePath.Location = new System.Drawing.Point(1176, 9);
+			this.btnGetModulePath.Name = "btnGetModulePath";
+			this.btnGetModulePath.Size = new System.Drawing.Size(113, 23);
+			this.btnGetModulePath.TabIndex = 5;
+			this.btnGetModulePath.Text = "Тэг";
+			this.btnGetModulePath.UseVisualStyleBackColor = true;
+			this.btnGetModulePath.Click += new System.EventHandler(this.btnGetModulePath_Click);
+			// 
 			// PhrasePackForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
-			this.ClientSize = new System.Drawing.Size(815, 412);
+			this.ClientSize = new System.Drawing.Size(1301, 749);
+			this.Controls.Add(this.btnGetModulePath);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.txtPhrasePackName);
 			this.Controls.Add(this.label4);
@@ -486,6 +501,7 @@
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
 		private System.Windows.Forms.TextBox txtPhrase;
 		private System.Windows.Forms.ToolStripStatusLabel txtTotalWordCount;
+		private System.Windows.Forms.Button btnGetModulePath;
 	}
 }
 

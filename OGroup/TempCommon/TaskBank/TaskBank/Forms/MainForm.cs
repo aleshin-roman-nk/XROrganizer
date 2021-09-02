@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TaskBank.Dlg;
 using TaskBank.Dlg.forms;
-using UIComponents;
-using UIComponents.NodesNavigator;
-using UIComponents.ViewComponents;
+using CommonUIComponents;
+using CommonUIComponents.NodesNavigator;
+using CommonUIComponents.ViewComponents;
 
 namespace TaskBank
 {
@@ -24,13 +24,20 @@ namespace TaskBank
 			InitializeComponent();
 		}
 
-		public IDirectoryFilesView DirectoryFilesView => throw new NotImplementedException();
+		public IFilesView DirectoryFilesView => directoryFilesViewUC1;
 
 		public IDirectoriesView DirectoryNavigator => directoriesViewUC1;
+
+		public event EventHandler ShowHotTasks;
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		private void btnHotBank_Click(object sender, EventArgs e)
+		{
+			ShowHotTasks?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

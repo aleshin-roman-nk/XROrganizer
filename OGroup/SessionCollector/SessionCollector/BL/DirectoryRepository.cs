@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SessionCollector.BL
 {
-	public class DirectoryRepository : IEntityRepository<ODirectory>
+	public class DirectoryRepository : IEntityRepository<INode>
 	{
 		AppData _appData;
 
@@ -18,24 +18,26 @@ namespace SessionCollector.BL
 			_appData = data;
 		}
 
-		public void Delete(ODirectory e)
+		public void Delete(INode e)
 		{
-			throw new NotImplementedException();
+			_appData.Directories.Remove(e as ODirectory);
+			_appData.SaveChanges();
 		}
 
-		public IEnumerable<ODirectory> Get()
+		public IEnumerable<INode> Get()
 		{
-			throw new NotImplementedException();
+			return _appData.Directories.ToList();
 		}
 
-		public ODirectory GetById(int id)
+		public INode GetById(int id)
 		{
-			throw new NotImplementedException();
+			return _appData.Nodes.FirstOrDefault( x=> x.Id == id);
 		}
 
-		public void Save(ODirectory e)
+		public void Save(INode e)
 		{
-			throw new NotImplementedException();
+			_appData.Entry(e).State = e.Id == 0 ? EntityState.Added : EntityState.Modified;
+			_appData.SaveChanges();
 		}
 	}
 }

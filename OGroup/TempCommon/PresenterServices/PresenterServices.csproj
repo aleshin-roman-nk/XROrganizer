@@ -48,9 +48,9 @@
       <Project>{0d7f46d1-2c0c-42fe-8fed-38a4da845cc4}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UIComponents\UIComponents.csproj">
+    <ProjectReference Include="..\UIComponents\CommonUIComponents.csproj">
       <Project>{c886c63e-000f-4b56-8371-355056455ddb}</Project>
-      <Name>UIComponents</Name>
+      <Name>CommonUIComponents</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

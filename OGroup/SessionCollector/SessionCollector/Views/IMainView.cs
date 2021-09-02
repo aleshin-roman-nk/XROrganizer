@@ -9,15 +9,16 @@ namespace SessionCollector
 {
 	public interface IMainView
 	{
-		void DisplaySessions(IEnumerable<OSession> list, decimal hours, DateTime? endofday);
+		void DisplaySessions(IEnumerable<OSession> list, decimal hours, decimal doneHrs, DateTime? endofday);
 
-		event EventHandler<DateTime> CommandCreateSession;
-		event EventHandler CommandSaveDayImage;
-		event EventHandler<DateTime> CommandDateChanged;
-		event EventHandler<DateTime> CommandOrderAndAlign;
-		event EventHandler<OSession> CommandWorkSession;
-		event EventHandler<OSession> CommandDeleteSession;
-		event EventHandler<OSession> CommandStartSessionTick;
+		event EventHandler<DateTime> CreateSession;
+		event EventHandler SaveDayImage;
+		event EventHandler<DateTime> DateChanged;
+		event EventHandler<DateTime> OrderAndAlign;
+		event EventHandler<OSession> EditSession;
+		event EventHandler<OSession> DeleteSession;
+		event EventHandler<OSession> StartSessionTick;
+		event EventHandler<DateTime> ShowStata;
 
 		bool UserAnsweredYes(string qstr);
 		void ShowMessage(string msg);

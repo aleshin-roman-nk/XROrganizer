@@ -7,13 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskBank", "TaskBank\TaskBa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{0D7F46D1-2C0C-42FE-8FED-38A4DA845CC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIComponents", "UIComponents\UIComponents.csproj", "{C886C63E-000F-4B56-8371-355056455DDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonUIComponents", "UIComponents\CommonUIComponents.csproj", "{C886C63E-000F-4B56-8371-355056455DDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputBoxes", "InputBoxes\InputBoxes.csproj", "{9D845BD0-D295-45E7-B786-77FCC299893E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestView", "TestView\TestView.csproj", "{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresenterServices", "PresenterServices\PresenterServices.csproj", "{481AC604-A5DB-4586-9B2E-3E5931488213}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}.Release|Any CPU.Build.0 = Release|Any CPU
-		{481AC604-A5DB-4586-9B2E-3E5931488213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{481AC604-A5DB-4586-9B2E-3E5931488213}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{481AC604-A5DB-4586-9B2E-3E5931488213}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{481AC604-A5DB-4586-9B2E-3E5931488213}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

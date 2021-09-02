@@ -277,5 +277,19 @@ namespace MyEngDictionary
 				clear_phrase_view();
 			}
 		}
+
+		private void btnGetModulePath_Click(object sender, EventArgs e)
+		{
+			var res = $"\"Мой словарь\" \\ {txtPhrasePackName.Text}";
+			try
+			{
+				Clipboard.Clear();
+				Clipboard.SetText(res);
+			}
+			catch (Exception)
+			{
+
+			}
+		}
 	}
 }

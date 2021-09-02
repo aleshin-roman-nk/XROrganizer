@@ -189,6 +189,7 @@ namespace SessionCollector.Forms
 			this.Name = "SessionTickerForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "SessionTickerForm";
+			this.TopMost = true;
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			this.panel2.ResumeLayout(false);

@@ -51,6 +51,8 @@ namespace SessionCollector.Forms
 
 		private bool isValid(string src)
 		{
+			if (string.IsNullOrEmpty(_valid_patter)) return true;
+
 			Regex rg = new Regex(_valid_patter);
 
 			return rg.Match(src).Success;

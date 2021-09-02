@@ -9,45 +9,46 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TaskBank.Views;
+using UIComponents;
 
 namespace TaskBank.Dlg.forms
 {
-	public partial class RmTaskForm : Form, ISingleEntityView<Note>
+	public partial class RmTaskForm : Form, ISingleEntityView<INode>
 	{
-		Note _rmTask;
+		INode _node;
 
 		public RmTaskForm()
 		{
 			InitializeComponent();
 		}
 
-		private void placeObject(Note tsk)
+		private void placeObject(INode n)
 		{
-			textBox1.Text = tsk.description;
+			textBox1.Text = n.description;
 			textBox1.SelectionStart = textBox1.Text.Length;
 		}
 
 		private void acceptObject()
 		{
-			_rmTask.description = textBox1.Text;
+			_node.description = textBox1.Text;
 		}
 
-		ViewResult<Note> ISingleEntityView<Note>.Go(Note tsk)
+		ViewResult<INode> ISingleEntityView<INode>.Go(INode tsk)
 		{
-			_rmTask = tsk;
-			placeObject(_rmTask);
+			_node = tsk;
+			placeObject(_node);
 
 			bool ok = this.ShowDialog() == DialogResult.OK;
 
 			if (ok)
 			{
 				acceptObject();
-				var res = new ViewResult<Note>(_rmTask, true);
+				var res = new ViewResult<INode>(_node, true);
 				return res;
 			}
 			else
 			{
-				return new ViewResult<Note>(null, false);
+				return new ViewResult<INode>(null, false);
 			}
 		}
 

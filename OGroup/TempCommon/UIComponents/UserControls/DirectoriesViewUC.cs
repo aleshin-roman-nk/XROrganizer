@@ -11,9 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using UIComponents.NodesNavigator;
+using CommonUIComponents.NodesNavigator;
 
-namespace UIComponents.UserControls
+namespace CommonUIComponents.UserControls
 {
 	public partial class DirectoriesViewUC : UserControl, IDirectoriesView
 	{

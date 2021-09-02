@@ -12,12 +12,33 @@ namespace SessionCollector.BL.Entities
 	public class OSession
 	{
 		public int Id { get; set; }
-		//public int OwnerId { get; set; }// любой объект из таблицы в которой задачи, заметки, идеи.
+		public int? NodeId { get; set; }// любой объект из таблицы в которой задачи, заметки, идеи.
 											// можно создать сессию без хозяина. но привязать можно только к записи внутри проекта.
-		public string Name { get; set; }
+		public string Name
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(Description)) return "-";
+				
+				string res = Description.Split(new[] { '\r', '\n' }).FirstOrDefault();
+
+				if (string.IsNullOrEmpty(res)) return "-";
+				else return res;
+			}
+		}
+
+		public virtual Node Node { get; set; }
 		public string Description { get; set; }
+		public string Report { get; set; }
 		public DateTime Start { get; set; }
 		public decimal ReservedHours { get; set; }
+		public string DirName
+		{
+			get
+			{
+				return Node == null ? "---" : Node.Name;
+			}
+		}
 		public string ShorName
 		{
 			get
@@ -58,9 +79,8 @@ namespace SessionCollector.BL.Entities
 			return JsonTool.Clone(this);
 		}
 
-		public void Accept(OSession o)
+		public void CopyFrom(OSession o)
 		{
-			//PropertyCopy.Copy(o, this);
 			o.CopyPropertiesTo(this);
 		}
 	}

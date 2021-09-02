@@ -1,6 +1,8 @@
-﻿using SessionCollector.BL;
+﻿using mvp_base;
+using SessionCollector.BL;
 using SessionCollector.BL.Entities;
 using SessionCollector.BL.Services;
+using SessionCollector.Forms;
 using SessionCollector.Tools;
 using SessionCollector.Views;
 using System;
@@ -15,30 +17,85 @@ namespace SessionCollector
 	{
 		IMainView _view;
 		ISessionView _sessionview;
+		IStataView _stataView;
 
 		IMainRepository _mainRepository;
 
-		Services _services;
+		IDirectoriesView _directoryView;
+
+		IService _services;
 		SingleSessionTicker _singleSessionTicker;
 
-		public MainPresenter(IMainView v, ISessionView sess_view, IMainRepository r, Services s)
+		public IMainView MainView => _view;
+
+		public MainPresenter(IMainView v, ISessionView sess_view, IMainRepository r, IDirectoriesView dir_view, IStataView sts, IService s)
 		{
 			_mainRepository = r;
 			_view = v;
 			_sessionview = sess_view;
+			_directoryView = dir_view;
 			_services = s;
+			_stataView = sts;
 
-			_view.CommandCreateSession += _view_CommandCreateSession;
-			_view.CommandSaveDayImage += _view_CommandSaveDayImage;
-			_view.CommandDateChanged += _view_CommandDateChanged;
-			_view.CommandOrderAndAlign += _view_CommandOrderAndAlign;
-			_view.CommandWorkSession += _view_CommandWorkSession;
-			_view.CommandDeleteSession += _view_CommandDeleteSession;
-			_view.CommandStartSessionTick += _view_CommandStartSessionTick;
+			_view.CreateSession += _view_CreateSession;
+			_view.SaveDayImage += _view_SaveDayImage;
+			_view.DateChanged += _view_DateChanged;
+			_view.OrderAndAlign += _view_OrderAndAlign;
+			_view.EditSession += _view_EditSession;
+			_view.DeleteSession += _view_DeleteSession;
+			_view.StartSessionTick += _view_StartSessionTick;
+			_view.ShowStata += _view_ShowStata;
 
 			_singleSessionTicker = new SingleSessionTicker();
 			_singleSessionTicker.WatchingFinishedAndSaveSecondsRequired += _singleSessionTicker_WatchingFinishedAndSaveRequired;
 			//_view.DisplaySessions(_mainRepository.Sessions.Get());
+
+			_directoryView.CreateDirectory += _directoryView_CreateDirectory;
+			_directoryView.DeleteDirectory += _directoryView_DeleteDirectory;
+
+			_sessionview.ChangeDirectory += _sessionview_ChangeDirectory;
+		}
+
+		private void _directoryView_DeleteDirectory(object sender, INode e)
+		{
+			_mainRepository.Directories.Delete(e);
+			_directoryView.DisplayNodes(_mainRepository.Directories.Get());
+		}
+
+		private void _view_ShowStata(object sender, DateTime e)
+		{
+			_directoryView.DisplayNodes(_mainRepository.Directories.Get());
+			var res = _directoryView.Go();
+
+			if (res.Ok)
+			{
+				_stataView.Go(_mainRepository.Sessions.GetStatistic(e.Year, e.Month, res.Result), $"{e.ToString("MMMM, yyyy")} года");
+			}
+		}
+
+		private void _sessionview_ChangeDirectory(object sender, ViewResultParams<OSession, INode> e)
+		{
+			_directoryView.DisplayNodes(_mainRepository.Directories.Get(), e.Param.Node);
+			var res = _directoryView.Go();
+
+			if (res.Ok)
+			{
+				e.Result = res.Result;
+				e.Ok = true;
+			}			
+		}
+
+		private void _directoryView_CreateDirectory(object sender, EventArgs e)
+		{
+			InputDataDialog inputData = new InputDataDialog();
+
+			if(inputData.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			{
+				ODirectory d = new ODirectory { Name = inputData.InputText };
+
+				_mainRepository.Directories.Save(d);
+				_directoryView.DisplayNodes(_mainRepository.Directories.Get());
+			}
 		}
 
 		// 111. Обрабатываем результат
@@ -51,7 +108,7 @@ namespace SessionCollector
 		}
 
 		// 111. Отправляем
-		private void _view_CommandStartSessionTick(object sender, OSession e)
+		private void _view_StartSessionTick(object sender, OSession e)
 		{
 			if (_singleSessionTicker.IsRunning)
 			{
@@ -61,7 +118,7 @@ namespace SessionCollector
 			_singleSessionTicker.StartWatching(e);
 		}
 
-		private void _view_CommandDeleteSession(object sender, OSession e)
+		private void _view_DeleteSession(object sender, OSession e)
 		{
 			if (_view.UserAnsweredYes($"Session will be killed at all\n{e.Description}"))
 			{
@@ -70,13 +127,16 @@ namespace SessionCollector
 			}
 		}
 
-		private void _view_CommandWorkSession(object sender, OSession e)
+		private void _view_EditSession(object sender, OSession e)
 		{
-			var res = _sessionview.Go(e.Clone());
+			// Make clone
+			var res = _sessionview.Go(e.Clone());// здесь образуется другой экземпляр объекта, которые не отслеживается
 
-			if (res.Accept)
+			if (res.Ok)
 			{
-				e.Accept(res.Data);
+				// if ok, copy to the source in database
+
+				e.CopyFrom(res.Result);
 
 				_mainRepository.Sessions.Save(e);
 
@@ -91,11 +151,12 @@ namespace SessionCollector
 
 			var hrs = _services.Sessions.GetAllocatedHours(items);
 			var finish = _services.Sessions.GetLastSessionFinish(items);
+			var doneSeconds = _services.Sessions.GetDoneWorkInSeconds(items);
 
-			_view.DisplaySessions(items, hrs, finish);
+			_view.DisplaySessions(items, hrs, doneSeconds, finish);
 		}
 
-		private void _view_CommandOrderAndAlign(object sender, DateTime e)
+		private void _view_OrderAndAlign(object sender, DateTime e)
 		{
 			//var items = _mainRepository.Sessions.GetByDay(e);
 			//items = _services.Sessions.SortAndAlign(items);
@@ -104,19 +165,17 @@ namespace SessionCollector
 			displaySessions(e);
 		}
 
-		private void _view_CommandDateChanged(object sender, DateTime e)
+		private void _view_DateChanged(object sender, DateTime e)
 		{
 			displaySessions(e);
-
-			//_view.DisplaySessions(_mainRepository.Sessions.GetByDay(e));
 		}
 
-		private void _view_CommandSaveDayImage(object sender, EventArgs e)
+		private void _view_SaveDayImage(object sender, EventArgs e)
 		{
 			_mainRepository.Save();
 		}
 
-		private void _view_CommandCreateSession(object sender, DateTime e)
+		private void _view_CreateSession(object sender, DateTime e)
 		{
 			OSession session = new OSession();
 
@@ -125,13 +184,11 @@ namespace SessionCollector
 
 			var res = _sessionview.Go(session);
 
-			if (res.Accept)
+			if (res.Ok)
 			{
-				_mainRepository.Sessions.Save(res.Data);
+				_mainRepository.Sessions.Save(res.Result);
 
 				displaySessions(e);
-
-				//_view.DisplaySessions(_mainRepository.Sessions.GetByDay(e));
 			}
 		}
 	}

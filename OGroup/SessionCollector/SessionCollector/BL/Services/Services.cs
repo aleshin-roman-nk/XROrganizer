@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SessionCollector.BL.Services
 {
-	public class Services
+	public class Services: IService
 	{
 		SessionService _srvVar = new SessionService();
 		public SessionService Sessions => _srvVar;

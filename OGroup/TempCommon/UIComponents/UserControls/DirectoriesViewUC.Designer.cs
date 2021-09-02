@@ -1,5 +1,5 @@
 ﻿
-namespace UIComponents.UserControls
+namespace CommonUIComponents.UserControls
 {
 	partial class DirectoriesViewUC
 	{
@@ -34,13 +34,13 @@ namespace UIComponents.UserControls
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.dgvDirectories = new System.Windows.Forms.DataGridView();
-			this.btnDeleteDir = new System.Windows.Forms.Button();
-			this.btnNewDir = new System.Windows.Forms.Button();
-			this.txtDirectoryFullName = new System.Windows.Forms.TextBox();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.iNodeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnDeleteDir = new System.Windows.Forms.Button();
+			this.btnNewDir = new System.Windows.Forms.Button();
+			this.txtDirectoryFullName = new System.Windows.Forms.TextBox();
 			this.panel3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvDirectories)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.iNodeBindingSource)).BeginInit();
@@ -99,6 +99,33 @@ namespace UIComponents.UserControls
 			this.dgvDirectories.Size = new System.Drawing.Size(307, 413);
 			this.dgvDirectories.TabIndex = 0;
 			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			this.nameDataGridViewTextBoxColumn.Width = 200;
+			// 
+			// typeDataGridViewTextBoxColumn
+			// 
+			this.typeDataGridViewTextBoxColumn.DataPropertyName = "type";
+			this.typeDataGridViewTextBoxColumn.HeaderText = "type";
+			this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+			this.typeDataGridViewTextBoxColumn.ReadOnly = true;
+			this.typeDataGridViewTextBoxColumn.Width = 70;
+			// 
+			// dateDataGridViewTextBoxColumn
+			// 
+			this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+			this.dateDataGridViewTextBoxColumn.HeaderText = "date";
+			this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// iNodeBindingSource
+			// 
+			this.iNodeBindingSource.DataSource = typeof(Domain.Entities.INode);
+			// 
 			// btnDeleteDir
 			// 
 			this.btnDeleteDir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -133,33 +160,6 @@ namespace UIComponents.UserControls
 			this.txtDirectoryFullName.ReadOnly = true;
 			this.txtDirectoryFullName.Size = new System.Drawing.Size(303, 27);
 			this.txtDirectoryFullName.TabIndex = 17;
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "name";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-			this.nameDataGridViewTextBoxColumn.Width = 200;
-			// 
-			// typeDataGridViewTextBoxColumn
-			// 
-			this.typeDataGridViewTextBoxColumn.DataPropertyName = "type";
-			this.typeDataGridViewTextBoxColumn.HeaderText = "type";
-			this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-			this.typeDataGridViewTextBoxColumn.ReadOnly = true;
-			this.typeDataGridViewTextBoxColumn.Width = 70;
-			// 
-			// dateDataGridViewTextBoxColumn
-			// 
-			this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
-			this.dateDataGridViewTextBoxColumn.HeaderText = "date";
-			this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// iNodeBindingSource
-			// 
-			this.iNodeBindingSource.DataSource = typeof(Domain.Entities.INode);
 			// 
 			// DirectoriesViewUC
 			// 

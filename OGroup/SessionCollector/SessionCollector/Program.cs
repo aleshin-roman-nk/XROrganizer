@@ -3,6 +3,7 @@ using SessionCollector.BL.Db;
 using SessionCollector.BL.Services;
 using SessionCollector.Forms;
 using SessionCollector.Tools;
+using SessionCollector.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unity;
 
 namespace SessionCollector
 {
@@ -26,14 +28,19 @@ namespace SessionCollector
 
 			Logger.Clear();
 
-			var m = new MainForm();
-			var s = new SessionForm();
-			var r = new MainRepository(@"Data Source=..\db\sessions.db");// забыл написать Data Source ))))))
-			var ss = new Services();
+			IUnityContainer container = new UnityContainer();
 
-			MainPresenter presenter = new MainPresenter(m, s, r, ss);
+			container.RegisterType<IMainView, MainForm>()
+				.RegisterType<ISessionView, SessionForm>()
+				.RegisterType<IMainRepository, MainRepository>()
+				.RegisterType<IService, Services>()
+				.RegisterType<IDirectoriesView, DirectoriesForm>()
+				.RegisterType<IDbConf, DbConf>()
+				.RegisterType<IStataView, StataForm>();
 
-			Application.Run(m);
+			MainPresenter presenter = (MainPresenter)container.Resolve(typeof(MainPresenter));
+
+			Application.Run((Form)presenter.MainView);
 		}
 	}
 }

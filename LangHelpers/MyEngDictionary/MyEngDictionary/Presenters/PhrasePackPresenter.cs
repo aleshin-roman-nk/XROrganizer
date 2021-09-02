@@ -78,7 +78,9 @@ namespace MyEngDictionary.Presenters
 
 		private void _phrasePackView_ChangeCurrentPack(object sender, EventArgs e)
 		{
-
+			// >>> 03-07-2021 00:49
+			// вообще то это решение для публикации изменений. это НЕ запрос-ответ между презентерами.
+			// 
 			var res = _hub.Publish(EventType.SelectPhrasePack, null);
 
 			if (res.Answer == ViewAnswer.Ok)

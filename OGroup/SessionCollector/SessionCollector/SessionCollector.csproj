@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Sc.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -58,6 +61,10 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.113.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,28 +74,62 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Db\AppData.cs" />
+    <Compile Include="BL\Db\DbConf.cs" />
+    <Compile Include="BL\Db\IDbConf.cs" />
     <Compile Include="BL\Db\MySQLiteConfig.cs" />
     <Compile Include="BL\DirectoryRepository.cs" />
+    <Compile Include="BL\Entities\INode.cs" />
+    <Compile Include="BL\Entities\Node.cs" />
+    <Compile Include="BL\Entities\OTask.cs" />
     <Compile Include="BL\IEntityRepository.cs" />
     <Compile Include="BL\IMainRepository.cs" />
+    <Compile Include="BL\Entities\UI\ChartItem.cs" />
+    <Compile Include="BL\Services\IService.cs" />
     <Compile Include="BL\Services\Services.cs" />
     <Compile Include="BL\Services\SessionService.cs" />
     <Compile Include="BL\SessionRepository.cs" />
+    <Compile Include="Forms\DirectoriesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DirectoriesForm.Designer.cs">
+      <DependentUpon>DirectoriesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InputDataDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\InputDataDialog.Designer.cs">
       <DependentUpon>InputDataDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC\TimeInputUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\TimeInputUserControl.Designer.cs">
+      <DependentUpon>TimeInputUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IStataView.cs" />
     <Compile Include="Forms\SessionTickerForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SessionTickerForm.Designer.cs">
       <DependentUpon>SessionTickerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StataForm.Designer.cs">
+      <DependentUpon>StataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mvp-base\ViewRequest.cs" />
+    <Compile Include="mvp-base\ViewResultParams.cs" />
     <Compile Include="Presenters\SingleSessionTicker.cs" />
     <Compile Include="Forms\SessionForm.cs">
       <SubType>Form</SubType>
@@ -97,12 +138,11 @@
       <DependentUpon>SessionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TickCounterAnimator.cs" />
-    <Compile Include="mvp-base\IEntityEditView.cs" />
     <Compile Include="Tools\JsonTool.cs" />
     <Compile Include="Tools\Logger.cs" />
     <Compile Include="Tools\PropertyCopy.cs" />
+    <Compile Include="Views\IDirectoriesView.cs" />
     <Compile Include="Views\IMainView.cs" />
-    <Compile Include="BL\MainConfig.cs" />
     <Compile Include="Views\ISessionTickerView.cs" />
     <Compile Include="Views\ISessionView.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
@@ -118,6 +158,9 @@
     <Compile Include="mvp-base\ViewResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\DirectoriesForm.resx">
+      <DependentUpon>DirectoriesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InputDataDialog.resx">
       <DependentUpon>InputDataDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +173,9 @@
     <EmbeddedResource Include="Forms\SessionTickerForm.resx">
       <DependentUpon>SessionTickerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StataForm.resx">
+      <DependentUpon>StataForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -140,8 +186,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UC\TimeInputUserControl.resx">
+      <DependentUpon>TimeInputUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\SessionCollector.BL.Entities.ODirectory.datasource" />
     <None Include="Properties\DataSources\SessionCollector.BL.Entities.OSession.datasource" />
+    <None Include="Properties\DataSources\SessionCollector.BL.Entities.UI.ChartItem.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -154,6 +205,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sc.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BL\Services\Entity\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

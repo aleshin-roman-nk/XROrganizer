@@ -1,5 +1,6 @@
 ﻿using mvp_base;
 using SessionCollector.BL.Entities;
+using mvp_base;
 using SessionCollector.Views;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeTickerCounter;
+using SessionCollector.Tools;
 
 namespace SessionCollector.Forms
 {
@@ -34,7 +36,11 @@ namespace SessionCollector.Forms
 
 			txtPlanFinish.Text = e.Finish.ToString("dd.MM.yyyy HH:mm");
 			txtDescription.Text = e.Description;
-			lblSessionTotalTimeString.Text = e.TotalWorkTime;
+			//lblSessionTotalTimeString.Text = e.TotalWorkTime;
+
+			timeInputUserControl1.TotalSeconds = _ent.TotalSeconds;
+
+			txtDirName.Text = e.DirName;
 		}
 
 		private OSession _get()
@@ -43,6 +49,7 @@ namespace SessionCollector.Forms
 			_ent.ReservedHours = get_plan_hours(mtxtPlanHrs.Text);
 			_ent.Start = dateTimePickerPlanStart.Value;
 			_ent.Description = txtDescription.Text;
+			_ent.TotalSeconds = timeInputUserControl1.TotalSeconds;
 
 			return _ent;
 		}
@@ -51,10 +58,8 @@ namespace SessionCollector.Forms
 		{
 			_set(e);
 			bool ok = DialogResult.OK == this.ShowDialog();
-			if(ok)
-				return new ViewResult<OSession> { Accept = ok, Data = _get() };
-			else
-				return new ViewResult<OSession> { Accept = ok, Data = null };
+
+			return new ViewResult<OSession> { Ok = ok, Result = ok ? _get() : null };
 		}
 
 		decimal get_plan_hours(string v)
@@ -75,16 +80,18 @@ namespace SessionCollector.Forms
 
 		private void label6_Click(object sender, EventArgs e)
 		{
-			InputDataDialog dlg = new InputDataDialog();
+			//InputDataDialog dlg = new InputDataDialog();
 
-			if(dlg.ShowWithValidation(@"^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$") == DialogResult.OK)
-			{
-				_ent.TotalSeconds = Convert.ToInt32(TimeSpan.Parse(dlg.InputText).TotalSeconds);
-				lblSessionTotalTimeString.Text = _ent.TotalWorkTime;
-			}
+			//if(dlg.ShowWithValidation(@"^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$") == DialogResult.OK)
+			//{
+			//	_ent.TotalSeconds = Convert.ToInt32(TimeSpan.Parse(dlg.InputText).TotalSeconds);
+			//	blSessionTotalTimeString.Text = _ent.TotalWorkTime;
+			//}
 		}
 
 		Color label6Backgfround;
+
+		public event EventHandler<ViewResultParams<OSession, INode>> ChangeDirectory;
 
 		private void label6_MouseEnter(object sender, EventArgs e)
 		{
@@ -98,6 +105,37 @@ namespace SessionCollector.Forms
 		{
 			var lbl = sender as Label;
 			lbl.BackColor = label6Backgfround;
+		}
+
+
+		/*
+		 * В принципе мы же копируем, заполняем поля из ввода пользователя в полы сущности.
+		 * Нет ничего нелогичного чтобы и подчиненные объекты вешать (присваивать) в мордочке.
+		 * 
+		 * Я же собираю данные, например метод _get()
+		 */
+		private void btnChangeDirectory_Click(object sender, EventArgs e)
+		{
+			// просто спросить директорию.
+			// здесь сами присвоим, а если надо валидация, в бизнес логике сделаем.
+
+			ViewResultParams<OSession, INode> req = new ViewResultParams<OSession, INode>();
+
+			req.Param = _ent;
+
+			ChangeDirectory?.Invoke(this, req);
+
+			if (req.Ok)
+			{
+				_ent.NodeId = req.Result.Id;
+				_ent.Node = (Node)req.Result;
+
+				txtDirName.Text = _ent.DirName;
+
+			}
+
+			// И теперь, после выхода, если нажата сохранить, а не отмена, в презентере выпоняем сохранение.
+			// и нет подводных операций сохранения.
 		}
 	}
 }

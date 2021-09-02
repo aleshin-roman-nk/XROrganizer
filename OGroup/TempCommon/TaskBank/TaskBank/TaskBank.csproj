@@ -240,10 +240,17 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.5.11.10\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.5.11.10\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presenters\DirectoryFilesPresenter.cs" />
+    <Compile Include="Presenters\FilesPresenter.cs" />
     <Compile Include="Presenters\DirectoriesPresenter.cs" />
+    <Compile Include="Presenters\Hub.cs" />
     <Compile Include="Views\ISingleEntityView.cs" />
     <Compile Include="Forms\RmTaskForm.cs">
       <SubType>Form</SubType>
@@ -257,7 +264,6 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewResult.cs" />
     <Compile Include="Views\IMainView.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Program.cs" />
@@ -318,13 +324,9 @@
       <Project>{9d845bd0-d295-45e7-b786-77fcc299893e}</Project>
       <Name>InputBoxes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\PresenterServices\PresenterServices.csproj">
-      <Project>{481ac604-a5db-4586-9b2e-3e5931488213}</Project>
-      <Name>PresenterServices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UIComponents\UIComponents.csproj">
+    <ProjectReference Include="..\..\UIComponents\CommonUIComponents.csproj">
       <Project>{c886c63e-000f-4b56-8371-355056455ddb}</Project>
-      <Name>UIComponents</Name>
+      <Name>CommonUIComponents</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

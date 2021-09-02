@@ -294,5 +294,19 @@ namespace TriningArticles
 
 			prevArticle = currentArticle;
 		}
+
+		private void btnGetArtLink_Click(object sender, EventArgs e)
+		{
+			var res = $"\"Articles\" \\ id{currentArticle.Id} \\ \"{currentArticle.Name}\"";
+			try
+			{
+				Clipboard.Clear();
+				Clipboard.SetText(res);
+			}
+			catch (Exception)
+			{
+
+			}
+		}
 	}
 }

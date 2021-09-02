@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Domain.Tools
 {
@@ -25,6 +26,12 @@ namespace Domain.Tools
 		{
 			//log.Information(str);
 			log.Information(str);
+		}
+
+		public static void ShowObject(object o)
+		{
+			var j = Newtonsoft.Json.JsonConvert.SerializeObject(o, Newtonsoft.Json.Formatting.Indented);
+			MessageBox.Show(j);
 		}
 	}
 }

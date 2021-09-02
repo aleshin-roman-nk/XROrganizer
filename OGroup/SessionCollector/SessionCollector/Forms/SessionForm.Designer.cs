@@ -37,13 +37,14 @@ namespace SessionCollector.Forms
 			this.txtDescription = new System.Windows.Forms.RichTextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.txtDirName = new System.Windows.Forms.TextBox();
 			this.btnChangeDirectory = new System.Windows.Forms.Button();
 			this.btnSave = new System.Windows.Forms.Button();
 			this.btn = new System.Windows.Forms.Button();
-			this.label6 = new System.Windows.Forms.Label();
-			this.lblSessionTotalTimeString = new System.Windows.Forms.Label();
 			this.mtxtPlanHrs = new System.Windows.Forms.MaskedTextBox();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.timeInputUserControl1 = new SessionCollector.UC.TimeInputUserControl();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -92,9 +93,11 @@ namespace SessionCollector.Forms
 			// 
 			// txtDescription
 			// 
-			this.txtDescription.Location = new System.Drawing.Point(490, 71);
+			this.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.txtDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txtDescription.Location = new System.Drawing.Point(0, 0);
 			this.txtDescription.Name = "txtDescription";
-			this.txtDescription.Size = new System.Drawing.Size(465, 444);
+			this.txtDescription.Size = new System.Drawing.Size(463, 451);
 			this.txtDescription.TabIndex = 6;
 			this.txtDescription.Text = "";
 			// 
@@ -116,13 +119,13 @@ namespace SessionCollector.Forms
 			this.label5.TabIndex = 8;
 			this.label5.Text = "Директория";
 			// 
-			// textBox1
+			// txtDirName
 			// 
-			this.textBox1.Location = new System.Drawing.Point(124, 6);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.ReadOnly = true;
-			this.textBox1.Size = new System.Drawing.Size(351, 30);
-			this.textBox1.TabIndex = 9;
+			this.txtDirName.Location = new System.Drawing.Point(124, 6);
+			this.txtDirName.Name = "txtDirName";
+			this.txtDirName.ReadOnly = true;
+			this.txtDirName.Size = new System.Drawing.Size(351, 30);
+			this.txtDirName.TabIndex = 9;
 			// 
 			// btnChangeDirectory
 			// 
@@ -132,6 +135,7 @@ namespace SessionCollector.Forms
 			this.btnChangeDirectory.TabIndex = 10;
 			this.btnChangeDirectory.Text = "...";
 			this.btnChangeDirectory.UseVisualStyleBackColor = true;
+			this.btnChangeDirectory.Click += new System.EventHandler(this.btnChangeDirectory_Click);
 			// 
 			// btnSave
 			// 
@@ -153,28 +157,6 @@ namespace SessionCollector.Forms
 			this.btn.Text = "Отмена";
 			this.btn.UseVisualStyleBackColor = true;
 			// 
-			// label6
-			// 
-			this.label6.AutoSize = true;
-			this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.label6.Location = new System.Drawing.Point(12, 266);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(177, 25);
-			this.label6.TabIndex = 18;
-			this.label6.Text = "Общее время сессии";
-			this.label6.Click += new System.EventHandler(this.label6_Click);
-			this.label6.MouseEnter += new System.EventHandler(this.label6_MouseEnter);
-			this.label6.MouseLeave += new System.EventHandler(this.label6_MouseLeave);
-			// 
-			// lblSessionTotalTimeString
-			// 
-			this.lblSessionTotalTimeString.AutoSize = true;
-			this.lblSessionTotalTimeString.Location = new System.Drawing.Point(200, 266);
-			this.lblSessionTotalTimeString.Name = "lblSessionTotalTimeString";
-			this.lblSessionTotalTimeString.Size = new System.Drawing.Size(19, 23);
-			this.lblSessionTotalTimeString.TabIndex = 19;
-			this.lblSessionTotalTimeString.Text = "0";
-			// 
 			// mtxtPlanHrs
 			// 
 			this.mtxtPlanHrs.Location = new System.Drawing.Point(215, 143);
@@ -184,21 +166,41 @@ namespace SessionCollector.Forms
 			this.mtxtPlanHrs.TabIndex = 20;
 			this.mtxtPlanHrs.ValidatingType = typeof(System.DateTime);
 			// 
+			// panel1
+			// 
+			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panel1.Controls.Add(this.txtDescription);
+			this.panel1.Location = new System.Drawing.Point(490, 71);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(465, 453);
+			this.panel1.TabIndex = 21;
+			// 
+			// timeInputUserControl1
+			// 
+			this.timeInputUserControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.timeInputUserControl1.Location = new System.Drawing.Point(12, 264);
+			this.timeInputUserControl1.Name = "timeInputUserControl1";
+			this.timeInputUserControl1.Size = new System.Drawing.Size(294, 64);
+			this.timeInputUserControl1.TabIndex = 22;
+			this.timeInputUserControl1.TotalSeconds = 0;
+			// 
 			// SessionForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(967, 536);
+			this.Controls.Add(this.timeInputUserControl1);
+			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.mtxtPlanHrs);
-			this.Controls.Add(this.lblSessionTotalTimeString);
-			this.Controls.Add(this.label6);
 			this.Controls.Add(this.btn);
 			this.Controls.Add(this.btnSave);
 			this.Controls.Add(this.btnChangeDirectory);
-			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.txtDirName);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.label4);
-			this.Controls.Add(this.txtDescription);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.txtPlanFinish);
 			this.Controls.Add(this.label2);
@@ -209,6 +211,7 @@ namespace SessionCollector.Forms
 			this.Name = "SessionForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "SessionForm";
+			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -223,12 +226,12 @@ namespace SessionCollector.Forms
 		private System.Windows.Forms.RichTextBox txtDescription;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox txtDirName;
 		private System.Windows.Forms.Button btnChangeDirectory;
 		private System.Windows.Forms.Button btnSave;
 		private System.Windows.Forms.Button btn;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Label lblSessionTotalTimeString;
 		private System.Windows.Forms.MaskedTextBox mtxtPlanHrs;
+		private System.Windows.Forms.Panel panel1;
+		private UC.TimeInputUserControl timeInputUserControl1;
 	}
 }

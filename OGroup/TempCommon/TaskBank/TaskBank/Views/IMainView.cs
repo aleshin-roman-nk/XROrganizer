@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UIComponents;
-using UIComponents.NodesNavigator;
-using UIComponents.ViewComponents;
+using CommonUIComponents;
+using CommonUIComponents.NodesNavigator;
+using CommonUIComponents.ViewComponents;
 
 namespace TaskBank
 {
 	public interface IMainView
 	{
-		IDirectoryFilesView DirectoryFilesView { get; }
+		IFilesView DirectoryFilesView { get; }
 		IDirectoriesView DirectoryNavigator { get; }
+		event EventHandler ShowHotTasks;
 	}
 }

@@ -1,0 +1,9 @@
+﻿{
+  "Id": 126,
+  "Name": "eng.M001",
+  "Lang": null,
+  "Content": "{\\rtf1\\ansi\\ansicpg1251\\deff0\\nouicompat\\deflang1049{\\fonttbl{\\f0\\fnil\\fcharset0 Roboto Condensed;}{\\f1\\fnil\\fcharset204 Roboto Condensed;}}\r\n{\\colortbl ;\\red255\\green255\\blue0;}\r\n{\\*\\generator Riched20 10.0.19041}\\viewkind4\\uc1 \r\n\\pard\\cf1\\f0\\fs24\\lang1033 ###eng.M001\\par\r\n\\par\r\nObserver can be a bit tedious. If you have several controls that produce events or several events, then you have to wire them up one at a time. Whereas if you use an interface, it's all in one place and you get type-safety and compile errors if you forget to implement a specific member of the interface. The drawback with interfaces is that you have specific coupling. The view is coupled to an interface and something has to implement that interface. you can use interface segregation to limit the interface coupling to one specific class; but, that adds a certain level of complexity.\\par\r\n\\par\r\n\\f1\\lang1049\\par\r\n}\r\n",
+  "WorkText": "{\\rtf1\\ansi\\ansicpg1251\\deff0\\nouicompat\\deflang1049{\\fonttbl{\\f0\\fnil\\fcharset204 Roboto Condensed;}}\r\n{\\colortbl ;\\red124\\green252\\blue0;}\r\n{\\*\\generator Riched20 10.0.19041}\\viewkind4\\uc1 \r\n\\pard\\cf1\\f0\\fs24\\par\r\n}\r\n",
+  "TxtContent": "###eng.M001\n\nObserver can be a bit tedious. If you have several controls that produce events or several events, then you have to wire them up one at a time. Whereas if you use an interface, it's all in one place and you get type-safety and compile errors if you forget to implement a specific member of the interface. The drawback with interfaces is that you have specific coupling. The view is coupled to an interface and something has to implement that interface. you can use interface segregation to limit the interface coupling to one specific class; but, that adds a certain level of complexity.\n\n",
+  "DateTime": "0001-01-01T00:00:00"
+}

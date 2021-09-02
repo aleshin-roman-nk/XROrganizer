@@ -38,6 +38,11 @@ namespace SessionCollector.BL.Services
 			return l.Sum(x => x.ReservedHours);
 		}
 
+		public decimal GetDoneWorkInSeconds(IEnumerable<OSession> l)
+		{
+			return l.Sum(x => x.TotalSeconds);
+		}
+
 		public DateTime? GetLastSessionFinish(IEnumerable<OSession> l)
 		{
 			if (l.Count() == 0) return null;

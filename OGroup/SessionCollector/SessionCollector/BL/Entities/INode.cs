@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SessionCollector.BL.Entities
+{
+	public interface INode
+	{
+		int Id { get; set; }
+		int owner_id { get; set; }
+		string Name { get; set; }
+		string description { get; set; }
+	}
+}
