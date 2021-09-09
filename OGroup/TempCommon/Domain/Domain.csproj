@@ -79,8 +79,8 @@
     <Compile Include="Entities\FNote.cs" />
     <Compile Include="Entities\FTask.cs" />
     <Compile Include="Entities\TrackedDir.cs" />
-    <Compile Include="Enums\NType.cs" />
-    <Compile Include="Enums\TaskState.cs" />
+    <Compile Include="Repos\FS\Enums\NType.cs" />
+    <Compile Include="Repos\FS\Enums\TaskState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\FS\IRepository.cs" />
     <Compile Include="Repos\T\TrashTempRepo.cs" />

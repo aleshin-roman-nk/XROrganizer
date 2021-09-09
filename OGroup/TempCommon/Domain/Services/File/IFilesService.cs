@@ -15,7 +15,9 @@ namespace Domain.Services
 		void Delete(INode n);
 		void ChangeOwnerDirectory(Dir dir);
 		void MoveFilesToDirectory(Dir owner, IEnumerable<INode> notes);
-		event EventHandler CollectionChanged;
+
 		IEnumerable<INode> Items { get; }
+
+		event EventHandler CollectionChanged;
 	}
 }

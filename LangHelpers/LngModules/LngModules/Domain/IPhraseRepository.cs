@@ -9,9 +9,9 @@ namespace LngModules.Domain
 {
 	public interface IPhraseRepository
 	{
-		void Save(Phrase p);
-		void Delete(Phrase p);
-		Phrase FirstOrDefault(string phrase);
-		IEnumerable<Phrase> GetPhrases(string first_letters);
+		void Save(Lexem p);
+		void Delete(Lexem p);
+		Lexem FirstOrDefault(string phrase);
+		IEnumerable<Lexem> GetPhrases(string first_letters);
 	}
 }

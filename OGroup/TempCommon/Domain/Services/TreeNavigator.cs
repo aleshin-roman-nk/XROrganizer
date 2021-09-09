@@ -61,7 +61,6 @@ namespace Domain.Services
 		}
 
 		public INode HighlightedNode => _highlightedDir;
-
 		public string CurrentNodeFullName
 		{
 			get
@@ -100,7 +99,6 @@ namespace Domain.Services
 		{
 			return r.type == NType.exit_dir;
 		}
-
 		private bool StackIsOnRoot()
 		{
 			return !owners.Any();
@@ -115,7 +113,6 @@ namespace Domain.Services
 				OnCurrentOwnerChanged();
 			}
 		}
-
 		public void Update()
 		{
 			OnCurrentOwnerChanged();

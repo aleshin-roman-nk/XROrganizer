@@ -86,17 +86,17 @@
     <Compile Include="BL\Db\DbConf.cs" />
     <Compile Include="BL\Db\IDbConf.cs" />
     <Compile Include="BL\Db\MySQLiteConfig.cs" />
-    <Compile Include="BL\DirectoryRepository.cs" />
+    <Compile Include="BL\Repo\NodeRepository.cs" />
     <Compile Include="BL\Entities\INode.cs" />
     <Compile Include="BL\Entities\Node.cs" />
     <Compile Include="BL\Entities\OTask.cs" />
-    <Compile Include="BL\IEntityRepository.cs" />
-    <Compile Include="BL\IMainRepository.cs" />
+    <Compile Include="BL\Repo\IRepository.cs" />
+    <Compile Include="BL\Repo\IMainRepository.cs" />
     <Compile Include="BL\Entities\UI\ChartItem.cs" />
     <Compile Include="BL\Services\IService.cs" />
     <Compile Include="BL\Services\Services.cs" />
     <Compile Include="BL\Services\SessionService.cs" />
-    <Compile Include="BL\SessionRepository.cs" />
+    <Compile Include="BL\Repo\SessionRepository.cs" />
     <Compile Include="Forms\DirectoriesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,7 +146,7 @@
     <Compile Include="Views\ISessionTickerView.cs" />
     <Compile Include="Views\ISessionView.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
-    <Compile Include="BL\MainRepository.cs" />
+    <Compile Include="BL\Repo\MainRepository.cs" />
     <Compile Include="BL\Entities\ODirectory.cs" />
     <Compile Include="BL\Entities\OSession.cs" />
     <Compile Include="Forms\MainForm.cs">

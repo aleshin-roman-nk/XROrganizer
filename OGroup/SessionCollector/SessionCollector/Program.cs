@@ -1,5 +1,6 @@
 ﻿using SessionCollector.BL;
 using SessionCollector.BL.Db;
+using SessionCollector.BL.Repo;
 using SessionCollector.BL.Services;
 using SessionCollector.Forms;
 using SessionCollector.Tools;

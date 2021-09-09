@@ -30,9 +30,7 @@ namespace TaskBank.Presenters
 
 			IRepository repo = new MainRepository();
 
-			IFilesService fs = new FilesService(repo);
-
-			filesPresenter = new FilesPresenter(fs, _mainView.DirectoryFilesView, _hub);
+			filesPresenter = new FilesPresenter(new FilesService(repo), _mainView.DirectoryFilesView, _hub);
 			directoriesPresenter = new DirectoriesPresenter(new DirectoriesService(repo), _mainView.DirectoryNavigator, _hub);
 		}
 

@@ -1,6 +1,7 @@
 ﻿using mvp_base;
 using SessionCollector.BL;
 using SessionCollector.BL.Entities;
+using SessionCollector.BL.Repo;
 using SessionCollector.BL.Services;
 using SessionCollector.Forms;
 using SessionCollector.Tools;
@@ -30,6 +31,17 @@ namespace SessionCollector
 
 		public MainPresenter(IMainView v, ISessionView sess_view, IMainRepository r, IDirectoriesView dir_view, IStataView sts, IService s)
 		{
+			/*
+			 * Разные презентеры:
+			 * + просмотр и редактирование сессии
+			 * + просмотр статистики
+			 * + навигация и выбор узла
+			 * 
+			 * Сообщение всех презентеров через хаб.
+			 * 
+			 * 
+			 */
+
 			_mainRepository = r;
 			_view = v;
 			_sessionview = sess_view;
@@ -58,13 +70,13 @@ namespace SessionCollector
 
 		private void _directoryView_DeleteDirectory(object sender, INode e)
 		{
-			_mainRepository.Directories.Delete(e);
-			_directoryView.DisplayNodes(_mainRepository.Directories.Get());
+			_mainRepository.Nodes.Delete(e);
+			_directoryView.DisplayNodes(_mainRepository.Nodes.Get());
 		}
 
 		private void _view_ShowStata(object sender, DateTime e)
 		{
-			_directoryView.DisplayNodes(_mainRepository.Directories.Get());
+			_directoryView.DisplayNodes(_mainRepository.Nodes.Get());
 			var res = _directoryView.Go();
 
 			if (res.Ok)
@@ -75,7 +87,7 @@ namespace SessionCollector
 
 		private void _sessionview_ChangeDirectory(object sender, ViewResultParams<OSession, INode> e)
 		{
-			_directoryView.DisplayNodes(_mainRepository.Directories.Get(), e.Param.Node);
+			_directoryView.DisplayNodes(_mainRepository.Nodes.Get(), e.Param.Node);
 			var res = _directoryView.Go();
 
 			if (res.Ok)
@@ -93,8 +105,8 @@ namespace SessionCollector
 			{
 				ODirectory d = new ODirectory { Name = inputData.InputText };
 
-				_mainRepository.Directories.Save(d);
-				_directoryView.DisplayNodes(_mainRepository.Directories.Get());
+				_mainRepository.Nodes.Save(d);
+				_directoryView.DisplayNodes(_mainRepository.Nodes.Get());
 			}
 		}
 

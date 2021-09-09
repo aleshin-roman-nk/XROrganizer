@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace LngModules.Domain.Entities
 {
-	public class Sentence
+	public class Paragraph
 	{
-		public Sentence()
+		public Paragraph()
 		{
-			Lexems = new List<Lexem>();
+			Sentences = new List<Sentence>();
 		}
 
 		public int id { get; set; }
 		public string text { get; set; }
-		public string description { get; set; }
-		public int ParagraphId { get; set; }
-		public virtual ICollection<Lexem> Lexems { get; set; }
+		public string practiceText { get; set; }
+		public virtual ICollection<Sentence> Sentences { get; set; }
 	}
 }
