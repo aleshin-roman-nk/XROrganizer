@@ -15,6 +15,10 @@ using xorg.Tools;
 
 namespace TaskBank.Presenters
 {
+	/*
+	 * It is the best project ever!!!
+	 * 
+	 */
 	public class TaskBankMainPresenter
 	{
 		List<INode> _openedNodes = new List<INode>();
