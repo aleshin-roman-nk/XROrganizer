@@ -14,8 +14,9 @@ namespace Domain.Entities
 		NType type { get; }
 		bool CanHaveChildren { get; }
 		string name { get; set; }
-		string description { get; set; }
+		string definition { get; set; }
 		DateTime? date { get; set; }
 		string NTypeString { get; }
+		string path { get; set; }
 	}
 }

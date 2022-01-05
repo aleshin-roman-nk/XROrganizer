@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UIComponents.Forms;
 
 namespace TestView
 {
@@ -19,7 +20,10 @@ namespace TestView
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			Text = InputBoxes.InputBox.Show("Enter your age");
+			//Text = InputBoxes.InputBox.Show("Enter your age");
+
+			FTaskForm fff = new FTaskForm();
+			fff.ShowDialog();
 		}
 	}
 }

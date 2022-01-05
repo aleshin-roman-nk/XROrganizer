@@ -16,5 +16,10 @@ namespace LngModules
 		{
 			InitializeComponent();
 		}
+
+		private void btnSelectParagraph_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

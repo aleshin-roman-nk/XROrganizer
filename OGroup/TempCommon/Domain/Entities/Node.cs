@@ -1,9 +1,11 @@
 ﻿using Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Domain.Entities
 {
@@ -18,10 +20,24 @@ namespace Domain.Entities
 		public int id { get; set; }
 		public int owner_id { get; set; }
 		public NType type => _type;
-		public string name { get; set; }
-		public string description { get; set; }
+		public virtual string name { get; set; }
+		public string definition { get; set; }
+		public string log { get; set; }
 		public DateTime? date { get; set; }
 		public bool CanHaveChildren => _canHaveChildren;
 		public string NTypeString { get { return type.ToString(); } }
+		public string path { get; set; }
+		public override bool Equals(object obj)
+		{
+			INode ob = obj as INode;
+
+			if (ob == null) return false;
+
+			return ob.id == this.id;
+		}
+		public override int GetHashCode()
+		{
+			return id;
+		}
 	}
 }

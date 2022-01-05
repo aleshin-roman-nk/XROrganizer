@@ -9,5 +9,7 @@ namespace InputBoxes
 	public interface IInputBox
 	{
 		string Show(string title, string default_msg = "");
+		bool UserAnsweredYes(string q);
+		void ShowMessage(string msg);
 	}
 }

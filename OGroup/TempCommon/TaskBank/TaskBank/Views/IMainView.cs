@@ -1,19 +1,23 @@
 ﻿using Domain.Entities;
+using Shared.UI.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommonUIComponents;
-using CommonUIComponents.NodesNavigator;
-using CommonUIComponents.ViewComponents;
 
-namespace TaskBank
+namespace TaskBank.Views
 {
-	public interface IMainView
+	public interface IMainView: IStickable
 	{
-		IFilesView DirectoryFilesView { get; }
-		IDirectoriesView DirectoryNavigator { get; }
-		event EventHandler ShowHotTasks;
+		INodesView NodesView { get; }
+		event EventHandler StartDesriptionForm;
+		event EventHandler StartCurrentBuffer;
+		event EventHandler StartSessionCollector;
+		event EventHandler StartWindowCompletedNodes;
+		event EventHandler DeleteNode;
+		event EventHandler CreateNode;
+		event EventHandler RenameNode;
+		int OpenedTasksCout { get; set; }
 	}
 }

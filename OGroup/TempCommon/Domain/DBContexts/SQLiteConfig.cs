@@ -8,7 +8,7 @@ using System.Data.Entity.Infrastructure.DependencyResolution;
 using System.Data.SQLite;
 using System.Data.SQLite.EF6;
 
-namespace Domain.DBContexts
+namespace Domain.DBContext
 {
 	public class SQLiteConfig : DbConfiguration
 	{

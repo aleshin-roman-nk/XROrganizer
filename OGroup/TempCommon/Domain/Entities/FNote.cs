@@ -1,4 +1,5 @@
-﻿using Domain.Enums;
+﻿using Domain.Entities;
+using Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,9 +22,9 @@ namespace Domain.Entities
 		{
 			get
 			{
-				if (description == null) return "";
-				int lenght = description.Length > 100 ? 100 : description.Length;
-				return description.Substring(0, lenght) + "...";
+				if (definition == null) return "";
+				int lenght = definition.Length > 100 ? 100 : definition.Length;
+				return definition.Substring(0, lenght) + "...";
 			}
 		}
 

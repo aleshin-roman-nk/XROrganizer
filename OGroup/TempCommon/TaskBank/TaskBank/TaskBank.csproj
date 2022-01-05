@@ -38,7 +38,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -47,7 +47,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -75,12 +75,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
-    </Reference>
-    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -248,28 +242,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presenters\FilesPresenter.cs" />
-    <Compile Include="Presenters\DirectoriesPresenter.cs" />
-    <Compile Include="Presenters\Hub.cs" />
-    <Compile Include="Views\ISingleEntityView.cs" />
-    <Compile Include="Forms\RmTaskForm.cs">
+    <Compile Include="Forms\DescriptionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RmTaskForm.Designer.cs">
-      <DependentUpon>RmTaskForm.cs</DependentUpon>
+    <Compile Include="Forms\DescriptionForm.Designer.cs">
+      <DependentUpon>DescriptionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\FilesPresenter.cs" />
+    <Compile Include="Presenters\Hub.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\IMainView.cs" />
-    <Compile Include="Presenters\MainPresenter.cs" />
+    <Compile Include="Presenters\TaskBankMainPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\RmTaskForm.resx">
-      <DependentUpon>RmTaskForm.cs</DependentUpon>
+    <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\IDescriptionWindow.cs" />
+    <Compile Include="Views\IStickable.cs" />
+    <EmbeddedResource Include="Forms\DescriptionForm.resx">
+      <DependentUpon>DescriptionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -312,7 +306,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Forms\TextFile1.txt" />
     <Content Include="icons8-task-42.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -320,15 +313,24 @@
       <Project>{0d7f46d1-2c0c-42fe-8fed-38a4da845cc4}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\InputBoxes\InputBoxes.csproj">
-      <Project>{9d845bd0-d295-45e7-b786-77fcc299893e}</Project>
-      <Name>InputBoxes</Name>
+    <ProjectReference Include="..\..\Services\Services.csproj">
+      <Project>{b7c776a3-e51f-4fed-b8bf-6eb4e5b06deb}</Project>
+      <Name>Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\UIComponents\CommonUIComponents.csproj">
+    <ProjectReference Include="..\..\SessionCollector\SessionCollector\SessionCollector.csproj">
+      <Project>{53EA0975-0679-482F-96C2-DD197E38E037}</Project>
+      <Name>SessionCollector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Shared.UI\Shared.UI.csproj">
       <Project>{c886c63e-000f-4b56-8371-355056455ddb}</Project>
-      <Name>CommonUIComponents</Name>
+      <Name>Shared.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xorg.Tools\xorg.Tools.csproj">
+      <Project>{3AEDA0C6-DC99-4B8A-A737-1BCF3C61F01D}</Project>
+      <Name>xorg.Tools</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
