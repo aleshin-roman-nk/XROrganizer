@@ -1,1 +1,0 @@
-{"boardid":"1gWlILSfGAIX975Y-NAcUeH8hIprtNH7h","color":2,"date":1614775725035,"datemod":1614775771439,"gdid":"180jBosLFaMJg6adIypk0IwiQrYIqTInJ","id":209,"notetxt":"Учиться рассуждать во время решения задачи и разработки программы вслух. Задел на то, что объяснять на собесах. ","pass":false,"sellist":6,"status":0,"text_span":"","timer":0,"title_span":""}

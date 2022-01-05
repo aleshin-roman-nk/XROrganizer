@@ -1,1 +1,0 @@
-{"boardid":"1gWlILSfGAIX975Y-NAcUeH8hIprtNH7h","color":2,"date":1607369462671,"datemod":1607369508830,"gdid":"1GwzE3pW58bNRv3knRaXJqkVQay7I4oOx","id":29,"notetxt":"Хорошая практика создавать документацию со спецификаций описания, назначения сущности, класса и тд. ","pass":false,"sellist":4,"status":0,"timer":0}

@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":1,"date":1607958088292,"datemod":1607958115950,"gdid":"1zIsGQrNiHWrgLTo8uF4_JKCbleNFpGgY","id":54,"notetxt":"Составлять мой справочник, труд по организованности. ","pass":false,"sellist":4,"status":0,"timer":0}

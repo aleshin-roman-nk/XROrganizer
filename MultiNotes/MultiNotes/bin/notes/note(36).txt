@@ -1,1 +1,0 @@
-{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":6,"date":1613275828726,"datemod":1613275918943,"gdid":"1HpwNTRjF1we6yp3p8TYbLWSVeOTCzmPD","id":191,"notetxt":"Рассказывать, учиться излагать истину. Работать над этим. ","pass":false,"sellist":6,"status":0,"text_span":"","timer":0,"title_span":""}

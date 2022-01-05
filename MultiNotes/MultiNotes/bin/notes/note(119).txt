@@ -1,1 +1,0 @@
-{"boardid":"1gWlILSfGAIX975Y-NAcUeH8hIprtNH7h","color":0,"date":1610962969241,"datemod":1610962994135,"gdid":"1UPYCIZLk5wB7LdQ9icFI_yMDUPj0U-qw","id":89,"notetxt":"Все данные проекта хранятся в отдельных json файлах. ","pass":false,"sellist":4,"status":0,"timer":0}

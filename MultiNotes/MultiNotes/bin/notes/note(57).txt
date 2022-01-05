@@ -1,1 +1,0 @@
-{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":6,"date":1612957422555,"datemod":1612957461099,"gdid":"1atBUlo1YhGn2Qbj9cEO57JcCxqDN5zB8","id":173,"notetxt":"Качать преподнесение материала. Много читать, размышлять, выражать мысли чётко. ","pass":false,"sellist":7,"status":0,"timer":0}

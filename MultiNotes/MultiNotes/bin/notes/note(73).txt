@@ -1,1 +1,0 @@
-{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":6,"date":1612674357375,"datemod":1612674540211,"gdid":"1MFtWbCKrqQ22UcQz4ZEUGcOUBVcnzQ6h","id":157,"notetxt":"Создать временный центр заметок по проектам. С деревом директорий. ","pass":false,"sellist":3,"status":0,"timer":0}

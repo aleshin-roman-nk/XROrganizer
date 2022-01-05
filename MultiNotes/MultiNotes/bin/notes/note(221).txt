@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1606744298455,"datemod":1606744357045,"gdid":"12sReb7kzoHqtzMENpNuRoGXQyjISJA87","id":14,"notetxt":"Когда приступаю к задаче, должен не отвлекаться на другие занятия. Как на уроке.\nДолжна быть программа занятия. ","pass":false,"sellist":0,"status":0,"timer":0}

@@ -1,1 +1,0 @@
-{"backcolor":0,"backnum":1,"backpath":"","color":3,"colorfont":0,"datemod":1615103704909,"gdid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","icon":15,"id":8,"numord":7,"title":"Банк целей. "}

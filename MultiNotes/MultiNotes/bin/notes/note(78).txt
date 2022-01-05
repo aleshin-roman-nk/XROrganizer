@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1612673330810,"datemod":1612673515111,"gdid":"1gATrrL1iLakFtaMCAmdjpHG0uzhvHMfT","id":152,"notetxt":"Можно учить словосочетаниями, например the resurrection of the dead, в общем мыслить образами стараться. ","pass":false,"sellist":2,"status":0,"timer":0}

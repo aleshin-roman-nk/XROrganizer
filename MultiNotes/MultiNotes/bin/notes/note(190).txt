@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":4,"date":1607891362466,"datemod":1607891433020,"gdid":"17iBjx5aVYJJ6rvQ2ulbk5y9RMqdfOXPt","id":49,"notetxt":"Максимально важно!\nНе просто смотреть или пробежать прочитать, а переваривать материал. Практику использование. ","pass":false,"sellist":2,"status":0,"timer":0}

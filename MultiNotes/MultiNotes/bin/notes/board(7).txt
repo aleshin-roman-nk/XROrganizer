@@ -1,1 +1,0 @@
-{"backcolor":0,"backnum":0,"backpath":"","color":3,"colorfont":0,"datemod":1615103704904,"gdid":"1OfkCgR6PtqmUO03Do2N47j7PrAfRyH4i","icon":5,"id":2,"numord":2,"title":"Работа"}

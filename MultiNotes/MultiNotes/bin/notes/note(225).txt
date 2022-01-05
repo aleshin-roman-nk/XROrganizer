@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1605257951558,"datemod":1606464136932,"gdid":"1RnmFFWArfhrj9KAWXhmW-KB1XaaGHHwo","id":10,"notetxt":"Главная идея это централизация. Объекты исследования. ","pass":false,"sellist":3,"status":0,"timer":0}

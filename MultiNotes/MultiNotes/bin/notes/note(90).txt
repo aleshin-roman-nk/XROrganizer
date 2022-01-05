@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1612613403324,"datemod":1612613507595,"gdid":"1B5gVjS853kpOUnoCew_15I0yE5_H9NpV","id":140,"notetxt":"Упражнения на запоминания конструкций и фраз и слов. До автоматизма. А потом, перевод с русского, ища в голове уже изученный инструменты выражения.\nЗадача банка. ","pass":false,"sellist":4,"status":0,"timer":0}

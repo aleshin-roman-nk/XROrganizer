@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":2,"date":1607838866810,"datemod":1607838922444,"gdid":"1hYLxUR5rScCejzpeHDgOgGxd0S5MAJDh","id":46,"notetxt":"Сначала использовать примитивные конструкции для отработки акт слов запаса. Затем усложнять всякими yet и тд. ","pass":false,"sellist":2,"status":0,"timer":0}

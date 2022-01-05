@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":4,"date":1607844618528,"datemod":1607844638762,"gdid":"1YPGbUbrHrqxIhg_C3Ihi_z9Azqbh4IOQ","id":48,"notetxt":"Много читать и пересказывать. ","pass":false,"sellist":3,"status":0,"timer":0}

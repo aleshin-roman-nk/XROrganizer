@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":6,"date":1612945025430,"datemod":1612945147409,"gdid":"1hjgcQIs3Yiqzj8wkc2AFCW6agk_oSvPv","id":167,"notetxt":"Изначально все можно складывать в банк заметок, быстрые идеи. А из этого банка уже фильтровать, формировать задачи.\nВ части проекта может быть задача работа с  книгой.","pass":false,"sellist":1,"status":0,"timer":0}

@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":2,"date":1607421712585,"datemod":1607421753538,"gdid":"11mNKe5C_1aKi03q-Us_UlSkySSG6JB8p","id":31,"notetxt":"Бывает и так можно сделать и так, а как правильно? Нужно заранее порешать и принять чёткий план. ","pass":false,"sellist":7,"status":0,"timer":0}

@@ -1,1 +1,0 @@
-{"boardid":"1mv1OOz_zQDGdPvuUpJQgJWPUTQdhfQEu","color":6,"date":1614147238248,"datemod":1614147309247,"gdid":"1GAMu2PtX-sZ0v1tU0Ete8QTomNnv9Bup","id":200,"notetxt":"Изучать материалы, писать изложения, свои статьи. Рассказывать свой опыт.\nДословный пересказ статей.\nЧтение вслух на скорость. ","pass":false,"sellist":5,"status":0,"text_span":"","timer":0,"title_span":""}

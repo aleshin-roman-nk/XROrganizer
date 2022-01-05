@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1612617561704,"datemod":1612617681382,"gdid":"1qWJa14g4LCs2CnCr8CMJV07cOWQ9LbRC","id":141,"notetxt":"Общий банк фраз. Текущий банк фраз, что я хочу сегодня работать. Картинка, ричбокс практики. ","pass":false,"sellist":6,"status":0,"timer":0}

@@ -1,1 +1,0 @@
-{"boardid":"1Id5gRUMo3WKPl6EYbqacuZIcoEjpiBf7","color":6,"date":1612744875079,"datemod":1612744924697,"gdid":"1A6xd_zkbRkOgfU_UzAtwZ_FuvPlrb36j","id":160,"notetxt":"Составлять презентацию для собеседования. Подготавливая о себе информацию. ","pass":false,"sellist":5,"status":0,"timer":0}

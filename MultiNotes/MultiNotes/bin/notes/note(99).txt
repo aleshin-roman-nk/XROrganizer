@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":1,"date":1612517786726,"datemod":1612517798962,"gdid":"14zGdIg8yDHt9R_SqNdiTgRm7RdJcmst5","id":131,"notetxt":"Скорость в единицу времени","pass":false,"sellist":7,"status":0,"timer":0}

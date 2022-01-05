@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":0,"date":1611907773256,"datemod":1611907843664,"gdid":"1LdZKyKXvamC53S83sJ6ovHislt__VaiJ","id":111,"notetxt":"Устанавливать конкретные цели результатов, приобретения инструментов. Учить фразы, которыми буду пользоваться. ","pass":false,"sellist":1,"status":0,"timer":0}

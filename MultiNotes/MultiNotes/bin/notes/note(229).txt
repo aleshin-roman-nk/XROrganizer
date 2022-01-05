@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1605257501750,"datemod":1605257536787,"gdid":"1FPiWAoZWsMxQONz1hJn06QqtKOgLqltg","id":6,"notetxt":"Организованнтсть. Просто древовидный банк. ","pass":false,"sellist":1,"status":0,"timer":0}

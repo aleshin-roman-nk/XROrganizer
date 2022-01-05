@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1605257578774,"datemod":1605257611115,"gdid":"1KHAdguKpB1uHhGsiYM2HCD_LGMERtc35","id":7,"notetxt":"Просто расписать на неделю объем работ, задач. В простых папках","pass":false,"sellist":0,"status":0,"timer":0}

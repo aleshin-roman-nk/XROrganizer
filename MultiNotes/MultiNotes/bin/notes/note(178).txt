@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1608407292195,"datemod":1608407361674,"gdid":"1AVc9RUnLw7SIr6zVQ8zKQBS9DzW3zRgc","id":61,"notetxt":"Читаю статью, составляю ответы, веду статистику, сколько сделал предложений за неделю. Программка специально для англ, вообще ин языка. ","pass":false,"sellist":3,"status":0,"timer":0}

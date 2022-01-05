@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":1,"date":1606126236167,"datemod":1606464124733,"gdid":"1kKf9t33yrjZOCTy28o1h6wD4gWW3rmhc","id":12,"notetxt":"Каждый отдельный день должен приносит максимальный результат","pass":false,"sellist":7,"status":0,"timer":0}

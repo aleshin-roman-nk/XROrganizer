@@ -1,1 +1,0 @@
-{"boardid":"1gWlILSfGAIX975Y-NAcUeH8hIprtNH7h","color":1,"date":1612529959013,"datemod":1612529985027,"gdid":"1oOUUxv4m4Hw5hJYte92AdflY7t_SDCJ2","id":134,"notetxt":"Наглядная схема, архитектура, алгоритм должны быть. ","pass":false,"sellist":4,"status":0,"timer":0}

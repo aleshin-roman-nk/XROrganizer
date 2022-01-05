@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":1,"date":1609585076247,"datemod":1609585101659,"gdid":"1ALFyDSSY_Da9fLXZcLZqo5yixHPsj1sL","id":68,"notetxt":"Необходимо писать программы как выполнить крупные задачи. ","pass":false,"sellist":0,"status":0,"timer":0}

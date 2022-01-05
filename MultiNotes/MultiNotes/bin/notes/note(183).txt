@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":1,"date":1607962504218,"datemod":1607962537486,"gdid":"1nVAFKTqUXkurJ9optnfXngtQlJ4Vj6WE","id":56,"notetxt":"Это нормально коллекционировать мои правила организованности, организации своего времени.","pass":false,"sellist":4,"status":0,"timer":0}

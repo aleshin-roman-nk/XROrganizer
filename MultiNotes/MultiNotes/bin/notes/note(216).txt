@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":1,"date":1607007684745,"datemod":1607007772312,"gdid":"1Uc3Vc5fI6QK9ck6jZxe76403SVO3fzQL","id":19,"notetxt":"Исследовать смысл каждого слова в контексте. Коллекционировать предложения содержащие исследуемое слово.","pass":false,"sellist":1,"status":0,"timer":0}

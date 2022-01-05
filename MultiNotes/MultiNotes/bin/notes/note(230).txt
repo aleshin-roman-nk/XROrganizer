@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1603897547562,"datemod":1603897604513,"gdid":"1O2QBC7tuw-NY_iZjgPw2NseHo1mvJlw9","id":5,"notetxt":"Нужно писать статьи на англ.\nПрактиковать использование слов, которые я хорошо знаю и не очень. ","pass":false,"sellist":7,"status":0,"timer":0}

@@ -1,1 +1,0 @@
-{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":1,"date":1612618224997,"datemod":1612618260469,"gdid":"1709kuCWuJago2J_s3htcMBJKduPAvDuP","id":146,"notetxt":"Готовить часовые речи. Проекты речей. План. Для интервью. ","pass":false,"sellist":6,"status":0,"timer":0}

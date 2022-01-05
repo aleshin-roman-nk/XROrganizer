@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":0,"date":1611835461978,"datemod":1611835492969,"gdid":"158B_wDwnhMawXQY3Kt9zPj5n0wcZ4-TF","id":109,"notetxt":"Сессии расписывать попункто. Программа выполнения сессии","pass":false,"sellist":2,"status":0,"timer":0}

@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":2,"date":1615007744428,"datemod":1615008013826,"gdid":"1W_v4Dl0PbCZHGWEp3QRNHG54c9a9NVCz","id":214,"notetxt":"Окно трендовых проектов. Сессия складывается в банк. Окно показывает сколько часов отработки. ","pass":false,"sellist":6,"status":0,"text_span":"","timer":0,"title_span":""}

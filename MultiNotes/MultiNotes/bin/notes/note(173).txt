@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":1,"date":1609583005525,"datemod":1609583054745,"gdid":"14lBWywHBSDgR3Hn1ZR2wm8rgWQ9lE0ep","id":66,"notetxt":"Очень важно ближайшее время усердно работать на моей способности пересказывать. На любом языке. ","pass":false,"sellist":1,"status":0,"timer":0}

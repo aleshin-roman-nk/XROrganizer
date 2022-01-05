@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1606772393659,"datemod":1606772401061,"gdid":"1MwKiKxTP_Fn5h1b8706CdOR0PlKd04XJ","id":16,"notetxt":"http://www.youtube.com/shorts/Owwu7AJY1GM","pass":false,"sellist":1,"status":0,"timer":0}

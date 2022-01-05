@@ -1,1 +1,0 @@
-{"boardid":"1mv1OOz_zQDGdPvuUpJQgJWPUTQdhfQEu","color":2,"date":1614156453553,"datemod":1614156489421,"gdid":"1VtxrhfP8oxwqWi2AvbqWrHdtA3hoBONO","id":202,"notetxt":"Прям повторять одни и те-же слова, выражения, предложения много раз, в течение недели. ","pass":false,"sellist":4,"status":0,"text_span":"","timer":0,"title_span":""}

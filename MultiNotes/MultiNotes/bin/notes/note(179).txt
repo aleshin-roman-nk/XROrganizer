@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":1,"date":1608272519677,"datemod":1608272589049,"gdid":"1O1HEvOWbkSjO_GsUHlLmjSoV-W9wzWET","id":60,"notetxt":"Писать программу как делать, объем что делать. ","pass":false,"sellist":4,"status":0,"timer":0}

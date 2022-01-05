@@ -1,1 +1,0 @@
-{"boardid":"1gWlILSfGAIX975Y-NAcUeH8hIprtNH7h","color":1,"date":1612533658618,"datemod":1612533700819,"gdid":"19dLt7gMc0i33kNY6foD3EBCFgVpwcU0R","id":135,"notetxt":"Очень важно изучая пересказывать, изучать, чтобы мог объяснить, как на экзамене. ","pass":false,"sellist":2,"status":0,"timer":0}

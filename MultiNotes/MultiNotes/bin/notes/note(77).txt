@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1612673974040,"datemod":1612674014828,"gdid":"14Y_8ALyITJxlCGxH183tU4uIuirjVYfk","id":153,"notetxt":"Одну и ту же группу слов, которые я хочу ввести в свой рабочий словарь, применять сразу же много раз. ","pass":false,"sellist":7,"status":0,"timer":0}

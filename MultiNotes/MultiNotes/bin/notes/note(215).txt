@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":1,"date":1607007974188,"datemod":1607008016346,"gdid":"1UybeAyW3cplL6pbCrzofVTxwLqR0iCka","id":21,"notetxt":"Подсчёт часов в месяц + банк задач \u003d прогнозируемый результат","pass":false,"sellist":1,"status":0,"timer":0}

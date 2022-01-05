@@ -1,1 +1,0 @@
-{"boardid":"1gWlILSfGAIX975Y-NAcUeH8hIprtNH7h","color":1,"date":1607963165761,"datemod":1607963191838,"gdid":"1-dFTdF3VtpHnBJQna69YNXPALyr4sfnR","id":58,"notetxt":"Сначала порисовать игру потом программировать кишки. ","pass":false,"sellist":4,"status":0,"timer":0}

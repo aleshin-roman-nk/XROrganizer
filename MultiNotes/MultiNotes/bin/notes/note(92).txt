@@ -1,1 +1,0 @@
-{"boardid":"1Id5gRUMo3WKPl6EYbqacuZIcoEjpiBf7","color":1,"date":1612594383588,"datemod":1612594514081,"gdid":"1SpXcBwUvXFXSc6V5Hx3pZeGbUwSxEEdJ","id":138,"notetxt":"Создать папку в которой буду составлять рассказ о себе и своих проектах и достижениях. И выражать их на англ. Это задача банка. Папка называется getting_job","pass":false,"sellist":4,"status":0,"timer":0}

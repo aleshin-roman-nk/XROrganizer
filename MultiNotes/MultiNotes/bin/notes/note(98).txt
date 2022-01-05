@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1612525480774,"datemod":1612525559678,"gdid":"1i-C6HryD50Mx-4-fxIcNLsiNUWyc-eK9","id":132,"notetxt":"Переделать ту программку, чтобы группы были недельные. И Тут же учить и применять новые слова. ","pass":false,"sellist":4,"status":0,"timer":0}

@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":2,"date":1614775015854,"datemod":1614775106355,"gdid":"17PiQ01R3FDYeeWgX98mBdg2yqgzxQ4Km","id":206,"notetxt":"Читая и изучая размышлять на этом языке, то есть ","pass":false,"sellist":6,"status":0,"text_span":"","timer":0,"title_span":""}

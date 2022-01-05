@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":1,"date":1612534019439,"datemod":1612534056147,"gdid":"14jMOqVySg41tfE_D6Ep3MKRUaneD1W7C","id":136,"notetxt":"Пробовать такие упражнения, рассказывать на русском языке изучая статьи на англ. ","pass":false,"sellist":3,"status":0,"timer":0}

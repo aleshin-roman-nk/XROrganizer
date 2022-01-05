@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":1,"date":1607957781256,"datemod":1607957871261,"gdid":"1XBzpAztqqxidcDOkWWfqp7zvIT6XN9f_","id":52,"notetxt":"Технологическая карта для моих ежедневных задач.\nСтек ежедневных задачек по программированию. Проработать решение а, б, в.... ","pass":false,"sellist":2,"status":0,"timer":0}

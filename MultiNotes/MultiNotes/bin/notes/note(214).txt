@@ -1,1 +1,0 @@
-{"boardid":"1Ipp7m1QhjZPL90THnSdYAp0ObNGKK3V0","color":1,"date":1607008025965,"datemod":1607008055095,"gdid":"1pqiT6HMOvNJLRJ_F8z3E6o_8mGRQZXGW","id":22,"notetxt":"Банк задач просто, раскиданный по категориям","pass":false,"sellist":0,"status":0,"timer":0}

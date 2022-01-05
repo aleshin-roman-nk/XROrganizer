@@ -1,1 +1,0 @@
-{"boardid":"1gWlILSfGAIX975Y-NAcUeH8hIprtNH7h","color":0,"date":1611134702922,"datemod":1611134749221,"gdid":"1HknjVTHkyz-4VkE6VHlAj60dtkdmr4g4","id":100,"notetxt":"Сделать коллекцию цветов для моих приложений. Тёмные цвета, компонент, источник палитры. ","pass":false,"sellist":1,"status":0,"timer":0}

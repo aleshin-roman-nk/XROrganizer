@@ -1,1 +1,0 @@
-{"boardid":"1mv1OOz_zQDGdPvuUpJQgJWPUTQdhfQEu","color":6,"date":1614136429348,"datemod":1614136465757,"gdid":"1iaWcYscK34dtGYrKjweKkfAL7scQK9MA","id":199,"notetxt":"Очень хорошие упражнения это русские предложения выражать в изучаемой языке. ","pass":false,"sellist":4,"status":0,"text_span":"","timer":0,"title_span":""}

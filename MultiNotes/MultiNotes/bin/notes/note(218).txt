@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1606813810513,"datemod":1606813833761,"gdid":"1RTWDA7s_UDxK02Yzm61y-lFj3C2HfFop","id":17,"notetxt":"Взять 5 слов и использовать их целый день. ","pass":false,"sellist":5,"status":0,"timer":0}

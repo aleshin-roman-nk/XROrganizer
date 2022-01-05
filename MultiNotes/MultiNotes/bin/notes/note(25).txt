@@ -1,1 +1,0 @@
-{"boardid":"1mv1OOz_zQDGdPvuUpJQgJWPUTQdhfQEu","color":2,"date":1614156516180,"datemod":1614156596758,"gdid":"1IVy5Zn6Wi0rckAT46mNyrW7WyJdrTy6j","id":203,"notetxt":"Я читаю больше, слушаю меньше, использую ещё меньше. Вот и все сходится по нагрузочной. ","pass":false,"sellist":2,"status":0,"text_span":"","timer":0,"title_span":""}

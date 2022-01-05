@@ -1,1 +1,0 @@
-{"boardid":"1gWlILSfGAIX975Y-NAcUeH8hIprtNH7h","color":2,"date":1614773516273,"datemod":1614773794215,"gdid":"1WqkvZKhJvbwOqwZjTPDMRUD0g_aVFYj6","id":204,"notetxt":"Порисовать алгоритм начала работы UI. Серьёзно относиться с бумагой и ручкой на черновике вести разработку. ","pass":false,"sellist":6,"status":0,"text_span":"","timer":0,"title_span":""}

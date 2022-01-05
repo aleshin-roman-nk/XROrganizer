@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":2,"date":1607445901500,"datemod":1607445973856,"gdid":"1SLFFn6p1mzZRckQxrU2tSXaC_CO_QfUG","id":35,"notetxt":"К концу дня должна продукция в виде выученных слов, фраз, предложений с порядком слов. Составленный предложений. Учится применять слова, фразы, конструкции. ","pass":false,"sellist":3,"status":0,"timer":0}

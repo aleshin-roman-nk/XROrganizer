@@ -1,1 +1,0 @@
-{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":1,"date":1612618022141,"datemod":1612618048500,"gdid":"1bQHf5WSL3-GL9x2U2o4PAO2Bs5B3zwbo","id":145,"notetxt":"Планировщик задач. Мне должно быть легко приступать к новому дню. ","pass":false,"sellist":1,"status":0,"timer":0}

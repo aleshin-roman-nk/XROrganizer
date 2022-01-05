@@ -1,1 +1,0 @@
-{"boardid":"1gWlILSfGAIX975Y-NAcUeH8hIprtNH7h","color":2,"date":1607369332550,"datemod":1607369365776,"gdid":"1TDqklv9CmnPT4bIS-jklFye4K97FBwt2","id":28,"notetxt":"Название объектов существительное. Методы глаголы. ","pass":false,"sellist":7,"status":0,"timer":0}

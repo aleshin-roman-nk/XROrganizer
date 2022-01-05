@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":2,"date":1607841776140,"datemod":1607841870570,"gdid":"1QQm_6AeIGukk5p8a0zD3p8lAS_Mx1GRx","id":47,"notetxt":"Изучать видео о паттернах, сайты часто вопросы по .net. И пересказывать, письменные ответы. Писать статьи с развёрнутым раскрытие темы. ","pass":false,"sellist":0,"status":0,"timer":0}

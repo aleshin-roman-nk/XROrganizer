@@ -1,1 +1,0 @@
-{"boardid":"10OtdeB-NdXWT9QZOnmHHaXkhBVs_WaQ0","color":5,"date":1606758342565,"datemod":1606758433099,"gdid":"1mItU8cdmJe4BabYUxE4Bv0rapjrtfyY4","id":15,"notetxt":"Работая с фильмом, статьёй, выписывать слова и учить их данном контексте. Придумать несколько ситуаций когда я бы применил это. Придумывать диалоги, писать изложения. ","pass":false,"sellist":7,"status":0,"timer":0}

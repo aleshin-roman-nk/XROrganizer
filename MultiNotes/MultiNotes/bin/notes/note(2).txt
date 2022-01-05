@@ -1,1 +1,0 @@
-{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":2,"date":1615092444033,"datemod":1615092519908,"gdid":"1YMCJi12c3R72GKjCqTaJPxRtl_lAqiEy","id":222,"notetxt":"Мне очень нравится оформлять свои исследования в статьи, документы. Хорошо структурированно. ","pass":false,"sellist":5,"status":0,"text_span":"","timer":0,"title_span":""}

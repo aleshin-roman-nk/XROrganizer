@@ -1,1 +1,0 @@
-{"boardid":"1SAhUaIm2w7JbYriXeE_qinrzfvHu5q_L","color":2,"date":1607790449715,"datemod":1607790524647,"gdid":"1BWuoQY9zZsXarp1wN8ey49PWUbY55gee","id":38,"notetxt":"Брать картинку, какую то тему. Записывать слова и фразы, связанные с этой ситуацией. Затем составлять предложения с использованием полученного набора. ","pass":false,"sellist":5,"status":0,"timer":0}

@@ -1,1 +1,0 @@
-{"boardid":"185aYG5569EC0k_CQzfsNV3ONYSTVuHzA","color":1,"date":1612617857735,"datemod":1612617882747,"gdid":"1rZFbERphZWGd52CiFg3QGgp0VB9oOx9q","id":144,"notetxt":"Центральный маршрутизатор идей, мыслей, задач. ","pass":false,"sellist":4,"status":0,"timer":0}
