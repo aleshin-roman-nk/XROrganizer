@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Shared.UI.tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,18 @@ using System.Windows.Forms;
 
 namespace Shared.UI.UserControls
 {
+
+	/*
+	 * Black theme:
+	 * backgroung = 37; 37; 38
+	 * text = 219; 164; 14
+	 * 
+	 * orange theme:
+	 * backgroung = #4B5A20
+	 * text = #DBA40E
+	 * 
+	 */
+
 	public partial class DescriptionUC : UserControl, IDescriptionView
 	{
 		SavingObserver savingObserver;
@@ -26,35 +39,6 @@ namespace Shared.UI.UserControls
 			savingObserver = new SavingObserver();
 
 			savingObserver.Indicator = lblSaved;
-		}
-
-		private class SavingObserver
-		{
-			bool _savedValue = false;
-
-			public Control Indicator { get; set; }
-			public bool Saved
-			{
-				get
-				{
-					return _savedValue;
-				}
-				set
-				{
-					_savedValue = value;
-
-					if (_savedValue)
-					{
-						Indicator.BackColor = Color.Green;
-						Indicator.Text = "[OK]";
-					}
-					else
-					{
-						Indicator.BackColor = Color.Red;
-						Indicator.Text = "[X]";
-					}
-				}
-			}
 		}
 
 		private void rtxNodeDescription_TextChanged(object sender, EventArgs e)

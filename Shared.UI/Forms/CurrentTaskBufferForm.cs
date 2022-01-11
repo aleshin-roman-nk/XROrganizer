@@ -76,10 +76,22 @@ namespace Shared.UI.Forms
 			Close();
 		}
 
+
+		BindingSource bs;
 		public void Display(IEnumerable<BufferTask> bufferTasks)
 		{
-			dataGridView1.DataSource = new BindingSource { DataSource = bufferTasks };
+			bs = new BindingSource();
+			bs.CurrentItemChanged += Bs_CurrentItemChanged;
+
+			dataGridView1.DataSource = bs;
+
+			bs.DataSource = bufferTasks;
 			ShowDialog();
+		}
+
+		private void Bs_CurrentItemChanged(object sender, EventArgs e)
+		{
+			richTextBox1.Text = (bs.Current as BufferTask).descr;
 		}
 
 		private void dataGridView1_KeyDown(object sender, KeyEventArgs e)

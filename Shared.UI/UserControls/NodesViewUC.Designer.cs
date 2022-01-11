@@ -86,6 +86,7 @@ namespace Shared.UI.UserControls
 			this.nodeGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.nodeGrid.Size = new System.Drawing.Size(999, 540);
 			this.nodeGrid.TabIndex = 13;
+			this.nodeGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.nodeGrid_CellMouseDoubleClick);
 			this.nodeGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.itemsGrid_KeyDown);
 			// 
 			// colId
@@ -94,6 +95,7 @@ namespace Shared.UI.UserControls
 			this.colId.HeaderText = "#";
 			this.colId.Name = "colId";
 			this.colId.ReadOnly = true;
+			this.colId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colId.Width = 70;
 			// 
 			// name
@@ -102,6 +104,7 @@ namespace Shared.UI.UserControls
 			this.name.HeaderText = "name";
 			this.name.Name = "name";
 			this.name.ReadOnly = true;
+			this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.name.Width = 200;
 			// 
 			// NTypeString
@@ -110,6 +113,7 @@ namespace Shared.UI.UserControls
 			this.NTypeString.HeaderText = "type";
 			this.NTypeString.Name = "NTypeString";
 			this.NTypeString.ReadOnly = true;
+			this.NTypeString.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.NTypeString.Width = 50;
 			// 
 			// cldate
@@ -118,6 +122,7 @@ namespace Shared.UI.UserControls
 			this.cldate.HeaderText = "date";
 			this.cldate.Name = "cldate";
 			this.cldate.ReadOnly = true;
+			this.cldate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.cldate.Width = 150;
 			// 
 			// description
@@ -126,6 +131,7 @@ namespace Shared.UI.UserControls
 			this.description.HeaderText = "definition";
 			this.description.Name = "description";
 			this.description.ReadOnly = true;
+			this.description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.description.Width = 300;
 			// 
 			// txtDirectoryFullName

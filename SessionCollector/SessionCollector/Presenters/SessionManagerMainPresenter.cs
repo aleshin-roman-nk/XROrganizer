@@ -31,6 +31,19 @@ namespace SessionCollector
 		{
 			_view.ShowWindow();
 		}
+
+		public void CreateSession(FTask t)
+		{
+			OSession session = new OSession { Owner = t, NodeId = t.id};
+
+			session.Start = _view.CurrentDateTime;
+			session.ProvidedSeconds = 3600;
+
+			_sessionService.Repo.Save(session);
+
+			displaySessions(_view.CurrentDateTime);
+		}
+
 		public void CloseApplication()
 		{
 			//if (_singleSessionTicker.IsRunning)
@@ -53,7 +66,7 @@ namespace SessionCollector
 			_view.CreateSession += _view_CreateSession;
 			_view.DateChanged += _view_DateChanged;
 			_view.OrderAndAlign += _view_OrderAndAlign;
-			_view.EditSession += _view_EditSession;
+			_view.StartSession += _view_StartSession;
 			_view.DeleteSession += _view_DeleteSession;
 			_view.StartSessionTick += _view_StartSessionTick;
 			_view.ShowStata += _view_ShowStata;
@@ -76,7 +89,7 @@ namespace SessionCollector
 			_view.CreateSession -= _view_CreateSession;
 			_view.DateChanged -= _view_DateChanged;
 			_view.OrderAndAlign -= _view_OrderAndAlign;
-			_view.EditSession -= _view_EditSession;
+			_view.StartSession -= _view_StartSession;
 			_view.DeleteSession -= _view_DeleteSession;
 			_view.StartSessionTick -= _view_StartSessionTick;
 			_view.ShowStata -= _view_ShowStata;
@@ -186,7 +199,7 @@ namespace SessionCollector
 			}
 		}
 
-		private void _view_EditSession(object sender, OSession e)
+		private void _view_StartSession(object sender, OSession e)
 		{
 			if (_sessionview.IsWorking)
 			{

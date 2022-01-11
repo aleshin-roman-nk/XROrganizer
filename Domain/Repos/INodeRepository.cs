@@ -9,6 +9,8 @@ namespace Domain.Repos
 		INode Create(INode owner, INode n);
 		void Delete(INode o);
 		IEnumerable<INode> GetAll(INode owner);
+		IEnumerable<INode> GetAllExcludeCompletedTask(INode owner);
+		IEnumerable<FTask> GetCompletedTasks(/*period parameter*/);
 		IEnumerable<INode> GetAll();
 		INode Get(int id);
 		void SaveRange(IEnumerable<INode> notes);

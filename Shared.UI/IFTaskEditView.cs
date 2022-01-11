@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Shared.UI
 {
-	public interface IFTaskEditView
+	public interface IFTaskEditView: IEntityInstanceWindow<FTask>
 	{
-		void Go(FTask o, Action<ViewResponse<FTask>> resultHandler);
+		void Go(FTask o, Action<ViewResponse<FTask>> workCompletedHandlr, Action<FTask> saveTaskHndlr);
 		void AddProperty(string name, string value);
 	}
 }

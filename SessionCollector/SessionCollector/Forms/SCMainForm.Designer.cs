@@ -97,7 +97,7 @@ namespace SessionCollector
 			this.dgvSessions.RowHeadersVisible = false;
 			this.dgvSessions.RowTemplate.Height = 28;
 			this.dgvSessions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvSessions.Size = new System.Drawing.Size(921, 287);
+			this.dgvSessions.Size = new System.Drawing.Size(636, 287);
 			this.dgvSessions.TabIndex = 0;
 			this.dgvSessions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvSessions_CellFormatting);
 			this.dgvSessions.Paint += new System.Windows.Forms.PaintEventHandler(this.dgvSessions_Paint);
@@ -127,7 +127,7 @@ namespace SessionCollector
 			this.txtDescription.Location = new System.Drawing.Point(3, 3);
 			this.txtDescription.Name = "txtDescription";
 			this.txtDescription.ReadOnly = true;
-			this.txtDescription.Size = new System.Drawing.Size(913, 295);
+			this.txtDescription.Size = new System.Drawing.Size(628, 182);
 			this.txtDescription.TabIndex = 6;
 			this.txtDescription.Text = "";
 			// 
@@ -160,7 +160,7 @@ namespace SessionCollector
 			this.panel1.Controls.Add(this.txtDescription);
 			this.panel1.Location = new System.Drawing.Point(404, 364);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(921, 303);
+			this.panel1.Size = new System.Drawing.Size(636, 190);
 			this.panel1.TabIndex = 10;
 			this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
 			// 
@@ -240,7 +240,7 @@ namespace SessionCollector
 			this.btnKickNextDay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
 			this.btnKickNextDay.FlatAppearance.BorderSize = 0;
 			this.btnKickNextDay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnKickNextDay.Location = new System.Drawing.Point(1267, 12);
+			this.btnKickNextDay.Location = new System.Drawing.Point(890, 6);
 			this.btnKickNextDay.Name = "btnKickNextDay";
 			this.btnKickNextDay.Size = new System.Drawing.Size(28, 28);
 			this.btnKickNextDay.TabIndex = 18;
@@ -253,7 +253,7 @@ namespace SessionCollector
 			this.btnKickPrevDay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
 			this.btnKickPrevDay.FlatAppearance.BorderSize = 0;
 			this.btnKickPrevDay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnKickPrevDay.Location = new System.Drawing.Point(1233, 12);
+			this.btnKickPrevDay.Location = new System.Drawing.Point(856, 6);
 			this.btnKickPrevDay.Name = "btnKickPrevDay";
 			this.btnKickPrevDay.Size = new System.Drawing.Size(28, 28);
 			this.btnKickPrevDay.TabIndex = 19;
@@ -266,7 +266,7 @@ namespace SessionCollector
 			this.btnHideCompletedSessions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
 			this.btnHideCompletedSessions.FlatAppearance.BorderSize = 0;
 			this.btnHideCompletedSessions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnHideCompletedSessions.Location = new System.Drawing.Point(1199, 12);
+			this.btnHideCompletedSessions.Location = new System.Drawing.Point(822, 6);
 			this.btnHideCompletedSessions.Name = "btnHideCompletedSessions";
 			this.btnHideCompletedSessions.Size = new System.Drawing.Size(28, 28);
 			this.btnHideCompletedSessions.TabIndex = 20;
@@ -279,7 +279,7 @@ namespace SessionCollector
 			this.cName.HeaderText = "Name";
 			this.cName.Name = "cName";
 			this.cName.ReadOnly = true;
-			this.cName.Width = 500;
+			this.cName.Width = 300;
 			// 
 			// TotalMins
 			// 
@@ -310,7 +310,7 @@ namespace SessionCollector
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-			this.ClientSize = new System.Drawing.Size(1333, 674);
+			this.ClientSize = new System.Drawing.Size(1048, 561);
 			this.Controls.Add(this.btnHideCompletedSessions);
 			this.Controls.Add(this.btnKickPrevDay);
 			this.Controls.Add(this.btnKickNextDay);

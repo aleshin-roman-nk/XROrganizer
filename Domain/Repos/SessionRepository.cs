@@ -1,5 +1,6 @@
 ﻿using Domain.DBContext;
 using Domain.Entities;
+using Domain.Repos.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,10 +11,12 @@ namespace Domain.Repos
 	public class SessionRepository: ISessionRepository
 	{
 		IAppDataContextFactory _contextFactory;
+		ToolRepo _toolRepo;
 
 		public SessionRepository(IAppDataContextFactory contextFactory)
 		{
 			_contextFactory = contextFactory;
+			_toolRepo = new ToolRepo(contextFactory);
 		}
 
 		public void Delete(OSession e)
@@ -32,8 +35,13 @@ namespace Domain.Repos
 
 			using (var db = _contextFactory.Create())
 			{
-				return db.Sessions.Include(x => x.Owner).Where(x => x.Start >= dt1 && x.Start < dt2)
+				var res = db.Sessions.Include(x => x.Owner).Where(x => x.Start >= dt1 && x.Start < dt2)
 					.OrderBy(x => x.Start).ToList();
+
+				foreach (var item in res)
+					item.Owner.path = _toolRepo.getPathOf(item.Owner, db);
+
+				return res;
 			}
 		}
 

@@ -51,7 +51,8 @@ namespace Services.Nodes
 			if (own.type != NType._sys_root_dir)
 				res.Add(Dir.ExitTopDir);
 
-			var i = _repo.GetAll(own);
+			//var i = _repo.GetAll(own);
+			var i = _repo.GetAllExcludeCompletedTask(own);
 
 			res.AddRange(i.Where(x => x.type == NType.Dir).OrderBy(x=>x.name).ToList());
 			res.AddRange(i.Where(x => x.type != NType.Dir).OrderByDescending(x=>x.date).ToList());
@@ -62,7 +63,9 @@ namespace Services.Nodes
 		public void MoveNodesToDirectory(Dir dir, IEnumerable<INode> nodes)
 		{
 			foreach (var item in nodes)
+			{
 				item.owner_id = dir.id;
+			}
 
 			_repo.SaveRange(nodes);
 
@@ -102,5 +105,9 @@ namespace Services.Nodes
 			_navigator.Enter(n);
 		}
 
+		public IEnumerable<FTask> GetCompletedTasks()
+		{
+			return _repo.GetCompletedTasks().OrderByDescending(x => x.completed_date);
+		}
 	}
 }

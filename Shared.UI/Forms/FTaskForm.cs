@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Shared.UI;
+using Shared.UI.tools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,14 +15,32 @@ using xorg.Tools;
 
 namespace Shared.UI.Forms
 {
+
+/*
+ * Black theme:
+ * backgroung = 37; 37; 38
+ * text = 219; 164; 14
+ * 
+ * orange theme:
+ * backgroung = #4B5A20
+ * text = #DBA40E
+ * 
+ */
+
 	public partial class FTaskForm : Form, IFTaskEditView
 	{
+		SavingObserver savingObserver;
+
 		FTask _ent = null;
 		FTask _origin = null;
 
 		public FTaskForm()
 		{
 			InitializeComponent();
+
+			savingObserver = new SavingObserver();
+			savingObserver.Indicator = lblSaved;
+			savingObserver.Saved = true;
 
 			typeof(Control).GetProperty("ResizeRedraw", BindingFlags.NonPublic | BindingFlags.Instance)
 				.SetValue(panel1, true, null);
@@ -103,13 +122,18 @@ namespace Shared.UI.Forms
 		{
 			if(MessageBox.Show("Close the task?", "TASK", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
 				isCompleted = !isCompleted;
+
+			if (isCompleted)
+				_ent.completed_date = DateTime.Now;
 		}
 
 		Action<ViewResponse<FTask>> _resultHandler;
+		Action<FTask> _saveTaskHndlr;
 
-		public void Go(FTask o, Action<ViewResponse<FTask>> resultHandler)
+		public void Go(FTask o, Action<ViewResponse<FTask>> resultHandler, Action<FTask> saveTaskHndlr)
 		{
 			_resultHandler = resultHandler;
+			_saveTaskHndlr = saveTaskHndlr;
 			_set(o);
 			Show();
 		}
@@ -155,6 +179,21 @@ namespace Shared.UI.Forms
 		{
 			var p = sender as Panel;
 			ControlPaint.DrawBorder(e.Graphics, p.ClientRectangle, Color.Yellow, ButtonBorderStyle.Solid);
+		}
+
+		private void richTextBoxDescription_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.S && e.Control)
+			{
+				_saveTaskHndlr(_get());
+				savingObserver.Saved = true;
+				e.Handled = true;
+			}
+		}
+
+		private void richTextBoxDescription_TextChanged(object sender, EventArgs e)
+		{
+			savingObserver.Saved = false;
 		}
 	}
 }

@@ -41,7 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ABus.cs" />
+    <Compile Include="IEntityInstanceWindow.cs" />
+    <Compile Include="OpenObjectManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingleSessionBusMarker.cs" />
+    <Compile Include="WorkingSessionCapsule.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{0D7F46D1-2C0C-42FE-8FED-38A4DA845CC4}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.UI\Shared.UI.csproj">
+      <Project>{C886C63E-000F-4B56-8371-355056455DDB}</Project>
+      <Name>Shared.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

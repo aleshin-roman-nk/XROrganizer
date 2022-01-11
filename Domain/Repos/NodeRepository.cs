@@ -25,7 +25,7 @@ namespace Domain.Repos
 			using (var db = _factory.Create())
 			{
 				db.Entry(n).State = n.id == 0 ? EntityState.Added : EntityState.Modified;
-				n.path = _toolRepo.GetFullPathOf(n);
+				n.path = _toolRepo.GetPathOf(n);
 				db.SaveChanges();
 			}
 		}
@@ -44,7 +44,7 @@ namespace Domain.Repos
 			using (var db = _factory.Create())
 			{
 				n.owner_id = own.id;
-				n.path = _toolRepo.GetFullPathOf(n);
+				n.path = _toolRepo.GetPathOf(n);
 				db.Entry(n).State = EntityState.Added;
 				db.SaveChanges();
 				return n;
@@ -76,10 +76,46 @@ namespace Domain.Repos
 
 		public IEnumerable<INode> GetAll(INode owner)
 		{
+			return _getNodes(owner, true);
+
+			//using (var db = _factory.Create())
+			//{
+			//	// пусть сервисы сортирую как им надо
+			//	var items = db.Nodes.Where(x => x.owner_id == owner.id).ToList();
+
+			//	var path = _toolRepo.getFullPathOf(owner, db);
+
+			//	foreach (var item in items)
+			//	{
+			//		item.path = path;
+			//	}
+
+			//	return items;
+			//}
+		}
+
+		public IEnumerable<INode> GetAllExcludeCompletedTask(INode owner)
+		{
+			return _getNodes(owner, false);
+		}
+
+		private IEnumerable<INode> _getNodes(INode owner, bool loadCompleted)
+		{
 			using (var db = _factory.Create())
 			{
+				IEnumerable<INode> items;
+
 				// пусть сервисы сортирую как им надо
-				var items = db.Nodes.Where(x => x.owner_id == owner.id).ToList();
+				if (loadCompleted)
+					items = db.Nodes.Where(x => x.owner_id == owner.id).ToList();
+				else
+					items = db.Nodes.Where(x => x.owner_id == owner.id && ( (x is FTask) ? ((x as FTask).IsCompleted == false) : (true) )).ToList();
+
+				var path = _toolRepo.getFullPathOf(owner, db);
+
+				foreach (var item in items)
+					item.path = path;
+
 				return items;
 			}
 		}
@@ -125,6 +161,19 @@ namespace Domain.Repos
 			{
 				return db.Nodes.FirstOrDefault(x => x.id == id);
 			}
+		}
+
+		public IEnumerable<FTask> GetCompletedTasks(/*period parameter*/)
+		{
+			using (var db = _factory.Create())
+			{
+				var res = db.Tasks.Where(x => x.IsCompleted /* && period parameter*/).ToList();
+
+				foreach (var item in res)
+					item.path = _toolRepo.getPathOf(item, db);
+
+				return res;
+			};
 		}
 	}
 }

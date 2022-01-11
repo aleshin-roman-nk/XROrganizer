@@ -19,6 +19,7 @@ namespace TaskBank
 		public int height => Height;
 
 		int _openedTaskCount = 0;
+		int _nodesInClipboard = 0;
 		public int OpenedTasksCout
 		{
 			get
@@ -29,6 +30,19 @@ namespace TaskBank
 			{
 				_openedTaskCount = value;
 				txtOpenedTaskCount.Text = _openedTaskCount.ToString();
+			}
+		}
+
+		public int ClipboardNodesCount
+		{
+			get
+			{
+				return _nodesInClipboard;
+			}
+			set
+			{
+				_nodesInClipboard = value;
+				setBufferState(_nodesInClipboard);
 			}
 		}
 
@@ -46,6 +60,7 @@ namespace TaskBank
 		public event EventHandler StartCurrentBuffer;
 		public event EventHandler StartSessionCollector;
 		public event EventHandler StartWindowCompletedNodes;
+		public event EventHandler CreateSession;
 
 		void setBufferState(int items_cnt)
 		{
@@ -78,19 +93,6 @@ namespace TaskBank
 		//	Delete?.Invoke(this, _currentNode);
 		//}
 
-		private void btnTimePoint_Click(object sender, EventArgs e)
-		{
-			var res = $">>> {DateTime.Now.ToString("dd-MM-yyyy HH:mm")}";
-			try
-			{
-				Clipboard.Clear();
-				Clipboard.SetText(res);
-			}
-			catch (Exception)
-			{
-
-			}
-		}
 
 		private void btnShowDescr_Click(object sender, EventArgs e)
 		{
@@ -102,22 +104,33 @@ namespace TaskBank
 			if(e.KeyCode == Keys.Delete)
 			{
 				DeleteNode?.Invoke(this, EventArgs.Empty);
+				e.Handled = true;
+			}
+			else if(e.KeyCode == Keys.F7)
+			{
+				CreateNode?.Invoke(this, EventArgs.Empty);
+				e.Handled = true;
+			}
+			else if(e.KeyCode == Keys.F2)
+			{
+				RenameNode?.Invoke(this, EventArgs.Empty);
+				e.Handled = true;
 			}
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e)
 		{
-			DeleteNode?.Invoke(this, EventArgs.Empty);
+			
 		}
 
 		private void btnRename_Click(object sender, EventArgs e)
 		{
-			RenameNode?.Invoke(this, EventArgs.Empty);
+			
 		}
 
 		private void btnCreate_Click(object sender, EventArgs e)
 		{
-			CreateNode?.Invoke(this, EventArgs.Empty);
+			
 		}
 
 		private void btnShowCurentBuffer_Click(object sender, EventArgs e)
@@ -133,6 +146,69 @@ namespace TaskBank
 		private void btnHideCompleted_Click(object sender, EventArgs e)
 		{
 			StartWindowCompletedNodes?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void btnTimeTag_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btntsCreate_Click(object sender, EventArgs e)
+		{
+			CreateNode?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void btntsRename_Click(object sender, EventArgs e)
+		{
+			RenameNode?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void btntsDelete_Click(object sender, EventArgs e)
+		{
+			DeleteNode?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void btntsTimeTag_Click(object sender, EventArgs e)
+		{
+			var res = $">>> {DateTime.Now.ToString("dd-MM-yyyy HH:mm")}";
+			try
+			{
+				Clipboard.Clear();
+				Clipboard.SetText(res);
+			}
+			catch (Exception)
+			{
+
+			}
+		}
+
+		private void btntsTaskTag_Click(object sender, EventArgs e)
+		{
+			var i = NodesView.SelectedNodes.SingleOrDefault();
+
+			if (i == null) return;
+
+			string res = $"{i.path}#{i.id}";
+
+			try
+			{
+				Clipboard.Clear();
+				Clipboard.SetText(res);
+			}
+			catch (Exception)
+			{
+
+			}
+		}
+
+		private void btntsCreateSession_Click(object sender, EventArgs e)
+		{
+			CreateSession?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

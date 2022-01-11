@@ -61,7 +61,7 @@ namespace Shared.UI.UserControls
 			// rtxNodeDescription
 			// 
 			this.rtxNodeDescription.AcceptsTab = true;
-			this.rtxNodeDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+			this.rtxNodeDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(90)))), ((int)(((byte)(32)))));
 			this.rtxNodeDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.rtxNodeDescription.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.rtxNodeDescription.EnableAutoDragDrop = true;
@@ -91,7 +91,7 @@ namespace Shared.UI.UserControls
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(90)))), ((int)(((byte)(32)))));
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.lblSaved);
 			this.Controls.Add(this.label1);

@@ -40,12 +40,13 @@ namespace TaskBank
 		{
 			using (Mutex mutex = new Mutex(false, "Global\\" + appGuid))
 			{
+#if !DEBUG
 				if (!mutex.WaitOne(0, false))
 				{
 					MessageBox.Show("Task bank is already running");
 					return;
 				}
-
+#endif
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 
@@ -78,6 +79,7 @@ namespace TaskBank
 					.RegisterType<IFTaskEditView, FTaskForm>()
 					.RegisterType<IBufferTaskView, CurrentTaskBufferForm>()
 					.RegisterType<ISessionRepository, SessionRepository>()
+					.RegisterType<ICompletedTasksView, CompletedTasksForm>()
 					.RegisterInstance(container);
 
 				var presenter = container.Resolve<TaskBankMainPresenter>();

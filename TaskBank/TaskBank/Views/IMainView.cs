@@ -18,6 +18,8 @@ namespace TaskBank.Views
 		event EventHandler DeleteNode;
 		event EventHandler CreateNode;
 		event EventHandler RenameNode;
+		event EventHandler CreateSession;
 		int OpenedTasksCout { get; set; }
+		int ClipboardNodesCount { get; set; }
 	}
 }

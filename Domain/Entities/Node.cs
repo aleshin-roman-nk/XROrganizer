@@ -22,10 +22,10 @@ namespace Domain.Entities
 		public NType type => _type;
 		public virtual string name { get; set; }
 		public string definition { get; set; }
-		public string log { get; set; }
 		public DateTime? date { get; set; }
 		public bool CanHaveChildren => _canHaveChildren;
 		public string NTypeString { get { return type.ToString(); } }
+		[NotMapped]
 		public string path { get; set; }
 		public override bool Equals(object obj)
 		{

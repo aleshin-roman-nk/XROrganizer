@@ -64,6 +64,12 @@
     <Compile Include="Forms\ChooseDateForm.Designer.cs">
       <DependentUpon>ChooseDateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CompletedTasksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CompletedTasksForm.Designer.cs">
+      <DependentUpon>CompletedTasksForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CurrentTaskBufferForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,12 +89,14 @@
       <DependentUpon>NTypeChooseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IBufferTaskView.cs" />
+    <Compile Include="ICompletedTasksView.cs" />
     <Compile Include="IFTaskEditView.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="tools\SavingObserver.cs" />
     <Compile Include="UserControls\DataGridViewCustomizer.cs" />
     <Compile Include="UserControls\DescriptionUC.cs">
       <SubType>UserControl</SubType>
@@ -128,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChooseDateForm.resx">
       <DependentUpon>ChooseDateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompletedTasksForm.resx">
+      <DependentUpon>CompletedTasksForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CurrentTaskBufferForm.resx">
       <DependentUpon>CurrentTaskBufferForm.cs</DependentUpon>

@@ -24,6 +24,8 @@ namespace Domain.Entities
 		//public string tags { get; set; }
 		//public bool IsInCurrentBuffer { get; set; }
 
+		public DateTime completed_date { get; set; }
+
 		private string _name = null;
 
 		private string findNameTag(string input)

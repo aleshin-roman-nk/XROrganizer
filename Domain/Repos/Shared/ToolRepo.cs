@@ -18,7 +18,7 @@ namespace Domain.Repos.Shared
 			_factory = f;
 		}
 
-		public string getFullPathOf(INode n, AppData db)
+		public string getPathOf(INode n, AppData db)
 		{
 			List<string> nodes = new List<string>();
 
@@ -50,13 +50,19 @@ namespace Domain.Repos.Shared
 			return sb.ToString();
 		}
 
+		public string getFullPathOf(INode n, AppData db)
+		{
+			var res = getPathOf(n, db);
+			return $"{res}{n.name} \\ ";
+		}
+
 		public IEnumerable<INode> FetchPathsAndSave(IEnumerable<INode> nodes)
 		{
 			using (var db = _factory.Create())
 			{
 				foreach (var item in nodes)
 				{
-					item.path = getFullPathOf(item, db);
+					item.path = getPathOf(item, db);
 					//db.Entry(item).State = EntityState.Modified;
 				}
 
@@ -65,11 +71,11 @@ namespace Domain.Repos.Shared
 			}
 		}
 
-		public string GetFullPathOf(INode n)
+		public string GetPathOf(INode n)
 		{
 			using (var db = _factory.Create())
 			{
-				return getFullPathOf(n, db);
+				return getPathOf(n, db);
 			}
 		}
 	}

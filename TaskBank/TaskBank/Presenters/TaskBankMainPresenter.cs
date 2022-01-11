@@ -15,13 +15,11 @@ using xorg.Tools;
 
 namespace TaskBank.Presenters
 {
-	/*
-	 * It is the best project ever!!!
-	 * 
-	 */
 	public class TaskBankMainPresenter
 	{
 		List<INode> _openedNodes = new List<INode>();
+		List<INode> _clipboard = new List<INode>();
+
 
 		IUnityContainer _ioc;
 
@@ -45,6 +43,7 @@ namespace TaskBank.Presenters
 			_mainView.NodesView.ActivateNode += _nodesView_ActivateNode;
 			_mainView.NodesView.LeaveNode += _nodesView_LeaveNode;
 			_mainView.NodesView.CurrentNodeChanged += NodesView_CurrentNodeChanged;
+			_mainView.NodesView.Paste += NodesView_Paste;
 			_mainView.StartDesriptionForm += _mainView_StartDesriptionForm;
 			_mainView.StartCurrentBuffer += _mainView_StartCurrentBuffer;
 			_mainView.StartSessionCollector += _mainView_StartSessionCollector;
@@ -52,6 +51,8 @@ namespace TaskBank.Presenters
 			_mainView.CreateNode += _mainView_CreateNode;
 			_mainView.RenameNode += _mainView_RenameNode;
 			_mainView.DeleteNode += _mainView_DeleteNode;
+			_mainView.NodesView.SendNodesToClipboard += NodesView_SendNodesToClipboard;
+			_mainView.CreateSession += _mainView_CreateSession;
 
 			descriptionWindow.Save += DescView_Save;
 
@@ -60,11 +61,48 @@ namespace TaskBank.Presenters
 			update();
 		}
 
+		private void _mainView_CreateSession(object sender, EventArgs e)
+		{
+			if(_sessionManagerMainPresenter != null)
+			{
+				if(_sessionManagerMainPresenter.IsRunning)
+				{
+					var i = _mainView.NodesView.SelectedNodes.SingleOrDefault();
+					if(i != null)
+					{
+						if(i is FTask)
+						{
+							_sessionManagerMainPresenter.CreateSession((FTask)i);
+						}
+					}
+				}
+			}
+		}
+
+		private void NodesView_Paste(object sender, EventArgs e)
+		{
+			_service.MoveNodesToDirectory(_service.CurrentOwner as Dir, _clipboard);
+
+			_clipboard.Clear();
+			_mainView.ClipboardNodesCount = _clipboard.Count();
+		}
+
+		private void NodesView_SendNodesToClipboard(object sender, IEnumerable<INode> e)
+		{
+			_clipboard.Clear();
+			_clipboard.AddRange(e);
+
+			_mainView.ClipboardNodesCount = _clipboard.Count();
+		}
+
 		private void _mainView_StartWindowCompletedNodes(object sender, EventArgs e)
 		{
 			//var _node_repo = _ioc.Resolve<INodeRepository>();
 			//var items = _node_repo.GetAll();
 			//_node_repo.FetchPathsAndSave(items);
+
+			var frm = _ioc.Resolve<ICompletedTasksView>();
+			frm.Display(_service.GetCompletedTasks());
 		}
 
 		private void _mainView_StartSessionCollector(object sender, EventArgs e)
@@ -125,7 +163,18 @@ namespace TaskBank.Presenters
 
 		private void _mainView_RenameNode(object sender, EventArgs e)
 		{
-			
+			var i = _mainView.NodesView.SelectedNodes.FirstOrDefault();
+			if (i.type < 0) return;
+
+			var new_name = _dialogs.Show("Rename", i.name);
+
+			if (string.IsNullOrEmpty( new_name) == false)
+			{
+				i.name = new_name;
+
+				_service.Save(i);
+				update();
+			}
 		}
 
 		private void _mainView_CreateNode(object sender, EventArgs e)
@@ -217,13 +266,18 @@ namespace TaskBank.Presenters
 				//frm.AddProperty("node_full_path", _service.getFullPath(n));
 				//frm.Go(n as FTask, handleFTaskEdirEnd);
 
-				frm.Go(n as FTask, (x) =>
+				frm.Go(n as FTask,
+				(x) =>
 				{
 					if (x.Ok)
 						_service.Save(x.Data);
 
 					_openedNodes.Remove(x.Data);
 					_mainView.OpenedTasksCout = _openedNodes.Count;
+				},
+				(y) =>
+				{
+					_service.Save(y);
 				});
 
 				_mainView.OpenedTasksCout = _openedNodes.Count;
@@ -232,14 +286,5 @@ namespace TaskBank.Presenters
 
 			return false;
 		}
-
-		//private void handleFTaskEdirEnd(ViewResponse<FTask> r)
-		//{
-		//	if (r.Ok)
-		//		_service.Save(r.Data);
-
-		//	_openedNodes.Remove(r.Data);
-		//	_mainView.OpenedTasksCout = _openedNodes.Count;
-		//}
 	}
 }

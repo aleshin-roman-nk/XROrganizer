@@ -47,14 +47,7 @@ namespace Domain.Entities
 				return Owner == null ? "---" : Owner.name;
 			}
 		}
-		public string ShorName
-		{
-			get
-			{
-				if (Description.Length < 10) return Description;
-				return Description.Substring(0, 10);
-			}
-		}
+
 		public DateTime Finish
 		{
 			get

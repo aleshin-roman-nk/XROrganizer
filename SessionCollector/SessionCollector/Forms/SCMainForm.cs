@@ -40,7 +40,7 @@ namespace SessionCollector
 		public event EventHandler<DateTime> CreateSession;
 		public event EventHandler<DateTime> DateChanged;
 		public event EventHandler<DateTime> OrderAndAlign;
-		public event EventHandler<OSession> EditSession;
+		public event EventHandler<OSession> StartSession;
 		public event EventHandler<OSession> DeleteSession;
 		public event EventHandler<OSession> StartSessionTick;
 		public event EventHandler<DateTime> ShowStata;
@@ -127,7 +127,7 @@ namespace SessionCollector
 			}
 			else if (e.KeyCode == Keys.Enter)// Если комплексная сессия - вход в нее - нормально. Если надо редактировать, ентер+контрол.
 			{
-				EditSession?.Invoke(this, _current_session);
+				StartSession?.Invoke(this, _current_session);
 				e.Handled = true;
 			}
 			else if (e.KeyCode == Keys.Delete)

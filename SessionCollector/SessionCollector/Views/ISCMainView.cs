@@ -13,7 +13,7 @@ namespace SessionCollector
 		event EventHandler<DateTime> CreateSession;
 		event EventHandler<DateTime> DateChanged;
 		event EventHandler<DateTime> OrderAndAlign;
-		event EventHandler<OSession> EditSession;
+		event EventHandler<OSession> StartSession;
 		event EventHandler<OSession> DeleteSession;
 		event EventHandler<OSession> StartSessionTick;
 		event EventHandler<DateTime> ShowStata;

@@ -18,5 +18,7 @@ namespace Services.Nodes
 		void MoveNodesToDirectory(Dir owner, IEnumerable<INode> notes);
 		IEnumerable<INode> Items { get; }
 		event EventHandler CollectionChanged;
+
+		IEnumerable<FTask> GetCompletedTasks(/*period parameter*/);
 	}
 }

@@ -156,5 +156,14 @@ namespace Shared.UI.UserControls
 
 			_customizer.markRowsWithIcons();
 		}
+
+		private void nodeGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+		{
+			if (e.RowIndex < 0) return;
+
+			var i = nodeGrid.Rows[e.RowIndex].DataBoundItem as INode;
+
+			ActivateNode?.Invoke(this, i);
+		}
 	}
 }
