@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
+using Shared.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -44,7 +45,6 @@ namespace Shared.UI.UserControls
 
 		public event EventHandler<IEnumerable<INode>> SendNodesToClipboard;
 		public event EventHandler Paste;
-		public event EventHandler MakeNodePathTag;
 		public event EventHandler<INode> ActivateNode;
 		public event EventHandler LeaveNode;
 		public event EventHandler<INode> CurrentNodeChanged;

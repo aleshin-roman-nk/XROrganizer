@@ -12,5 +12,6 @@ namespace Domain.Repos
 		BufferTask Create(int ftaskId);
 		IEnumerable<BufferTask> GetAll();
 		void Delete(int id);
+		bool Exists(int taskId);
 	}
 }

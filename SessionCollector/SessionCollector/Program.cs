@@ -31,8 +31,6 @@ namespace SessionCollector
 
 			container
 				.RegisterType<ISCMainView, SCMainForm>()
-				.RegisterType<ISingleSessionView, SessionForm>()
-				.RegisterType<IBufferTaskView, CurrentTaskBufferForm>()
 				.RegisterType<ISessionService, SessionService>()
 				.RegisterType<ISessionRepository, SessionRepository>()
 				.RegisterType<IAppDataContextFactory, AppDataContextFactory>()
@@ -48,9 +46,7 @@ namespace SessionCollector
 
 			SessionManagerMainPresenter presenter = (SessionManagerMainPresenter)container.Resolve(typeof(SessionManagerMainPresenter));
 
-			Application.Run((Form)presenter.MainView);
-
-			presenter.CloseApplication();
+			Application.Run();
 		}
 	}
 }

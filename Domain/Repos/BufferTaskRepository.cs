@@ -20,6 +20,8 @@ namespace Domain.Repos
 			_toolRepo = new ToolRepo(_factory);
 		}
 
+		
+
 		public BufferTask Create(int ftaskId)
 		{
 			using (var db = _factory.Create())
@@ -44,7 +46,16 @@ namespace Domain.Repos
 			}
 		}
 
-		public IEnumerable<BufferTask> GetAll()
+        public bool Exists(int taskId)
+        {
+			using (var db = _factory.Create())
+            {
+				var res = db.BufferTasks.SingleOrDefault(x => x.node_id == taskId);
+				return res != null;
+            }
+		}
+
+        public IEnumerable<BufferTask> GetAll()
 		{
 			using (var db = _factory.Create())
 			{
@@ -52,7 +63,7 @@ namespace Domain.Repos
 
 				foreach (var item in res)
 				{
-					item.Node.path = _toolRepo.getPathOf(item.Node, db);
+					item.Node.path = _toolRepo.GetPathOf(item.Node, db);
 				}
 
 				return res;

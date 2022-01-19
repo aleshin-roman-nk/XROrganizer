@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Shared.UI.Interfaces;
 using Shared.UI.tools;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xorg.Tools;
 
 namespace Shared.UI.UserControls
 {
@@ -67,6 +69,7 @@ namespace Shared.UI.UserControls
 				if (savingObserver.Saved == false)
 				{
 					_node.definition = rtxNodeDescription.Text;
+					
 					Save?.Invoke(this, _node);
 				}
 			}

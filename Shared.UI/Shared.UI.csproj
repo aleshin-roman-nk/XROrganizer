@@ -56,7 +56,21 @@
     <Compile Include="Dlg\Forms\InputBoxForm.Designer.cs">
       <DependentUpon>InputBoxForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dlg\IInputBox.cs" />
+    <Compile Include="Interfaces\EventArgsDefinition\SessionsPageRequiredEventArgs.cs" />
+    <Compile Include="Interfaces\EventArgsDefinition\DisplaySessionsPageEventArg.cs" />
+    <Compile Include="Forms\SessionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SessionForm.Designer.cs">
+      <DependentUpon>SessionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TopSessionsOfTaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TopSessionsOfTaskForm.Designer.cs">
+      <DependentUpon>TopSessionsOfTaskForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IInputBox.cs" />
     <Compile Include="Dlg\InputBox.cs" />
     <Compile Include="Forms\ChooseDateForm.cs">
       <SubType>Form</SubType>
@@ -88,15 +102,18 @@
     <Compile Include="Dlg\Forms\NTypeChooseForm.Designer.cs">
       <DependentUpon>NTypeChooseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IBufferTaskView.cs" />
-    <Compile Include="ICompletedTasksView.cs" />
-    <Compile Include="IFTaskEditView.cs" />
+    <Compile Include="Interfaces\IBufferTaskView.cs" />
+    <Compile Include="Interfaces\ICompletedTasksView.cs" />
+    <Compile Include="Interfaces\IFTaskEditView.cs" />
+    <Compile Include="Interfaces\ISingleSessionView.cs" />
+    <Compile Include="Interfaces\ITopSessionsOfTaskView.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="tools\SavingObserver.cs" />
+    <Compile Include="tools\TickCounterAnimator.cs" />
     <Compile Include="UserControls\DataGridViewCustomizer.cs" />
     <Compile Include="UserControls\DescriptionUC.cs">
       <SubType>UserControl</SubType>
@@ -104,15 +121,21 @@
     <Compile Include="UserControls\DescriptionUC.Designer.cs">
       <DependentUpon>DescriptionUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\IDescriptionView.cs" />
-    <Compile Include="UserControls\INodesView.cs" />
-    <Compile Include="INodeTypeCustomizer.cs" />
+    <Compile Include="Interfaces\IDescriptionView.cs" />
+    <Compile Include="Interfaces\INodesView.cs" />
+    <Compile Include="Interfaces\INodeTypeCustomizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserControls\NodesViewUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\NodesViewUC.Designer.cs">
       <DependentUpon>NodesViewUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TimeInputUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\TimeInputUserControl.Designer.cs">
+      <DependentUpon>TimeInputUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewRequest.cs" />
     <Compile Include="ViewResponse.cs" />
@@ -149,6 +172,12 @@
     <EmbeddedResource Include="Dlg\Forms\NTypeChooseForm.resx">
       <DependentUpon>NTypeChooseForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SessionForm.resx">
+      <DependentUpon>SessionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TopSessionsOfTaskForm.resx">
+      <DependentUpon>TopSessionsOfTaskForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -158,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\NodesViewUC.resx">
       <DependentUpon>NodesViewUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\TimeInputUserControl.resx">
+      <DependentUpon>TimeInputUserControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +215,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="icons8-task-completed-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-closed-sign-38.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-open-sign-38.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playing01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playing02.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

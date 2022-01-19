@@ -1,5 +1,7 @@
 ﻿using Domain.Entities;
 using Shared.UI;
+using Shared.UI.Interfaces;
+using Shared.UI.Interfaces.EventArgsDefinition;
 using Shared.UI.tools;
 using System;
 using System.Collections.Generic;
@@ -50,23 +52,6 @@ namespace Shared.UI.Forms
 				.SetValue(panel1, true, null);
 		}
 
-		//public ViewResponse<FTask> Go(FTask o)
-		//{
-		//	_ent = o;
-
-		//	_set(_ent);
-
-		//	if (this.ShowDialog() == DialogResult.OK)
-		//	{
-		//		return new ViewResponse<FTask> { Data = _get(), Ok = true };
-		//	}
-		//	else
-		//	{
-		//		return new ViewResponse<FTask> { Data = null, Ok = false };
-		//	}
-
-		//}
-
 		bool _isCompleted;
 		private bool isCompleted
 		{
@@ -90,6 +75,8 @@ namespace Shared.UI.Forms
 			}
 		}
 
+		public int ObjId => _origin.id;
+
 		private void _set(FTask o)
 		{
 			_origin = o;
@@ -109,11 +96,7 @@ namespace Shared.UI.Forms
 			_ent.definition = richTextBoxDescription.Text;
 			_ent.name = textBox1Name.Text;
 
-//			string _before_str = JsonTool.Serialize(_origin);
 			_ent.CopyPropertiesTo(_origin);
-//			string _after_str = JsonTool.Serialize(_origin);
-
-//			MessageBox.Show($"before\n{_before_str}\nafter\n{_after_str}");
 
 			return _ent;
 		}
@@ -127,37 +110,19 @@ namespace Shared.UI.Forms
 				_ent.completed_date = DateTime.Now;
 		}
 
-		Action<ViewResponse<FTask>> _resultHandler;
-		Action<FTask> _saveTaskHndlr;
+        public event EventHandler Completed;
+        public event EventHandler<FTask> Save;
+        public event EventHandler<DisplaySessionsPageEventArg> ShowTopSessions;
 
-		public void Go(FTask o, Action<ViewResponse<FTask>> resultHandler, Action<FTask> saveTaskHndlr)
+        private void FTaskForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			_resultHandler = resultHandler;
-			_saveTaskHndlr = saveTaskHndlr;
-			_set(o);
-			Show();
-		}
-
-		private void FTaskForm_FormClosed(object sender, FormClosedEventArgs e)
-		{
-
+			Completed?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void button1save_Click(object sender, EventArgs e)
 		{
+			Save?.Invoke(this, _get());
 			Close();
-		}
-
-		private void FTaskForm_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			ViewResponse<FTask> res;
-
-			if (DialogResult == DialogResult.OK)
-				res = new ViewResponse<FTask> { Ok = true, Data = _get() };
-			else
-				res = new ViewResponse<FTask> { Ok = false, Data = _origin };
-
-			_resultHandler(res);
 		}
 
 		private void btnUpdateTaskName_Click(object sender, EventArgs e)
@@ -185,7 +150,7 @@ namespace Shared.UI.Forms
 		{
 			if (e.KeyCode == Keys.S && e.Control)
 			{
-				_saveTaskHndlr(_get());
+				Save?.Invoke(this, _get());
 				savingObserver.Saved = true;
 				e.Handled = true;
 			}
@@ -195,5 +160,27 @@ namespace Shared.UI.Forms
 		{
 			savingObserver.Saved = false;
 		}
-	}
+
+        public void Go(FTask o)
+        {
+			_set(o);
+			Show();
+		}
+
+        public void Restore()
+        {
+			this.Show();
+			this.WindowState = FormWindowState.Normal;
+			this.Focus();
+        }
+
+        private void btnAllSessions_Click(object sender, EventArgs e)
+        {
+			ShowTopSessions?.Invoke(
+				this, new DisplaySessionsPageEventArg(
+					DateTime.Now, 
+					$"{_ent.path}#{_ent.id}",
+					_ent.id));
+		}
+    }
 }

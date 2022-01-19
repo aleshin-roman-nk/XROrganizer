@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using xorg.Tools;
 
-namespace Shared.UI.Dlg
+namespace Shared.UI.Interfaces
 {
 	public class InputBox: IInputBox
 	{

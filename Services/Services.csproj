@@ -54,6 +54,10 @@
       <Project>{0d7f46d1-2c0c-42fe-8fed-38a4da845cc4}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\xorg.Tools\xorg.Tools.csproj">
+      <Project>{3AEDA0C6-DC99-4B8A-A737-1BCF3C61F01D}</Project>
+      <Name>xorg.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

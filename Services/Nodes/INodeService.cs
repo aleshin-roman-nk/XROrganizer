@@ -19,6 +19,8 @@ namespace Services.Nodes
 		IEnumerable<INode> Items { get; }
 		event EventHandler CollectionChanged;
 
-		IEnumerable<FTask> GetCompletedTasks(/*period parameter*/);
+		IEnumerable<FTask> GetCompletedTasks(int year, int month);
+
+		IEnumerable<OSession> GetTopSessions(DateTime today, int taskId, int top, int page);
 	}
 }

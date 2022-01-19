@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
 using Shared.UI;
+using Shared.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 

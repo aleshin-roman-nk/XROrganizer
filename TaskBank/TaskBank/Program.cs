@@ -8,6 +8,7 @@ using SessionCollector.Views;
 using Shared.UI;
 using Shared.UI.Dlg;
 using Shared.UI.Forms;
+using Shared.UI.Interfaces;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -55,20 +56,16 @@ namespace TaskBank
 				//Debugger.init();
 				Logger.Clear();
 
-				IMainView mf = new MainForm();
+				//IMainView mf = new MainForm();
 
 				container
 
 					.RegisterType<ISCMainView, SCMainForm>()
 					.RegisterType<ISingleSessionView, SessionForm>()
-					//.RegisterType<IBufferTaskView, CurrentTaskBufferForm>()
 					.RegisterType<ISessionService, SessionService>()
-					//.RegisterType<ISessionRepository, SessionRepository>()
-					//.RegisterType<IAppDataContextFactory, AppDataContextFactory>()
-					//.RegisterInstance(dbConf)
 					.RegisterType<IStataView, StataForm>()
 
-					.RegisterInstance(mf)
+					.RegisterInstance<IMainView>(new MainForm())
 					.RegisterType<IAppDataContextFactory, AppDataContextFactory>()
 					.RegisterType<IDescriptionWindow, DescriptionForm>()
 					.RegisterType<IInputBox, InputBox>()
@@ -78,13 +75,15 @@ namespace TaskBank
 					.RegisterType<IBufferTaskRepository, BufferTaskRepository>()
 					.RegisterType<IFTaskEditView, FTaskForm>()
 					.RegisterType<IBufferTaskView, CurrentTaskBufferForm>()
+					.RegisterType<ITopSessionsOfTaskView, TopSessionsOfTaskForm>()
 					.RegisterType<ISessionRepository, SessionRepository>()
 					.RegisterType<ICompletedTasksView, CompletedTasksForm>()
-					.RegisterInstance(container);
+					.RegisterType<OpenObjectManager>()
+					.RegisterType<SessionManagerMainPresenter>();
 
 				var presenter = container.Resolve<TaskBankMainPresenter>();
 
-				Application.Run((Form)mf);
+				Application.Run((Form)container.Resolve<IMainView>());
 			}
 		}
 	}

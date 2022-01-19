@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Shared.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,10 +26,17 @@ namespace Shared.UI.Forms
 		[DllImport("user32.dll")]
 		private static extern bool ReleaseCapture();
 
+		IInputBox _inputBox;
 
-		public CurrentTaskBufferForm()
+		public CurrentTaskBufferForm(IInputBox inputBox)
 		{
 			InitializeComponent();
+
+			_inputBox = inputBox;
+
+			bs = new BindingSource();
+			dataGridView1.DataSource = bs;
+			bs.CurrentItemChanged += Bs_CurrentItemChanged;
 
 			this.DoubleBuffered = true;
 			this.SetStyle(ControlStyles.ResizeRedraw, true);
@@ -36,8 +44,10 @@ namespace Shared.UI.Forms
 		}
 
 		public event EventHandler<INode> CreateSession;
+        public event EventHandler Completed;
+        public event EventHandler<BufferTask> Delete;
 
-		protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
 		{
 			Rectangle rc = new Rectangle(this.ClientSize.Width - cGrip, this.ClientSize.Height - cGrip, cGrip, cGrip);
 			ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
@@ -78,31 +88,55 @@ namespace Shared.UI.Forms
 
 
 		BindingSource bs;
-		public void Display(IEnumerable<BufferTask> bufferTasks)
+		public void Go(IEnumerable<BufferTask> bufferTasks)
 		{
-			bs = new BindingSource();
-			bs.CurrentItemChanged += Bs_CurrentItemChanged;
-
-			dataGridView1.DataSource = bs;
-
 			bs.DataSource = bufferTasks;
-			ShowDialog();
+			Show();
 		}
 
 		private void Bs_CurrentItemChanged(object sender, EventArgs e)
 		{
-			richTextBox1.Text = (bs.Current as BufferTask).descr;
+			var i = bs.Current as BufferTask;
+
+			if(i != null)
+				richTextBox1.Text = i.descr;
 		}
 
 		private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
 		{
-			if(e.KeyCode == Keys.Enter)
-			{
-				BufferTask n = (dataGridView1.DataSource as BindingSource).Current as BufferTask;
+			BufferTask n = (dataGridView1.DataSource as BindingSource).Current as BufferTask;
+			if (n == null) return;
 
+			if (e.KeyCode == Keys.Enter)
+			{
 				CreateSession?.Invoke(this, n.Node);
 				e.Handled = true;
 			}
+			else if(e.KeyCode == Keys.Delete)
+            {
+				if(_inputBox.UserAnsweredYes($"Confirm deleting {n.path}"))
+					Delete?.Invoke(this, n);
+            }
 		}
-	}
+
+        private void CurrentTaskBufferForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+			Completed?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Update(IEnumerable<BufferTask> bufferTasks)
+        {
+			bs.DataSource = null;
+			bs.DataSource = bufferTasks;
+		}
+
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+			if (e.RowIndex < 0) return;
+
+			var i = dataGridView1.Rows[e.RowIndex].DataBoundItem as BufferTask;
+
+			CreateSession?.Invoke(this, i.Node);
+		}
+    }
 }

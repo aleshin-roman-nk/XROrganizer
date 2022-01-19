@@ -12,25 +12,21 @@ namespace SessionCollector.Forms
 {
 	public partial class StataForm : Form, IStataView
 	{
+        INode _dir = null;
+
+        BindingSource bs;
         public StataForm()
 		{
 			InitializeComponent();
-		}
-
-		public void Go(IEnumerable<ChartItem> lst, string title)
-		{
-            _render(lst, title);
-            BindingSource bs = new BindingSource();
-            bs.DataSource = lst;
+            bs = new BindingSource();
             dataGridView1.DataSource = bs;
-            this.ShowDialog();
-		}
+        }
 
-		public void SetData(IEnumerable<OSession> lst)
+		public void Go(INode d)
 		{
-			throw new NotImplementedException();
+            _dir = d;
+            this.Show();
 		}
-
 
         //==================================================================
 
@@ -79,7 +75,20 @@ namespace SessionCollector.Forms
             }
         }
 
+        public void Display(IEnumerable<ChartItem> lst, string title)
+        {
+            _render(lst, title);
+            bs.DataSource = null;
+            bs.DataSource = lst;
+        }
+
         CurrentDataPoint _CurrentDataPoint = new CurrentDataPoint();
+
+        public INode Node => _dir;
+        public DateTime CurrentDate => dateTimePicker1.Value;
+
+        public event EventHandler DateChanged;
+        public event EventHandler Completed;
 
         class CurrentDataPoint
 		{
@@ -109,5 +118,20 @@ namespace SessionCollector.Forms
 				highlightedPoint = null;
             }
 		}
-	}
+
+        private void StataForm_Load(object sender, EventArgs e)
+        {
+            DateChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void StataForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Completed?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            DateChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
 }

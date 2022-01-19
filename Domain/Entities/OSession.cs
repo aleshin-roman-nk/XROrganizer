@@ -12,7 +12,7 @@ namespace Domain.Entities
 	public class OSession
 	{
 		public int Id { get; set; }
-		public int? NodeId { get; set; }
+		public int NodeId { get; set; }
 
 		/// <summary>
 		/// The session owner
@@ -29,6 +29,7 @@ namespace Domain.Entities
 		{
 			get
 			{
+				if (Owner == null) return "not loaded";
 				return Owner.definition;
 			}
 		}
@@ -37,6 +38,7 @@ namespace Domain.Entities
 		{
 			get
 			{
+				if (Owner == null) return "not loaded";
 				return $"{Owner.path}#{Owner.id}";
 			}
 		}

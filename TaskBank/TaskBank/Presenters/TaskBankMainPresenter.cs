@@ -6,9 +6,11 @@ using SessionCollector;
 using Shared.UI;
 using Shared.UI.Dlg;
 using Shared.UI.Forms;
+using Shared.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TaskBank.Presenters.EventDefinition;
 using TaskBank.Views;
 using Unity;
 using xorg.Tools;
@@ -17,28 +19,47 @@ namespace TaskBank.Presenters
 {
 	public class TaskBankMainPresenter
 	{
-		List<INode> _openedNodes = new List<INode>();
 		List<INode> _clipboard = new List<INode>();
 
-
-		IUnityContainer _ioc;
+		OpenObjectManager _openObjectManager;
 
 		private readonly INodeService _service;
 		private readonly IMainView _mainView;
 		IDescriptionWindow _descView;
 
+		IBufferTaskRepository _bufferTaskRepository;
+		IBufferTaskView _currentTaskBufferView = null;
+
+		ICompletedTasksView _completedTasksView = null;
+
+		Func<IBufferTaskView> _bufferTaskViewFactory;
+		Func<ICompletedTasksView> _completedTasksViewFactory;
+
 		SessionManagerMainPresenter _sessionManagerMainPresenter = null;
 
 		IInputBox _dialogs;
  
-		public TaskBankMainPresenter(IMainView mainView, IDescriptionWindow descriptionWindow, IInputBox dlg, INodeService srv, IUnityContainer cont)
+		public TaskBankMainPresenter(IMainView mainView, 
+			IDescriptionWindow descriptionWindow,
+			OpenObjectManager openObjManager,
+			SessionManagerMainPresenter sessPres,
+			IInputBox dlg, 
+			INodeService srv,
+			Func<ICompletedTasksView> CompletedTasksViewFactory,
+
+			Func<IBufferTaskView> BufferTaskViewFactory,
+			IBufferTaskRepository bufferTaskRepository
+			)
 		{
 			_service = srv;
 			_mainView = mainView;
 			_descView = descriptionWindow;
 			_dialogs = dlg;
-
-			_ioc = cont;
+			_openObjectManager = openObjManager;
+			_sessionManagerMainPresenter = sessPres;
+			_bufferTaskRepository = bufferTaskRepository;
+			_bufferTaskViewFactory = BufferTaskViewFactory;
+			_completedTasksViewFactory = CompletedTasksViewFactory;
 
 			_mainView.NodesView.ActivateNode += _nodesView_ActivateNode;
 			_mainView.NodesView.LeaveNode += _nodesView_LeaveNode;
@@ -53,33 +74,113 @@ namespace TaskBank.Presenters
 			_mainView.DeleteNode += _mainView_DeleteNode;
 			_mainView.NodesView.SendNodesToClipboard += NodesView_SendNodesToClipboard;
 			_mainView.CreateSession += _mainView_CreateSession;
+            _mainView.RestoreWorkingSessionWindow += _mainView_RestoreWorkingSessionWindow;
+            _mainView.PutTaskToBuffer += _mainView_PutTaskToBuffer;
+            _mainView.StartStatisticWindow += _mainView_StartStatisticWindow;
 
-			descriptionWindow.Save += DescView_Save;
+			_descView.Save += DescView_Save;
 
 			_service.CollectionChanged += _service_CollectionChanged;
+
+			_openObjectManager.SaveTask += _openObjectManager_SaveTask;
+            _openObjectManager.SaveSession += _openObjectManager_SaveSession;
+            _openObjectManager.OpenTasksCountChanged += _openObjectManager_OpenTasksCountChanged;
+            _openObjectManager.WorkingSessionStateChanged += _openObjectManager_WorkingSessionStateChanged;
+            _openObjectManager.SessionsRequired += _openObjectManager_SessionsRequired;
+
+
+			_sessionManagerMainPresenter.StartSession += _sessionManagerMainPresenter_StartSession;
 
 			update();
 		}
 
-		private void _mainView_CreateSession(object sender, EventArgs e)
-		{
-			if(_sessionManagerMainPresenter != null)
-			{
-				if(_sessionManagerMainPresenter.IsRunning)
-				{
-					var i = _mainView.NodesView.SelectedNodes.SingleOrDefault();
-					if(i != null)
-					{
-						if(i is FTask)
-						{
-							_sessionManagerMainPresenter.CreateSession((FTask)i);
-						}
-					}
-				}
-			}
+        private void _openObjectManager_SessionsRequired(object sender, RequestSessionsPageOpenObjectManagerEvenArgs e)
+        {
+			e.Sessions = _service.GetTopSessions(e.Date, e.taskId, e.itemsPerPage, e.page);
+        }
+
+        private void _mainView_StartStatisticWindow(object sender, EventArgs e)
+        {
+			_sessionManagerMainPresenter.ShowStataWindow(
+				_mainView.NodesView.SelectedNodes.SingleOrDefault()
+				);
 		}
 
-		private void NodesView_Paste(object sender, EventArgs e)
+        private void _mainView_PutTaskToBuffer(object sender, EventArgs e)
+        {
+            var i = _mainView.NodesView.SelectedNodes.SingleOrDefault();
+
+            if (i != null)
+            {
+				if (_bufferTaskRepository.Exists(i.id))
+					_dialogs.ShowMessage($"Task [{i.path}{i.id}] already exists in the buffer");
+				else
+					_bufferTaskRepository.Create(i.id);
+            }
+
+            //if (dlgCurrentTaskBuffer != null)
+            _currentTaskBufferView?.Update(_bufferTaskRepository.GetAll());
+        }
+
+        private void _mainView_RestoreWorkingSessionWindow(object sender, EventArgs e)
+        {
+			_openObjectManager.TryRestoreSessionWindow();
+
+		}
+
+        private void _sessionManagerMainPresenter_StartSession(object sender, OSession e)
+        {
+			_openObjectManager.OpenSession(e);
+
+		}
+
+        private void _openObjectManager_WorkingSessionStateChanged(object sender, bool e)
+        {
+			_mainView.SessionState = e;
+        }
+
+        private void _openObjectManager_OpenTasksCountChanged(object sender, int e)
+        {
+			_mainView.OpenedTasksCout = e;
+		}
+
+        private void _openObjectManager_SaveSession(object sender, OSession e)
+        {
+			_sessionManagerMainPresenter.SaveSession(e);
+		}
+
+        private void _openObjectManager_SaveTask(object sender, FTask e)
+        {
+			_service.Save(e);
+			if (_completedTasksView != null)
+				_completedTasksView.Display(
+					_service.GetCompletedTasks(
+						_completedTasksView.CurrentDate.Year,
+						_completedTasksView.CurrentDate.Month));
+
+			update();
+		}
+
+        private void _mainView_CreateSession(object sender, EventArgs e)
+		{
+			_createSession(_mainView.NodesView.SelectedNodes.SingleOrDefault());
+		}
+
+        private void _createSession(INode n)
+        {
+            if (_sessionManagerMainPresenter.IsWindowRunning)
+            {
+                if (n != null)
+                {
+                    if (n is FTask)
+                    {
+                        _sessionManagerMainPresenter.CreateSession((FTask)n);
+                    }
+                }
+            }
+        }
+
+        private void NodesView_Paste(object sender, EventArgs e)
 		{
 			_service.MoveNodesToDirectory(_service.CurrentOwner as Dir, _clipboard);
 
@@ -97,59 +198,72 @@ namespace TaskBank.Presenters
 
 		private void _mainView_StartWindowCompletedNodes(object sender, EventArgs e)
 		{
-			//var _node_repo = _ioc.Resolve<INodeRepository>();
-			//var items = _node_repo.GetAll();
-			//_node_repo.FetchPathsAndSave(items);
+			if (_completedTasksView != null) return;
 
-			var frm = _ioc.Resolve<ICompletedTasksView>();
-			frm.Display(_service.GetCompletedTasks());
+			_completedTasksView = _completedTasksViewFactory();
+            _completedTasksView.DateChanged += _completedTasksView_DateChanged;
+            _completedTasksView.OpenNode += _completedTasksView_OpenNode;
+            _completedTasksView.Completed += _completedTasksView_Completed;
+
+			var d = DateTime.Now;
+			_completedTasksView.Display(_service.GetCompletedTasks(d.Year, d.Month));
 		}
 
-		private void _mainView_StartSessionCollector(object sender, EventArgs e)
-		{
-			// send to presenters hub
-			// hub will check whether the presenter is already working.
-			if (_sessionManagerMainPresenter == null)
-			{
-				_sessionManagerMainPresenter = _ioc.Resolve<SessionManagerMainPresenter>();
-				_sessionManagerMainPresenter.Go();
-				return;
-			}
+        private void _completedTasksView_Completed(object sender, EventArgs e)
+        {
+			_completedTasksView.DateChanged -= _completedTasksView_DateChanged;
+			_completedTasksView.OpenNode -= _completedTasksView_OpenNode;
+			_completedTasksView.Completed -= _completedTasksView_Completed;
 
-			if (_sessionManagerMainPresenter.IsRunning == false)
-			{
-				_sessionManagerMainPresenter = _ioc.Resolve<SessionManagerMainPresenter>();
-				_sessionManagerMainPresenter.Go();
-				GC.Collect();
-			}
+			_completedTasksView = null;
+		}
+
+        private void _completedTasksView_OpenNode(object sender, INode e)
+        {
+			_openObjectManager.OpenTask(e as FTask);
+        }
+
+        private void _completedTasksView_DateChanged(object sender, DateTime e)
+        {
+			_completedTasksView.Display(_service.GetCompletedTasks(e.Year, e.Month));
+		}
+
+        private void _mainView_StartSessionCollector(object sender, EventArgs e)
+		{
+			_sessionManagerMainPresenter.ShowWindow();
 		}
 
 		private void _mainView_StartCurrentBuffer(object sender, EventArgs e)
 		{
-			IBufferTaskView dlg = _ioc.Resolve<IBufferTaskView>();
+			if (_currentTaskBufferView != null) return;
 
-			//>>> 28-12-2021 23:36
-			// Здесь лучше использовать event hub, общую шину обмена событий, результатов работы окон, запросов окон.
-			EventHandler<INode> _CreateSession = delegate(object o, INode ev)
-			{
-				var res = _dialogs.ChooseDateTime();
-
-				if (res.Ok)
-				{
-					var s = new OSession { NodeId = ev.id, Start = res.Data, ProvidedSeconds = 3600, Description = "" };
-					var rep_ses = _ioc.Resolve<ISessionRepository>();
-					rep_ses.Save(s);
-				}
-			};
-
-			IBufferTaskRepository repo = _ioc.Resolve<IBufferTaskRepository>();
-
-			dlg.CreateSession += _CreateSession;
-			dlg.Display(repo.GetAll());
-			dlg.CreateSession -= _CreateSession;
+			_currentTaskBufferView = _bufferTaskViewFactory();
+            _currentTaskBufferView.Completed += _currentTaskBufferView_Completed;
+            _currentTaskBufferView.CreateSession += _currentTaskBufferView_CreateSession;
+            _currentTaskBufferView.Delete += _currentTaskBufferView_Delete;
+			_currentTaskBufferView.Go(_bufferTaskRepository.GetAll());
 		}
 
-		private void _mainView_DeleteNode(object sender, EventArgs e)
+        private void _currentTaskBufferView_Delete(object sender, BufferTask e)
+        {
+			_bufferTaskRepository.Delete(e.id);
+			_currentTaskBufferView.Update(_bufferTaskRepository.GetAll());
+		}
+
+        private void _currentTaskBufferView_CreateSession(object sender, INode e)
+        {
+			_createSession(e);
+		}
+
+        private void _currentTaskBufferView_Completed(object sender, EventArgs e)
+        {
+			_currentTaskBufferView.Completed -= _currentTaskBufferView_Completed;
+			_currentTaskBufferView.CreateSession -= _currentTaskBufferView_CreateSession;
+			_currentTaskBufferView.Delete -= _currentTaskBufferView_Delete;
+			_currentTaskBufferView = null;
+		}
+
+        private void _mainView_DeleteNode(object sender, EventArgs e)
 		{
 			var i = _mainView.NodesView.SelectedNodes.FirstOrDefault();
 			if (i.type < 0) return;
@@ -226,8 +340,15 @@ namespace TaskBank.Presenters
 
 		private void DescView_Save(object sender, INode e)
 		{
-			if(e.type >= 0)
+			if (e.type >= 0)
+            {
+                if (_openObjectManager.IsOpened(e.id))
+                {
+					_dialogs.ShowMessage($"[{e.path}] has already opened");
+					return;
+                }
 				_service.Save(e);
+            }
 		}
 
 		private void _service_CollectionChanged(object sender, EventArgs e)
@@ -237,7 +358,13 @@ namespace TaskBank.Presenters
 
 		private void update()
 		{
-			_mainView.NodesView.DisplayNodes(_service.Items, _service.CurrentParentFullName, _service.HighlightedNode);
+			_mainView.NodesView.DisplayNodes(
+				_service.Items.Where(x => 
+				{
+					if (x is FTask) return !(x as FTask).IsCompleted; else return true;
+				}).ToList(), 
+				_service.CurrentParentFullName, 
+				_service.HighlightedNode);
 		}
 
 		private void _nodesView_LeaveNode(object sender, EventArgs e)
@@ -253,38 +380,8 @@ namespace TaskBank.Presenters
 			}
 			else if(e.type == NType.Task)
 			{
-				openTask(e);
+				_openObjectManager.OpenTask(e as FTask);
 			}
-		}
-
-		bool openTask(INode n)
-		{
-			if(_openedNodes.Contains(n) == false)
-			{
-				_openedNodes.Add(n);
-				var frm = _ioc.Resolve<IFTaskEditView>();
-				//frm.AddProperty("node_full_path", _service.getFullPath(n));
-				//frm.Go(n as FTask, handleFTaskEdirEnd);
-
-				frm.Go(n as FTask,
-				(x) =>
-				{
-					if (x.Ok)
-						_service.Save(x.Data);
-
-					_openedNodes.Remove(x.Data);
-					_mainView.OpenedTasksCout = _openedNodes.Count;
-				},
-				(y) =>
-				{
-					_service.Save(y);
-				});
-
-				_mainView.OpenedTasksCout = _openedNodes.Count;
-				return true;
-			}
-
-			return false;
 		}
 	}
 }

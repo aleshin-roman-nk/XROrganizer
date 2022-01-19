@@ -39,10 +39,66 @@ namespace Domain.Repos
 					.OrderBy(x => x.Start).ToList();
 
 				foreach (var item in res)
-					item.Owner.path = _toolRepo.getPathOf(item.Owner, db);
+					item.Owner.path = _toolRepo.GetPathOf(item.Owner, db);
 
 				return res;
 			}
+		}
+
+		public IEnumerable<int> GetAllChildTaskIdOf(INode n)
+		{
+			/*
+			 * Возможна оптимизация: не загружать задачи, дата закрытия которых
+			 * в предидущем и более ранних месяцах.
+			 * Сессии этих задач гарантированно немогут быть в текущем месяце.
+			 * 
+			 */
+
+			var stack = new Stack<INode>();
+
+			var res = new List<int>();
+
+			using (var db = _contextFactory.Create())
+			{
+				Func<INode, IEnumerable<INode>> getChildren = (owner) =>
+				{
+					return db.Nodes.Where(x => x.owner_id == owner.id).ToList();
+				};
+
+				stack.Push(n);
+				while (stack.Any())
+				{
+					var next = stack.Pop();
+					if (next.type == Enums.NType.Task) res.Add(next.id);
+					foreach (var child in getChildren(next))
+						stack.Push(child);
+				}
+
+				return res;
+			}
+		}
+
+		public IEnumerable<OSession> GetSessionOf(int year, int month, INode n)
+		{
+			DateTime dt1 = new DateTime(year, month, 1, 0, 0, 0);
+			DateTime dt2 = dt1.AddMonths(1);
+
+			List<OSession> res = new List<OSession>();
+
+			var task_id_collection = GetAllChildTaskIdOf(n);
+
+			using (var db = _contextFactory.Create())
+			{
+				res = db.Sessions/*.Include(x => x.Owner)*/.Where(sess =>
+					  task_id_collection.Contains(sess.NodeId) &&
+					  (sess.Start >= dt1 && sess.Start < dt2)
+				).ToList();
+
+				//foreach (var item in res)
+				//	item.Owner.path = _toolRepo.GetPathOf(item.Owner, db);
+			}
+
+			return res;
 		}
 
 		public void Save(OSession e)
@@ -84,25 +140,32 @@ namespace Domain.Repos
 			 */
 		}
 
-		//private IEnumerable<INode> ReadAllChildren(INode root)
-		//{
-		//	var dirs = _contextFactory.Directories.ToList();
+   //     public IEnumerable<INode> GetAllChildren(INode root)
+   //     {
 
-		//	var stack = new Stack<INode>();
+			//using (var db = _contextFactory.Create())
+   //         {
+			//	var stack = new Stack<INode>();
 
-		//	Func<INode, IEnumerable<INode>> getChildren = (owner) =>
-		//	{
-		//		return dirs.Where(x => x.owner_id == owner.Id).ToList();
-		//	};
+   //         }
 
-		//	stack.Push(root);
-		//	while (stack.Any())
-		//	{
-		//		var next = stack.Pop();
-		//		yield return next;
-		//		foreach (var child in getChildren(next))
-		//			stack.Push(child);
-		//	}
-		//}
-	}
+			//	var dirs = _contextFactory.Directories.ToList();
+
+            
+
+   //         Func<INode, IEnumerable<INode>> getChildren = (owner) =>
+   //         {
+   //             return dirs.Where(x => x.owner_id == owner.Id).ToList();
+   //         };
+
+   //         stack.Push(root);
+   //         while (stack.Any())
+   //         {
+   //             var next = stack.Pop();
+   //             yield return next;
+   //             foreach (var child in getChildren(next))
+   //                 stack.Push(child);
+   //         }
+   //     }
+    }
 }

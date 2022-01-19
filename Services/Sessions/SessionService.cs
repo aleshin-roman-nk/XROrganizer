@@ -54,7 +54,16 @@ namespace Services.Sessions
 						.Select(day => new DateTime(year, month, day))
 						.ToList();
 
-			return dates.Select(x => new ChartItem(Repo.GetSecondsOfDay(x, dir), x.Day.ToString())).ToList();
+			var sessions = Repo.GetSessionOf(year, month, dir);
+
+			Func<DateTime, int> _getSeconds = (dt) =>
+			{
+				DateTime dt1 = new DateTime(dt.Year, dt.Month, dt.Day, 0, 0, 0);
+				DateTime dt2 = dt1.AddDays(1);
+				return sessions.Where(x => x.Start >= dt1 && x.Start < dt2).ToList().Sum(x => x.TotalSeconds);
+			};
+
+			return dates.Select(x => new ChartItem(_getSeconds(x), x.Day.ToString())).ToList();
 		}
 
 		public void KickSessionToNextDay(OSession s)

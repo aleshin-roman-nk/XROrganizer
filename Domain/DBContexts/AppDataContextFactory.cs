@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using xorg.Tools;
 
 namespace Domain.DBContext
 {
@@ -17,7 +18,9 @@ namespace Domain.DBContext
 
 		public AppData Create()
 		{
-			return new AppData(db_connection_string);
+			AppData res = new AppData(db_connection_string);
+			//res.Database.Log = Logger.Write;
+			return res;
 		}
 	}
 }

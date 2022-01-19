@@ -128,7 +128,7 @@ namespace Domain.Repos
 			}
 		}
 
-		public IEnumerable<INode> GetAllChildrenOf(INode n)
+		public IEnumerable<INode> GetAllChildTasksOf(INode n)
 		{
 			var stack = new Stack<INode>();
 
@@ -145,17 +145,19 @@ namespace Domain.Repos
 				while (stack.Any())
 				{
 					var next = stack.Pop();
-					//yield return next;
 					if (next.type == Enums.NType.Task) res.Add(next);
 					foreach (var child in getChildren(next))
 						stack.Push(child);
 				}
 
-				return res;
+                foreach (var item in res)
+                    item.path = _toolRepo.GetPathOf(item, db);
+                
+                return res;
 			}
 		}
 
-		public INode Get(int id)
+        public INode Get(int id)
 		{
 			using (var db = _factory.Create())
 			{
@@ -163,17 +165,34 @@ namespace Domain.Repos
 			}
 		}
 
-		public IEnumerable<FTask> GetCompletedTasks(/*period parameter*/)
+		public IEnumerable<FTask> GetCompletedTasks(int year, int month)
 		{
+			DateTime dt1 = new DateTime(year, month, 1, 0, 0, 0);
+			DateTime dt2 = dt1.AddMonths(1);
+
 			using (var db = _factory.Create())
 			{
-				var res = db.Tasks.Where(x => x.IsCompleted /* && period parameter*/).ToList();
+				var res = db.Tasks.Where(x => x.IsCompleted && (x.completed_date >= dt1 && 
+				x.completed_date < dt2)).ToList();
 
 				foreach (var item in res)
-					item.path = _toolRepo.getPathOf(item, db);
+					item.path = _toolRepo.GetPathOf(item, db);
 
 				return res;
 			};
+		}
+
+		public IEnumerable<OSession> GetTopSessions(DateTime today, int taskId, int top, int page)
+        {
+			DateTime dt1 = new DateTime(today.Year, today.Month, today.Day, 0, 0, 0);
+			DateTime dt2 = dt1.AddDays(1);
+
+			using (var db = _factory.Create())
+            {
+				return db.Sessions.Where(sess =>
+					sess.NodeId == taskId && (sess.Start < dt2)
+				).OrderByDescending(sess => sess.Start).Skip(top * page).Take(top).ToList();
+            };
 		}
 	}
 }

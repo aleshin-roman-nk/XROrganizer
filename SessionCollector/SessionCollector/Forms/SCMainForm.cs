@@ -37,12 +37,9 @@ namespace SessionCollector
 			dgvSessions.AutoGenerateColumns = false;
 		}
 
-		public event EventHandler<DateTime> CreateSession;
 		public event EventHandler<DateTime> DateChanged;
-		public event EventHandler<DateTime> OrderAndAlign;
 		public event EventHandler<OSession> StartSession;
 		public event EventHandler<OSession> DeleteSession;
-		public event EventHandler<OSession> StartSessionTick;
 		public event EventHandler<DateTime> ShowStata;
 		public event EventHandler<OSession> KickNextDay;
 		public event EventHandler<OSession> KickPrevDay;
@@ -95,22 +92,6 @@ namespace SessionCollector
 			txtActualDoneWord.Text = TimeSpan.FromSeconds(Convert.ToDouble(doneSecnds)).ToString(@"hh\:mm");
 		}
 
-		private void btnNewSession_Click(object sender, EventArgs e)
-		{
-			DateTime now = DateTime.Now;
-			DateTime sel = myCalendar1.CurrentDate;
-
-			DateTime dt = new DateTime(sel.Year, sel.Month, sel.Day, now.Hour, now.Minute, now.Second);
-
-			CreateSession?.Invoke(this, dt);
-		}
-
-		private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-		{
-			//DateChanged?.Invoke(this, e.Start);
-			//txtCurrentDate.Text = e.Start.ToString("dd MMMM yyyy");
-		}
-
 		private void MainForm_Shown(object sender, EventArgs e)
 		{
 			DateChanged?.Invoke(this, myCalendar1.CurrentDate);
@@ -120,12 +101,7 @@ namespace SessionCollector
 		{
 			if (_current_session == null) return;
 
-			if (e.Control && e.KeyCode == Keys.Enter)
-			{
-				StartSessionTick?.Invoke(this, _current_session);
-				e.Handled = true;
-			}
-			else if (e.KeyCode == Keys.Enter)// Если комплексная сессия - вход в нее - нормально. Если надо редактировать, ентер+контрол.
+			if (e.KeyCode == Keys.Enter)// Если комплексная сессия - вход в нее - нормально. Если надо редактировать, ентер+контрол.
 			{
 				StartSession?.Invoke(this, _current_session);
 				e.Handled = true;
@@ -137,21 +113,9 @@ namespace SessionCollector
 			}
 		}
 
-		private void btnSortAndAlign_Click(object sender, EventArgs e)
-		{
-			//OrderAndAlign?.Invoke(this, monthCalendar1.SelectionStart);
-		}
-
 		private void dgvSessions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
 			var data = dgvSessions.Rows[e.RowIndex].DataBoundItem as OSession;
-
-			//if (data.IsTickered) 
-			//{ 
-			//	//e.CellStyle.ForeColor = ColorTranslator.FromHtml("#a29bfe");
-			//	e.CellStyle.BackColor = ColorTranslator.FromHtml("#a29bfe");
-			//	return;
-			//}
 
 			if (data.Closed)
 			{
@@ -159,16 +123,6 @@ namespace SessionCollector
 			}
 			else
 				e.CellStyle.ForeColor = ColorTranslator.FromHtml("#ff7675");
-		}
-
-		public bool UserAnsweredYes(string qstr)
-		{
-			return MessageBox.Show(qstr, "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
-		}
-
-		public void ShowMessage(string msg)
-		{
-			MessageBox.Show(msg, "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 		}
 
 		private void panel1_Paint(object sender, PaintEventArgs e)
@@ -217,6 +171,17 @@ namespace SessionCollector
 		public void ShowWindow()
 		{
 			this.Show();
+			this.WindowState = FormWindowState.Normal;
+			this.Focus();
 		}
-	}
+
+        private void dgvSessions_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+			if (e.RowIndex < 0) return;
+
+			var i = dgvSessions.Rows[e.RowIndex].DataBoundItem as OSession;
+
+			StartSession?.Invoke(this, i);
+		}
+    }
 }

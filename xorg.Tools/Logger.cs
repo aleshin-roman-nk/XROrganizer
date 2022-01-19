@@ -23,5 +23,10 @@ namespace xorg.Tools
 		{
 			File.WriteAllText(filename, "", Encoding.UTF8);
 		}
+
+		public static void WriteObject(object o)
+        {
+			WriteLine(JsonTool.Serialize(o));
+		}
 	}
 }

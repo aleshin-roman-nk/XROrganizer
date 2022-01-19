@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Shared.UI.Interfaces;
 using Shared.UI.UserControls;
 using System;
 using System.Drawing;
@@ -46,7 +47,26 @@ namespace TaskBank
 			}
 		}
 
-		public MainForm()
+        public bool SessionState
+        {
+            get
+            {
+				return true;
+            }
+            set
+            {
+				if (value)
+                {
+					btnSessionState.BackgroundImage = Properties.Resources.sessionwork;
+				}
+                else
+                {
+					btnSessionState.BackgroundImage = Properties.Resources.nosession;
+				} 
+			}
+        }
+
+        public MainForm()
 		{
 			InitializeComponent();
 
@@ -61,8 +81,11 @@ namespace TaskBank
 		public event EventHandler StartSessionCollector;
 		public event EventHandler StartWindowCompletedNodes;
 		public event EventHandler CreateSession;
+        public event EventHandler RestoreWorkingSessionWindow;
+        public event EventHandler PutTaskToBuffer;
+        public event EventHandler StartStatisticWindow;
 
-		void setBufferState(int items_cnt)
+        void setBufferState(int items_cnt)
 		{
 			if (items_cnt == 0)
 				txtBufferState.BackColor = Color.Gray;
@@ -70,33 +93,6 @@ namespace TaskBank
 				txtBufferState.BackColor = Color.Yellow;
 
 			txtBufferState.Text = $"{items_cnt}";
-		}
-
-		public void SetClipboardState(int cnt)
-		{
-			setBufferState(cnt);
-		}
-		//private void btnCreate_Click(object sender, EventArgs e)
-		//{
-		//	INTypeChooseView ntypeChooseForm = new NTypeChooseForm();
-
-		//	var res = ntypeChooseForm.Choose(new List<NType> { NType.Note, NType.Task });
-
-		//	if (res.Ok)
-		//	{
-		//		Create?.Invoke(this, res.Data);
-		//	}
-		//}
-
-		//private void btnDelete_Click(object sender, EventArgs e)
-		//{
-		//	Delete?.Invoke(this, _currentNode);
-		//}
-
-
-		private void btnShowDescr_Click(object sender, EventArgs e)
-		{
-			StartDesriptionForm?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -116,46 +112,6 @@ namespace TaskBank
 				RenameNode?.Invoke(this, EventArgs.Empty);
 				e.Handled = true;
 			}
-		}
-
-		private void btnDelete_Click(object sender, EventArgs e)
-		{
-			
-		}
-
-		private void btnRename_Click(object sender, EventArgs e)
-		{
-			
-		}
-
-		private void btnCreate_Click(object sender, EventArgs e)
-		{
-			
-		}
-
-		private void btnShowCurentBuffer_Click(object sender, EventArgs e)
-		{
-			StartCurrentBuffer?.Invoke(this, EventArgs.Empty);
-		}
-
-		private void btnStartSessionCollector_Click(object sender, EventArgs e)
-		{
-			StartSessionCollector?.Invoke(this, EventArgs.Empty);
-		}
-
-		private void btnHideCompleted_Click(object sender, EventArgs e)
-		{
-			StartWindowCompletedNodes?.Invoke(this, EventArgs.Empty);
-		}
-
-		private void btnTimeTag_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void button1_Click(object sender, EventArgs e)
-		{
-
 		}
 
 		private void btntsCreate_Click(object sender, EventArgs e)
@@ -210,5 +166,40 @@ namespace TaskBank
 		{
 			CreateSession?.Invoke(this, EventArgs.Empty);
 		}
-	}
+
+        private void stbtnPutTaskToBuffer_Click(object sender, EventArgs e)
+        {
+			PutTaskToBuffer?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void tsbtnShowCompleted_Click(object sender, EventArgs e)
+        {
+			StartWindowCompletedNodes?.Invoke(this, EventArgs.Empty);
+		}
+
+        private void tsbtnShowBuffer_Click(object sender, EventArgs e)
+        {
+			StartCurrentBuffer?.Invoke(this, EventArgs.Empty);
+		}
+
+        private void tsbtnSessionCollector_Click(object sender, EventArgs e)
+        {
+			StartSessionCollector?.Invoke(this, EventArgs.Empty);
+		}
+
+        private void stbtnViewEditDescription_Click(object sender, EventArgs e)
+        {
+			StartDesriptionForm?.Invoke(this, EventArgs.Empty);
+		}
+
+        private void btnSessionState_Click(object sender, EventArgs e)
+        {
+			RestoreWorkingSessionWindow?.Invoke(this, EventArgs.Empty);
+		}
+
+        private void tsbtnShowStatistic_Click(object sender, EventArgs e)
+        {
+			StartStatisticWindow?.Invoke(this, EventArgs.Empty);
+        }
+    }
 }

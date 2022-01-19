@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Shared.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,9 @@ namespace Shared.UI.Forms
 	{
 		BindingSource bs;
 
-		public CompletedTasksForm()
+		public DateTime CurrentDate => dateTimePicker1.Value;
+
+        public CompletedTasksForm()
 		{
 			InitializeComponent();
 
@@ -26,7 +29,11 @@ namespace Shared.UI.Forms
 			dataGridView1.DataSource = bs;
 		}
 
-		public void Display(IEnumerable<INode> nodes)
+        public event EventHandler<DateTime> DateChanged;
+        public event EventHandler<INode> OpenNode;
+        public event EventHandler Completed;
+
+        public void Display(IEnumerable<INode> nodes)
 		{
 			bs.DataSource = nodes;
 			bs.ResetBindings(true);
@@ -40,7 +47,19 @@ namespace Shared.UI.Forms
 
 			var i = dataGridView1.Rows[e.RowIndex].DataBoundItem as INode;
 
-			MessageBox.Show($"{e.RowIndex} {e.ColumnIndex} #{i.id}");
+			//MessageBox.Show($"{e.RowIndex} {e.ColumnIndex} #{i.id}");
+
+			OpenNode?.Invoke(this, i);
 		}
-	}
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+			DateChanged?.Invoke(this, dateTimePicker1.Value);
+		}
+
+        private void CompletedTasksForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+			Completed?.Invoke(this, EventArgs.Empty);
+        }
+    }
 }

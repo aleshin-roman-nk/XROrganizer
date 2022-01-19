@@ -2,37 +2,75 @@
 using Services.Sessions;
 using SessionCollector.Views;
 using Shared.UI;
+using Shared.UI.Interfaces;
 using System;
 using xorg.Tools;
 
 namespace SessionCollector
 {
-	/// <summary>
-	/// 1. Загружает список сессий на выбранную дату.
-	/// 2. Создает сессию.
-	/// 3. Открывает сессию в окне сессий.
-	/// 4. Сохраняет сессию, если нажато сохранить.
-	/// 5. Запрещает открытие другой сессии.
-	/// </summary>
 	public class SessionManagerMainPresenter
 	{
-		ISCMainView _view;
-		ISingleSessionView _sessionview;
-		IStataView _stataView;
+		ISCMainView _view = null;
+		Func<ISCMainView> _createMainViewFactory;
+		IInputBox _dialogs;
 
 		ISessionService _sessionService;
-		//ISingleSessionTicker _singleSessionTicker;
 
-		public ISCMainView MainView => _view;
+		Func<IStataView> _stataViewFactory;
+		IStataView _stataView = null;
 
-		private bool _IsRunning;
-		public bool IsRunning => _IsRunning;
-		public void Go()
+		public bool IsWindowRunning => _view != null;
+		public void ShowWindow()
 		{
+			if(_view == null)
+            {
+				_view = _createMainViewFactory();
+
+				_view.DateChanged += _view_DateChanged;
+				_view.StartSession += _view_StartSession;
+				_view.DeleteSession += _view_DeleteSession;
+				_view.KickNextDay += _view_KickNextDay;
+				_view.KickPrevDay += _view_KickPrevDay;
+				_view.WindowClosed += _view_WindowClosed;
+			}
+
 			_view.ShowWindow();
 		}
 
-		public void CreateSession(FTask t)
+		public void ShowStataWindow(INode n)
+        {
+			if (n == null) return;
+
+			if(_stataView == null)
+            {
+				_stataView = _stataViewFactory();
+
+				_stataView.Completed += _stataView_Completed;
+                _stataView.DateChanged += _stataView_DateChanged;
+
+				_stataView.Go(n);
+			}
+		}
+
+        private void _stataView_DateChanged(object sender, EventArgs e)
+        {
+			var i = _sessionService.GetStatistic(
+				_stataView.CurrentDate.Year,
+				_stataView.CurrentDate.Month,
+				_stataView.Node);
+
+			_stataView.Display(i, $"{_stataView.Node.path}{_stataView.Node.name}");
+		}
+
+        private void _stataView_Completed(object sender, EventArgs e)
+        {
+			_stataView.Completed += _stataView_Completed;
+			_stataView.DateChanged += _stataView_DateChanged;
+
+			_stataView = null;
+		}
+
+        public void CreateSession(FTask t)
 		{
 			OSession session = new OSession { Owner = t, NodeId = t.id};
 
@@ -44,64 +82,38 @@ namespace SessionCollector
 			displaySessions(_view.CurrentDateTime);
 		}
 
-		public void CloseApplication()
-		{
-			//if (_singleSessionTicker.IsRunning)
-			//{
-			//	_sessionService.Repo.Save(_singleSessionTicker.CollectTotalSecondsAndStop());
-			//}
+		public void SaveSession(OSession s)
+        {
+			_sessionService.Repo.Save(s);
+			if(_view != null)
+				displaySessions(_view.CurrentDateTime);
 		}
 
+		public event EventHandler<OSession> StartSession;
+
 		public SessionManagerMainPresenter(
-			ISCMainView v, 
-			ISingleSessionView sess_view,
-			IStataView sts, 
+			Func<ISCMainView> SCMainViewFactory,
+			Func<IStataView> stataViewFactiry,
+
+			IInputBox dlg,
 			ISessionService s)
-		{			
-			_view = v;
-			_sessionview = sess_view;
+		{
+			_createMainViewFactory = SCMainViewFactory;
+			_stataViewFactory = stataViewFactiry;
 			_sessionService = s;
-			_stataView = sts;
-
-			_view.CreateSession += _view_CreateSession;
-			_view.DateChanged += _view_DateChanged;
-			_view.OrderAndAlign += _view_OrderAndAlign;
-			_view.StartSession += _view_StartSession;
-			_view.DeleteSession += _view_DeleteSession;
-			_view.StartSessionTick += _view_StartSessionTick;
-			_view.ShowStata += _view_ShowStata;
-			_view.KickNextDay += _view_KickNextDay;
-			_view.KickPrevDay += _view_KickPrevDay;
-			_view.WindowClosed += _view_WindowClosed;
-
-			//_singleSessionTicker.WatchingFinishedAndSaveSecondsRequired += _singleSessionTicker_WatchingFinishedAndSaveRequired;
-			//_singleSessionTicker.WatchingStoppedWithoutSave += _singleSessionTicker_WatchingStoppedWithoutSave;
-
-			_sessionview.ChangeDirectory += _sessionview_ChangeDirectory;
-			_sessionview.WorkCompleted += _sessionview_WorkCompleted;
-			_sessionview.SaveRequired += _sessionview_SaveRequired;
-
-			_IsRunning = true;
+			_dialogs = dlg;
 		}
 
 		private void _view_WindowClosed(object sender, EventArgs e)
 		{
-			_view.CreateSession -= _view_CreateSession;
 			_view.DateChanged -= _view_DateChanged;
-			_view.OrderAndAlign -= _view_OrderAndAlign;
 			_view.StartSession -= _view_StartSession;
 			_view.DeleteSession -= _view_DeleteSession;
-			_view.StartSessionTick -= _view_StartSessionTick;
-			_view.ShowStata -= _view_ShowStata;
 			_view.KickNextDay -= _view_KickNextDay;
 			_view.KickPrevDay -= _view_KickPrevDay;
 			_view.WindowClosed -= _view_WindowClosed;
 
-			_sessionview.ChangeDirectory -= _sessionview_ChangeDirectory;
-			_sessionview.WorkCompleted -= _sessionview_WorkCompleted;
-			_sessionview.SaveRequired -= _sessionview_SaveRequired;
-
-			_IsRunning = false;
+			_view = null;
 		}
 
 		private void _view_KickPrevDay(object sender, OSession e)
@@ -118,81 +130,9 @@ namespace SessionCollector
 			displaySessions(_view.CurrentDateTime);
 		}
 
-		private void _sessionview_SaveRequired(object sender, OSession e)
-		{
-			_sessionService.Repo.Save(e);
-			displaySessions(_view.CurrentDateTime);
-		}
-
-		private void _sessionview_WorkCompleted(object sender, ViewResponse<OSession> e)
-		{
-			if (e.Ok)
-			{
-				_sessionService.Repo.Save(e.Data);
-				displaySessions(_view.CurrentDateTime);
-			}
-		}
-
-		private void _singleSessionTicker_WatchingStoppedWithoutSave(object sender, EventArgs e)
-		{
-			displaySessions(_view.CurrentDateTime);
-		}
-
-		private void _view_ShowStata(object sender, DateTime e)
-		{
-			//// var res = hub.GetThing(HubCmdCode.GetOwnerForSession, null);
-
-			//var res = _directorySelectorBoxPresenter.Go();
-
-			//if (res.Ok)
-			//{
-			//	_stataView.Go(_sessionService.GetStatistic(e.Year, e.Month, res.Data), $"{e.ToString("MMMM, yyyy")} года");
-			//}
-		}
-
-		/*
-		 * >>> 21-10-2021 23:44
-		 * А может передавать целиком объект (сылку на объект) передавать с указанием что изменить.
-		 * Или поменять название события DirectoryIsRequested
-		 * 
-		 */
-		private void _sessionview_ChangeDirectory(object sender, ViewRequest<OSession, INode> e)
-		{
-			//var res = _directorySelectorBoxPresenter.Go(e.Parameter.Owner);
-
-			//e.Response = res;		
-		}
-
-		// 111. Обрабатываем результат
-		// >>> 25-09-2021 02:20
-		// Заменить на изменение состояние. Тогда можно оперативно изменять цвет состояния сессии.
-		// >>> 25-09-2021 02:30
-		// И если уйдем от коннектед сценарои к дисконнектед, тогда это состояние надо мапить в бд.
-		//		и при загрузке приложения искать среди сессий в этом состоянии, автоматом открывать для нее счетчик.
-		//	Либо при закрытии забывать и все. С автосохранением остатка времени.
-		private void _singleSessionTicker_WatchingFinishedAndSaveRequired(object sender, int e)
-		{
-			////var ses = _singleSessionTicker.WatchedSession;
-			////ses.TotalSeconds = _singleSessionTicker.TotalSeconds;// it is not necessary to do it. About it _singleSessionTicker has tooken care of this
-			//_sessionService.Repo.Save(_singleSessionTicker.WatchedSession);
-			//displaySessions(_view.CurrentDateTime);
-		}
-
-		// 111. Отправляем
-		private void _view_StartSessionTick(object sender, OSession e)
-		{
-			//if (_singleSessionTicker.IsRunning)
-			//{
-			//	_view.ShowMessage("There is a session being already watched.");
-			//	return;
-			//}
-			//_singleSessionTicker.StartWatching(e);
-			//displaySessions(_view.CurrentDateTime);
-		}
-
 		private void _view_DeleteSession(object sender, OSession e)
 		{
-			if (_view.UserAnsweredYes($"Session will be killed at all\n{e.Description}"))
+			if (_dialogs.UserAnsweredYes($"Session will be killed at all\n{e.Description}"))
 			{
 				_sessionService.Repo.Delete(e);
 				displaySessions(_view.CurrentDateTime);
@@ -201,23 +141,11 @@ namespace SessionCollector
 
 		private void _view_StartSession(object sender, OSession e)
 		{
-			if (_sessionview.IsWorking)
-			{
-				_view.ShowMessage("There is a working session");
-				return;
-			}
-			_sessionview.Go(e.Clone());
+			StartSession?.Invoke(this, e);
 		}
 
 		private void displaySessions(DateTime d)
 		{
-			//var items = _repoSessions.GetOfDay(d);
-			////items = _sessionService.SortAndAlign(items);
-
-			//var hrs = _sessionService.AllocatedHours(items);
-			//var finish = _sessionService.LastSessionFinish(items);
-			//var doneSeconds = _sessionService.DoneWorkInSeconds(items);
-
 			_sessionService.SetCollectionOfDate(d);
 
 			_view.DisplaySessions(
@@ -227,34 +155,9 @@ namespace SessionCollector
 				_sessionService.LastSessionFinish);
 		}
 
-		private void _view_OrderAndAlign(object sender, DateTime e)
-		{
-			//var items = _mainRepository.Sessions.GetByDay(e);
-			//items = _services.Sessions.SortAndAlign(items);
-			//_view.DisplaySessions(items);
-
-			displaySessions(e);
-		}
-
 		private void _view_DateChanged(object sender, DateTime e)
 		{
 			displaySessions(e);
-		}
-
-		private void _view_CreateSession(object sender, DateTime e)
-		{
-			if (_sessionview.IsWorking)
-			{
-				_view.ShowMessage("There is a working session");
-				return;
-			}
-
-			OSession session = new OSession();
-
-			session.Start = e;
-			session.ProvidedSeconds = 3600;
-
-			_sessionview.Go(session);
 		}
 	}
 }

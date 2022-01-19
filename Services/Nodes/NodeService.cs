@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using xorg.Tools;
 
 namespace Services.Nodes
 {
@@ -82,6 +83,7 @@ namespace Services.Nodes
 		public void Save(INode d)
 		{
 			_repo.Save(d);
+			//updateData();
 		}
 
 		public void Delete(INode d)
@@ -105,9 +107,14 @@ namespace Services.Nodes
 			_navigator.Enter(n);
 		}
 
-		public IEnumerable<FTask> GetCompletedTasks()
+		public IEnumerable<FTask> GetCompletedTasks(int year, int month)
 		{
-			return _repo.GetCompletedTasks().OrderByDescending(x => x.completed_date);
+			return _repo.GetCompletedTasks(year, month).OrderByDescending(x => x.completed_date);
 		}
-	}
+
+        public IEnumerable<OSession> GetTopSessions(DateTime today, int taskId, int top, int page)
+        {
+			return _repo.GetTopSessions(today, taskId, top, page);
+        }
+    }
 }
