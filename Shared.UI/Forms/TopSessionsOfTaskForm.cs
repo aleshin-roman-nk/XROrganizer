@@ -48,7 +48,9 @@ namespace Shared.UI.Forms
 
             foreach (var item in sessions)
             {
-                res.AppendLine($">>> {item.Start}");
+                var total_time = TimeSpan.FromSeconds(item.TotalSeconds);
+
+                res.AppendLine($">>> {item.Start.ToString("dd-MM-yyyy HH:mm")} total :{(int)total_time.TotalHours}:{total_time.Minutes:d2}");
                 if (string.IsNullOrEmpty(item.Description))
                     res.AppendLine("******************************************");
                 else

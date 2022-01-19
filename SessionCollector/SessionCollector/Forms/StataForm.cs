@@ -45,7 +45,7 @@ namespace SessionCollector.Forms
             //chart1.Titles.Add($"{title}; Total time: {TimeSpan.FromSeconds(points.Sum(x=>x.Seconds)).ToString(@"hh\:mm")}");
 
             var total_time = TimeSpan.FromSeconds(points.Sum(x => x.Seconds));
-            chart1.Titles.Add($"{title}; Total time: {(int)total_time.TotalHours}:{total_time.Minutes}");
+            chart1.Titles.Add($"{title}; Total time: {(int)total_time.TotalHours}:{total_time.Minutes:d2}");
 
             _CurrentDataPoint.OriginalColor = chart1.PaletteCustomColors[0];
 

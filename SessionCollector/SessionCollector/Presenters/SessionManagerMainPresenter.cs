@@ -59,7 +59,8 @@ namespace SessionCollector
 				_stataView.CurrentDate.Month,
 				_stataView.Node);
 
-			_stataView.Display(i, $"{_stataView.Node.path}{_stataView.Node.name}");
+			var _name = _stataView.Node.type == Domain.Enums.NType.Dir ? _stataView.Node.name : $"#{_stataView.Node.id}";
+			_stataView.Display(i, $"{_stataView.Node.path}{_name}");
 		}
 
         private void _stataView_Completed(object sender, EventArgs e)
