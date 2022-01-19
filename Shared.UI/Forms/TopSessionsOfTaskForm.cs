@@ -97,11 +97,16 @@ namespace Shared.UI.Forms
         public void Display(IEnumerable<OSession> sessions)
         {
             var str = generateView(sessions);
-            if(string.IsNullOrEmpty(str))
+            if(string.IsNullOrEmpty(str) && _page != 0)
             {
                 _page--;
                 lblPageNumber.Text = _page.ToString();
                 OnPageChanged();
+                return;
+            }
+            else if (string.IsNullOrEmpty(str) && _page == 0)
+            {
+                richTextBox1.Text = "[no session]";
                 return;
             }
 
