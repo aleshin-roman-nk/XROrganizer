@@ -26,7 +26,7 @@ namespace Domain.Entities
 		{
 			get
 			{
-				return Node == null ? "" : Node.definition;
+				return Node == null ? "" : Node.text;
 			}
 		}
 		public string path

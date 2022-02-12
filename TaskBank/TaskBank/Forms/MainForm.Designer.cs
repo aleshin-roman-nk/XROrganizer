@@ -37,8 +37,6 @@
             this.btntsCreate = new System.Windows.Forms.ToolStripButton();
             this.btntsRename = new System.Windows.Forms.ToolStripButton();
             this.btntsDelete = new System.Windows.Forms.ToolStripButton();
-            this.btntsTimeTag = new System.Windows.Forms.ToolStripButton();
-            this.btntsTaskTag = new System.Windows.Forms.ToolStripButton();
             this.btntsCreateSession = new System.Windows.Forms.ToolStripButton();
             this.stbtnPutTaskToBuffer = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -46,11 +44,13 @@
             this.tsbtnShowBuffer = new System.Windows.Forms.ToolStripButton();
             this.tsbtnSessionCollector = new System.Windows.Forms.ToolStripButton();
             this.stbtnViewEditDescription = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnShowStatistic = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btntsTimeTag = new System.Windows.Forms.ToolStripButton();
+            this.btntsTaskTag = new System.Windows.Forms.ToolStripButton();
             this.label4 = new System.Windows.Forms.Label();
             this.nodesViewUC1 = new Shared.UI.UserControls.NodesViewUC();
             this.btnSessionState = new System.Windows.Forms.Button();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbtnShowStatistic = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -151,28 +151,6 @@
             this.btntsDelete.Text = "Delete (Del)";
             this.btntsDelete.Click += new System.EventHandler(this.btntsDelete_Click);
             // 
-            // btntsTimeTag
-            // 
-            this.btntsTimeTag.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btntsTimeTag.Image = ((System.Drawing.Image)(resources.GetObject("btntsTimeTag.Image")));
-            this.btntsTimeTag.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btntsTimeTag.Name = "btntsTimeTag";
-            this.btntsTimeTag.Size = new System.Drawing.Size(32, 32);
-            this.btntsTimeTag.Text = "toolStripButton1";
-            this.btntsTimeTag.ToolTipText = "Time tag";
-            this.btntsTimeTag.Click += new System.EventHandler(this.btntsTimeTag_Click);
-            // 
-            // btntsTaskTag
-            // 
-            this.btntsTaskTag.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btntsTaskTag.Image = ((System.Drawing.Image)(resources.GetObject("btntsTaskTag.Image")));
-            this.btntsTaskTag.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btntsTaskTag.Name = "btntsTaskTag";
-            this.btntsTaskTag.Size = new System.Drawing.Size(32, 32);
-            this.btntsTaskTag.Text = "toolStripButton1";
-            this.btntsTaskTag.ToolTipText = "Task tag";
-            this.btntsTaskTag.Click += new System.EventHandler(this.btntsTaskTag_Click);
-            // 
             // btntsCreateSession
             // 
             this.btntsCreateSession.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -238,6 +216,43 @@
             this.stbtnViewEditDescription.Text = "Quick view and edit";
             this.stbtnViewEditDescription.Click += new System.EventHandler(this.stbtnViewEditDescription_Click);
             // 
+            // tsbtnShowStatistic
+            // 
+            this.tsbtnShowStatistic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnShowStatistic.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnShowStatistic.Image")));
+            this.tsbtnShowStatistic.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnShowStatistic.Name = "tsbtnShowStatistic";
+            this.tsbtnShowStatistic.Size = new System.Drawing.Size(32, 32);
+            this.tsbtnShowStatistic.Text = "Statistic";
+            this.tsbtnShowStatistic.Click += new System.EventHandler(this.tsbtnShowStatistic_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
+            // 
+            // btntsTimeTag
+            // 
+            this.btntsTimeTag.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btntsTimeTag.Image = ((System.Drawing.Image)(resources.GetObject("btntsTimeTag.Image")));
+            this.btntsTimeTag.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btntsTimeTag.Name = "btntsTimeTag";
+            this.btntsTimeTag.Size = new System.Drawing.Size(32, 32);
+            this.btntsTimeTag.Text = "toolStripButton1";
+            this.btntsTimeTag.ToolTipText = "Time tag";
+            this.btntsTimeTag.Click += new System.EventHandler(this.btntsTimeTag_Click);
+            // 
+            // btntsTaskTag
+            // 
+            this.btntsTaskTag.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btntsTaskTag.Image = ((System.Drawing.Image)(resources.GetObject("btntsTaskTag.Image")));
+            this.btntsTaskTag.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btntsTaskTag.Name = "btntsTaskTag";
+            this.btntsTaskTag.Size = new System.Drawing.Size(32, 32);
+            this.btntsTaskTag.Text = "toolStripButton1";
+            this.btntsTaskTag.ToolTipText = "Task tag";
+            this.btntsTaskTag.Click += new System.EventHandler(this.btntsTaskTag_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -271,21 +286,6 @@
             this.btnSessionState.UseVisualStyleBackColor = true;
             this.btnSessionState.Click += new System.EventHandler(this.btnSessionState_Click);
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
-            // 
-            // tsbtnShowStatistic
-            // 
-            this.tsbtnShowStatistic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbtnShowStatistic.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnShowStatistic.Image")));
-            this.tsbtnShowStatistic.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbtnShowStatistic.Name = "tsbtnShowStatistic";
-            this.tsbtnShowStatistic.Size = new System.Drawing.Size(32, 32);
-            this.tsbtnShowStatistic.Text = "Statistic";
-            this.tsbtnShowStatistic.Click += new System.EventHandler(this.tsbtnShowStatistic_Click);
-            // 
             // MainForm
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(224)))));
@@ -302,6 +302,7 @@
             this.KeyPreview = true;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

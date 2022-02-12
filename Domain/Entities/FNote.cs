@@ -22,9 +22,9 @@ namespace Domain.Entities
 		{
 			get
 			{
-				if (definition == null) return "";
-				int lenght = definition.Length > 100 ? 100 : definition.Length;
-				return definition.Substring(0, lenght) + "...";
+				if (text == null) return "";
+				int lenght = text.Length > 100 ? 100 : text.Length;
+				return text.Substring(0, lenght) + "...";
 			}
 		}
 

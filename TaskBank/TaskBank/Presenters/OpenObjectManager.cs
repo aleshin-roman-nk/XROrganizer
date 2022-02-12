@@ -18,15 +18,25 @@ namespace TaskBank.Presenters
 		Func<ISingleSessionView> _sessionWindowFactory;
 		Func<ITopSessionsOfTaskView> _topSessionsFactory;
 
-		public event EventHandler<FTask> SaveTask;
+		public event EventHandler<SaveNodeEventArgs> SaveTask;
 		public event EventHandler<OSession> SaveSession;
 		public event EventHandler<int> OpenTasksCountChanged;
 		public event EventHandler<bool> WorkingSessionStateChanged;
 		public event EventHandler<RequestSessionsPageOpenObjectManagerEvenArgs> SessionsRequired;
+		public event EventHandler<RequestFTaskOpenObjectManagerEventArgs> FTaskRequired;
+		public event EventHandler<INode> CreateSession;
 
 		public bool IsOpened(int inodeId)
         {
 			return _openedTasks.Any(x => x.ObjId == inodeId);
+		}
+
+		public bool AnyWorkingWindow
+		{
+			get
+			{
+				return _openedTasks.Count > 0 || _openedSession != null;
+			}
 		}
 
 		public OpenObjectManager(
@@ -104,12 +114,31 @@ namespace TaskBank.Presenters
             frm.Save += Frm_Save;
             frm.Completed += Frm_Completed;
             frm.ShowTopSessions += Frm_ShowTopSessions;
+            frm.CreateSession += Frm_CreateSession;
+            frm.OpenNodeById += Frm_OpenNodeById;
 
 			_openedTasks.Add(frm);
 			OpenTasksCountChanged?.Invoke(this, _openedTasks.Count);
 
 			frm.Go(t);
 		}
+
+        private void Frm_OpenNodeById(object sender, int e)
+        {
+			var args = new RequestFTaskOpenObjectManagerEventArgs(e);
+
+			FTaskRequired?.Invoke(this, args);
+
+            if (args.NodeExists)
+            {
+				OpenTask(args.Node as FTask);
+			}
+		}
+
+        private void Frm_CreateSession(object sender, INode e)
+        {
+            CreateSession?.Invoke(this, e);
+        }
 
         private void Frm_ShowTopSessions(object sender, DisplaySessionsPageEventArg e)
         {
@@ -154,13 +183,15 @@ namespace TaskBank.Presenters
 				frm.Save -= Frm_Save;
 				frm.Completed -= Frm_Completed;
 				frm.ShowTopSessions -= Frm_ShowTopSessions;
+				frm.CreateSession -= Frm_CreateSession;
+				frm.OpenNodeById -= Frm_OpenNodeById;
 
 				_openedTasks.Remove(frm);
 				OpenTasksCountChanged?.Invoke(this, _openedTasks.Count);
 			}
 		}
 
-        private void Frm_Save(object sender, FTask e)
+        private void Frm_Save(object sender, SaveNodeEventArgs e)
         {
 			SaveTask?.Invoke(this, e);
 		}

@@ -263,6 +263,8 @@
     <Compile Include="Forms\DescriptionForm.Designer.cs">
       <DependentUpon>DescriptionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\EventDefinition\ApplicationClosingEventArgs.cs" />
+    <Compile Include="Presenters\EventDefinition\RequestFTaskOpenObjectManagerEventArgs.cs" />
     <Compile Include="Presenters\EventDefinition\RequestSessionsPageOpenObjectManagerEvenArgs.cs" />
     <Compile Include="Presenters\FilesPresenter.cs" />
     <Compile Include="Presenters\Hub.cs" />

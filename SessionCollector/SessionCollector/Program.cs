@@ -2,6 +2,7 @@
 using Domain.Repos;
 using Services.Sessions;
 using SessionCollector.Forms;
+using SessionCollector.Presenters;
 using SessionCollector.Views;
 using Shared.UI;
 using Shared.UI.Forms;

@@ -16,7 +16,9 @@ namespace Shared.UI.Interfaces
 		int ObjId { get; }
 		void Restore();
 		event EventHandler Completed;
-		event EventHandler<FTask> Save;
+		event EventHandler<SaveNodeEventArgs> Save;
 		event EventHandler<DisplaySessionsPageEventArg> ShowTopSessions;
+		event EventHandler<INode> CreateSession;
+		event EventHandler<int> OpenNodeById;
 	}
 }

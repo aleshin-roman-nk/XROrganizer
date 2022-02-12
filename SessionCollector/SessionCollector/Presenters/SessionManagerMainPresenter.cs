@@ -6,7 +6,7 @@ using Shared.UI.Interfaces;
 using System;
 using xorg.Tools;
 
-namespace SessionCollector
+namespace SessionCollector.Presenters
 {
 	public class SessionManagerMainPresenter
 	{
@@ -18,6 +18,9 @@ namespace SessionCollector
 
 		Func<IStataView> _stataViewFactory;
 		IStataView _stataView = null;
+
+		public event EventHandler<OSession> StartSession;
+		//public event EventHandler<ExtendSessionTomorrowEventArgs> ExtendSessionTomorrow;
 
 		public bool IsWindowRunning => _view != null;
 		public void ShowWindow()
@@ -32,12 +35,38 @@ namespace SessionCollector
 				_view.KickNextDay += _view_KickNextDay;
 				_view.KickPrevDay += _view_KickPrevDay;
 				_view.WindowClosed += _view_WindowClosed;
+                _view.ExtendSessionTomorrow += _view_ExtendSessionTomorrow;
 			}
 
 			_view.ShowWindow();
 		}
 
-		public void ShowStataWindow(INode n)
+		private void _view_WindowClosed(object sender, EventArgs e)
+		{
+			_view.DateChanged -= _view_DateChanged;
+			_view.StartSession -= _view_StartSession;
+			_view.DeleteSession -= _view_DeleteSession;
+			_view.KickNextDay -= _view_KickNextDay;
+			_view.KickPrevDay -= _view_KickPrevDay;
+			_view.WindowClosed -= _view_WindowClosed;
+			_view.ExtendSessionTomorrow -= _view_ExtendSessionTomorrow;
+
+			_view = null;
+		}
+
+		private void _view_ExtendSessionTomorrow(object sender, OSession e)
+        {
+			var d = _view.CurrentDateTime.AddDays(1);
+
+			if (_creatingAllowed(e.NodeId, d) == false) return;
+
+			//ExtendSessionTomorrow?.Invoke(sender, new ExtendSessionTomorrowEventArgs(e.NodeId, _view.CurrentDateTime));
+			OSession s = new OSession { NodeId = e.NodeId, Start = d, ProvidedSeconds = 3600 };
+			_sessionService.Repo.Save(s);
+
+			_dialogs.ShowMessage("Session has successfully created");
+		}
+        public void ShowStataWindow(INode n)
         {
 			if (n == null) return;
 
@@ -73,6 +102,8 @@ namespace SessionCollector
 
         public void CreateSession(FTask t)
 		{
+			if (_creatingAllowed(t.id, _view.CurrentDateTime) == false) return;
+
 			OSession session = new OSession { Owner = t, NodeId = t.id};
 
 			session.Start = _view.CurrentDateTime;
@@ -83,6 +114,16 @@ namespace SessionCollector
 			displaySessions(_view.CurrentDateTime);
 		}
 
+		bool _creatingAllowed(int nodeid, DateTime d)
+        {
+			if(_sessionService.Repo.SessionExists(nodeid, d))
+            {
+				return _dialogs.UserAnsweredYes($"Session of task you want to create is already created. Do you want to create a duplicate");
+            }
+
+			return true;
+        }
+
 		public void SaveSession(OSession s)
         {
 			_sessionService.Repo.Save(s);
@@ -90,7 +131,7 @@ namespace SessionCollector
 				displaySessions(_view.CurrentDateTime);
 		}
 
-		public event EventHandler<OSession> StartSession;
+
 
 		public SessionManagerMainPresenter(
 			Func<ISCMainView> SCMainViewFactory,
@@ -105,29 +146,29 @@ namespace SessionCollector
 			_dialogs = dlg;
 		}
 
-		private void _view_WindowClosed(object sender, EventArgs e)
-		{
-			_view.DateChanged -= _view_DateChanged;
-			_view.StartSession -= _view_StartSession;
-			_view.DeleteSession -= _view_DeleteSession;
-			_view.KickNextDay -= _view_KickNextDay;
-			_view.KickPrevDay -= _view_KickPrevDay;
-			_view.WindowClosed -= _view_WindowClosed;
 
-			_view = null;
-		}
 
 		private void _view_KickPrevDay(object sender, OSession e)
 		{
+			DateTime d = e.Start.AddDays(-1);
+			if (_creatingAllowed(e.NodeId, d) == false) return;
+
 			if (e == null) return;
-			_sessionService.KickSessionToPrevDay(e);
+
+			e.Start = d;
+			_sessionService.Repo.Save(e);
 			displaySessions(_view.CurrentDateTime);
 		}
 
 		private void _view_KickNextDay(object sender, OSession e)
 		{
+			DateTime d = e.Start.AddDays(1);
+			if (_creatingAllowed(e.NodeId, d) == false) return;
+
 			if (e == null) return;
-			_sessionService.KickSessionToNextDay(e);
+
+			e.Start = d;
+			_sessionService.Repo.Save(e);
 			displaySessions(_view.CurrentDateTime);
 		}
 

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TaskBank.Forms;
+using TaskBank.Presenters.EventDefinition;
 using TaskBank.Views;
 
 namespace TaskBank
@@ -14,6 +15,7 @@ namespace TaskBank
 	{
 		public INodesView NodesView => nodesViewUC1;
 		public Point LocationPoint => Location;
+		IInputBox _inputBox;
 
 		public int width => Width;
 
@@ -66,9 +68,10 @@ namespace TaskBank
 			}
         }
 
-        public MainForm()
+        public MainForm(IInputBox dlg)
 		{
 			InitializeComponent();
+			_inputBox = dlg;
 
 			setBufferState(0);
 		}
@@ -84,6 +87,7 @@ namespace TaskBank
         public event EventHandler RestoreWorkingSessionWindow;
         public event EventHandler PutTaskToBuffer;
         public event EventHandler StartStatisticWindow;
+        public event EventHandler<ApplicationClosingEventArgs> ApplicationClosing;
 
         void setBufferState(int items_cnt)
 		{
@@ -201,5 +205,19 @@ namespace TaskBank
         {
 			StartStatisticWindow?.Invoke(this, EventArgs.Empty);
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+			var arg = new ApplicationClosingEventArgs();
+
+			ApplicationClosing?.Invoke(this, arg);
+
+			e.Cancel = arg.AnyWorkingWindows == true;
+
+			if(arg.AnyWorkingWindows == true)
+            {
+				_inputBox.ShowMessage("There are working windows");
+			}
+		}
     }
 }

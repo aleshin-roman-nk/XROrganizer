@@ -12,7 +12,7 @@ namespace Services.Nodes
 		void JumpBack();
 		void Enter(INode n);
 		INode Create(INode d);
-		void Save(INode d);
+		int Save(INode d);
 		void Delete(INode d);
 		bool HasChildren(INode d);
 		void MoveNodesToDirectory(Dir owner, IEnumerable<INode> notes);
@@ -22,5 +22,7 @@ namespace Services.Nodes
 		IEnumerable<FTask> GetCompletedTasks(int year, int month);
 
 		IEnumerable<OSession> GetTopSessions(DateTime today, int taskId, int top, int page);
+
+		FTask GetTask(int taskId);
 	}
 }

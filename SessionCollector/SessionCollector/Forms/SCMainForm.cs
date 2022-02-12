@@ -44,9 +44,10 @@ namespace SessionCollector
 		public event EventHandler<OSession> KickNextDay;
 		public event EventHandler<OSession> KickPrevDay;
 		public event EventHandler WindowClosed;
+        public event EventHandler<OSession> ExtendSessionTomorrow;
 
-		//public event EventHandler NotifyShown;
-		bool _hideComplSessions = true;
+        //public event EventHandler NotifyShown;
+        bool _hideComplSessions = true;
 		private bool hideComplSessions
 		{
 			get
@@ -73,7 +74,7 @@ namespace SessionCollector
 
 		public void DisplaySessions(IEnumerable<OSession> list, decimal hours, decimal doneSecnds, DateTime? eod)
 		{
-			_originalCollectio = list;
+			_originalCollectio = list.OrderBy(x => x.Name).ToList();
 
 			//var j = Tools.JsonTool.Serialize(_originalCollectio.FirstOrDefault());
 			//MessageBox.Show(j);
@@ -182,6 +183,14 @@ namespace SessionCollector
 			var i = dgvSessions.Rows[e.RowIndex].DataBoundItem as OSession;
 
 			StartSession?.Invoke(this, i);
+		}
+
+        private void btnDoItTomorrow_Click(object sender, EventArgs e)
+        {
+			var s = _current_session;
+			if(s == null) return;
+
+			ExtendSessionTomorrow?.Invoke(this, s);
 		}
     }
 }

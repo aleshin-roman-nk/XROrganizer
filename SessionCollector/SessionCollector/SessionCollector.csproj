@@ -234,6 +234,7 @@
     <Compile Include="Forms\SessionLogItemCollectionEditForm.Designer.cs">
       <DependentUpon>SessionLogItemCollectionEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\ExtendSessionTomorrowEventArgs.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

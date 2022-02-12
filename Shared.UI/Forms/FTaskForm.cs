@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -32,13 +33,17 @@ namespace Shared.UI.Forms
 	public partial class FTaskForm : Form, IFTaskEditView
 	{
 		SavingObserver savingObserver;
+		NodeTextPages nodeTextPages;
 
 		FTask _ent = null;
-		FTask _origin = null;
 
-		public FTaskForm()
+		IInputBox _dlg;
+
+		public FTaskForm(IInputBox dlg)
 		{
 			InitializeComponent();
+
+			_dlg = dlg;
 
 			savingObserver = new SavingObserver();
 			savingObserver.Indicator = lblSaved;
@@ -75,30 +80,52 @@ namespace Shared.UI.Forms
 			}
 		}
 
-		public int ObjId => _origin.id;
+		public int ObjId => _ent.id;
 
 		private void _set(FTask o)
 		{
-			_origin = o;
-			_ent = JsonTool.Clone(_origin);
+			_ent = o;
 
-			richTextBoxDescription.Text = o.definition;
-			isCompleted = o.IsCompleted;
-			lblDate.Text = o.date.Value.ToShortDateString();
-			textBox1Name.Text = o.name;
-			lblFullPath.Text = $"{o.path}#{o.id}";
+			//richTextBoxDescription.Text = o.text;
+			isCompleted = _ent.IsCompleted;
+			lblDate.Text = _ent.date.Value.ToShortDateString();
+			txtFullPath.Text = $"{_ent.path}#{_ent.id}";
+			checkBox1Pinned.Checked = _ent.pinned;
+
+			nodeTextPages = new NodeTextPages(_ent.text);
+			richTextBoxDescription.Text = nodeTextPages.Page;
+			txtPageText.Text = $"{nodeTextPages.PageNo}/{nodeTextPages.MaxPage}";
 		}
 
 		private FTask _get()
 		{
 			// todo: collect all properties
 			_ent.IsCompleted = isCompleted;
-			_ent.definition = richTextBoxDescription.Text;
-			_ent.name = textBox1Name.Text;
+			//_ent.text = richTextBoxDescription.Text;
+			_ent.pinned = checkBox1Pinned.Checked;
+			_ent.text = nodeTextPages.DbText;
 
-			_ent.CopyPropertiesTo(_origin);
+			nodeTextPages.Page = richTextBoxDescription.Text;
+			_ent.text = nodeTextPages.DbText;
+			updateName(_ent);
 
 			return _ent;
+		}
+
+		private void updateName(FTask ent)
+        {
+			if (!string.IsNullOrEmpty(_ent.name)) return;
+
+			string str = nodeTextPages.FirstPageText();
+
+			// c# 8.0 or higher
+			//using var reader = new StringReader(str);
+			//string first = reader.ReadLine();
+
+			using (var reader = new StringReader(str))
+			{
+				ent.name = reader.ReadLine();
+			}
 		}
 
 		private void btnComlete_Click(object sender, EventArgs e)
@@ -111,25 +138,27 @@ namespace Shared.UI.Forms
 		}
 
         public event EventHandler Completed;
-        public event EventHandler<FTask> Save;
+        public event EventHandler<SaveNodeEventArgs> Save;
         public event EventHandler<DisplaySessionsPageEventArg> ShowTopSessions;
+		public event EventHandler<INode> CreateSession;
+        public event EventHandler<int> OpenNodeById;
 
         private void FTaskForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			Completed?.Invoke(this, EventArgs.Empty);
 		}
 
+		private void OnNodeSave()
+        {
+			SaveNodeEventArgs ev = new SaveNodeEventArgs(_get());
+			Save?.Invoke(this, ev);
+			savingObserver.Saved = ev.IsNodeSaved;
+        }
+
 		private void button1save_Click(object sender, EventArgs e)
 		{
-			Save?.Invoke(this, _get());
+			OnNodeSave();
 			Close();
-		}
-
-		private void btnUpdateTaskName_Click(object sender, EventArgs e)
-		{
-			_ent.definition = richTextBoxDescription.Text;
-			_ent.updateNameFromDescription();
-			textBox1Name.Text = _ent.name;
 		}
 
 		public void AddProperty(string name, string value)
@@ -150,8 +179,9 @@ namespace Shared.UI.Forms
 		{
 			if (e.KeyCode == Keys.S && e.Control)
 			{
-				Save?.Invoke(this, _get());
-				savingObserver.Saved = true;
+				//Save?.Invoke(this, _get());
+				//savingObserver.Saved = true;
+				OnNodeSave();
 				e.Handled = true;
 			}
 		}
@@ -182,5 +212,92 @@ namespace Shared.UI.Forms
 					$"{_ent.path}#{_ent.id}",
 					_ent.id));
 		}
+
+        private void btnCreateSession_Click(object sender, EventArgs e)
+        {
+			CreateSession?.Invoke(this, _ent);
+        }
+
+        private void toolStripMenuItem1OpenNodeById_Click(object sender, EventArgs e)
+        {
+			var txt = richTextBoxDescription.SelectedText;
+
+			if (!string.IsNullOrEmpty(txt))
+            {
+				int i = 0;
+				if (int.TryParse(txt, out i))
+					OpenNodeById?.Invoke(this, i);
+            }
+        }
+
+        private void btnTimeTag_Click(object sender, EventArgs e)
+        {
+			richTextBoxDescription.SelectedText = $">>> {DateTime.Now.ToString("dd-MM-yyyy HH:mm")}";
+
+			//try
+			//{
+			//	Clipboard.Clear();
+			//	Clipboard.SetText(res);
+			//}
+			//catch (Exception)
+			//{
+
+			//}
+		}
+
+        private void btnNextPage_Click(object sender, EventArgs e)
+        {
+			bool saved = savingObserver.Saved;// we want to remember if any page is not saved in db
+			nodeTextPages.Page = richTextBoxDescription.Text;
+			nodeTextPages.nextPage();
+			richTextBoxDescription.Text = nodeTextPages.Page;
+			txtPageText.Text = $"{nodeTextPages.PageNo}/{nodeTextPages.MaxPage}";
+			savingObserver.Saved = saved;
+		}
+
+        private void btnPrevPage_Click(object sender, EventArgs e)
+        {
+			bool saved = savingObserver.Saved;
+			nodeTextPages.Page = richTextBoxDescription.Text;
+			nodeTextPages.prevPage();
+			richTextBoxDescription.Text = nodeTextPages.Page;
+			txtPageText.Text = $"{nodeTextPages.PageNo}/{nodeTextPages.MaxPage}";
+			savingObserver.Saved = saved;
+		}
+
+        private void brnAddPage_Click(object sender, EventArgs e)
+        {
+			bool saved = savingObserver.Saved;
+			nodeTextPages.Page = richTextBoxDescription.Text;
+			nodeTextPages.AddPage("", "");
+			richTextBoxDescription.Text = nodeTextPages.Page;
+			txtPageText.Text = $"{nodeTextPages.PageNo}/{nodeTextPages.MaxPage}";
+			savingObserver.Saved = saved;
+		}
+
+        private void btnKillPage_Click(object sender, EventArgs e)
+        {
+			bool saved = savingObserver.Saved;
+			nodeTextPages.killPage();
+			richTextBoxDescription.Text = nodeTextPages.Page;
+			txtPageText.Text = $"{nodeTextPages.PageNo}/{nodeTextPages.MaxPage}";
+			savingObserver.Saved = saved;
+		}
+
+        private void FTaskForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!savingObserver.Saved)
+            {
+				var resp = _dlg.AskUser("There are something unsaved. Do you want to save?");
+				if(resp == DlgAnswerCode.yes)
+                {
+					OnNodeSave();
+                }
+				else if (resp == DlgAnswerCode.cancel)
+                {
+					e.Cancel = true;
+                }
+			}
+        }
     }
 }

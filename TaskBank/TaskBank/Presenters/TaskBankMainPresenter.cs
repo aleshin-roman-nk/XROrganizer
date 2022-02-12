@@ -3,10 +3,12 @@ using Domain.Enums;
 using Domain.Repos;
 using Services.Nodes;
 using SessionCollector;
+using SessionCollector.Presenters;
 using Shared.UI;
 using Shared.UI.Dlg;
 using Shared.UI.Forms;
 using Shared.UI.Interfaces;
+using Shared.UI.Interfaces.EventArgsDefinition;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,6 +79,7 @@ namespace TaskBank.Presenters
             _mainView.RestoreWorkingSessionWindow += _mainView_RestoreWorkingSessionWindow;
             _mainView.PutTaskToBuffer += _mainView_PutTaskToBuffer;
             _mainView.StartStatisticWindow += _mainView_StartStatisticWindow;
+            _mainView.ApplicationClosing += _mainView_ApplicationClosing;
 
 			_descView.Save += DescView_Save;
 
@@ -87,11 +90,38 @@ namespace TaskBank.Presenters
             _openObjectManager.OpenTasksCountChanged += _openObjectManager_OpenTasksCountChanged;
             _openObjectManager.WorkingSessionStateChanged += _openObjectManager_WorkingSessionStateChanged;
             _openObjectManager.SessionsRequired += _openObjectManager_SessionsRequired;
+            _openObjectManager.CreateSession += _openObjectManager_CreateSession;
+            _openObjectManager.FTaskRequired += _openObjectManager_FTaskRequired;
 
 
 			_sessionManagerMainPresenter.StartSession += _sessionManagerMainPresenter_StartSession;
-
+           
 			update();
+		}
+
+        private void _openObjectManager_FTaskRequired(object sender, RequestFTaskOpenObjectManagerEventArgs e)
+        {
+			var res = _service.GetTask(e.taskId);
+
+			if(res == null)
+            {
+				e.NodeExists = false;
+            }
+            else
+            {
+				e.NodeExists = true;
+				e.Node = res;
+            }
+        }
+
+        private void _mainView_ApplicationClosing(object sender, ApplicationClosingEventArgs e)
+        {
+			e.AnyWorkingWindows = _openObjectManager.AnyWorkingWindow;
+        }
+
+        private void _openObjectManager_CreateSession(object sender, INode e)
+        {
+			_createSession(e);
 		}
 
         private void _openObjectManager_SessionsRequired(object sender, RequestSessionsPageOpenObjectManagerEvenArgs e)
@@ -149,17 +179,18 @@ namespace TaskBank.Presenters
 			_sessionManagerMainPresenter.SaveSession(e);
 		}
 
-        private void _openObjectManager_SaveTask(object sender, FTask e)
+        private void _openObjectManager_SaveTask(object sender, SaveNodeEventArgs e)
         {
-			_service.Save(e);
-			if (_completedTasksView != null)
-				_completedTasksView.Display(
-					_service.GetCompletedTasks(
-						_completedTasksView.CurrentDate.Year,
-						_completedTasksView.CurrentDate.Month));
+			e.IsNodeSaved = _service.Save(e.Node) > 0;
 
-			update();
-		}
+            if (_completedTasksView != null)
+                _completedTasksView.Display(
+                    _service.GetCompletedTasks(
+                        _completedTasksView.CurrentDate.Year,
+                        _completedTasksView.CurrentDate.Month));
+
+            update();
+        }
 
         private void _mainView_CreateSession(object sender, EventArgs e)
 		{
@@ -268,7 +299,7 @@ namespace TaskBank.Presenters
 			var i = _mainView.NodesView.SelectedNodes.FirstOrDefault();
 			if (i.type < 0) return;
 
-			if (_dialogs.UserAnsweredYes($"Are you sure to kill {i.name} / {i.definition}"))
+			if (_dialogs.UserAnsweredYes($"Are you sure to kill {i.name} / {i.text}"))
 			{
 				_service.Delete(i);
 				update();

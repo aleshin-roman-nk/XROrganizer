@@ -11,6 +11,8 @@ namespace TestingConsole
 	{
 		static void Main(string[] args)
 		{
+			Logger.Clear();
+
 			IUnityContainer container = new UnityContainer();
 
 			container
@@ -21,8 +23,17 @@ namespace TestingConsole
 				.RegisterType<IAppDataContextFactory, AppDataContextFactory>();
 
 
-			test3(container);
+			tst4(container);
 			Console.ReadLine();
+		}
+
+		static void tst4(IUnityContainer container)
+        {
+			ISessionRepository sr = container.Resolve<ISessionRepository>();
+
+			var res = sr.SessionExists(1, DateTime.Today);
+
+            Console.WriteLine(res);
 		}
 
 		static void test3(IUnityContainer container)

@@ -6,7 +6,7 @@ namespace Domain.Repos
 {
 	public interface INodeRepository
 	{
-		void Save(INode o);
+		int Save(INode o);
 		INode Create(INode owner, INode n);
 		void Delete(INode o);
 		IEnumerable<INode> GetAll(INode owner);

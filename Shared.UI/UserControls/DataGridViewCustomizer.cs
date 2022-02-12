@@ -69,6 +69,14 @@ namespace Shared.UI.UserControls
 			if (clr == Color.Empty) return;
 
 			e.CellStyle.ForeColor = clr;
+
+			/*
+			 * >>> 30-01-2022
+			 * Придумать лямбду, условие - функция.
+			 * входные параметры в лямбду: INode, DataGridViewCellStyle
+			 */
+			if((row.DataBoundItem as INode).pinned)
+				e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
 		}
 
 		private void removeImgCol()

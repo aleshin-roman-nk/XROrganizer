@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskBank.Presenters.EventDefinition;
 
 namespace TaskBank.Views
 {
@@ -23,6 +24,7 @@ namespace TaskBank.Views
 		event EventHandler CreateSession;
 		event EventHandler RestoreWorkingSessionWindow;
 		event EventHandler PutTaskToBuffer;
+		event EventHandler<ApplicationClosingEventArgs> ApplicationClosing;
 		int OpenedTasksCout { get; set; }
 		bool SessionState { get; set; }
 		int ClipboardNodesCount { get; set; }

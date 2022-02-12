@@ -53,5 +53,22 @@ namespace Shared.UI.Interfaces
 		{
 			MessageBox.Show(JsonTool.Serialize(o));
 		}
-	}
+
+        public DlgAnswerCode AskUser(string msg)
+        {
+			var res = MessageBox.Show(msg, "Question", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+            switch (res)
+            {
+                case DialogResult.Cancel:
+					return DlgAnswerCode.cancel;
+                case DialogResult.Yes:
+					return DlgAnswerCode.yes;
+                case DialogResult.No:
+					return DlgAnswerCode.no;
+            }
+
+			return DlgAnswerCode.cancel;
+        }
+    }
 }

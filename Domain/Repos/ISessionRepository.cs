@@ -14,5 +14,8 @@ namespace Domain.Repos
 		//IEnumerable<INode> GetAllChildren(INode n);
 		IEnumerable<OSession> GetSessionOf(int year, int month, INode n);
 		IEnumerable<int> GetAllChildTaskIdOf(INode n);
+
+		//bool SessionExists(Func<OSession, bool> fcond);
+		bool SessionExists(int ownerId, DateTime dt);
 	}
 }

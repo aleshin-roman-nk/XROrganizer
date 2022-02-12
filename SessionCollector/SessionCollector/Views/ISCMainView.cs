@@ -16,6 +16,7 @@ namespace SessionCollector
 		event EventHandler<OSession> KickNextDay;
 		event EventHandler<OSession> KickPrevDay;
 		event EventHandler WindowClosed;
+		event EventHandler<OSession> ExtendSessionTomorrow;
 
 		DateTime CurrentDateTime { get; }
 		//event EventHandler NotifyShown;

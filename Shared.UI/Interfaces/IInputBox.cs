@@ -12,5 +12,6 @@ namespace Shared.UI.Interfaces
 		void ShowObject(object o);
 		ViewResponse<NType> ChooseNType(IEnumerable<NType> items);
 		ViewResponse<DateTime> ChooseDateTime();
+		DlgAnswerCode AskUser(string msg);
 	}
 }

@@ -30,7 +30,7 @@ namespace Domain.Entities
 			get
 			{
 				if (Owner == null) return "not loaded";
-				return Owner.definition;
+				return Owner.text;
 			}
 		}
 

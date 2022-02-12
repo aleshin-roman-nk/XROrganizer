@@ -137,7 +137,7 @@ namespace Shared.UI.Forms
 
 			txtNodeName.Text = e.Name;
 
-			owningNodeDescription.Text = e.Owner.definition;
+			owningNodeDescription.Text = e.Owner.text;
 
 			closed = e.Closed;
 		}

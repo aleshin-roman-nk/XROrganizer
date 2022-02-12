@@ -20,13 +20,14 @@ namespace Domain.Repos
 			_toolRepo = new ToolRepo(_factory);
 		}
 
-		public void Save(INode n)
+		public int Save(INode n)
 		{
 			using (var db = _factory.Create())
 			{
 				db.Entry(n).State = n.id == 0 ? EntityState.Added : EntityState.Modified;
+				var res = db.SaveChanges();
 				n.path = _toolRepo.GetPathOf(n);
-				db.SaveChanges();
+				return res;
 			}
 		}
 		
@@ -161,7 +162,11 @@ namespace Domain.Repos
 		{
 			using (var db = _factory.Create())
 			{
-				return db.Nodes.FirstOrDefault(x => x.id == id);
+				var res = db.Nodes.FirstOrDefault(x => x.id == id);
+				if(res == null) return null;
+				res.path = _toolRepo.GetPathOf(res, db);
+
+				return res;
 			}
 		}
 

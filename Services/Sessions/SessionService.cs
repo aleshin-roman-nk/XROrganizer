@@ -66,19 +66,6 @@ namespace Services.Sessions
 			return dates.Select(x => new ChartItem(_getSeconds(x), x.Day.ToString())).ToList();
 		}
 
-		public void KickSessionToNextDay(OSession s)
-		{
-			s.Start = s.Start.AddDays(1);
-			_repo.Save(s);
-
-		}
-
-		public void KickSessionToPrevDay(OSession s)
-		{
-			s.Start = s.Start.AddDays(-1);
-			_repo.Save(s);
-		}
-
 		public decimal AllocatedHours
 		{
 			get

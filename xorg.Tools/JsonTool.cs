@@ -17,7 +17,13 @@ namespace xorg.Tools
 
 		public static T Deserialize<T>(string j)
 		{
-			return JsonConvert.DeserializeObject<T>(j);
+			var settings = new JsonSerializerSettings
+			{
+				NullValueHandling = NullValueHandling.Ignore,
+				MissingMemberHandling = MissingMemberHandling.Ignore
+			};
+			//var jsonModel = JsonConvert.DeserializeObject<Customer>(jsonString, settings);
+			return JsonConvert.DeserializeObject<T>(j, settings);
 		}
 
 		public static T Clone<T>(T o)

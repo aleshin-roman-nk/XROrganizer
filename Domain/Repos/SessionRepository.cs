@@ -45,6 +45,8 @@ namespace Domain.Repos
 			}
 		}
 
+
+
 		public IEnumerable<int> GetAllChildTaskIdOf(INode n)
 		{
 			/*
@@ -125,47 +127,27 @@ namespace Domain.Repos
 			using (var db = _contextFactory.Create())
 			{
 				return db.Sessions.Where(x => x.NodeId == own.id && x.Start >= dt1 && x.Start < dt2).ToList().Sum(x => x.TotalSeconds);
-			}			
-			/*
-			 * Если INode dir это директория.
-			 * + найти все сессии, прямо висящие на директории
-			 * + найти все задачи, найти все поддиретории и найти все сессии, для этих объектов
-			 * вообще, задачи могут иметь подзадачи. так что просто нийти все дочерние объекты.
-			 * 
-			 * 
-			 * 
-			 * 1. Загружаем всю коллекцию директорий. !!!Для БД это одна плоская таблица!!!
-			 * 
-			 * 
-			 */
+			}
 		}
 
-   //     public IEnumerable<INode> GetAllChildren(INode root)
-   //     {
+        public bool SessionExists(Func<OSession, bool> fcond)
+        {
+			using (var db = _contextFactory.Create())
+            {
+				return db.Sessions.Any(fcond);
+				//return db.Sessions.Any(x => x.NodeId == 1);
+            }
+		}
 
-			//using (var db = _contextFactory.Create())
-   //         {
-			//	var stack = new Stack<INode>();
+        public bool SessionExists(int ownerId, DateTime dt)
+        {
+			using (var db = _contextFactory.Create())
+			{
+				DateTime dt1 = new DateTime(dt.Year, dt.Month, dt.Day, 0, 0, 0, 0);
+				DateTime dt2 = dt1.AddDays(1);
 
-   //         }
-
-			//	var dirs = _contextFactory.Directories.ToList();
-
-            
-
-   //         Func<INode, IEnumerable<INode>> getChildren = (owner) =>
-   //         {
-   //             return dirs.Where(x => x.owner_id == owner.Id).ToList();
-   //         };
-
-   //         stack.Push(root);
-   //         while (stack.Any())
-   //         {
-   //             var next = stack.Pop();
-   //             yield return next;
-   //             foreach (var child in getChildren(next))
-   //                 stack.Push(child);
-   //         }
-   //     }
+				return db.Sessions.Any(x => x.NodeId == ownerId && x.Start >= dt1 && x.Start < dt2);
+			}
+		}
     }
 }

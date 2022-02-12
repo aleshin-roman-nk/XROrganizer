@@ -55,8 +55,12 @@ namespace Services.Nodes
 			//var i = _repo.GetAll(own);
 			var i = _repo.GetAllExcludeCompletedTask(own);
 
-			res.AddRange(i.Where(x => x.type == NType.Dir).OrderBy(x=>x.name).ToList());
-			res.AddRange(i.Where(x => x.type != NType.Dir).OrderByDescending(x=>x.date).ToList());
+			//res.AddRange(i.Where(x => x.type == NType.Dir).OrderBy(x=>x.pinned).ThenBy(x=>x.name).ToList());
+			//res.AddRange(i.Where(x => x.type != NType.Dir).OrderByDescending(x=>x.pinned).ThenByDescending(x=>x.date).ToList());
+
+			//res.AddRange(i.OrderBy(x=>x.type).ThenBy(x=>x.name).ThenBy(x=>x.pinned).ToList());
+
+			res.AddRange(i);
 
 			return res;
 		}
@@ -80,9 +84,9 @@ namespace Services.Nodes
 			return res;
 		}
 
-		public void Save(INode d)
+		public int Save(INode d)
 		{
-			_repo.Save(d);
+			return _repo.Save(d);
 			//updateData();
 		}
 
@@ -116,5 +120,10 @@ namespace Services.Nodes
         {
 			return _repo.GetTopSessions(today, taskId, top, page);
         }
+
+        public FTask GetTask(int taskId)
+        {
+			return _repo.Get(taskId) as FTask;
+		}
     }
 }

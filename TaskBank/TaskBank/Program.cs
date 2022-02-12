@@ -4,6 +4,7 @@ using Services.Nodes;
 using Services.Sessions;
 using SessionCollector;
 using SessionCollector.Forms;
+using SessionCollector.Presenters;
 using SessionCollector.Views;
 using Shared.UI;
 using Shared.UI.Dlg;
@@ -65,7 +66,7 @@ namespace TaskBank
 					.RegisterType<ISessionService, SessionService>()
 					.RegisterType<IStataView, StataForm>()
 
-					.RegisterInstance<IMainView>(new MainForm())
+					//.RegisterInstance<IMainView>(new MainForm())
 					.RegisterType<IAppDataContextFactory, AppDataContextFactory>()
 					.RegisterType<IDescriptionWindow, DescriptionForm>()
 					.RegisterType<IInputBox, InputBox>()
@@ -81,9 +82,13 @@ namespace TaskBank
 					.RegisterType<OpenObjectManager>()
 					.RegisterType<SessionManagerMainPresenter>();
 
+				var mainWind = container.Resolve<MainForm>();
+				container.RegisterInstance<IMainView>(mainWind);
+
 				var presenter = container.Resolve<TaskBankMainPresenter>();
 
-				Application.Run((Form)container.Resolve<IMainView>());
+				//Application.Run((Form)container.Resolve<IMainView>());
+				Application.Run((Form)mainWind);
 			}
 		}
 	}

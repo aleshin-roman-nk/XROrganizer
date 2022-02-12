@@ -51,6 +51,7 @@ namespace SessionCollector
             this.btnKickNextDay = new System.Windows.Forms.Button();
             this.btnKickPrevDay = new System.Windows.Forms.Button();
             this.btnHideCompletedSessions = new System.Windows.Forms.Button();
+            this.btnDoItTomorrow = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSessions)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -279,11 +280,25 @@ namespace SessionCollector
             this.btnHideCompletedSessions.UseVisualStyleBackColor = true;
             this.btnHideCompletedSessions.Click += new System.EventHandler(this.btnHideCompletedSessions_Click);
             // 
+            // btnDoItTomorrow
+            // 
+            this.btnDoItTomorrow.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDoItTomorrow.BackgroundImage")));
+            this.btnDoItTomorrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnDoItTomorrow.FlatAppearance.BorderSize = 0;
+            this.btnDoItTomorrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDoItTomorrow.Location = new System.Drawing.Point(924, 6);
+            this.btnDoItTomorrow.Name = "btnDoItTomorrow";
+            this.btnDoItTomorrow.Size = new System.Drawing.Size(28, 28);
+            this.btnDoItTomorrow.TabIndex = 21;
+            this.btnDoItTomorrow.UseVisualStyleBackColor = true;
+            this.btnDoItTomorrow.Click += new System.EventHandler(this.btnDoItTomorrow_Click);
+            // 
             // SCMainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(1048, 561);
+            this.Controls.Add(this.btnDoItTomorrow);
             this.Controls.Add(this.btnHideCompletedSessions);
             this.Controls.Add(this.btnKickPrevDay);
             this.Controls.Add(this.btnKickNextDay);
@@ -333,6 +348,7 @@ namespace SessionCollector
 		private System.Windows.Forms.DataGridViewTextBoxColumn TotalMins;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Start;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Finish;
-	}
+        private System.Windows.Forms.Button btnDoItTomorrow;
+    }
 }
 

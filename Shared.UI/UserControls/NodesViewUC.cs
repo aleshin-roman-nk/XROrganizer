@@ -59,7 +59,15 @@ namespace Shared.UI.UserControls
 				 indexBeforeUpdate = nodeGrid.CurrentCell.RowIndex;
 
 			bsNodes.DataSource = null;
-			bsNodes.DataSource = nodes;
+
+			var top_exit_dir = nodes.SingleOrDefault(x => x.type == NType.exit_dir);
+			List<INode> dirs = new List<INode>();
+			if(top_exit_dir != null) dirs.Add(top_exit_dir);
+			dirs.AddRange(nodes.Where(x => x.type <= 0 && x.type != NType.exit_dir).OrderBy(x => x.name).ToList());
+			var all = dirs.Concat( nodes.Where(x => x.type > 0).OrderByDescending(x => x.pinned).ThenByDescending(x => x.date).ToList() ).ToList();
+
+			bsNodes.DataSource = all;
+
 			txtDirectoryFullName.Text = $"[{path}]";
 			placeCursor(highlightedNode);
 

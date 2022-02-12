@@ -50,12 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\DlgAnswerCode.cs" />
     <Compile Include="Dlg\Forms\InputBoxForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dlg\Forms\InputBoxForm.Designer.cs">
       <DependentUpon>InputBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\EventArgsDefinition\SaveNodeEventArgs.cs" />
     <Compile Include="Interfaces\EventArgsDefinition\SessionsPageRequiredEventArgs.cs" />
     <Compile Include="Interfaces\EventArgsDefinition\DisplaySessionsPageEventArg.cs" />
     <Compile Include="Forms\SessionForm.cs">
@@ -112,6 +114,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="tools\NodeTextPages.cs" />
     <Compile Include="tools\SavingObserver.cs" />
     <Compile Include="tools\TickCounterAnimator.cs" />
     <Compile Include="UserControls\DataGridViewCustomizer.cs" />
@@ -193,6 +196,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\CascadiaCode.ttf" />
     <None Include="Resources\task_24.png" />
   </ItemGroup>
   <ItemGroup>

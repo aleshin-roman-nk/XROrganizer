@@ -16,7 +16,5 @@ namespace Services.Sessions
 		IEnumerable<OSession> Items { get; }
 		ISessionRepository Repo { get; }
 		IEnumerable<ChartItem> GetStatistic(int year, int month, INode dir);
-		void KickSessionToNextDay(OSession s);
-		void KickSessionToPrevDay(OSession s);
 	}
 }

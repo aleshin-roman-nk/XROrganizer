@@ -62,13 +62,13 @@ namespace Shared.UI.UserControls
 		{
 			if (_node != null)
 			{
-				if (string.IsNullOrEmpty(_node.definition)) _node.definition = "";
+				if (string.IsNullOrEmpty(_node.text)) _node.text = "";
 
 				// We only need to know if rtxNodeDescription.Text has changed.
 				//if (!_node.description.Equals(rtxNodeDescription.Text))
 				if (savingObserver.Saved == false)
 				{
-					_node.definition = rtxNodeDescription.Text;
+					_node.text = rtxNodeDescription.Text;
 					
 					Save?.Invoke(this, _node);
 				}
@@ -85,7 +85,7 @@ namespace Shared.UI.UserControls
 			_commitAndSave();
 
 			_node = n;
-			rtxNodeDescription.Text = _node.definition;
+			rtxNodeDescription.Text = _node.text;
 
 			_dontObserveSavingState = false;
 		}
