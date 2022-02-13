@@ -15,6 +15,7 @@ namespace Services.Nodes
 		int Save(INode d);
 		void Delete(INode d);
 		bool HasChildren(INode d);
+		bool HasSessions(INode d);
 		void MoveNodesToDirectory(Dir owner, IEnumerable<INode> notes);
 		IEnumerable<INode> Items { get; }
 		event EventHandler CollectionChanged;

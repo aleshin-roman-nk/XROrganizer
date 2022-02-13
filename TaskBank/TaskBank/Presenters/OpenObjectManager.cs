@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Enums;
 using Shared.UI.Interfaces;
 using Shared.UI.Interfaces.EventArgsDefinition;
 using System;
@@ -73,7 +74,7 @@ namespace TaskBank.Presenters
 
         private void _openedSession_OpenOwner(object sender, Node e)
         {
-			OpenTask(e as FTask);
+			if(e.type == NType.Task) OpenTask(e as FTask);
 		}
 
         private void _openedSession_Save(object sender, OSession e)

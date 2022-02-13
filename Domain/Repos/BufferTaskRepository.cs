@@ -17,7 +17,7 @@ namespace Domain.Repos
 		public BufferTaskRepository(IAppDataContextFactory f)
 		{
 			_factory = f;
-			_toolRepo = new ToolRepo(_factory);
+			_toolRepo = new ToolRepo();
 		}
 
 		
@@ -63,7 +63,7 @@ namespace Domain.Repos
 
 				foreach (var item in res)
 				{
-					item.Node.path = _toolRepo.GetPathOf(item.Node, db);
+					item.Node.path = _toolRepo.getFullPathOf(item.Node, db);
 				}
 
 				return res;

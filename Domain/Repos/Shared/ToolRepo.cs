@@ -6,19 +6,17 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using xorg.Tools;
 
 namespace Domain.Repos.Shared
 {
 	public class ToolRepo
 	{
-		IAppDataContextFactory _factory;
-
-		public ToolRepo(IAppDataContextFactory f)
+		public ToolRepo()
 		{
-			_factory = f;
 		}
 
-		public string GetPathOf(INode n, AppData db)
+		private string GetPathOf(INode n, AppData db)
 		{
 			List<string> nodes = new List<string>();
 
@@ -52,31 +50,16 @@ namespace Domain.Repos.Shared
 
 		public string getFullPathOf(INode n, AppData db)
 		{
-			var res = GetPathOf(n, db);
-			return $"{res}{n.name} \\ ";
-		}
+			string res = "";
 
-		public IEnumerable<INode> FetchPathsAndSave(IEnumerable<INode> nodes)
-		{
-			using (var db = _factory.Create())
-			{
-				foreach (var item in nodes)
-				{
-					item.path = GetPathOf(item, db);
-					//db.Entry(item).State = EntityState.Modified;
-				}
+			if (n.type == Enums.NType._sys_root_dir) return "";
 
-				//db.SaveChanges();
-				return nodes;
-			}
-		}
+			if(n.type == Enums.NType.Dir)
+				res = $"{GetPathOf(n, db)}{n.name}";
+			else
+				res = $"{GetPathOf(n, db)}#{n.id}";
 
-		public string GetPathOf(INode n)
-		{
-			using (var db = _factory.Create())
-			{
-				return GetPathOf(n, db);
-			}
+			return res;
 		}
 	}
 }

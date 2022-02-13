@@ -203,9 +203,11 @@ namespace TaskBank.Presenters
             {
                 if (n != null)
                 {
-                    if (n is FTask)
+                    //if (n is FTask)
+                    if (n.type >= NType.Dir)
                     {
-                        _sessionManagerMainPresenter.CreateSession((FTask)n);
+                        //_sessionManagerMainPresenter.CreateSession((FTask)n);
+                        _sessionManagerMainPresenter.CreateSession((Node)n);
                     }
                 }
             }
@@ -299,7 +301,19 @@ namespace TaskBank.Presenters
 			var i = _mainView.NodesView.SelectedNodes.FirstOrDefault();
 			if (i.type < 0) return;
 
-			if (_dialogs.UserAnsweredYes($"Are you sure to kill {i.name} / {i.text}"))
+            if (_service.HasChildren(i))
+            {
+                _dialogs.ShowMessage($"[{i.path}] has CHILD NODES and could not be deleted.");
+                return;
+            }
+
+            if (_service.HasSessions(i))
+            {
+                _dialogs.ShowMessage($"[{i.path}] has SESSIONS and could not be deleted.");
+                return;
+            }
+
+            if (_dialogs.UserAnsweredYes($"Are you sure to kill {i.name} / {i.text}"))
 			{
 				_service.Delete(i);
 				update();

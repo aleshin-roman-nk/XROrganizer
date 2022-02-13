@@ -23,7 +23,9 @@ namespace TestingConsole
 				.RegisterType<IAppDataContextFactory, AppDataContextFactory>();
 
 
-			tst4(container);
+			//1567
+
+			test1(container);
 			Console.ReadLine();
 		}
 
@@ -70,13 +72,15 @@ namespace TestingConsole
 		static void test1(IUnityContainer container)
 		{
 			INodeRepository repo = container.Resolve<INodeRepository>();
-			var i = repo.Get(1);//xorg
-			var items = repo.GetAllChildTasksOf(i);
-			//var items = repo.GetCompletedSessionOf(i);
+
+			//var i = repo.Get(1);//xorg
+			//var items = repo.GetAllChildTasksOf(i);
+
+			var items = repo.GetFirstLineChildren(1567);//xorg
 
 			foreach (var item in items)
 			{
-				Console.WriteLine($"{item.path}#{item.id}");
+				Console.WriteLine($"{item.name}#{item.id}");
 				//Console.WriteLine($"session:{item.Start} #{item.Id} task:{item.Owner.path}#{item.NodeId}");
 			}
 		}

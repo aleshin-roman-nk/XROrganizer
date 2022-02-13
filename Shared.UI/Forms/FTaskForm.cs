@@ -89,7 +89,7 @@ namespace Shared.UI.Forms
 			//richTextBoxDescription.Text = o.text;
 			isCompleted = _ent.IsCompleted;
 			lblDate.Text = _ent.date.Value.ToShortDateString();
-			txtFullPath.Text = $"{_ent.path}#{_ent.id}";
+			txtFullPath.Text = $"{_ent.path}";
 			checkBox1Pinned.Checked = _ent.pinned;
 
 			nodeTextPages = new NodeTextPages(_ent.text);

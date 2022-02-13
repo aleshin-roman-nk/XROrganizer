@@ -16,7 +16,7 @@ namespace Domain.Repos
 		public SessionRepository(IAppDataContextFactory contextFactory)
 		{
 			_contextFactory = contextFactory;
-			_toolRepo = new ToolRepo(contextFactory);
+			_toolRepo = new ToolRepo();
 		}
 
 		public void Delete(OSession e)
@@ -39,7 +39,9 @@ namespace Domain.Repos
 					.OrderBy(x => x.Start).ToList();
 
 				foreach (var item in res)
-					item.Owner.path = _toolRepo.GetPathOf(item.Owner, db);
+                {
+					item.Owner.path = _toolRepo.getFullPathOf(item.Owner, db);
+				}
 
 				return res;
 			}
@@ -47,7 +49,7 @@ namespace Domain.Repos
 
 
 
-		public IEnumerable<int> GetAllChildTaskIdOf(INode n)
+		public IEnumerable<int> GetAllChildIdOf(INode n)
 		{
 			/*
 			 * Возможна оптимизация: не загружать задачи, дата закрытия которых
@@ -71,7 +73,8 @@ namespace Domain.Repos
 				while (stack.Any())
 				{
 					var next = stack.Pop();
-					if (next.type == Enums.NType.Task) res.Add(next.id);
+					//if (next.type == Enums.NType.Task) res.Add(next.id);
+					if (next.type >= Enums.NType.Dir) res.Add(next.id);
 					foreach (var child in getChildren(next))
 						stack.Push(child);
 				}
@@ -87,7 +90,7 @@ namespace Domain.Repos
 
 			List<OSession> res = new List<OSession>();
 
-			var task_id_collection = GetAllChildTaskIdOf(n);
+			var task_id_collection = GetAllChildIdOf(n);
 
 			using (var db = _contextFactory.Create())
 			{
@@ -128,15 +131,6 @@ namespace Domain.Repos
 			{
 				return db.Sessions.Where(x => x.NodeId == own.id && x.Start >= dt1 && x.Start < dt2).ToList().Sum(x => x.TotalSeconds);
 			}
-		}
-
-        public bool SessionExists(Func<OSession, bool> fcond)
-        {
-			using (var db = _contextFactory.Create())
-            {
-				return db.Sessions.Any(fcond);
-				//return db.Sessions.Any(x => x.NodeId == 1);
-            }
 		}
 
         public bool SessionExists(int ownerId, DateTime dt)

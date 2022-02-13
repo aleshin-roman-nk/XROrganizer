@@ -19,5 +19,6 @@ namespace Domain.Entities
 		string NTypeString { get; }
 		string path { get; set; }
 		bool pinned { get; set; }
+		bool deleted { get; set; }
 	}
 }

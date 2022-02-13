@@ -125,5 +125,10 @@ namespace Services.Nodes
         {
 			return _repo.Get(taskId) as FTask;
 		}
+
+        public bool HasSessions(INode d)
+        {
+            return _repo.HasSessions(d);
+        }
     }
 }

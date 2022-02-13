@@ -88,8 +88,7 @@ namespace SessionCollector.Presenters
 				_stataView.CurrentDate.Month,
 				_stataView.Node);
 
-			var _name = _stataView.Node.type == Domain.Enums.NType.Dir ? _stataView.Node.name : $"#{_stataView.Node.id}";
-			_stataView.Display(i, $"{_stataView.Node.path}{_name}");
+			_stataView.Display(i, $"{_stataView.Node.path}");
 		}
 
         private void _stataView_Completed(object sender, EventArgs e)
@@ -100,7 +99,8 @@ namespace SessionCollector.Presenters
 			_stataView = null;
 		}
 
-        public void CreateSession(FTask t)
+        //public void CreateSession(FTask t)
+        public void CreateSession(Node t)
 		{
 			if (_creatingAllowed(t.id, _view.CurrentDateTime) == false) return;
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using xorg.Tools;
+using System.IO;
 
 namespace Domain.Entities
 {
@@ -39,9 +40,44 @@ namespace Domain.Entities
 			get
 			{
 				if (Owner == null) return "not loaded";
-				return $"{Owner.path}#{Owner.id}";
+				return $"{Owner.path}";
+
+    //            if (string.IsNullOrEmpty(Owner.name))
+    //            {
+				//	using (var reader = new StringReader(Owner.))
+				//	{
+				//		return reader.ReadLine();
+				//	}
+				//}
+
+				//return Owner.name;
 			}
 		}
+
+		//private List<NodeTextPage> _deser(string txt)
+		//{
+		//	// here strange thing happends.
+		//	// sometimes txt comes as "null", sometimes as not null but empty string.
+		//	if (string.IsNullOrEmpty(txt))
+		//	{
+		//		return new List<NodeTextPage> { new NodeTextPage { name = "", text = "" } };
+		//	}
+
+		//	List<NodeTextPage> res = null;
+
+		//	try
+		//	{
+		//		res = JsonTool.Deserialize<List<NodeTextPage>>(txt);
+		//	}
+		//	catch (Exception)
+		//	{
+		//		res = new List<NodeTextPage>();
+		//		res.Add(new NodeTextPage { text = txt });
+		//	}
+
+		//	return res;
+		//}
+
 		public string DirName
 		{
 			get

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using xorg.Tools;
 
 namespace Domain.Repos
 {
@@ -17,7 +18,7 @@ namespace Domain.Repos
 		public NodeRepository(IAppDataContextFactory factory)
 		{
 			_factory = factory;
-			_toolRepo = new ToolRepo(_factory);
+			_toolRepo = new ToolRepo();
 		}
 
 		public int Save(INode n)
@@ -26,7 +27,7 @@ namespace Domain.Repos
 			{
 				db.Entry(n).State = n.id == 0 ? EntityState.Added : EntityState.Modified;
 				var res = db.SaveChanges();
-				n.path = _toolRepo.GetPathOf(n);
+				n.path = _toolRepo.getFullPathOf(n, db);
 				return res;
 			}
 		}
@@ -45,7 +46,7 @@ namespace Domain.Repos
 			using (var db = _factory.Create())
 			{
 				n.owner_id = own.id;
-				n.path = _toolRepo.GetPathOf(n);
+				n.path = _toolRepo.getFullPathOf(n, db);
 				db.Entry(n).State = EntityState.Added;
 				db.SaveChanges();
 				return n;
@@ -69,30 +70,9 @@ namespace Domain.Repos
 		{
 			using (var db = _factory.Create())
 			{
-				//var r = db.Dirs.FirstOrDefault(x => x.owner_id == d.id);
 				var r = db.Nodes.FirstOrDefault(x => x.owner_id == d.id);
 				return !(r == null);
 			}
-		}
-
-		public IEnumerable<INode> GetAll(INode owner)
-		{
-			return _getNodes(owner, true);
-
-			//using (var db = _factory.Create())
-			//{
-			//	// пусть сервисы сортирую как им надо
-			//	var items = db.Nodes.Where(x => x.owner_id == owner.id).ToList();
-
-			//	var path = _toolRepo.getFullPathOf(owner, db);
-
-			//	foreach (var item in items)
-			//	{
-			//		item.path = path;
-			//	}
-
-			//	return items;
-			//}
 		}
 
 		public IEnumerable<INode> GetAllExcludeCompletedTask(INode owner)
@@ -115,7 +95,9 @@ namespace Domain.Repos
 				var path = _toolRepo.getFullPathOf(owner, db);
 
 				foreach (var item in items)
-					item.path = path;
+                {
+					item.path = item.type == Enums.NType.Dir ? $"{path} \\ {item.name}" : $"{path} \\ #{item.id}";
+                }
 
 				return items;
 			}
@@ -129,34 +111,34 @@ namespace Domain.Repos
 			}
 		}
 
-		public IEnumerable<INode> GetAllChildTasksOf(INode n)
-		{
-			var stack = new Stack<INode>();
+		//public IEnumerable<INode> GetAllChildTasksOf(INode n)
+		//{
+		//	var stack = new Stack<INode>();
 
-			var res = new List<INode>();
+		//	var res = new List<INode>();
 
-			using (var db = _factory.Create())
-			{
-				Func<INode, IEnumerable<INode>> getChildren = (owner) =>
-				{
-					return db.Nodes.Where(x => x.owner_id == owner.id).ToList();
-				};
+		//	using (var db = _factory.Create())
+		//	{
+		//		Func<INode, IEnumerable<INode>> getChildren = (owner) =>
+		//		{
+		//			return db.Nodes.Where(x => x.owner_id == owner.id).ToList();
+		//		};
 
-				stack.Push(n);
-				while (stack.Any())
-				{
-					var next = stack.Pop();
-					if (next.type == Enums.NType.Task) res.Add(next);
-					foreach (var child in getChildren(next))
-						stack.Push(child);
-				}
+		//		stack.Push(n);
+		//		while (stack.Any())
+		//		{
+		//			var next = stack.Pop();
+		//			if (next.type == Enums.NType.Task) res.Add(next);
+		//			foreach (var child in getChildren(next))
+		//				stack.Push(child);
+		//		}
 
-                foreach (var item in res)
-                    item.path = _toolRepo.GetPathOf(item, db);
+  //              foreach (var item in res)
+  //                  item.path = _toolRepo.getFullPathOf(item, db);
                 
-                return res;
-			}
-		}
+  //              return res;
+		//	}
+		//}
 
         public INode Get(int id)
 		{
@@ -164,7 +146,8 @@ namespace Domain.Repos
 			{
 				var res = db.Nodes.FirstOrDefault(x => x.id == id);
 				if(res == null) return null;
-				res.path = _toolRepo.GetPathOf(res, db);
+				//res.path = _toolRepo.GetPathOf(res, db);
+				res.path = _toolRepo.getFullPathOf(res, db);
 
 				return res;
 			}
@@ -181,7 +164,7 @@ namespace Domain.Repos
 				x.completed_date < dt2)).ToList();
 
 				foreach (var item in res)
-					item.path = _toolRepo.GetPathOf(item, db);
+					item.path = _toolRepo.getFullPathOf(item, db);
 
 				return res;
 			};
@@ -199,5 +182,23 @@ namespace Domain.Repos
 				).OrderByDescending(sess => sess.Start).Skip(top * page).Take(top).ToList();
             };
 		}
-	}
+
+        public bool HasSessions(INode d)
+        {
+			using (var db = _factory.Create())
+            {
+				return db.Sessions.Any(x=> x.NodeId == d.id);
+			}
+		}
+
+        public IEnumerable<INode> GetFirstLineChildren(int owner)
+        {
+			using (var db = _factory.Create())
+            {
+				var r = db.Nodes.Where(x => x.owner_id == owner).ToList();
+
+				return r;
+			}
+		}
+    }
 }

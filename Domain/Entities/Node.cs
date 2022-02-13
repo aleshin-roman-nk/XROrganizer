@@ -28,6 +28,7 @@ namespace Domain.Entities
 		[NotMapped]
 		public string path { get; set; }
         public bool pinned { get; set; }
+        public bool deleted { get; set; }
 
         public override bool Equals(object obj)
 		{
