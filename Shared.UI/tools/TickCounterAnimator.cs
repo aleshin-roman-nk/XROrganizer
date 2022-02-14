@@ -23,7 +23,7 @@ namespace Shared.UI.tools
 		public event EventHandler<int> TotalSecondsChanged;
 		public bool IsRunning => timer_is_running;
 
-		Image[] animFramesImg = new Image[] { Resources.playing01, Resources.playing02 };
+		Image[] animFramesImg = new Image[] { Resources.sessAnim01, Resources.sessAnim02 };
 
 		string pauseFrame = "[ | ]";
 

@@ -327,6 +327,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8-task-42.ico" />
+    <None Include="Resources\sessAnim01.png" />
+    <None Include="Resources\sessAnim02.png" />
+    <None Include="Resources\icons8-stop-sign-24.png" />
+    <None Include="Resources\icons8-stopSession-24.png" />
+    <None Include="Resources\icons8-playSession-24.png" />
     <None Include="Resources\icons8-work-24-v2.png" />
     <None Include="Resources\icons8-work-24.png" />
     <None Include="Resources\icons8-nosession-24.png" />

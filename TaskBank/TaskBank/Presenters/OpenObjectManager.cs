@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
 using Shared.UI.Interfaces;
+using Shared.UI.Interfaces.Enums;
 using Shared.UI.Interfaces.EventArgsDefinition;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,9 @@ namespace TaskBank.Presenters
 		public event EventHandler<SaveNodeEventArgs> SaveTask;
 		public event EventHandler<OSession> SaveSession;
 		public event EventHandler<int> OpenTasksCountChanged;
-		public event EventHandler<bool> WorkingSessionStateChanged;
+		public event EventHandler WorkingSessionWindowOpen;
+		public event EventHandler WorkingSessionWindowCompleted;
+		public event EventHandler<WorkingSessionPlayState> WorkingSessionPlayStateChanged;
 		public event EventHandler<RequestSessionsPageOpenObjectManagerEvenArgs> SessionsRequired;
 		public event EventHandler<RequestFTaskOpenObjectManagerEventArgs> FTaskRequired;
 		public event EventHandler<INode> CreateSession;
@@ -65,11 +68,24 @@ namespace TaskBank.Presenters
 				_openedSession.Completed += _openedSession_Completed;
 				_openedSession.Save += _openedSession_Save;
 				_openedSession.OpenOwner += _openedSession_OpenOwner;
-				WorkingSessionStateChanged?.Invoke(this, true);
+                _openedSession.SessionWindowWorkStateChanged += _openedSession_SessionWindowWorkStateChanged;
+				WorkingSessionWindowOpen?.Invoke(this, EventArgs.Empty);
 				_openedSession.Go(s);
 			}
 			else
 				_openedSession.Restore();
+		}
+
+		public void SetWorkingSessionPlayState(WorkingSessionPlayState st)
+        {
+			if (_openedSession == null) return;
+
+			_openedSession.SetWorkingSesionPlayState(st);
+		}
+
+        private void _openedSession_SessionWindowWorkStateChanged(object sender, WorkingSessionPlayState e)
+        {
+			WorkingSessionPlayStateChanged?.Invoke(this, e);
 		}
 
         private void _openedSession_OpenOwner(object sender, Node e)
@@ -89,7 +105,8 @@ namespace TaskBank.Presenters
 			frm.Completed -= _openedSession_Completed;
 			frm.Save -= _openedSession_Save;
 			frm.OpenOwner -= _openedSession_OpenOwner;
-			WorkingSessionStateChanged?.Invoke(this, false);
+			_openedSession.SessionWindowWorkStateChanged -= _openedSession_SessionWindowWorkStateChanged;
+			WorkingSessionWindowCompleted?.Invoke(this, EventArgs.Empty);
 
 			_openedSession = null;
 		}

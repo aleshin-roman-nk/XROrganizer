@@ -143,9 +143,9 @@ namespace Shared.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap playing01 {
+        internal static System.Drawing.Bitmap sessAnim01 {
             get {
-                object obj = ResourceManager.GetObject("playing01", resourceCulture);
+                object obj = ResourceManager.GetObject("sessAnim01", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +153,9 @@ namespace Shared.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap playing02 {
+        internal static System.Drawing.Bitmap sessAnim02 {
             get {
-                object obj = ResourceManager.GetObject("playing02", resourceCulture);
+                object obj = ResourceManager.GetObject("sessAnim02", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Shared.UI.Interfaces;
+using Shared.UI.Interfaces.Enums;
 using Shared.UI.UserControls;
 using System;
 using System.Drawing;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Windows.Forms;
 using TaskBank.Forms;
 using TaskBank.Presenters.EventDefinition;
+using TaskBank.Properties;
 using TaskBank.Views;
 
 namespace TaskBank
@@ -59,20 +61,76 @@ namespace TaskBank
             {
 				if (value)
                 {
-					btnSessionState.BackgroundImage = Properties.Resources.sessionwork;
+					btnSessionState.BackgroundImage = Resources.sessionwork;
+					pictureSessionAnimation.Visible = true;
+					btnPlayStopSessionWorking.Visible = true;
+					pictureSessionAnimation.Image = Resources.sessionStoped;
+					SessionWorkingState = WorkingSessionPlayState.stop;
 				}
                 else
                 {
-					btnSessionState.BackgroundImage = Properties.Resources.nosession;
+					btnSessionState.BackgroundImage = Resources.nosession;
+					pictureSessionAnimation.Visible = false;
+					btnPlayStopSessionWorking.Visible = false;
+					timerSessionAnim.Enabled = false;
+					timerSessionAnim.Stop();
 				} 
 			}
         }
 
-        public MainForm(IInputBox dlg)
+		WorkingSessionPlayState _sessionWorkingState;
+
+		Image[] animFramesImg = new Image[] { Resources.sessAnim01, Resources.sessAnim02 };
+
+		public WorkingSessionPlayState SessionWorkingState
+        {
+            get
+            {
+				return _sessionWorkingState;
+			}
+            set
+            {
+				_sessionWorkingState = value;
+
+				if (_sessionWorkingState == WorkingSessionPlayState.stop)
+					_stopSessionAnimation();
+				else
+					_playSessionAnimation();
+			}
+        }
+
+		private void _playSessionAnimation()
+        {
+			timerSessionAnim.Enabled = true;
+			timerSessionAnim.Start();
+			btnPlayStopSessionWorking.BackgroundImage = Resources.stopSession;
+        }
+
+		private void _stopSessionAnimation()
+		{
+			timerSessionAnim.Enabled = false;
+			timerSessionAnim.Stop();
+			pictureSessionAnimation.Image = Resources.sessionStoped;
+			btnPlayStopSessionWorking.BackgroundImage = Resources.playSession;
+		}
+
+		int _currentFrame = 0;
+		private void nextFrameSessionAnimation()
+        {
+			if (_currentFrame < animFramesImg.Count() - 1)
+				_currentFrame++;
+			else
+				_currentFrame = 0;
+
+			pictureSessionAnimation.Image = animFramesImg[_currentFrame];
+		}
+
+		public MainForm(IInputBox dlg)
 		{
 			InitializeComponent();
 			_inputBox = dlg;
 
+			SessionWorkingState = WorkingSessionPlayState.stop;
 			setBufferState(0);
 		}
 
@@ -88,6 +146,7 @@ namespace TaskBank
         public event EventHandler PutTaskToBuffer;
         public event EventHandler StartStatisticWindow;
         public event EventHandler<ApplicationClosingEventArgs> ApplicationClosing;
+        public event EventHandler<WorkingSessionPlayState> WorkingSessionPlayStateChanged;
 
         void setBufferState(int items_cnt)
 		{
@@ -218,6 +277,19 @@ namespace TaskBank
             {
 				_inputBox.ShowMessage("There are working windows");
 			}
+		}
+
+        private void timerSessionAnim_Tick(object sender, EventArgs e)
+        {
+			nextFrameSessionAnimation();
+		}
+
+        private void btnPlayStopSessionWorking_Click(object sender, EventArgs e)
+        {
+			if (SessionWorkingState == WorkingSessionPlayState.stop)
+				WorkingSessionPlayStateChanged?.Invoke(this, WorkingSessionPlayState.run);
+			else
+				WorkingSessionPlayStateChanged?.Invoke(this, WorkingSessionPlayState.stop);
 		}
     }
 }

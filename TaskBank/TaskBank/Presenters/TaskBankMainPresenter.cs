@@ -8,6 +8,7 @@ using Shared.UI;
 using Shared.UI.Dlg;
 using Shared.UI.Forms;
 using Shared.UI.Interfaces;
+using Shared.UI.Interfaces.Enums;
 using Shared.UI.Interfaces.EventArgsDefinition;
 using System;
 using System.Collections.Generic;
@@ -80,6 +81,7 @@ namespace TaskBank.Presenters
             _mainView.PutTaskToBuffer += _mainView_PutTaskToBuffer;
             _mainView.StartStatisticWindow += _mainView_StartStatisticWindow;
             _mainView.ApplicationClosing += _mainView_ApplicationClosing;
+            _mainView.WorkingSessionPlayStateChanged += _mainView_WorkingSessionPlayStateChanged;
 
 			_descView.Save += DescView_Save;
 
@@ -88,16 +90,38 @@ namespace TaskBank.Presenters
 			_openObjectManager.SaveTask += _openObjectManager_SaveTask;
             _openObjectManager.SaveSession += _openObjectManager_SaveSession;
             _openObjectManager.OpenTasksCountChanged += _openObjectManager_OpenTasksCountChanged;
-            _openObjectManager.WorkingSessionStateChanged += _openObjectManager_WorkingSessionStateChanged;
-            _openObjectManager.SessionsRequired += _openObjectManager_SessionsRequired;
+            _openObjectManager.WorkingSessionWindowOpen += _openObjectManager_WorkingSessionWindowOpen;
+            _openObjectManager.WorkingSessionWindowCompleted += _openObjectManager_WorkingSessionWindowCompleted;
+            _openObjectManager.WorkingSessionPlayStateChanged += _openObjectManager_WorkingSessionPlayStateChanged;
+			_openObjectManager.SessionsRequired += _openObjectManager_SessionsRequired;
             _openObjectManager.CreateSession += _openObjectManager_CreateSession;
             _openObjectManager.FTaskRequired += _openObjectManager_FTaskRequired;
-
 
 			_sessionManagerMainPresenter.StartSession += _sessionManagerMainPresenter_StartSession;
            
 			update();
 		}
+
+        private void _mainView_WorkingSessionPlayStateChanged(object sender, WorkingSessionPlayState e)
+        {
+			_openObjectManager.SetWorkingSessionPlayState(e);
+		}
+
+        private void _openObjectManager_WorkingSessionPlayStateChanged(object sender, WorkingSessionPlayState e)
+        {
+			_mainView.SessionWorkingState = e;
+
+		}
+
+        private void _openObjectManager_WorkingSessionWindowCompleted(object sender, EventArgs e)
+        {
+			_mainView.SessionState = false;
+		}
+
+        private void _openObjectManager_WorkingSessionWindowOpen(object sender, EventArgs e)
+        {
+			_mainView.SessionState = true;
+        }
 
         private void _openObjectManager_FTaskRequired(object sender, RequestFTaskOpenObjectManagerEventArgs e)
         {
@@ -163,11 +187,6 @@ namespace TaskBank.Presenters
 			_openObjectManager.OpenSession(e);
 
 		}
-
-        private void _openObjectManager_WorkingSessionStateChanged(object sender, bool e)
-        {
-			_mainView.SessionState = e;
-        }
 
         private void _openObjectManager_OpenTasksCountChanged(object sender, int e)
         {

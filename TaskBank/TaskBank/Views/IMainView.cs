@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Shared.UI.Interfaces;
+using Shared.UI.Interfaces.Enums;
 using Shared.UI.UserControls;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,10 @@ namespace TaskBank.Views
 		event EventHandler RestoreWorkingSessionWindow;
 		event EventHandler PutTaskToBuffer;
 		event EventHandler<ApplicationClosingEventArgs> ApplicationClosing;
+		event EventHandler<WorkingSessionPlayState> WorkingSessionPlayStateChanged;
 		int OpenedTasksCout { get; set; }
 		bool SessionState { get; set; }
+		WorkingSessionPlayState SessionWorkingState { get; set; }
 		int ClipboardNodesCount { get; set; }
 	}
 }

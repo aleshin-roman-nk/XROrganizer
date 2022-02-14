@@ -142,11 +142,11 @@
   <data name="open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-open-sign-38.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="playing01" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\playing01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="sessAnim01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sessAnim01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="playing02" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\playing02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="sessAnim02" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sessAnim02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="task_list_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\task_list_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

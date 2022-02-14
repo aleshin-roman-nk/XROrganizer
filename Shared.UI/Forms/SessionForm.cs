@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Shared.UI;
 using Shared.UI.Interfaces;
+using Shared.UI.Interfaces.Enums;
 using Shared.UI.tools;
 using System;
 using System.Collections.Generic;
@@ -25,10 +26,8 @@ namespace Shared.UI.Forms
 		[DllImport("user32.dll")]
 		private static extern bool ReleaseCapture();
 
-
 		OSession _ent;
 
-//		ISessionLogItemCollectionEdit sessionLog;
 		TickCounterAnimator tickCounterAnimator = new TickCounterAnimator();
 
 		bool _closed;
@@ -53,10 +52,44 @@ namespace Shared.UI.Forms
 			}
 		}
 
+		WorkingSessionPlayState _workingState;
+		private WorkingSessionPlayState workingState
+        {
+            get
+            {
+				return _workingState;
+            }
+            set
+            {
+				_workingState = value;
+
+                switch (_workingState)
+                {
+                    case WorkingSessionPlayState.stop:
+						_stopWorking();
+						OnWorkStateChanged(_workingState);
+						break;
+                    case WorkingSessionPlayState.run:
+						_playWorking();
+						OnWorkStateChanged(_workingState);
+						break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+		private void OnWorkStateChanged(WorkingSessionPlayState st)
+        {
+			SessionWindowWorkStateChanged?.Invoke(this, st);
+		}
+
 		private bool _isWorking = false;
 		public bool IsWorking => _isWorking;
 
         public int ObjId => _ent.Id;
+
+		public WorkingSessionPlayState workingSessionPlayState => workingState;
 
         public SessionForm()
 		{
@@ -74,6 +107,8 @@ namespace Shared.UI.Forms
 			//tickCounterAnimator.DisplayTime = lblTotalTimeTicker;
 			tickCounterAnimator.TotalSecondsChanged += TickCounterAnimator_TotalSecondsChanged;
 			tickCounterAnimator.PictureBox = pictureBox1;
+
+			workingState = WorkingSessionPlayState.stop;
 		}
 
 		protected override void OnPaint(PaintEventArgs e)
@@ -163,8 +198,9 @@ namespace Shared.UI.Forms
         public event EventHandler Completed;
         public event EventHandler<OSession> Save;
         public event EventHandler<Node> OpenOwner;
+        public event EventHandler<WorkingSessionPlayState> SessionWindowWorkStateChanged;
 
-		private void timeInputUserControl2Provided_ValueChanged(object sender, EventArgs e)
+        private void timeInputUserControl2Provided_ValueChanged(object sender, EventArgs e)
 		{
 			_ent.ProvidedSeconds = timeInputUserControl2Provided.TotalSeconds;
 			txtPlanFinish.Text = _ent.Finish.ToString("dd.MM.yyyy HH:mm");
@@ -211,20 +247,27 @@ namespace Shared.UI.Forms
 
 		private void btnPlay_Click(object sender, EventArgs e)
 		{
+			workingState = WorkingSessionPlayState.run;
+		}
+
+		private void _stopWorking()
+        {
+			tickCounterAnimator.Stop();
+			timeInputUserControl1Total.TotalSeconds = tickCounterAnimator.TotalSeconds;
+		}
+
+		private void _playWorking()
+        {
 			if (tickCounterAnimator.IsRunning) return;
 
 			tickCounterAnimator.TotalSeconds = timeInputUserControl1Total.TotalSeconds;
 			tickCounterAnimator.Play();
 		}
 
-		bool UserAnsweredYes(string msg)
-		{
-			return DialogResult.Yes == MessageBox.Show(msg, "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-		}
-
 		private void btnClose_Click(object sender, EventArgs e)
 		{
 			tickCounterAnimator.Stop();
+			Save?.Invoke(this, _get());
 			Completed?.Invoke(this, EventArgs.Empty);
 			Close();
 		}
@@ -247,8 +290,7 @@ namespace Shared.UI.Forms
 
 		private void btnPause_Click(object sender, EventArgs e)
 		{
-			tickCounterAnimator.Stop();
-			timeInputUserControl1Total.TotalSeconds = tickCounterAnimator.TotalSeconds;
+			workingState = WorkingSessionPlayState.stop;
 		}
 
 		private void timeInputUserControl1Total_ValueChanged(object sender, EventArgs e)
@@ -259,16 +301,6 @@ namespace Shared.UI.Forms
 				timeInputUserControl1Total.TotalSeconds = tickCounterAnimator.TotalSeconds;
 			}
 		}
-
-//		private void SessionLog_WorkCompleted(object sender, ViewResponse<IEnumerable<NoteRec>> e)
-//		{
-//			if (e.Ok)
-//			{
-//				_ent.notes_source = JsonTool.Serialize(e.Data);
-//				webBrowser1.DocumentText = _ent.Html;
-////				sessionLog.WorkCompleted -= SessionLog_WorkCompleted;
-//			}
-//		}
 
 		private void btnEditLogList_Click(object sender, EventArgs e)
 		{
@@ -294,5 +326,10 @@ namespace Shared.UI.Forms
         {
 			OpenOwner?.Invoke(this, _ent.Owner);
         }
+
+        public void SetWorkingSesionPlayState(WorkingSessionPlayState st)
+        {
+			workingState = st;
+		}
     }
 }

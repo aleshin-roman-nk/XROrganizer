@@ -57,6 +57,7 @@
     <Compile Include="Dlg\Forms\InputBoxForm.Designer.cs">
       <DependentUpon>InputBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\Enums\WorkingSessionPlayState.cs" />
     <Compile Include="Interfaces\EventArgsDefinition\SaveNodeEventArgs.cs" />
     <Compile Include="Interfaces\EventArgsDefinition\SessionsPageRequiredEventArgs.cs" />
     <Compile Include="Interfaces\EventArgsDefinition\DisplaySessionsPageEventArg.cs" />
@@ -231,6 +232,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\playing02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sessAnim02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sessAnim01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
