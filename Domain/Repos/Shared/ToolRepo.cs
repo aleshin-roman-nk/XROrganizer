@@ -50,16 +50,21 @@ namespace Domain.Repos.Shared
 
 		public string getFullPathOf(INode n, AppData db)
 		{
-			string res = "";
+			string res;
 
 			if (n.type == Enums.NType._sys_root_dir) return "";
 
-			if(n.type == Enums.NType.Dir)
-				res = $"{GetPathOf(n, db)}{n.name}";
-			else
-				res = $"{GetPathOf(n, db)}#{n.id}";
+            //if(n.type == Enums.NType.Dir)
+            //	res = $"{GetPathOf(n, db)}{n.name}";
+            //else
+            //	res = $"{GetPathOf(n, db)}#{n.id}";
 
-			return res;
+            if (!string.IsNullOrEmpty(n.name))
+                res = $"{GetPathOf(n, db)}{n.name}";
+            else
+                res = $"{GetPathOf(n, db)}#{n.id}";
+
+            return res;
 		}
 	}
 }

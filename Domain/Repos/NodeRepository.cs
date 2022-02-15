@@ -96,7 +96,8 @@ namespace Domain.Repos
 
 				foreach (var item in items)
                 {
-					item.path = item.type == Enums.NType.Dir ? $"{path} \\ {item.name}" : $"{path} \\ #{item.id}";
+					//item.path = item.type == Enums.NType.Dir ? $"{path} \\ {item.name}" : $"{path} \\ #{item.id}";
+					item.path = string.IsNullOrEmpty(item.name) == false ? $"{path} \\ {item.name}" : $"{path} \\ #{item.id}";
                 }
 
 				return items;
