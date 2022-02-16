@@ -38,7 +38,6 @@ namespace Shared.UI.UserControls
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NTypeString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cldate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.nodeGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,8 +66,7 @@ namespace Shared.UI.UserControls
             this.colId,
             this.name,
             this.NTypeString,
-            this.cldate,
-            this.description});
+            this.cldate});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(224)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -117,7 +115,7 @@ namespace Shared.UI.UserControls
             this.name.Name = "name";
             this.name.ReadOnly = true;
             this.name.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.name.Width = 200;
+            this.name.Width = 350;
             // 
             // NTypeString
             // 
@@ -136,15 +134,6 @@ namespace Shared.UI.UserControls
             this.cldate.ReadOnly = true;
             this.cldate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.cldate.Width = 150;
-            // 
-            // description
-            // 
-            this.description.DataPropertyName = "text";
-            this.description.HeaderText = "text";
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            this.description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.description.Width = 300;
             // 
             // NodesViewUC
             // 
@@ -171,6 +160,5 @@ namespace Shared.UI.UserControls
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn NTypeString;
         private System.Windows.Forms.DataGridViewTextBoxColumn cldate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn description;
     }
 }

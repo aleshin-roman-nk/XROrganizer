@@ -22,6 +22,7 @@ namespace Shared.UI.Interfaces
 		event EventHandler<IEnumerable<INode>> SendNodesToClipboard;
 		event EventHandler Paste;
 		event EventHandler<INode> ActivateNode;
+
 		event EventHandler LeaveNode;
 		event EventHandler<INode> CurrentNodeChanged;
 	}

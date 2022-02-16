@@ -117,16 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="colId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="NTypeString.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="cldate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnKillPage.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAUCAYAAAD/Rn+7AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vgAADr4B6kKxwAAAAZxJREFUSEtjGAVDCZyR0hQ6k2p5lygMVAvVRh6o81cruJBiufl5m6suVIggOJNm
+        +eSGj9l/YvCZFIsLUG3kAaBlL0EGXQ01/3kjzXoeMQ4Fhsx9dIfgwmdSLM9BtZEHYA6E4Uth5u/vZ9hO
+        xOdQsqMYZCjIcFIwMOR+IDsQ4VCz+yB5UqKeIDifbLkdm2XEYJBDgaH3GF38Srj5Oao5EhaC2CwihEFR
+        DdJ/J91m2uVQ80/IcqSkT6IATou8Tf9cDzE/fjfBeilyNKNHJYh9PdV60dUQ81/I+olJnyQBXBadSrV4
+        BJTmgKjCDUD6L4eZX0TWC8Knky0uQZVQBkAW3Eq3mYmeEU6nWjwBShPlQGAaPIWsF6yfUgeCDAZFxaVQ
+        s3fIBl/3Mv13Ldj8HDFRjM1jV0LNv4KSDrJakgDcYcAiAtlgYjAsk4D1o3ssxPzP1VSrZWQ7DAZAVRay
+        waRgaDFzF10cmAavUuwwGICFACkYPRphGOjY5yB5qjmOXIBe1VGczqgNYA6kWjqjNijzVqk+l2y5c9A5
+        jL6AgQEAPTyFayY42soAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="brnAddPage.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAUCAYAAAD/Rn+7AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vwAADr8BOAVTJAAAAfRJREFUSEtjGAzgzA7vg0C8Z/8aNw2o0OABQIcd+P8s7j8Ig9hQ4cEDaObAzDi1
+        xOuH/JuABktBhcgCNHMg0LCrIENfXgp7+/pyWBopDgU5BIZhjoNhZDmocvIA0ACwA2H4/skgED8MiPE6
+        9OwO7zPI+vDhczu914A1ATlSQAwynGj84mLoayCNYei9E4FbgDRIDVaHnt3pfRhZPT58bpfPCrCmqwf8
+        2rEpIAaDHHrvRNAedPGn50KmAmmsjkSORnR9yHJQ5YgQxGYRIQw0CBS1Ut/uRcU8PB18G1mOmPSJ7EgU
+        R2EDIIOwWfTpVuTnz7cjm4HsZCBGj2645SD28wuh2a+vhH0AsuH68aVPkhwIAyCDsFl0cpvXKaA0B0QV
+        bgDS//hM8GxkvSB8apvXeqgSOCDbgR9vRSagZwSgBWeB0kQ58Nn5kInIeqH6MRwIAhf2+Nw5v8vnKpSL
+        G4AMBuKwB6eCLiEb/OtRzJ931yP6gWyCUYzNY0/OhjwGJR1ktSQBkEYgBmYScBEBN5gYDIwWcCYBYgyP
+        fbgR8e3x2eACkDzUKvIAtMpCsZhYDAotYCbYgC7+8HTQIiBNmcNgAGQQEKNHHV6Mu6AOOgKkQWqo4zhy
+        ATRq4Q6jOJ1RG8AcSLV0Rm2QFKGSe2mfb/egcxh9AQMDAPCGlhKlA4FqAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnPrevPage.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAUCAYAAAD/Rn+7AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vgAADr4B6kKxwAAAARJJREFUSEtjGAWDAbj8z5Vy/JYZY3oqbDOIDRUeeABzmPX9+KtA9n8oDoNKDxzA
+        4bCBdyDQcnwOg+EcIA4jA5OfNECacTnM5nHiA6BcGbo4qdj0ZNg+oFUsEBuJBECNeB3m8DE9AaQGiEEh
+        gCJPLAaZDbIDyCY+BEGKiXEYVDlYPRCjRxkIJzv9yq60fZZ0F8gmaA6xgAUU3FQwkFrmYACQwQfQDSYj
+        KqhlDiYAaQb5EuRbZMNBGJsFIDYQY41ioNo6u9cpz4FsguaQDECaiXEoEIMcgyJPLKaLQ4EZoQhdnFRM
+        VjGDDoAG4XQoEqZ/QY0OQIbhcejA18UwAHQMNocOHgfCAMyh0GKFelE1CigGDAwAl4SHCJ3jkmMAAAAA
+        SUVORK5CYII=
+</value>
+  </data>
+  <data name="btnNextPage.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAUCAYAAAD/Rn+7AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vgAADr4B6kKxwAAAAQhJREFUSEtjGAWDCbj8z5UyPRW22fFbZgyIDRUePADoqDAg/g/C1vfjrw46hyI7
+        EIZp4lCQYUAMsoxUnAPEKA6EYWo6lMX0ZNg+dAtIxUDHlNk8TnyALk4Vh4I0gwwBGYZsOIkYFKJSDh/T
+        E2jqUFwW2D5Luuv0K7sSyE4GYvSoBjsOagxec2juUFByACphgajED6hlDgYAGYwryoEGHwAqIdqB1DAH
+        DvAZaPc65TlQrg7IJiqKcZkDCk1QqILUQJUTBiDFuAwkAYMdSVWHQQFVihlgBiqitsPgAKQZiNGjjBiM
+        s6CmisMoBUDLQY4cfA6DAaAj4A4cVA6DAZBjQMXFoHPYCAYMDAAb5ocI8XvD8wAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="richTextBoxText.Text" xml:space="preserve">
+    <value>Мысли с утреннего поклонения в Вефиле (Казахстан) которое 28.12.2016 проводил представитель главного управления (Бытие 12:2). 
+"Почему Иегова хотел произвести от Авраама целый народ? Не было ли проще выбрать себе отдельных послушных людей, чем возиться столько времени с непослушным народом? 
+В первую очередь нужно понимать, что выкуп - это грандиозный проект с большим размахом и масштабом действий (сколько людей было задействовано в том, что Иисус был рождён как человек). Так же нужно было учесть противодействие со стороны демонов и людей! </value>
+  </data>
 </root>

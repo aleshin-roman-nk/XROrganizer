@@ -147,6 +147,7 @@ namespace TaskBank
         public event EventHandler StartStatisticWindow;
         public event EventHandler<ApplicationClosingEventArgs> ApplicationClosing;
         public event EventHandler<WorkingSessionPlayState> WorkingSessionPlayStateChanged;
+        public event EventHandler OpenNode;
 
         void setBufferState(int items_cnt)
 		{
@@ -175,6 +176,11 @@ namespace TaskBank
 				RenameNode?.Invoke(this, EventArgs.Empty);
 				e.Handled = true;
 			}
+			else if(e.KeyCode == Keys.F3)
+            {
+				OpenNode?.Invoke(this, EventArgs.Empty);
+				e.Handled= true;
+            }
 		}
 
 		private void btntsCreate_Click(object sender, EventArgs e)

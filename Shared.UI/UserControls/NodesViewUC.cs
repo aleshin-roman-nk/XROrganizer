@@ -24,14 +24,14 @@ namespace Shared.UI.UserControls
 		{
 			InitializeComponent();
 
-			typeof(DataGridView).InvokeMember(
-			"DoubleBuffered",
-			BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
-			null,
-			nodeGrid,
-			new object[] { true });
+            typeof(DataGridView).InvokeMember(
+            "DoubleBuffered",
+            BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
+            null,
+            nodeGrid,
+            new object[] { true });
 
-			nodeGrid.AutoGenerateColumns = false;
+            nodeGrid.AutoGenerateColumns = false;
 
 			bsNodes.CurrentItemChanged += BsNodes_CurrentItemChanged;
 			nodeGrid.DataSource = bsNodes;
@@ -49,7 +49,7 @@ namespace Shared.UI.UserControls
 		public event EventHandler LeaveNode;
 		public event EventHandler<INode> CurrentNodeChanged;
 
-		string _lastPath = "";
+        string _lastPath = "";
 		public void DisplayNodes(IEnumerable<INode> nodes, string path, INode highlightedNode)
 		{
 			bool isPathSame = _lastPath.Equals(path);
@@ -116,6 +116,10 @@ namespace Shared.UI.UserControls
 				Paste?.Invoke(this, EventArgs.Empty);
 				e.Handled = true;
 			}
+			//else if(e.KeyCode == Keys.F3)
+   //         {
+
+   //         }
 		}
 
 		private void placeCursor(INode n)

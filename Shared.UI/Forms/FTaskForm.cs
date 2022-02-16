@@ -69,12 +69,12 @@ namespace Shared.UI.Forms
 				_isCompleted = value;
 				if (_isCompleted)
 				{
-					btnComlete.BackgroundImage = Shared.UI.Properties.Resources.icons8_task_completed_48;
+					btnComlete.BackgroundImage = Properties.Resources.icons8_task_completed_48;
 					btnComlete.BackColor = ColorTranslator.FromHtml("#94d2bd");
 				}
 				else
 				{
-					btnComlete.BackgroundImage = Shared.UI.Properties.Resources.icons8_task_planning_48;
+					btnComlete.BackgroundImage = Properties.Resources.icons8_task_planning_48;
 					btnComlete.BackColor = ColorTranslator.FromHtml("#ee9b00");
 				}
 			}
@@ -248,7 +248,7 @@ namespace Shared.UI.Forms
         private void btnNextPage_Click(object sender, EventArgs e)
         {
 			bool saved = savingObserver.Saved;// we want to remember if any page is not saved in db
-			nodeTextPages.Page = richTextBoxDescription.Text;
+			nodeTextPages.Page = richTextBoxDescription.Text;// забираем текст перед сменой страницы.
 			nodeTextPages.nextPage();
 			richTextBoxDescription.Text = nodeTextPages.Page;
 			txtPageText.Text = $"{nodeTextPages.PageNo}/{nodeTextPages.MaxPage}";

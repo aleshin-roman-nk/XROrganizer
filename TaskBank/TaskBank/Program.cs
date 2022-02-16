@@ -65,6 +65,7 @@ namespace TaskBank
 					.RegisterType<ISingleSessionView, SessionForm>()
 					.RegisterType<ISessionService, SessionService>()
 					.RegisterType<IStataView, StataForm>()
+					.RegisterType<INodeDefaultView, NodeDefaultForm>()
 
 					//.RegisterInstance<IMainView>(new MainForm())
 					.RegisterType<IAppDataContextFactory, AppDataContextFactory>()

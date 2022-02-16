@@ -59,25 +59,25 @@ namespace Shared.UI.UserControls
 
 		private void _grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
-			if (RowColors == null) return;
+            if (RowColors == null) return;
 
-			var row = _grid.Rows[e.RowIndex];
+            var row = _grid.Rows[e.RowIndex];
 
-			NType t = (row.DataBoundItem as INode).type;
+            NType t = (row.DataBoundItem as INode).type;
 
-			Color clr = getColor(t);
-			if (clr == Color.Empty) return;
+            Color clr = getColor(t);
+            if (clr == Color.Empty) return;
 
-			e.CellStyle.ForeColor = clr;
+            e.CellStyle.ForeColor = clr;
 
-			/*
+            /*
 			 * >>> 30-01-2022
 			 * Придумать лямбду, условие - функция.
 			 * входные параметры в лямбду: INode, DataGridViewCellStyle
 			 */
-			if((row.DataBoundItem as INode).pinned)
-				e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
-		}
+            if ((row.DataBoundItem as INode).pinned)
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+        }
 
 		private void removeImgCol()
 		{

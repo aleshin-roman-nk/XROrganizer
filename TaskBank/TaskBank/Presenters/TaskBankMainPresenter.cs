@@ -82,12 +82,13 @@ namespace TaskBank.Presenters
             _mainView.StartStatisticWindow += _mainView_StartStatisticWindow;
             _mainView.ApplicationClosing += _mainView_ApplicationClosing;
             _mainView.WorkingSessionPlayStateChanged += _mainView_WorkingSessionPlayStateChanged;
+            _mainView.OpenNode += _mainView_OpenNode;
 
 			_descView.Save += DescView_Save;
 
 			_service.CollectionChanged += _service_CollectionChanged;
 
-			_openObjectManager.SaveTask += _openObjectManager_SaveTask;
+			_openObjectManager.SaveNode += _openObjectManager_SaveTask;
             _openObjectManager.SaveSession += _openObjectManager_SaveSession;
             _openObjectManager.OpenTasksCountChanged += _openObjectManager_OpenTasksCountChanged;
             _openObjectManager.WorkingSessionWindowOpen += _openObjectManager_WorkingSessionWindowOpen;
@@ -100,6 +101,14 @@ namespace TaskBank.Presenters
 			_sessionManagerMainPresenter.StartSession += _sessionManagerMainPresenter_StartSession;
            
 			update();
+		}
+
+        private void _mainView_OpenNode(object sender, EventArgs e)
+        {
+			var n = _mainView.NodesView.SelectedNodes.FirstOrDefault();
+			if (n == null) return;
+
+			_openObjectManager.DefaultOpenNode(n);
 		}
 
         private void _mainView_WorkingSessionPlayStateChanged(object sender, WorkingSessionPlayState e)
@@ -445,6 +454,10 @@ namespace TaskBank.Presenters
 			else if(e.type == NType.Task)
 			{
 				_openObjectManager.OpenTask(e as FTask);
+			}
+            else
+            {
+				_openObjectManager.DefaultOpenNode(e);
 			}
 		}
 	}

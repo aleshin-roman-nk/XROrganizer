@@ -13,14 +13,17 @@ namespace TaskBank.Presenters
 	public class OpenObjectManager
 	{
 		List<IFTaskEditView> _openedTasks = new List<IFTaskEditView>();
+		List<INodeDefaultView> _openedNodes = new List<INodeDefaultView>();
+
 		ISingleSessionView _openedSession = null;
 		ITopSessionsOfTaskView _topSessions = null;
 
 		Func<IFTaskEditView> _FTaskWindowfactory;
+		Func<INodeDefaultView> _DefaultWindowfactory;
 		Func<ISingleSessionView> _sessionWindowFactory;
 		Func<ITopSessionsOfTaskView> _topSessionsFactory;
 
-		public event EventHandler<SaveNodeEventArgs> SaveTask;
+		public event EventHandler<SaveNodeEventArgs> SaveNode;
 		public event EventHandler<OSession> SaveSession;
 		public event EventHandler<int> OpenTasksCountChanged;
 		public event EventHandler WorkingSessionWindowOpen;
@@ -45,12 +48,14 @@ namespace TaskBank.Presenters
 
 		public OpenObjectManager(
 			Func<IFTaskEditView> FTaskWindowfactory, 
+			Func<INodeDefaultView> DefaultWindowfactory, 
 			Func<ISingleSessionView> sessionWindowFactory,
 			Func<ITopSessionsOfTaskView> topSessionsFactory)
         {
 			_sessionWindowFactory = sessionWindowFactory;
 			_FTaskWindowfactory = FTaskWindowfactory;
 			_topSessionsFactory = topSessionsFactory;
+			_DefaultWindowfactory = DefaultWindowfactory;
 		}
 
 		public void TryRestoreSessionWindow()
@@ -60,7 +65,54 @@ namespace TaskBank.Presenters
 			_openedSession.Restore();
 		}
 
-		public void OpenSession(OSession s)
+		public void DefaultOpenNode(INode n)
+        {
+			var op = _openedNodes.SingleOrDefault(x => x.ObjId == n.id);
+
+			if (op != null)
+			{
+				op.Restore();
+			}
+			else
+			{
+				createDefaultNodeView(n);
+			}
+		}
+
+		private void createDefaultNodeView(INode n)
+        {
+			var frmDefaultNode = _DefaultWindowfactory();
+
+            frmDefaultNode.Save += FrmDefaultNode_Save;
+            frmDefaultNode.Completed += FrmDefaultWindow_Completed;
+
+			_openedNodes.Add(frmDefaultNode);
+			OpenTasksCountChanged?.Invoke(this, _openedTasks.Count + _openedNodes.Count);
+
+			frmDefaultNode.Go(n);
+		}
+
+        private void FrmDefaultNode_Save(object sender, SaveNodeEventArgs e)
+        {
+			OnSaveNode(e);
+		}
+
+        private void FrmDefaultWindow_Completed(object sender, EventArgs e)
+        {
+			var sender_frm = sender as INodeDefaultView;
+			var frm = _openedNodes.SingleOrDefault(x => x.ObjId == sender_frm.ObjId);
+
+			if (frm != null)
+			{
+				frm.Save -= FrmDefaultNode_Save;
+				frm.Completed -= FrmDefaultWindow_Completed;
+
+				_openedNodes.Remove(frm);
+				OpenTasksCountChanged?.Invoke(this, _openedTasks.Count + _openedNodes.Count);
+			}
+		}
+
+        public void OpenSession(OSession s)
 		{
 			if (_openedSession == null)
 			{
@@ -136,7 +188,7 @@ namespace TaskBank.Presenters
             frm.OpenNodeById += Frm_OpenNodeById;
 
 			_openedTasks.Add(frm);
-			OpenTasksCountChanged?.Invoke(this, _openedTasks.Count);
+			OpenTasksCountChanged?.Invoke(this, _openedTasks.Count + _openedNodes.Count);
 
 			frm.Go(t);
 		}
@@ -153,7 +205,12 @@ namespace TaskBank.Presenters
 			}
 		}
 
-        private void Frm_CreateSession(object sender, INode e)
+		private void OnSaveNode(SaveNodeEventArgs n)
+        {
+			SaveNode?.Invoke(this, n);
+		}
+
+		private void Frm_CreateSession(object sender, INode e)
         {
             CreateSession?.Invoke(this, e);
         }
@@ -211,7 +268,7 @@ namespace TaskBank.Presenters
 
         private void Frm_Save(object sender, SaveNodeEventArgs e)
         {
-			SaveTask?.Invoke(this, e);
+			OnSaveNode(e);
 		}
     }
 }

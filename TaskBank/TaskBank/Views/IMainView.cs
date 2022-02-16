@@ -22,6 +22,7 @@ namespace TaskBank.Views
 		event EventHandler DeleteNode;
 		event EventHandler CreateNode;
 		event EventHandler RenameNode;
+		event EventHandler OpenNode;
 		event EventHandler CreateSession;
 		event EventHandler RestoreWorkingSessionWindow;
 		event EventHandler PutTaskToBuffer;

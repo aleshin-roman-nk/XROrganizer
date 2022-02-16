@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\NodeDefaultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NodeDefaultForm.Designer.cs">
+      <DependentUpon>NodeDefaultForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\DlgAnswerCode.cs" />
     <Compile Include="Dlg\Forms\InputBoxForm.cs">
       <SubType>Form</SubType>
@@ -108,6 +114,7 @@
     <Compile Include="Interfaces\IBufferTaskView.cs" />
     <Compile Include="Interfaces\ICompletedTasksView.cs" />
     <Compile Include="Interfaces\IFTaskEditView.cs" />
+    <Compile Include="Interfaces\INodeDefaultView.cs" />
     <Compile Include="Interfaces\ISingleSessionView.cs" />
     <Compile Include="Interfaces\ITopSessionsOfTaskView.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -134,6 +141,12 @@
     </Compile>
     <Compile Include="UserControls\NodesViewUC.Designer.cs">
       <DependentUpon>NodesViewUC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NodeTextPagesUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\NodeTextPagesUC.Designer.cs">
+      <DependentUpon>NodeTextPagesUC.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\TimeInputUserControl.cs">
       <SubType>UserControl</SubType>
@@ -176,6 +189,9 @@
     <EmbeddedResource Include="Dlg\Forms\NTypeChooseForm.resx">
       <DependentUpon>NTypeChooseForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NodeDefaultForm.resx">
+      <DependentUpon>NodeDefaultForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SessionForm.resx">
       <DependentUpon>SessionForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -191,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\NodesViewUC.resx">
       <DependentUpon>NodesViewUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\NodeTextPagesUC.resx">
+      <DependentUpon>NodeTextPagesUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\TimeInputUserControl.resx">
       <DependentUpon>TimeInputUserControl.cs</DependentUpon>
