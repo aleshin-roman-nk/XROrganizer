@@ -35,25 +35,25 @@
             this.txtOpenedTaskCount = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.label4 = new System.Windows.Forms.Label();
-            this.timerSessionAnim = new System.Windows.Forms.Timer(this.components);
-            this.pictureSessionAnimation = new System.Windows.Forms.PictureBox();
-            this.btnPlayStopSessionWorking = new System.Windows.Forms.Button();
-            this.btnSessionState = new System.Windows.Forms.Button();
             this.btntsCreate = new System.Windows.Forms.ToolStripButton();
             this.btntsRename = new System.Windows.Forms.ToolStripButton();
             this.btntsDelete = new System.Windows.Forms.ToolStripButton();
             this.btntsCreateSession = new System.Windows.Forms.ToolStripButton();
             this.stbtnPutTaskToBuffer = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnShowCompleted = new System.Windows.Forms.ToolStripButton();
             this.tsbtnShowBuffer = new System.Windows.Forms.ToolStripButton();
             this.tsbtnSessionCollector = new System.Windows.Forms.ToolStripButton();
             this.stbtnViewEditDescription = new System.Windows.Forms.ToolStripButton();
             this.tsbtnShowStatistic = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btntsTimeTag = new System.Windows.Forms.ToolStripButton();
             this.btntsTaskTag = new System.Windows.Forms.ToolStripButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.timerSessionAnim = new System.Windows.Forms.Timer(this.components);
+            this.pictureSessionAnimation = new System.Windows.Forms.PictureBox();
+            this.btnPlayStopSessionWorking = new System.Windows.Forms.Button();
+            this.btnSessionState = new System.Windows.Forms.Button();
             this.nodesViewUC1 = new Shared.UI.UserControls.NodesViewUC();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureSessionAnimation)).BeginInit();
@@ -120,69 +120,9 @@
             this.btntsTaskTag});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(776, 35);
+            this.toolStrip1.Size = new System.Drawing.Size(1061, 35);
             this.toolStrip1.TabIndex = 29;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 35);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(234, 40);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 19);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "Сессия";
-            // 
-            // timerSessionAnim
-            // 
-            this.timerSessionAnim.Interval = 250;
-            this.timerSessionAnim.Tick += new System.EventHandler(this.timerSessionAnim_Tick);
-            // 
-            // pictureSessionAnimation
-            // 
-            this.pictureSessionAnimation.Image = global::TaskBank.Properties.Resources.sessionStoped;
-            this.pictureSessionAnimation.Location = new System.Drawing.Point(356, 38);
-            this.pictureSessionAnimation.Name = "pictureSessionAnimation";
-            this.pictureSessionAnimation.Size = new System.Drawing.Size(24, 24);
-            this.pictureSessionAnimation.TabIndex = 33;
-            this.pictureSessionAnimation.TabStop = false;
-            this.pictureSessionAnimation.Visible = false;
-            // 
-            // btnPlayStopSessionWorking
-            // 
-            this.btnPlayStopSessionWorking.BackgroundImage = global::TaskBank.Properties.Resources.playSession;
-            this.btnPlayStopSessionWorking.FlatAppearance.BorderSize = 0;
-            this.btnPlayStopSessionWorking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlayStopSessionWorking.Location = new System.Drawing.Point(326, 38);
-            this.btnPlayStopSessionWorking.Name = "btnPlayStopSessionWorking";
-            this.btnPlayStopSessionWorking.Size = new System.Drawing.Size(24, 24);
-            this.btnPlayStopSessionWorking.TabIndex = 32;
-            this.btnPlayStopSessionWorking.UseVisualStyleBackColor = true;
-            this.btnPlayStopSessionWorking.Visible = false;
-            this.btnPlayStopSessionWorking.Click += new System.EventHandler(this.btnPlayStopSessionWorking_Click);
-            // 
-            // btnSessionState
-            // 
-            this.btnSessionState.BackgroundImage = global::TaskBank.Properties.Resources.nosession;
-            this.btnSessionState.FlatAppearance.BorderSize = 0;
-            this.btnSessionState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSessionState.Location = new System.Drawing.Point(296, 38);
-            this.btnSessionState.Name = "btnSessionState";
-            this.btnSessionState.Size = new System.Drawing.Size(24, 24);
-            this.btnSessionState.TabIndex = 31;
-            this.btnSessionState.UseVisualStyleBackColor = true;
-            this.btnSessionState.Click += new System.EventHandler(this.btnSessionState_Click);
             // 
             // btntsCreate
             // 
@@ -236,6 +176,11 @@
             this.stbtnPutTaskToBuffer.Text = "Put to buffer";
             this.stbtnPutTaskToBuffer.Click += new System.EventHandler(this.stbtnPutTaskToBuffer_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 35);
+            // 
             // tsbtnShowCompleted
             // 
             this.tsbtnShowCompleted.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -286,6 +231,11 @@
             this.tsbtnShowStatistic.Text = "Statistic";
             this.tsbtnShowStatistic.Click += new System.EventHandler(this.tsbtnShowStatistic_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
+            // 
             // btntsTimeTag
             // 
             this.btntsTimeTag.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -308,6 +258,56 @@
             this.btntsTaskTag.ToolTipText = "Task tag";
             this.btntsTaskTag.Click += new System.EventHandler(this.btntsTaskTag_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(234, 40);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 19);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "Сессия";
+            // 
+            // timerSessionAnim
+            // 
+            this.timerSessionAnim.Interval = 250;
+            this.timerSessionAnim.Tick += new System.EventHandler(this.timerSessionAnim_Tick);
+            // 
+            // pictureSessionAnimation
+            // 
+            this.pictureSessionAnimation.Image = global::TaskBank.Properties.Resources.sessionStoped;
+            this.pictureSessionAnimation.Location = new System.Drawing.Point(356, 38);
+            this.pictureSessionAnimation.Name = "pictureSessionAnimation";
+            this.pictureSessionAnimation.Size = new System.Drawing.Size(24, 24);
+            this.pictureSessionAnimation.TabIndex = 33;
+            this.pictureSessionAnimation.TabStop = false;
+            this.pictureSessionAnimation.Visible = false;
+            // 
+            // btnPlayStopSessionWorking
+            // 
+            this.btnPlayStopSessionWorking.BackgroundImage = global::TaskBank.Properties.Resources.playSession;
+            this.btnPlayStopSessionWorking.FlatAppearance.BorderSize = 0;
+            this.btnPlayStopSessionWorking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPlayStopSessionWorking.Location = new System.Drawing.Point(326, 38);
+            this.btnPlayStopSessionWorking.Name = "btnPlayStopSessionWorking";
+            this.btnPlayStopSessionWorking.Size = new System.Drawing.Size(24, 24);
+            this.btnPlayStopSessionWorking.TabIndex = 32;
+            this.btnPlayStopSessionWorking.UseVisualStyleBackColor = true;
+            this.btnPlayStopSessionWorking.Visible = false;
+            this.btnPlayStopSessionWorking.Click += new System.EventHandler(this.btnPlayStopSessionWorking_Click);
+            // 
+            // btnSessionState
+            // 
+            this.btnSessionState.BackgroundImage = global::TaskBank.Properties.Resources.nosession;
+            this.btnSessionState.FlatAppearance.BorderSize = 0;
+            this.btnSessionState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSessionState.Location = new System.Drawing.Point(296, 38);
+            this.btnSessionState.Name = "btnSessionState";
+            this.btnSessionState.Size = new System.Drawing.Size(24, 24);
+            this.btnSessionState.TabIndex = 31;
+            this.btnSessionState.UseVisualStyleBackColor = true;
+            this.btnSessionState.Click += new System.EventHandler(this.btnSessionState_Click);
+            // 
             // nodesViewUC1
             // 
             this.nodesViewUC1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -316,13 +316,13 @@
             this.nodesViewUC1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(224)))));
             this.nodesViewUC1.Location = new System.Drawing.Point(0, 62);
             this.nodesViewUC1.Name = "nodesViewUC1";
-            this.nodesViewUC1.Size = new System.Drawing.Size(775, 397);
+            this.nodesViewUC1.Size = new System.Drawing.Size(1060, 721);
             this.nodesViewUC1.TabIndex = 0;
             // 
             // MainForm
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(234)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(776, 459);
+            this.ClientSize = new System.Drawing.Size(1061, 783);
             this.Controls.Add(this.pictureSessionAnimation);
             this.Controls.Add(this.btnPlayStopSessionWorking);
             this.Controls.Add(this.btnSessionState);

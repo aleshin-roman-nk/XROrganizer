@@ -298,6 +298,7 @@ namespace Shared.UI.Forms
 			if (tickCounterAnimator.IsRunning)
 			{
 				tickCounterAnimator.Stop();
+				workingState = WorkingSessionPlayState.stop;
 				timeInputUserControl1Total.TotalSeconds = tickCounterAnimator.TotalSeconds;
 			}
 		}

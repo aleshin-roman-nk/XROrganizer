@@ -205,7 +205,7 @@
             this.nodeTextPagesUC1.Location = new System.Drawing.Point(3, 101);
             this.nodeTextPagesUC1.Name = "nodeTextPagesUC1";
             this.nodeTextPagesUC1.Size = new System.Drawing.Size(845, 595);
-            this.nodeTextPagesUC1.TabIndex = 14;
+            this.nodeTextPagesUC1.TabIndex = 0;
             this.nodeTextPagesUC1.ObjectChanged += new System.EventHandler(this.nodeTextPagesUC1_ObjectChanged);
             this.nodeTextPagesUC1.AddPageRequired += new System.EventHandler(this.nodeTextPagesUC1_AddPageRequired);
             // 

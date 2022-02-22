@@ -49,6 +49,7 @@
             this.btnKillPage.Name = "btnKillPage";
             this.btnKillPage.Size = new System.Drawing.Size(44, 20);
             this.btnKillPage.TabIndex = 25;
+            this.btnKillPage.TabStop = false;
             this.btnKillPage.UseVisualStyleBackColor = false;
             this.btnKillPage.Click += new System.EventHandler(this.btnKillPage_Click);
             // 
@@ -64,6 +65,7 @@
             this.brnAddPage.Name = "brnAddPage";
             this.brnAddPage.Size = new System.Drawing.Size(44, 20);
             this.brnAddPage.TabIndex = 24;
+            this.brnAddPage.TabStop = false;
             this.brnAddPage.UseVisualStyleBackColor = false;
             this.brnAddPage.Click += new System.EventHandler(this.brnAddPage_Click);
             // 
@@ -78,6 +80,7 @@
             this.txtPageText.ReadOnly = true;
             this.txtPageText.Size = new System.Drawing.Size(58, 19);
             this.txtPageText.TabIndex = 23;
+            this.txtPageText.TabStop = false;
             this.txtPageText.Tag = "";
             this.txtPageText.Text = "20/20";
             this.txtPageText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -94,6 +97,7 @@
             this.btnPrevPage.Name = "btnPrevPage";
             this.btnPrevPage.Size = new System.Drawing.Size(44, 20);
             this.btnPrevPage.TabIndex = 22;
+            this.btnPrevPage.TabStop = false;
             this.btnPrevPage.UseVisualStyleBackColor = false;
             this.btnPrevPage.Click += new System.EventHandler(this.btnPrevPage_Click);
             // 
@@ -109,10 +113,11 @@
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(44, 20);
             this.btnNextPage.TabIndex = 21;
+            this.btnNextPage.TabStop = false;
             this.btnNextPage.UseVisualStyleBackColor = false;
             this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
             // 
-            // richTextBoxText
+            // WorkspaceText
             // 
             this.WorkspaceText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -122,10 +127,10 @@
             this.WorkspaceText.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WorkspaceText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(127)))), ((int)(((byte)(0)))));
             this.WorkspaceText.Location = new System.Drawing.Point(-1, 29);
-            this.WorkspaceText.Name = "richTextBoxText";
+            this.WorkspaceText.Name = "WorkspaceText";
             this.WorkspaceText.Size = new System.Drawing.Size(770, 416);
-            this.WorkspaceText.TabIndex = 26;
-            this.WorkspaceText.Text = resources.GetString("richTextBoxText.Text");
+            this.WorkspaceText.TabIndex = 0;
+            this.WorkspaceText.Text = resources.GetString("WorkspaceText.Text");
             // 
             // NodeTextPagesUC
             // 

@@ -107,6 +107,7 @@ namespace TaskBank.Presenters
         {
 			var n = _mainView.NodesView.SelectedNodes.FirstOrDefault();
 			if (n == null) return;
+			if (n.type < NType.Dir) return;
 
 			_openObjectManager.DefaultOpenNode(n);
 		}
@@ -134,7 +135,7 @@ namespace TaskBank.Presenters
 
         private void _openObjectManager_FTaskRequired(object sender, RequestFTaskOpenObjectManagerEventArgs e)
         {
-			var res = _service.GetTask(e.taskId);
+			var res = _service.GetNode(e.taskId);
 
 			if(res == null)
             {
@@ -143,7 +144,7 @@ namespace TaskBank.Presenters
             else
             {
 				e.NodeExists = true;
-				e.Node = res;
+				e.Node = res as Node;
             }
         }
 

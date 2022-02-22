@@ -24,6 +24,6 @@ namespace Services.Nodes
 
 		IEnumerable<OSession> GetTopSessions(DateTime today, int taskId, int top, int page);
 
-		FTask GetTask(int taskId);
+		INode GetNode(int taskId);
 	}
 }

@@ -42,7 +42,7 @@ namespace TaskBank.Presenters
 		{
 			get
 			{
-				return _openedTasks.Count > 0 || _openedSession != null;
+				return _openedTasks.Count > 0 || _openedSession != null || _openedNodes.Count > 0;
 			}
 		}
 
@@ -201,7 +201,8 @@ namespace TaskBank.Presenters
 
             if (args.NodeExists)
             {
-				OpenTask(args.Node as FTask);
+				//OpenTask(args.Node as FTask);
+				DefaultOpenNode(args.Node);
 			}
 		}
 

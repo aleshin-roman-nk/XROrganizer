@@ -63,7 +63,7 @@ namespace Shared.UI.UserControls
 			var top_exit_dir = nodes.SingleOrDefault(x => x.type == NType.exit_dir);
 			List<INode> dirs = new List<INode>();
 			if(top_exit_dir != null) dirs.Add(top_exit_dir);
-			dirs.AddRange(nodes.Where(x => x.type <= 0 && x.type != NType.exit_dir).OrderBy(x => x.name).ToList());
+			dirs.AddRange(nodes.Where(x => x.type <= 0 && x.type != NType.exit_dir).OrderByDescending(x=>x.pinned).ThenBy(x => x.name).ToList());
 			var all = dirs.Concat( nodes.Where(x => x.type > 0).OrderByDescending(x => x.pinned).ThenByDescending(x => x.date).ToList() ).ToList();
 
 			bsNodes.DataSource = all;
@@ -156,6 +156,7 @@ namespace Shared.UI.UserControls
 			_customizer = new DataGridViewCustomizer(nodeGrid);
 			_customizer.RowColors = new Dictionary<NType, Color>();
 			_customizer.RowColors[NType.Dir] = ColorTranslator.FromHtml("#414833");
+			_customizer.RowColors[NType.Note] = ColorTranslator.FromHtml("#468faf");
 			_customizer.RowColors[NType.Task] = Color.Green;
 
 			var d = new Dictionary<NType, Image>();

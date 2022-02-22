@@ -121,9 +121,9 @@ namespace Services.Nodes
 			return _repo.GetTopSessions(today, taskId, top, page);
         }
 
-        public FTask GetTask(int taskId)
+        public INode GetNode(int taskId)
         {
-			return _repo.Get(taskId) as FTask;
+			return _repo.Get(taskId);
 		}
 
         public bool HasSessions(INode d)
