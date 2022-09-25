@@ -52,8 +52,7 @@ namespace Services.Nodes
 			if (own.type != NType._sys_root_dir)
 				res.Add(Dir.ExitTopDir);
 
-			//var i = _repo.GetAll(own);
-			var i = _repo.GetAllExcludeCompletedTask(own);
+			var i = _repo.GetAllOf(own, true);
 
 			//res.AddRange(i.Where(x => x.type == NType.Dir).OrderBy(x=>x.pinned).ThenBy(x=>x.name).ToList());
 			//res.AddRange(i.Where(x => x.type != NType.Dir).OrderByDescending(x=>x.pinned).ThenByDescending(x=>x.date).ToList());

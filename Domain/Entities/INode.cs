@@ -16,6 +16,7 @@ namespace Domain.Entities
 		string name { get; set; }
 		string text { get; set; }
 		DateTime? date { get; set; }
+		DateTime? last_modified_date { get; set; }
 		string NTypeString { get; }
 		string path { get; set; }
 		bool pinned { get; set; }

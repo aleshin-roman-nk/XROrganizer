@@ -11,6 +11,14 @@ using System.Windows.Forms;
 
 namespace Shared.UI.UserControls
 {
+    /*
+     * text color : 247; 127; 0
+     * background : 47; 47; 58
+     * 
+     * text color 1 : 247; 127; 0
+     * 
+     */
+
     public partial class NodeTextPagesUC : UserControl
     {
         NodeTextPages nodeTextPages = null;

@@ -65,10 +65,7 @@ namespace Shared.UI.UserControls
 
             NType t = (row.DataBoundItem as INode).type;
 
-            Color clr = getColor(t);
-            if (clr == Color.Empty) return;
-
-            e.CellStyle.ForeColor = clr;
+			// 13-09-2022 временно, закрытую задачу показываем, но она серая
 
             /*
 			 * >>> 30-01-2022
@@ -77,6 +74,19 @@ namespace Shared.UI.UserControls
 			 */
             if ((row.DataBoundItem as INode).pinned)
                 e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+			else if(t == NType.Task)
+			{
+				if((row.DataBoundItem as FTask).IsCompleted)
+				{
+                    e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Strikeout);
+                    e.CellStyle.ForeColor = ColorTranslator.FromHtml("#9EA3B0");
+					return;
+                }
+			}
+
+            Color clr = getColor(t);
+            if (clr == Color.Empty) return;
+            e.CellStyle.ForeColor = clr;
         }
 
 		private void removeImgCol()

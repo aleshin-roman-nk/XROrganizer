@@ -13,6 +13,7 @@ using Shared.UI.Interfaces.EventArgsDefinition;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using TaskBank.Presenters.EventDefinition;
 using TaskBank.Views;
 using Unity;
@@ -432,14 +433,22 @@ namespace TaskBank.Presenters
 
 		private void update()
 		{
-			_mainView.NodesView.DisplayNodes(
-				_service.Items.Where(x => 
-				{
-					if (x is FTask) return !(x as FTask).IsCompleted; else return true;
-				}).ToList(), 
-				_service.CurrentParentFullName, 
-				_service.HighlightedNode);
-		}
+			// старый вариант, исключение нодов, которые имеют тип FTask и тогда проверяется, закрыты ли они
+			//_mainView.NodesView.DisplayNodes(
+			//	_service.Items.Where(x => 
+			//	{
+			//		if (x is FTask) return !(x as FTask).IsCompleted; else return true;
+			//	}).ToList(), 
+			//	_service.CurrentParentFullName, 
+			//	_service.HighlightedNode);
+
+			// 13-09-2022 Грузим все ноды, в сетке помечаем, которые закрыты
+            _mainView.NodesView.DisplayNodes(
+                _service.Items,
+                _service.CurrentParentFullName,
+                _service.HighlightedNode);
+
+        }
 
 		private void _nodesView_LeaveNode(object sender, EventArgs e)
 		{

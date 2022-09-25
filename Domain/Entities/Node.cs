@@ -29,8 +29,10 @@ namespace Domain.Entities
 		public string path { get; set; }
         public bool pinned { get; set; }
         public bool deleted { get; set; }
+		[NotMapped]
+		public DateTime? last_modified_date { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public override bool Equals(object obj)
+		public override bool Equals(object obj)
 		{
 			INode ob = obj as INode;
 

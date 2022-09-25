@@ -19,18 +19,20 @@ using xorg.Tools;
 namespace Shared.UI.Forms
 {
 
-/*
- * Black theme:
- * backgroung = 37; 37; 38
- * text = 219; 164; 14
- * 
- * orange theme:
- * backgroung = #4B5A20
- * text = #DBA40E
- * 
- */
+    /*
+     * Black theme:
+     * backgroung = 37; 37; 38
+     * text = 219; 164; 14
+     * 
+     * orange theme:
+     * backgroung = #4B5A20
+     * text = #DBA40E
+     * 
+     * text = 219; 164; 14
+     * 
+     */
 
-	public partial class FTaskForm : Form, IFTaskEditView
+    public partial class FTaskForm : Form, IFTaskEditView
 	{
 		SavingObserver savingObserver;
 		NodeTextPages nodeTextPages;

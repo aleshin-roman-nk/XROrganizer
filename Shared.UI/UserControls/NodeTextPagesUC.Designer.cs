@@ -124,8 +124,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.WorkspaceText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(58)))));
             this.WorkspaceText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.WorkspaceText.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WorkspaceText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(127)))), ((int)(((byte)(0)))));
+            this.WorkspaceText.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.WorkspaceText.ForeColor = System.Drawing.Color.Yellow;
             this.WorkspaceText.Location = new System.Drawing.Point(-1, 29);
             this.WorkspaceText.Name = "WorkspaceText";
             this.WorkspaceText.Size = new System.Drawing.Size(770, 416);

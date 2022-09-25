@@ -34,7 +34,7 @@ namespace Domain.Entities
 			get
 			{
 				if (Node == null) return "";
-				return $"{Node.path}#{node_id}";
+				return $"{Node.path}";
 			}
 		}
 	}

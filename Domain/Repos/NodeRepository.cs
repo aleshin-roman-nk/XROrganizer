@@ -75,9 +75,9 @@ namespace Domain.Repos
 			}
 		}
 
-		public IEnumerable<INode> GetAllExcludeCompletedTask(INode owner)
+		public IEnumerable<INode> GetAllOf(INode owner, bool includeCompleted)
 		{
-			return _getNodes(owner, false);
+			return _getNodes(owner, includeCompleted);
 		}
 
 		private IEnumerable<INode> _getNodes(INode owner, bool loadCompleted)
