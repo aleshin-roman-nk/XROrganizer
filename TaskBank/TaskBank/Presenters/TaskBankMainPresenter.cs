@@ -32,6 +32,7 @@ namespace TaskBank.Presenters
 		IDescriptionWindow _descView;
 
 		IBufferTaskRepository _bufferTaskRepository;
+		private readonly ISessionRepository sessionRepository;
 		IBufferTaskView _currentTaskBufferView = null;
 
 		ICompletedTasksView _completedTasksView = null;
@@ -52,8 +53,10 @@ namespace TaskBank.Presenters
 			Func<ICompletedTasksView> CompletedTasksViewFactory,
 
 			Func<IBufferTaskView> BufferTaskViewFactory,
-			IBufferTaskRepository bufferTaskRepository
-			)
+			IBufferTaskRepository bufferTaskRepository,
+            ISessionRepository sessionRepository
+
+            )
 		{
 			_service = srv;
 			_mainView = mainView;
@@ -62,6 +65,7 @@ namespace TaskBank.Presenters
 			_openObjectManager = openObjManager;
 			_sessionManagerMainPresenter = sessPres;
 			_bufferTaskRepository = bufferTaskRepository;
+			this.sessionRepository = sessionRepository;
 			_bufferTaskViewFactory = BufferTaskViewFactory;
 			_completedTasksViewFactory = CompletedTasksViewFactory;
 
@@ -229,16 +233,53 @@ namespace TaskBank.Presenters
 
         private void _createSession(INode n)
         {
-            if (_sessionManagerMainPresenter.IsWindowRunning)
+			/*
+			 * >>> 04.10.2022
+			 * Плохое решение куда то отправлять запрос
+			 * Вполне можно здесь создать. Послать обновить окну коллектора сессий, если он открыт.
+			 * А тут мы просто обращаемся к репозиторию сессий.
+			 * Раз это центраный презентер.
+			 */
+
+			if (_sessionManagerMainPresenter.IsWindowRunning)
+			{
+				if (n != null)
+				{
+					//if (n is FTask)
+					if (n.type >= NType.Dir)
+					{
+						//_sessionManagerMainPresenter.CreateSession((FTask)n);
+						_sessionManagerMainPresenter.CreateSession((Node)n);
+					}
+				}
+			}
+			else __tmpFuncCreateSessionIfNoSessionCollector(n);
+        }
+
+		private void __tmpFuncCreateSessionIfNoSessionCollector(INode n)
+		{
+            if (n != null)
             {
-                if (n != null)
+                //if (n is FTask)
+                if (n.type >= NType.Dir)
                 {
-                    //if (n is FTask)
-                    if (n.type >= NType.Dir)
+                    //_sessionManagerMainPresenter.CreateSession((Node)n);
+
+                    var d = DateTime.Now;
+
+                    if (sessionRepository.SessionExists(n.id, d))
                     {
-                        //_sessionManagerMainPresenter.CreateSession((FTask)n);
-                        _sessionManagerMainPresenter.CreateSession((Node)n);
+                        if(_dialogs.UserAnsweredYes($"Session of task you want to create is already created. Do you want to create a duplicate") == false)
+							return;
                     }
+
+                    OSession session = new OSession { Owner = n as Node, NodeId = n.id };
+
+                    session.Start = d;
+                    session.ProvidedSeconds = 3600;
+
+                    sessionRepository.Save(session);
+
                 }
             }
         }
