@@ -16,7 +16,7 @@ namespace Shared.UI.Forms
     public partial class TopSessionsOfTaskForm : Form, ITopSessionsOfTaskView
     {
         int _page = 0;
-        int _items_perPage = 3;
+        int _items_perPage = 10;
 
         DateTime _date;
         int _taskId = -1;
