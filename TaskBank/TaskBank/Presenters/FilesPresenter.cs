@@ -29,7 +29,7 @@ namespace TaskBank.Presenters
 
 		private void wire()
 		{
-			//_filesView.Save += _filesView_Save;
+			//_filesView.Update += _filesView_Save;
 			//_filesView.Create += _filesView_Create;
 			//_filesView.Delete += _filesView_Delete;
 			//_filesView.SendNodesToClipboard += _filesView_PutNodesToClipboard;
@@ -112,7 +112,7 @@ namespace TaskBank.Presenters
 
 		private void _filesView_Save(object sender, INode e)
 		{
-			//_filesService.Save(e);
+			//_filesService.Update(e);
 		}
 
 		private void _hub_CurrentDirectoryChanged(object sender, EventArgs e)

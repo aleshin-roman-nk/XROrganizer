@@ -81,10 +81,12 @@
     <Compile Include="Entities\OSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\BufferTaskRepository.cs" />
+    <Compile Include="Repos\ForParentNode.cs" />
     <Compile Include="Repos\IBufferTaskRepository.cs" />
     <Compile Include="Repos\INodeRepository.cs" />
     <Compile Include="Repos\ISessionRepository.cs" />
     <Compile Include="Repos\NodeRepository.cs" />
+    <Compile Include="Repos\SessionForNode.cs" />
     <Compile Include="Repos\SessionRepository.cs" />
     <Compile Include="Repos\Shared\ToolRepo.cs" />
   </ItemGroup>

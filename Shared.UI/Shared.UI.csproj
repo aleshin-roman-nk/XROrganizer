@@ -258,5 +258,8 @@
   <ItemGroup>
     <None Include="Resources\sessAnim01.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="components\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

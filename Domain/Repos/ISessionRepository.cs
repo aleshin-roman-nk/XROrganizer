@@ -8,14 +8,14 @@ namespace Domain.Repos
 	{
 		void Delete(OSession e);
 		IEnumerable<OSession> GetOfDay(DateTime date);
-		void Save(OSession e);
+		void Update(OSession e);
 		int GetSecondsOfDay(DateTime dt, INode dir);
 
-		//IEnumerable<INode> GetAllChildren(INode n);
 		IEnumerable<OSession> GetSessionOf(int year, int month, INode n);
 		IEnumerable<int> GetAllChildIdOf(INode n);
+		//bool SessionExists(int ownerId, DateTime dt);
 
-		//bool SessionExists(Func<OSession, bool> fcond);
-		bool SessionExists(int ownerId, DateTime dt);
-	}
+		//SessionForNode ForNode(INode n);
+		SessionForNode ForNode(int parentNode);
+    }
 }

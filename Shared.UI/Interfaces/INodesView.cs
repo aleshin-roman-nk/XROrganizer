@@ -25,5 +25,7 @@ namespace Shared.UI.Interfaces
 
 		event EventHandler LeaveNode;
 		event EventHandler<INode> CurrentNodeChanged;
+
+		void RenderData(IEnumerable<INode> nodes, IEnumerable<INode> parents);
 	}
 }

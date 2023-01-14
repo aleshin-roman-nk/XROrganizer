@@ -61,27 +61,31 @@ namespace TaskBank
 
 				container
 
+					// view
 					.RegisterType<ISCMainView, SCMainForm>()
 					.RegisterType<ISingleSessionView, SessionForm>()
 					.RegisterType<ISessionService, SessionService>()
 					.RegisterType<IStataView, StataForm>()
 					.RegisterType<INodeDefaultView, NodeDefaultForm>()
-
-					//.RegisterInstance<IMainView>(new MainForm())
-					.RegisterType<IAppDataContextFactory, AppDataContextFactory>()
 					.RegisterType<IDescriptionWindow, DescriptionForm>()
 					.RegisterType<IInputBox, InputBox>()
+					.RegisterType<IFTaskEditView, FTaskForm>()
+					.RegisterType<IBufferTaskView, CurrentTaskBufferForm>()
+					.RegisterType<ITopSessionsOfTaskView, TopSessionsOfTaskForm>()
+					.RegisterType<ICompletedTasksView, CompletedTasksForm>()
+
+					// presenter
+					.RegisterType<OpenObjectManager>()
+					.RegisterType<SessionManagerMainPresenter>()
+
+					// data logic
+					.RegisterType<IAppDataContextFactory, AppDataContextFactory>()
 					.RegisterType<IDbConf, DbConf>()
 					.RegisterType<INodeService, NodeService>()
 					.RegisterType<INodeRepository, NodeRepository>()
 					.RegisterType<IBufferTaskRepository, BufferTaskRepository>()
-					.RegisterType<IFTaskEditView, FTaskForm>()
-					.RegisterType<IBufferTaskView, CurrentTaskBufferForm>()
-					.RegisterType<ITopSessionsOfTaskView, TopSessionsOfTaskForm>()
-					.RegisterType<ISessionRepository, SessionRepository>()
-					.RegisterType<ICompletedTasksView, CompletedTasksForm>()
-					.RegisterType<OpenObjectManager>()
-					.RegisterType<SessionManagerMainPresenter>();
+					.RegisterType<ISessionRepository, SessionRepository>();
+
 
 				var mainWind = container.Resolve<MainForm>();
 				container.RegisterInstance<IMainView>(mainWind);

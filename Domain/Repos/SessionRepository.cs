@@ -49,7 +49,7 @@ namespace Domain.Repos
 
 
 
-		public IEnumerable<int> GetAllChildIdOf(INode n)
+		public IEnumerable<int> GetAllChildIdOf(INode n)// дать коллекцию
 		{
 			/*
 			 * Возможна оптимизация: не загружать задачи, дата закрытия которых
@@ -106,9 +106,11 @@ namespace Domain.Repos
 			return res;
 		}
 
-		public void Save(OSession e)
+		public void Update(OSession e)
 		{
-			using (var db = _contextFactory.Create())
+            if (e.Id == 0) throw new InvalidOperationException("This is a new object, its id is 0. For update you have to use existing one");
+
+            using (var db = _contextFactory.Create())
 			{
 				var owner = db.Nodes.FirstOrDefault(x => x.id == e.NodeId);
 				if (owner != null)
@@ -117,7 +119,8 @@ namespace Domain.Repos
 					//e.NodeId = dir.Id;
 				}
 
-				db.Entry(e).State = e.Id == 0 ? EntityState.Added : EntityState.Modified;
+				//db.Entry(e).State = e.Id == 0 ? EntityState.Added : EntityState.Modified;
+				db.Entry(e).State = EntityState.Modified;
 
 				db.SaveChanges();
 			}
@@ -133,15 +136,14 @@ namespace Domain.Repos
 			}
 		}
 
-        public bool SessionExists(int ownerId, DateTime dt)
-        {
-			using (var db = _contextFactory.Create())
-			{
-				DateTime dt1 = new DateTime(dt.Year, dt.Month, dt.Day, 0, 0, 0, 0);
-				DateTime dt2 = dt1.AddDays(1);
+   //     public SessionForNode ForNode(INode n)
+   //     {
+			//return new SessionForNode(n, _contextFactory);
+   //     }
 
-				return db.Sessions.Any(x => x.NodeId == ownerId && x.Start >= dt1 && x.Start < dt2);
-			}
-		}
+        public SessionForNode ForNode(int parentNode)
+        {
+            return new SessionForNode(parentNode, _contextFactory);
+        }
     }
 }

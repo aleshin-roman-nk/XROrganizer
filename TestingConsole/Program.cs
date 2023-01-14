@@ -1,4 +1,5 @@
 ﻿using Domain.DBContext;
+using Domain.Entities;
 using Domain.Repos;
 using System;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace TestingConsole
         {
 			ISessionRepository sr = container.Resolve<ISessionRepository>();
 
-			var res = sr.SessionExists(1, DateTime.Today);
+			var res = sr.ForNode(1).SessionExists(DateTime.Today);
 
             Console.WriteLine(res);
 		}
@@ -46,7 +47,7 @@ namespace TestingConsole
 
 			int page = 0;
 
-			var sess = repo.GetTopSessions(DateTime.Now, 894, 3, page);
+			var sess = repo.AsParent(new Node { id = 894}).GetTopSessions(DateTime.Now, 3, page);
 
 			while(sess.Count() > 0)
             {
@@ -54,7 +55,7 @@ namespace TestingConsole
 				foreach (var item in sess)
 					Console.WriteLine($"#{item.Id} - {item.Start.ToShortDateString()}");
 				page++;
-				sess = repo.GetTopSessions(DateTime.Now, 894, 3, page);
+				sess = repo.AsParent(new Node { id = 894 }).GetTopSessions(DateTime.Now, 3, page);
 			}
 
             Console.WriteLine("the end");

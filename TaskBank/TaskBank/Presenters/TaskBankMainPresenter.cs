@@ -44,7 +44,9 @@ namespace TaskBank.Presenters
 
 		IInputBox _dialogs;
 
-		public TaskBankMainPresenter(IMainView mainView,
+		TreeState _treeState;
+
+        public TaskBankMainPresenter(IMainView mainView,
 			IDescriptionWindow descriptionWindow,
 			OpenObjectManager openObjManager,
 			SessionManagerMainPresenter sessPres,
@@ -93,7 +95,7 @@ namespace TaskBank.Presenters
 
 			_service.CollectionChanged += _service_CollectionChanged;
 
-			_openObjectManager.SaveNode += _openObjectManager_SaveTask;
+			_openObjectManager.SaveNode += _openObjectManager_SaveNode;
 			_openObjectManager.SaveSession += _openObjectManager_SaveSession;
 			_openObjectManager.OpenTasksCountChanged += _openObjectManager_OpenTasksCountChanged;
 			_openObjectManager.WorkingSessionWindowOpen += _openObjectManager_WorkingSessionWindowOpen;
@@ -210,12 +212,12 @@ namespace TaskBank.Presenters
 
 		private void _openObjectManager_SaveSession(object sender, OSession e)
 		{
-			_sessionManagerMainPresenter.SaveSession(e);
+			_sessionManagerMainPresenter.UpdateSession(e);
 		}
 
-		private void _openObjectManager_SaveTask(object sender, SaveNodeEventArgs e)
+		private void _openObjectManager_SaveNode(object sender, SaveNodeEventArgs e)
 		{
-			e.IsNodeSaved = _service.Save(e.Node) > 0;
+			e.IsNodeSaved = _service.Update(e.Node) > 0;
 
 			if (_completedTasksView != null)
 				_completedTasksView.Display(
@@ -267,26 +269,27 @@ namespace TaskBank.Presenters
 
 					var d = DateTime.Now;
 
-					if (sessionRepository.SessionExists(n.id, d))
+					if (sessionRepository.ForNode(n.id).SessionExists(d))
 					{
 						if (_dialogs.UserAnsweredYes($"Session of task you want to create is already created. Do you want to create a duplicate") == false)
 							return;
 					}
 
-					OSession session = new OSession { Owner = n as Node, NodeId = n.id };
+					//OSession session = new OSession { Owner = n as Node, NodeId = n.id };
+					OSession session = new OSession();
 
 					session.Start = d;
 					session.ProvidedSeconds = 3600;
 
-					sessionRepository.Save(session);
-
+					sessionRepository.ForNode(n.id).Create(session);
 				}
 			}
 		}
 
 		private void NodesView_Paste(object sender, EventArgs e)
 		{
-			_service.MoveNodesToDirectory(_service.CurrentOwner as Dir, _clipboard);
+			//_service.MoveNodesToDirectory(_service.CurrentOwner as Dir, _clipboard);
+			_service.Move(_clipboard);
 
 			_clipboard.Clear();
 			_mainView.ClipboardNodesCount = _clipboard.Count();
@@ -402,7 +405,7 @@ namespace TaskBank.Presenters
 			{
 				i.name = new_name;
 
-				_service.Save(i);
+				_service.Update(i);
 				update();
 			}
 		}
@@ -435,6 +438,7 @@ namespace TaskBank.Presenters
 				if (n != null)
 				{
 					n.date = DateTime.Now;
+					n.last_modified_date = DateTime.Now;
 					var node = _service.Create(n);
 					update();
 					_mainView.NodesView.SetCursorAt(node);
@@ -463,7 +467,7 @@ namespace TaskBank.Presenters
 					_dialogs.ShowMessage($"[{e.path}] has already opened");
 					return;
 				}
-				_service.Save(e);
+				_service.Update(e);
 			}
 		}
 
@@ -474,21 +478,11 @@ namespace TaskBank.Presenters
 
 		private void update()
 		{
-			// старый вариант, исключение нодов, которые имеют тип FTask и тогда проверяется, закрыты ли они
-			//_mainView.NodesView.DisplayNodes(
-			//	_service.Items.Where(x => 
-			//	{
-			//		if (x is FTask) return !(x as FTask).IsCompleted; else return true;
-			//	}).ToList(), 
-			//	_service.CurrentParentFullName, 
-			//	_service.HighlightedNode);
-
 			// 13-09-2022 Грузим все ноды, в сетке помечаем, которые закрыты
 			_mainView.NodesView.DisplayNodes(
 				_service.Items,
 				_service.CurrentParentFullName,
 				_service.HighlightedNode);
-
 		}
 
 		private void _nodesView_LeaveNode(object sender, EventArgs e)
@@ -511,5 +505,23 @@ namespace TaskBank.Presenters
 				_openObjectManager.DefaultOpenNode(e);
 			}
 		}
-	}
+
+
+		//==== tree state manager
+
+		//private void leaveDir()
+		//{
+  //          _treeState.NodeUnderCursor = _treeState.Parents.Pop();
+  //          _treeState.Children = _service.GetChildrenOf(_treeState.Parents.Peek());
+  //          _mainView.NodesView.RenderData(_treeState.Children, _treeState.Parents, _treeState.NodeUnderCursor);
+  //      }
+
+		//private void enterDir(INode p)
+		//{
+		//	_treeState.Parents.Push(p);
+		//	_treeState.Children = _service.GetChildrenOf(p);
+		//	_treeState.NodeUnderCursor = null;
+		//	_mainView.NodesView.RenderData(_treeState.Children, _treeState.Parents, _treeState.NodeUnderCursor);
+  //      }
+    }
 }

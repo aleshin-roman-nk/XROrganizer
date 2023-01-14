@@ -29,8 +29,8 @@ namespace Domain.Entities
 		public string path { get; set; }
         public bool pinned { get; set; }
         public bool deleted { get; set; }
-		[NotMapped]
-		public DateTime? last_modified_date { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string DNA { get; set; }
+		public DateTime? last_modified_date { get; set; }
 
 		public override bool Equals(object obj)
 		{

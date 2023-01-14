@@ -64,29 +64,33 @@ namespace Services.Nodes
 			return res;
 		}
 
-		public void MoveNodesToDirectory(Dir dir, IEnumerable<INode> nodes)
+        public void Move(IEnumerable<INode> nodes)
 		{
-			foreach (var item in nodes)
-			{
-				item.owner_id = dir.id;
-			}
+            _repo.AsParent(_navigator.CurrentOwner).Move(nodes);
+            updateData();
+        }
 
-			_repo.SaveRange(nodes);
 
-			updateData();
-		}
-
-		public INode Create(INode d)
+        public INode Create(INode d)
 		{
-			var res = _repo.Create(_navigator.CurrentOwner, d);
+
+			var res = _repo.AsParent(_navigator.CurrentOwner).Create(d);
+			res.last_modified_date = DateTime.Now;
 			updateData();
 			return res;
 		}
 
-		public int Save(INode d)
+		// почему мы не вызываем событие при сохранении ноды? Ведь коллекция изменилась.
+		// в базе данных объект изменился, а в загруженной коллекции старый объект.
+		public int Update(INode d)
 		{
-			return _repo.Save(d);
-			//updateData();
+			d.last_modified_date = DateTime.Now;
+
+			var res = _repo.Update(d);
+
+			updateData();
+
+			return res;
 		}
 
 		public void Delete(INode d)
@@ -117,7 +121,7 @@ namespace Services.Nodes
 
         public IEnumerable<OSession> GetTopSessions(DateTime today, int taskId, int top, int page)
         {
-			return _repo.GetTopSessions(today, taskId, top, page);
+			return _repo.AsParent(new Node { id = taskId }).GetTopSessions(today, top, page);
         }
 
         public INode GetNode(int taskId)

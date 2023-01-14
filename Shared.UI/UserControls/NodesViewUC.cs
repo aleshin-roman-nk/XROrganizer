@@ -4,6 +4,7 @@ using Shared.UI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -20,7 +21,7 @@ namespace Shared.UI.UserControls
 
 		public IEnumerable<INode> SelectedNodes => _getSelectedNodes();
 
-		public NodesViewUC()
+        public NodesViewUC()
 		{
 			InitializeComponent();
 
@@ -35,7 +36,7 @@ namespace Shared.UI.UserControls
 
 			bsNodes.CurrentItemChanged += BsNodes_CurrentItemChanged;
 			nodeGrid.DataSource = bsNodes;
-		}
+        }
 
 		private void BsNodes_CurrentItemChanged(object sender, EventArgs e)
 		{
@@ -48,6 +49,7 @@ namespace Shared.UI.UserControls
 		public event EventHandler<INode> ActivateNode;
 		public event EventHandler LeaveNode;
 		public event EventHandler<INode> CurrentNodeChanged;
+
 
         string _lastPath = "";
 		public void DisplayNodes(IEnumerable<INode> nodes, string path, INode highlightedNode)
@@ -178,5 +180,35 @@ namespace Shared.UI.UserControls
 
 			ActivateNode?.Invoke(this, i);
 		}
-	}
+
+        public void RenderData(IEnumerable<INode> nodes, IEnumerable<INode> parents)
+		{
+			//bool isPathSame = _lastPath.Equals(path);
+
+			//int indexBeforeUpdate = -1;
+   //         if (nodeGrid.CurrentCell != null)
+   //             indexBeforeUpdate = nodeGrid.CurrentCell.RowIndex;
+
+   //         bsNodes.DataSource = null;
+
+   //         var top_exit_dir = nodes.SingleOrDefault(x => x.type == NType.exit_dir);
+   //         List<INode> dirs = new List<INode>();
+   //         if (top_exit_dir != null) dirs.Add(top_exit_dir);
+   //         dirs.AddRange(nodes.Where(x => x.type <= 0 && x.type != NType.exit_dir).OrderByDescending(x => x.pinned).ThenBy(x => x.name).ToList());
+   //         var all = dirs.Concat(nodes.Where(x => x.type > 0).OrderByDescending(x => x.pinned).ThenByDescending(x => x.date).ToList()).ToList();
+
+   //         bsNodes.DataSource = all;
+
+   //         txtDirectoryFullName.Text = $"[{path}]";
+   //         placeCursor(highlightedNode);
+
+   //         if (indexBeforeUpdate >= 0 && isPathSame)
+   //             placeCursorByRowIndex(indexBeforeUpdate);
+
+			//_lastPath = path;
+
+			//if (_customizer != null)
+   //             _customizer.markRowsWithIcons();
+        }
+    }
 }

@@ -21,7 +21,6 @@ namespace Domain.Entities
 		string path { get; set; }
 		bool pinned { get; set; }
 		bool deleted { get; set; }
-
-		//string DNA { get; set; }
+		string DNA { get; set; }
 	}
 }

@@ -25,7 +25,7 @@ namespace Domain.Entities
 		public string Report { get; set; }
 		public DateTime Start { get; set; }
 		public int ProvidedSeconds { get; set; }
-
+		public string DNA { get; set; }
 		public string OwnerDefinition
 		{
 			get

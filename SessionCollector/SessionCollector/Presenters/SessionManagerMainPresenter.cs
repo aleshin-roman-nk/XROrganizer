@@ -62,9 +62,10 @@ namespace SessionCollector.Presenters
 
 			//ExtendSessionTomorrow?.Invoke(sender, new ExtendSessionTomorrowEventArgs(e.NodeId, _view.CurrentDateTime));
 			OSession s = new OSession { NodeId = e.NodeId, Start = d, ProvidedSeconds = 3600 };
-			_sessionService.Repo.Save(s);
+			//_sessionService.Repo.Update(s);
+			_sessionService.Repo.ForNode(e.NodeId).Create(s);
 
-			_dialogs.ShowMessage("Session has successfully created");
+            _dialogs.ShowMessage("Session has successfully created");
 		}
         public void ShowStataWindow(INode n)
         {
@@ -109,14 +110,15 @@ namespace SessionCollector.Presenters
 			session.Start = _view.CurrentDateTime;
 			session.ProvidedSeconds = 3600;
 
-			_sessionService.Repo.Save(session);
+			//_sessionService.Repo.Update(session);
+			_sessionService.Repo.ForNode(t.id).Create(session);
 
 			displaySessions(_view.CurrentDateTime);
 		}
 
 		bool _creatingAllowed(int nodeid, DateTime d)
         {
-			if(_sessionService.Repo.SessionExists(nodeid, d))
+			if(_sessionService.Repo.ForNode(nodeid).SessionExists(d))
             {
 				return _dialogs.UserAnsweredYes($"Session of task you want to create is already created. Do you want to create a duplicate");
             }
@@ -124,9 +126,9 @@ namespace SessionCollector.Presenters
 			return true;
         }
 
-		public void SaveSession(OSession s)
+		public void UpdateSession(OSession s)
         {
-			_sessionService.Repo.Save(s);
+			_sessionService.Repo.Update(s);
 			if(_view != null)
 				displaySessions(_view.CurrentDateTime);
 		}
@@ -156,7 +158,7 @@ namespace SessionCollector.Presenters
 			if (e == null) return;
 
 			e.Start = d;
-			_sessionService.Repo.Save(e);
+			_sessionService.Repo.Update(e);
 			displaySessions(_view.CurrentDateTime);
 		}
 
@@ -168,7 +170,7 @@ namespace SessionCollector.Presenters
 			if (e == null) return;
 
 			e.Start = d;
-			_sessionService.Repo.Save(e);
+			_sessionService.Repo.Update(e);
 			displaySessions(_view.CurrentDateTime);
 		}
 

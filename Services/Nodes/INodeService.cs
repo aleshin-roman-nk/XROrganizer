@@ -12,11 +12,12 @@ namespace Services.Nodes
 		void JumpBack();
 		void Enter(INode n);
 		INode Create(INode d);
-		int Save(INode d);
+		int Update(INode d);
 		void Delete(INode d);
 		bool HasChildren(INode d);
 		bool HasSessions(INode d);
-		void MoveNodesToDirectory(Dir owner, IEnumerable<INode> notes);
+		//void MoveNodesToDirectory(Dir owner, IEnumerable<INode> notes);
+		void Move(IEnumerable<INode> notes);
 		IEnumerable<INode> Items { get; }
 		event EventHandler CollectionChanged;
 

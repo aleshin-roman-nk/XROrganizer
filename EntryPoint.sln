@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.UI", "Shared.UI\Shared.UI.csproj", "{C886C63E-000F-4B56-8371-355056455DDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestView", "TestView\TestView.csproj", "{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingConsole", "TestingConsole\TestingConsole.csproj", "{3351EEB8-7533-4FFB-B284-8FDB29B03064}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{B7C776A3-E51F-4FED-B8BF-6EB4E5B06DEB}"
@@ -23,7 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Presenters", "Shared
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.UI.Interfaces", "Shared.UI.Interfaces\Shared.UI.Interfaces.csproj", "{530F2FA7-ECCF-447B-91EE-6E1165110BA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xorg.webpolygon", "xorg.webpolygon\xorg.webpolygon.csproj", "{E992085A-6402-4EAD-AAE2-048F0ABB2952}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xorg.webpolygon", "xorg.webpolygon\xorg.webpolygon.csproj", "{E992085A-6402-4EAD-AAE2-048F0ABB2952}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xorgdbsrv", "xorgdbsrv\xorgdbsrv.csproj", "{5CBEAA0D-E8EC-4355-AF38-CBB2BA0CFDE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,6 @@ Global
 		{C886C63E-000F-4B56-8371-355056455DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C886C63E-000F-4B56-8371-355056455DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C886C63E-000F-4B56-8371-355056455DDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3BE3C9F0-FCF4-4902-8DBA-DAA18BA5CF74}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3351EEB8-7533-4FFB-B284-8FDB29B03064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3351EEB8-7533-4FFB-B284-8FDB29B03064}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3351EEB8-7533-4FFB-B284-8FDB29B03064}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,6 +71,10 @@ Global
 		{E992085A-6402-4EAD-AAE2-048F0ABB2952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E992085A-6402-4EAD-AAE2-048F0ABB2952}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E992085A-6402-4EAD-AAE2-048F0ABB2952}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CBEAA0D-E8EC-4355-AF38-CBB2BA0CFDE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CBEAA0D-E8EC-4355-AF38-CBB2BA0CFDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CBEAA0D-E8EC-4355-AF38-CBB2BA0CFDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CBEAA0D-E8EC-4355-AF38-CBB2BA0CFDE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
