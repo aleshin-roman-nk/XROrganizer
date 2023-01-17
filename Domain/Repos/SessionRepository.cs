@@ -1,4 +1,5 @@
 ﻿using Domain.DBContext;
+using Domain.dto;
 using Domain.Entities;
 using Domain.Repos.Shared;
 using System;
@@ -40,16 +41,17 @@ namespace Domain.Repos
 
 				foreach (var item in res)
                 {
-					item.Owner.path = _toolRepo.getFullPathOf(item.Owner, db);
+					item.Owner.path = _toolRepo.getFullPathOf(item.Owner.id, db);
 				}
 
 				return res;
 			}
 		}
 
+		//16-01-2023
+		// Самое время начать искать по днк
 
-
-		public IEnumerable<int> GetAllChildIdOf(INode n)// дать коллекцию
+		public IEnumerable<int> GetAllChildIdOf(NodeDTO n)// дать коллекцию
 		{
 			/*
 			 * Возможна оптимизация: не загружать задачи, дата закрытия которых
@@ -58,18 +60,18 @@ namespace Domain.Repos
 			 * 
 			 */
 
-			var stack = new Stack<INode>();
+			var stack = new Stack<Node>();
 
 			var res = new List<int>();
 
 			using (var db = _contextFactory.Create())
 			{
-				Func<INode, IEnumerable<INode>> getChildren = (owner) =>
+				Func<Node, IEnumerable<Node>> getChildren = (owner) =>
 				{
 					return db.Nodes.Where(x => x.owner_id == owner.id).ToList();
 				};
 
-				stack.Push(n);
+				stack.Push(new Node { id = n.id });
 				while (stack.Any())
 				{
 					var next = stack.Pop();
@@ -83,7 +85,7 @@ namespace Domain.Repos
 			}
 		}
 
-		public IEnumerable<OSession> GetSessionOf(int year, int month, INode n)
+		public IEnumerable<OSession> GetSessionOf(int year, int month, NodeDTO n)
 		{
 			DateTime dt1 = new DateTime(year, month, 1, 0, 0, 0);
 			DateTime dt2 = dt1.AddMonths(1);

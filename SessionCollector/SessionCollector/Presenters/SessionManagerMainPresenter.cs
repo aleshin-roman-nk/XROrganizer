@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Services.Sessions;
 using SessionCollector.Views;
 using Shared.UI;
@@ -67,7 +68,7 @@ namespace SessionCollector.Presenters
 
             _dialogs.ShowMessage("Session has successfully created");
 		}
-        public void ShowStataWindow(INode n)
+        public void ShowStataWindow(NodeDTO n)
         {
 			if (n == null) return;
 
@@ -87,7 +88,7 @@ namespace SessionCollector.Presenters
 			var i = _sessionService.GetStatistic(
 				_stataView.CurrentDate.Year,
 				_stataView.CurrentDate.Month,
-				_stataView.Node);
+				new NodeDTO { id = _stataView.Node.id });
 
 			_stataView.Display(i, $"{_stataView.Node.path}");
 		}
@@ -100,25 +101,20 @@ namespace SessionCollector.Presenters
 			_stataView = null;
 		}
 
-        //public void CreateSession(FTask t)
-        public void CreateSession(Node t)
+        public void CreateSession(NodeDTO t)
 		{
 			if (_creatingAllowed(t.id, _view.CurrentDateTime) == false) return;
 
-			OSession session = new OSession { Owner = t, NodeId = t.id};
-
-			session.Start = _view.CurrentDateTime;
-			session.ProvidedSeconds = 3600;
-
-			//_sessionService.Repo.Update(session);
-			_sessionService.Repo.ForNode(t.id).Create(session);
+			_sessionService.Repo
+				.ForNode(t.id)
+				.Create(new OSession { Start = _view.CurrentDateTime, ProvidedSeconds = 3600});
 
 			displaySessions(_view.CurrentDateTime);
 		}
 
 		bool _creatingAllowed(int nodeid, DateTime d)
         {
-			if(_sessionService.Repo.ForNode(nodeid).SessionExists(d))
+			if(_sessionService.Repo.ForNode(nodeid).SessionExistsOnDate(d))
             {
 				return _dialogs.UserAnsweredYes($"Session of task you want to create is already created. Do you want to create a duplicate");
             }

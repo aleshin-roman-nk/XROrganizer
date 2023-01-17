@@ -29,63 +29,20 @@ namespace Shared.UI.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FTaskForm));
-            this.richTextBoxDescription = new System.Windows.Forms.RichTextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1OpenNodeById = new System.Windows.Forms.ToolStripMenuItem();
             this.lblDate = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblSaved = new System.Windows.Forms.Label();
             this.checkBox1Pinned = new System.Windows.Forms.CheckBox();
-            this.txtFullPath = new System.Windows.Forms.TextBox();
             this.btnCreateSession = new System.Windows.Forms.Button();
             this.btnAllSessions = new System.Windows.Forms.Button();
             this.button1save = new System.Windows.Forms.Button();
             this.btnComlete = new System.Windows.Forms.Button();
             this.btnTimeTag = new System.Windows.Forms.Button();
-            this.btnNextPage = new System.Windows.Forms.Button();
-            this.btnPrevPage = new System.Windows.Forms.Button();
-            this.txtPageText = new System.Windows.Forms.TextBox();
-            this.brnAddPage = new System.Windows.Forms.Button();
-            this.btnKillPage = new System.Windows.Forms.Button();
-            this.contextMenuStrip1.SuspendLayout();
+            this.txtFullPath = new System.Windows.Forms.TextBox();
+            this.nodeTextPagesUC1 = new Shared.UI.UserControls.NodeTextPagesUC();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // richTextBoxDescription
-            // 
-            this.richTextBoxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(58)))));
-            this.richTextBoxDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBoxDescription.ContextMenuStrip = this.contextMenuStrip1;
-            this.richTextBoxDescription.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBoxDescription.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(64)))));
-            this.richTextBoxDescription.Location = new System.Drawing.Point(4, 4);
-            this.richTextBoxDescription.Margin = new System.Windows.Forms.Padding(4);
-            this.richTextBoxDescription.Name = "richTextBoxDescription";
-            this.richTextBoxDescription.Size = new System.Drawing.Size(797, 458);
-            this.richTextBoxDescription.TabIndex = 0;
-            this.richTextBoxDescription.Text = "";
-            this.richTextBoxDescription.TextChanged += new System.EventHandler(this.richTextBoxDescription_TextChanged);
-            this.richTextBoxDescription.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBoxDescription_KeyDown);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1OpenNodeById});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(134, 26);
-            // 
-            // toolStripMenuItem1OpenNodeById
-            // 
-            this.toolStripMenuItem1OpenNodeById.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1OpenNodeById.Image")));
-            this.toolStripMenuItem1OpenNodeById.Name = "toolStripMenuItem1OpenNodeById";
-            this.toolStripMenuItem1OpenNodeById.Size = new System.Drawing.Size(133, 22);
-            this.toolStripMenuItem1OpenNodeById.Text = "Open node";
-            this.toolStripMenuItem1OpenNodeById.Click += new System.EventHandler(this.toolStripMenuItem1OpenNodeById_Click);
             // 
             // lblDate
             // 
@@ -94,7 +51,7 @@ namespace Shared.UI.Forms
             this.lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(17, 19);
-            this.lblDate.TabIndex = 1;
+            this.lblDate.TabIndex = 10;
             this.lblDate.Text = "0";
             // 
             // panel1
@@ -103,10 +60,10 @@ namespace Shared.UI.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.richTextBoxDescription);
-            this.panel1.Location = new System.Drawing.Point(3, 100);
+            this.panel1.Controls.Add(this.nodeTextPagesUC1);
+            this.panel1.Location = new System.Drawing.Point(3, 74);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(807, 468);
+            this.panel1.Size = new System.Drawing.Size(807, 494);
             this.panel1.TabIndex = 10;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -130,20 +87,6 @@ namespace Shared.UI.Forms
             this.checkBox1Pinned.TabIndex = 13;
             this.checkBox1Pinned.Text = "pinned";
             this.checkBox1Pinned.UseVisualStyleBackColor = true;
-            // 
-            // txtFullPath
-            // 
-            this.txtFullPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFullPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(58)))));
-            this.txtFullPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtFullPath.ForeColor = System.Drawing.Color.White;
-            this.txtFullPath.Location = new System.Drawing.Point(3, 74);
-            this.txtFullPath.Name = "txtFullPath";
-            this.txtFullPath.ReadOnly = true;
-            this.txtFullPath.Size = new System.Drawing.Size(802, 20);
-            this.txtFullPath.TabIndex = 14;
-            this.txtFullPath.Tag = "node_full_path";
             // 
             // btnCreateSession
             // 
@@ -215,83 +158,43 @@ namespace Shared.UI.Forms
             this.btnTimeTag.UseVisualStyleBackColor = false;
             this.btnTimeTag.Click += new System.EventHandler(this.btnTimeTag_Click);
             // 
-            // btnNextPage
+            // txtFullPath
             // 
-            this.btnNextPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(68)))));
-            this.btnNextPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNextPage.BackgroundImage")));
-            this.btnNextPage.FlatAppearance.BorderSize = 0;
-            this.btnNextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNextPage.Location = new System.Drawing.Point(114, 48);
-            this.btnNextPage.Name = "btnNextPage";
-            this.btnNextPage.Size = new System.Drawing.Size(40, 20);
-            this.btnNextPage.TabIndex = 16;
-            this.btnNextPage.UseVisualStyleBackColor = false;
-            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
+            this.txtFullPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFullPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(58)))));
+            this.txtFullPath.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtFullPath.Font = new System.Drawing.Font("Roboto Condensed", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFullPath.ForeColor = System.Drawing.Color.White;
+            this.txtFullPath.Location = new System.Drawing.Point(8, 45);
+            this.txtFullPath.Name = "txtFullPath";
+            this.txtFullPath.ReadOnly = true;
+            this.txtFullPath.Size = new System.Drawing.Size(802, 23);
+            this.txtFullPath.TabIndex = 14;
+            this.txtFullPath.Tag = "node_full_path";
             // 
-            // btnPrevPage
+            // nodeTextPagesUC1
             // 
-            this.btnPrevPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(68)))));
-            this.btnPrevPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPrevPage.BackgroundImage")));
-            this.btnPrevPage.FlatAppearance.BorderSize = 0;
-            this.btnPrevPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrevPage.Location = new System.Drawing.Point(8, 48);
-            this.btnPrevPage.Name = "btnPrevPage";
-            this.btnPrevPage.Size = new System.Drawing.Size(40, 20);
-            this.btnPrevPage.TabIndex = 17;
-            this.btnPrevPage.UseVisualStyleBackColor = false;
-            this.btnPrevPage.Click += new System.EventHandler(this.btnPrevPage_Click);
-            // 
-            // txtPageText
-            // 
-            this.txtPageText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(58)))));
-            this.txtPageText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPageText.ForeColor = System.Drawing.Color.White;
-            this.txtPageText.Location = new System.Drawing.Point(54, 49);
-            this.txtPageText.Name = "txtPageText";
-            this.txtPageText.ReadOnly = true;
-            this.txtPageText.Size = new System.Drawing.Size(54, 20);
-            this.txtPageText.TabIndex = 18;
-            this.txtPageText.Tag = "";
-            this.txtPageText.Text = "20/20";
-            this.txtPageText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // brnAddPage
-            // 
-            this.brnAddPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(68)))));
-            this.brnAddPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("brnAddPage.BackgroundImage")));
-            this.brnAddPage.FlatAppearance.BorderSize = 0;
-            this.brnAddPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.brnAddPage.Location = new System.Drawing.Point(160, 48);
-            this.brnAddPage.Name = "brnAddPage";
-            this.brnAddPage.Size = new System.Drawing.Size(40, 20);
-            this.brnAddPage.TabIndex = 19;
-            this.brnAddPage.UseVisualStyleBackColor = false;
-            this.brnAddPage.Click += new System.EventHandler(this.brnAddPage_Click);
-            // 
-            // btnKillPage
-            // 
-            this.btnKillPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(68)))));
-            this.btnKillPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnKillPage.BackgroundImage")));
-            this.btnKillPage.FlatAppearance.BorderSize = 0;
-            this.btnKillPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnKillPage.Location = new System.Drawing.Point(206, 48);
-            this.btnKillPage.Name = "btnKillPage";
-            this.btnKillPage.Size = new System.Drawing.Size(40, 20);
-            this.btnKillPage.TabIndex = 20;
-            this.btnKillPage.UseVisualStyleBackColor = false;
-            this.btnKillPage.Click += new System.EventHandler(this.btnKillPage_Click);
+            this.nodeTextPagesUC1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nodeTextPagesUC1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
+            this.nodeTextPagesUC1.Location = new System.Drawing.Point(4, 4);
+            this.nodeTextPagesUC1.Margin = new System.Windows.Forms.Padding(4);
+            this.nodeTextPagesUC1.Name = "nodeTextPagesUC1";
+            this.nodeTextPagesUC1.SelectedText = "";
+            this.nodeTextPagesUC1.Size = new System.Drawing.Size(797, 484);
+            this.nodeTextPagesUC1.TabIndex = 1;
+            this.nodeTextPagesUC1.ObjectChanged += new System.EventHandler(this.nodeTextPagesUC1_ObjectChanged);
+            this.nodeTextPagesUC1.AddPageRequired += new System.EventHandler(this.nodeTextPagesUC1_AddPageRequired);
+            this.nodeTextPagesUC1.RemovePageRequired += new System.EventHandler<Domain.Entities.NodeTextPage>(this.nodeTextPagesUC1_RemovePageRequired);
+            this.nodeTextPagesUC1.OpenNodeById += new System.EventHandler<string>(this.nodeTextPagesUC1_OpenNodeById);
             // 
             // FTaskForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(811, 572);
-            this.Controls.Add(this.btnKillPage);
-            this.Controls.Add(this.brnAddPage);
-            this.Controls.Add(this.txtPageText);
-            this.Controls.Add(this.btnPrevPage);
-            this.Controls.Add(this.btnNextPage);
             this.Controls.Add(this.btnTimeTag);
             this.Controls.Add(this.txtFullPath);
             this.Controls.Add(this.checkBox1Pinned);
@@ -304,13 +207,14 @@ namespace Shared.UI.Forms
             this.Controls.Add(this.lblDate);
             this.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FTaskForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FTaskForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FTaskForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FTaskForm_FormClosed);
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FTaskForm_KeyDown);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -318,8 +222,6 @@ namespace Shared.UI.Forms
 		}
 
 		#endregion
-
-		private System.Windows.Forms.RichTextBox richTextBoxDescription;
 		private System.Windows.Forms.Label lblDate;
 		private System.Windows.Forms.Button btnComlete;
 		private System.Windows.Forms.Button button1save;
@@ -328,14 +230,8 @@ namespace Shared.UI.Forms
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Label lblSaved;
         private System.Windows.Forms.CheckBox checkBox1Pinned;
-        private System.Windows.Forms.TextBox txtFullPath;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1OpenNodeById;
         private System.Windows.Forms.Button btnTimeTag;
-        private System.Windows.Forms.Button btnNextPage;
-        private System.Windows.Forms.Button btnPrevPage;
-        private System.Windows.Forms.TextBox txtPageText;
-        private System.Windows.Forms.Button brnAddPage;
-        private System.Windows.Forms.Button btnKillPage;
+        private System.Windows.Forms.TextBox txtFullPath;
+        private UserControls.NodeTextPagesUC nodeTextPagesUC1;
     }
 }

@@ -77,9 +77,10 @@ namespace TaskBank
 					// presenter
 					.RegisterType<OpenObjectManager>()
 					.RegisterType<SessionManagerMainPresenter>()
-
-					// data logic
-					.RegisterType<IAppDataContextFactory, AppDataContextFactory>()
+                    .RegisterType<NodeInstanFactory>()
+                    
+                    // data logic
+                    .RegisterType<IAppDataContextFactory, AppDataContextFactory>()
 					.RegisterType<IDbConf, DbConf>()
 					.RegisterType<INodeService, NodeService>()
 					.RegisterType<INodeRepository, NodeRepository>()

@@ -16,5 +16,6 @@ namespace Domain.DBContext
 		public DbSet<Dir> Dirs { get; set; }
 		public DbSet<FTask> Tasks { get; set; }
 		public DbSet<BufferTask> BufferTasks { get; set; }
+		public DbSet<NodeTextPage> NodeTextPages { get; set; }
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Domain.DBContext;
+using Domain.dto;
 using Domain.Entities;
 using Domain.Repos;
 using System;
@@ -34,7 +35,7 @@ namespace TestingConsole
         {
 			ISessionRepository sr = container.Resolve<ISessionRepository>();
 
-			var res = sr.ForNode(1).SessionExists(DateTime.Today);
+			var res = sr.ForNode(1).SessionExistsOnDate(DateTime.Today);
 
             Console.WriteLine(res);
 		}
@@ -47,7 +48,7 @@ namespace TestingConsole
 
 			int page = 0;
 
-			var sess = repo.AsParent(new Node { id = 894}).GetTopSessions(DateTime.Now, 3, page);
+			var sess = repo.AsParent(new NodeDTO { id = 894}).GetTopSessions(DateTime.Now, 3, page);
 
 			while(sess.Count() > 0)
             {
@@ -55,7 +56,7 @@ namespace TestingConsole
 				foreach (var item in sess)
 					Console.WriteLine($"#{item.Id} - {item.Start.ToShortDateString()}");
 				page++;
-				sess = repo.AsParent(new Node { id = 894 }).GetTopSessions(DateTime.Now, 3, page);
+				sess = repo.AsParent(new NodeDTO { id = 894 }).GetTopSessions(DateTime.Now, 3, page);
 			}
 
             Console.WriteLine("the end");
@@ -77,13 +78,13 @@ namespace TestingConsole
 			//var i = repo.Get(1);//xorg
 			//var items = repo.GetAllChildTasksOf(i);
 
-			var items = repo.GetFirstLineChildren(1567);//xorg
+			//var items = repo.GetFirstLineChildren(1567);//xorg
 
-			foreach (var item in items)
-			{
-				Console.WriteLine($"{item.name}#{item.id}");
-				//Console.WriteLine($"session:{item.Start} #{item.Id} task:{item.Owner.path}#{item.NodeId}");
-			}
+			//foreach (var item in items)
+			//{
+			//	Console.WriteLine($"{item.name}#{item.id}");
+			//	//Console.WriteLine($"session:{item.Start} #{item.Id} task:{item.Owner.path}#{item.NodeId}");
+			//}
 		}
 	}
 }

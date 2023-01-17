@@ -13,12 +13,6 @@ namespace Domain.Repos
         private INode node;
         private readonly IAppDataContextFactory dbFactory;
 
-        //public SessionForNode(INode node, IAppDataContextFactory dbFactory) 
-        //{
-        //    this.node = node;
-        //    this.dbFactory = dbFactory;
-        //}
-
         public SessionForNode(int nodeId, IAppDataContextFactory dbFactory)
         {
             this.dbFactory = dbFactory;
@@ -44,7 +38,7 @@ namespace Domain.Repos
             }
         }
 
-        public bool SessionExists(DateTime dt)
+        public bool SessionExistsOnDate(DateTime dt)
         {
             using (var db = dbFactory.Create())
             {

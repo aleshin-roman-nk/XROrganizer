@@ -10,7 +10,8 @@ namespace Shared.UI.Interfaces
 		bool UserAnsweredYes(string q);
 		void ShowMessage(string msg);
 		void ShowObject(object o);
-		ViewResponse<NType> ChooseNType(IEnumerable<NType> items);
+		//ViewResponse<NType> ChooseNType(IEnumerable<NType> items);
+		ViewResponse<string> ChooseNType(IEnumerable<string> items);
 		ViewResponse<DateTime> ChooseDateTime();
 		DlgAnswerCode AskUser(string msg);
 	}

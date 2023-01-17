@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Domain.Enums;
 using Shared.UI.Interfaces;
 using System;
@@ -17,9 +18,9 @@ namespace Shared.UI.UserControls
 
 		DataGridViewCustomizer _customizer;
 
-		INode _currentNode => bsNodes.Current as INode;
+        NodeDTO _currentNode => bsNodes.Current as NodeDTO;
 
-		public IEnumerable<INode> SelectedNodes => _getSelectedNodes();
+		public IEnumerable<NodeDTO> SelectedNodes => _getSelectedNodes();
 
         public NodesViewUC()
 		{
@@ -44,15 +45,14 @@ namespace Shared.UI.UserControls
 				CurrentNodeChanged?.Invoke(this, _currentNode);
 		}
 
-		public event EventHandler<IEnumerable<INode>> SendNodesToClipboard;
+		public event EventHandler<IEnumerable<NodeDTO>> SendNodesToClipboard;
 		public event EventHandler Paste;
-		public event EventHandler<INode> ActivateNode;
+		public event EventHandler<NodeDTO> ActivateNode;
 		public event EventHandler LeaveNode;
-		public event EventHandler<INode> CurrentNodeChanged;
-
+		public event EventHandler<NodeDTO> CurrentNodeChanged;
 
         string _lastPath = "";
-		public void DisplayNodes(IEnumerable<INode> nodes, string path, INode highlightedNode)
+		public void DisplayNodes(IEnumerable<NodeDTO> nodes, string path, NodeDTO highlightedNode)
 		{
 			bool isPathSame = _lastPath.Equals(path);
 
@@ -63,7 +63,7 @@ namespace Shared.UI.UserControls
 			bsNodes.DataSource = null;
 
 			var top_exit_dir = nodes.SingleOrDefault(x => x.type == NType.exit_dir);
-			List<INode> dirs = new List<INode>();
+			List<NodeDTO> dirs = new List<NodeDTO>();
 			if(top_exit_dir != null) dirs.Add(top_exit_dir);
 			dirs.AddRange(nodes.Where(x => x.type <= 0 && x.type != NType.exit_dir).OrderByDescending(x=>x.pinned).ThenBy(x => x.name).ToList());
 			var all = dirs.Concat( nodes.Where(x => x.type > 0).OrderByDescending(x => x.pinned).ThenByDescending(x => x.date).ToList() ).ToList();
@@ -124,7 +124,7 @@ namespace Shared.UI.UserControls
    //         }
 		}
 
-		private void placeCursor(INode n)
+		private void placeCursor(NodeDTO n)
 		{
 			if (n == null) return;
 
@@ -132,7 +132,7 @@ namespace Shared.UI.UserControls
 
 			DataGridViewRow row = nodeGrid.Rows
 				.Cast<DataGridViewRow>()
-				.Where(r => (r.DataBoundItem as INode).id == n.id)
+				.Where(r => (r.DataBoundItem as NodeDTO).id == n.id)
 				.FirstOrDefault();
 
 			if (row == null) return;
@@ -143,12 +143,12 @@ namespace Shared.UI.UserControls
 			nodeGrid.CurrentCell = nodeGrid[0, rowIndex];
 		}
 
-		private IEnumerable<INode> _getSelectedNodes()
+		private IEnumerable<NodeDTO> _getSelectedNodes()
 		{
-			return nodeGrid.SelectedRows.Cast<DataGridViewRow>().Select(x => x.DataBoundItem as INode);
+			return nodeGrid.SelectedRows.Cast<DataGridViewRow>().Select(x => x.DataBoundItem as NodeDTO);
 		}
 
-		public void SetCursorAt(INode n)
+		public void SetCursorAt(NodeDTO n)
 		{
 			placeCursor(n);
 		}
@@ -176,39 +176,9 @@ namespace Shared.UI.UserControls
 		{
 			if (e.RowIndex < 0) return;
 
-			var i = nodeGrid.Rows[e.RowIndex].DataBoundItem as INode;
+			var i = nodeGrid.Rows[e.RowIndex].DataBoundItem as NodeDTO;
 
 			ActivateNode?.Invoke(this, i);
 		}
-
-        public void RenderData(IEnumerable<INode> nodes, IEnumerable<INode> parents)
-		{
-			//bool isPathSame = _lastPath.Equals(path);
-
-			//int indexBeforeUpdate = -1;
-   //         if (nodeGrid.CurrentCell != null)
-   //             indexBeforeUpdate = nodeGrid.CurrentCell.RowIndex;
-
-   //         bsNodes.DataSource = null;
-
-   //         var top_exit_dir = nodes.SingleOrDefault(x => x.type == NType.exit_dir);
-   //         List<INode> dirs = new List<INode>();
-   //         if (top_exit_dir != null) dirs.Add(top_exit_dir);
-   //         dirs.AddRange(nodes.Where(x => x.type <= 0 && x.type != NType.exit_dir).OrderByDescending(x => x.pinned).ThenBy(x => x.name).ToList());
-   //         var all = dirs.Concat(nodes.Where(x => x.type > 0).OrderByDescending(x => x.pinned).ThenByDescending(x => x.date).ToList()).ToList();
-
-   //         bsNodes.DataSource = all;
-
-   //         txtDirectoryFullName.Text = $"[{path}]";
-   //         placeCursor(highlightedNode);
-
-   //         if (indexBeforeUpdate >= 0 && isPathSame)
-   //             placeCursorByRowIndex(indexBeforeUpdate);
-
-			//_lastPath = path;
-
-			//if (_customizer != null)
-   //             _customizer.markRowsWithIcons();
-        }
     }
 }

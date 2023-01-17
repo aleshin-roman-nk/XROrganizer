@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Shared.UI.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace Shared.UI.Forms
 			dataGridView1.AutoGenerateColumns = false;
 		}
 
-		public event EventHandler<INode> CreateSession;
+		public event EventHandler<NodeDTO> CreateSession;
         public event EventHandler Completed;
         public event EventHandler<BufferTask> Delete;
 
@@ -109,7 +110,7 @@ namespace Shared.UI.Forms
 
 			if (e.KeyCode == Keys.Enter)
 			{
-				CreateSession?.Invoke(this, n.Node);
+				CreateSession?.Invoke(this, new NodeDTO { id = n.Node.id });
 				e.Handled = true;
 			}
 			else if(e.KeyCode == Keys.Delete)
@@ -136,7 +137,7 @@ namespace Shared.UI.Forms
 
 			var i = dataGridView1.Rows[e.RowIndex].DataBoundItem as BufferTask;
 
-			CreateSession?.Invoke(this, i.Node);
+			CreateSession?.Invoke(this, new NodeDTO { id = i.Node.id });
 		}
     }
 }

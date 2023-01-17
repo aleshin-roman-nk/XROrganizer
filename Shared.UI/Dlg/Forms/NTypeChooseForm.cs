@@ -13,12 +13,12 @@ namespace Shared.UI.Dlg.Forms
 			InitializeComponent();
 		}
 
-		NType getChoosed()
+		string getChoosed()
 		{
-			return (NType)listView1.SelectedItems[0].Tag;
+			return (string)listView1.SelectedItems[0].Tag;
 		}
 
-		public ViewResponse<NType> Choose(IEnumerable<NType> items)
+		public ViewResponse<string> Choose(IEnumerable<string> items)
 		{
 			foreach (var item in items)
 			{
@@ -27,9 +27,9 @@ namespace Shared.UI.Dlg.Forms
 
 			if (DialogResult.OK == ShowDialog())
 			{
-				return new ViewResponse<NType>{Data = getChoosed(), Ok = true};
+				return new ViewResponse<string>{Data = getChoosed(), Ok = true};
 			}
-			else return new ViewResponse<NType> { Data = NType.none, Ok = false };
+			else return new ViewResponse<string> { Ok = false };
 		}
 
 		private void listView1_DoubleClick(object sender, EventArgs e)

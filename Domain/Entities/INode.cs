@@ -22,5 +22,7 @@ namespace Domain.Entities
 		bool pinned { get; set; }
 		bool deleted { get; set; }
 		string DNA { get; set; }
+
+		ICollection<NodeTextPage> textPages { get; set; }
 	}
 }

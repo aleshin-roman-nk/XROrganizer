@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NodeTextPagesUC));
             this.btnKillPage = new System.Windows.Forms.Button();
             this.brnAddPage = new System.Windows.Forms.Button();
@@ -35,6 +36,9 @@
             this.btnPrevPage = new System.Windows.Forms.Button();
             this.btnNextPage = new System.Windows.Forms.Button();
             this.WorkspaceText = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openNodeByIdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnKillPage
@@ -124,18 +128,32 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.WorkspaceText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(58)))));
             this.WorkspaceText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.WorkspaceText.ContextMenuStrip = this.contextMenuStrip1;
             this.WorkspaceText.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.WorkspaceText.ForeColor = System.Drawing.Color.Yellow;
             this.WorkspaceText.Location = new System.Drawing.Point(-1, 29);
             this.WorkspaceText.Name = "WorkspaceText";
-            this.WorkspaceText.Size = new System.Drawing.Size(770, 416);
+            this.WorkspaceText.Size = new System.Drawing.Size(766, 416);
             this.WorkspaceText.TabIndex = 0;
             this.WorkspaceText.Text = resources.GetString("WorkspaceText.Text");
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openNodeByIdToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 28);
+            // 
+            // openNodeByIdToolStripMenuItem
+            // 
+            this.openNodeByIdToolStripMenuItem.Name = "openNodeByIdToolStripMenuItem";
+            this.openNodeByIdToolStripMenuItem.Size = new System.Drawing.Size(189, 24);
+            this.openNodeByIdToolStripMenuItem.Text = "Open node by id";
+            this.openNodeByIdToolStripMenuItem.Click += new System.EventHandler(this.openNodeByIdToolStripMenuItem_Click);
+            // 
             // NodeTextPagesUC
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.Controls.Add(this.WorkspaceText);
             this.Controls.Add(this.btnKillPage);
@@ -145,6 +163,7 @@
             this.Controls.Add(this.btnNextPage);
             this.Name = "NodeTextPagesUC";
             this.Size = new System.Drawing.Size(768, 448);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,5 +177,7 @@
         private System.Windows.Forms.Button btnPrevPage;
         private System.Windows.Forms.Button btnNextPage;
         private System.Windows.Forms.RichTextBox WorkspaceText;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem openNodeByIdToolStripMenuItem;
     }
 }

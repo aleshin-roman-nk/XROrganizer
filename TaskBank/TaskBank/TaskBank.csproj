@@ -264,8 +264,8 @@
       <DependentUpon>DescriptionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\EventDefinition\ApplicationClosingEventArgs.cs" />
-    <Compile Include="Presenters\EventDefinition\RequestFTaskOpenObjectManagerEventArgs.cs" />
-    <Compile Include="Presenters\EventDefinition\RequestSessionsPageOpenObjectManagerEvenArgs.cs" />
+    <Compile Include="Presenters\EventDefinition\GetNodeEventArgs.cs" />
+    <Compile Include="Presenters\EventDefinition\GetSessionsEvenArgs.cs" />
     <Compile Include="Presenters\FilesPresenter.cs" />
     <Compile Include="Presenters\Hub.cs" />
     <Compile Include="Forms\MainForm.cs">
@@ -274,6 +274,7 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\NodeInstanFactory.cs" />
     <Compile Include="Presenters\OpenObjectManager.cs" />
     <Compile Include="Presenters\TaskBankMainPresenter.cs" />
     <Compile Include="Presenters\TreeState.cs" />

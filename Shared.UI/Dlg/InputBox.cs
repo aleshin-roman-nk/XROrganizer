@@ -35,8 +35,9 @@ namespace Shared.UI.Interfaces
 			MessageBox.Show(msg);
 		}
 
-		public ViewResponse<NType> ChooseNType(IEnumerable<NType> items)
-		{
+		//public ViewResponse<NType> ChooseNType(IEnumerable<NType> items)
+		public ViewResponse<string> ChooseNType(IEnumerable<string> items)
+        {
 			NTypeChooseForm frm = new NTypeChooseForm();
 
 			return frm.Choose(items);

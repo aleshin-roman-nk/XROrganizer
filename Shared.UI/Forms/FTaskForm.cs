@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Shared.UI;
 using Shared.UI.Interfaces;
 using Shared.UI.Interfaces.EventArgsDefinition;
@@ -35,7 +36,6 @@ namespace Shared.UI.Forms
     public partial class FTaskForm : Form, IFTaskEditView
 	{
 		SavingObserver savingObserver;
-		NodeTextPages nodeTextPages;
 
 		FTask _ent = null;
 
@@ -88,27 +88,19 @@ namespace Shared.UI.Forms
 		{
 			_ent = o;
 
-			//richTextBoxDescription.Text = o.text;
 			isCompleted = _ent.IsCompleted;
 			lblDate.Text = _ent.date.Value.ToShortDateString();
 			txtFullPath.Text = $"{_ent.path}";
 			checkBox1Pinned.Checked = _ent.pinned;
-
-			nodeTextPages = new NodeTextPages(_ent.text);
-			richTextBoxDescription.Text = nodeTextPages.Page;
-			txtPageText.Text = $"{nodeTextPages.PageNo}/{nodeTextPages.MaxPage}";
-		}
+            nodeTextPagesUC1.SetNode(_ent);
+        }
 
 		private FTask _get()
 		{
-			// todo: collect all properties
 			_ent.IsCompleted = isCompleted;
-			//_ent.text = richTextBoxDescription.Text;
 			_ent.pinned = checkBox1Pinned.Checked;
-			_ent.text = nodeTextPages.DbText;
+			nodeTextPagesUC1.CommitCurrentPage();
 
-			nodeTextPages.Page = richTextBoxDescription.Text;
-			_ent.text = nodeTextPages.DbText;
 			updateName(_ent);
 
 			return _ent;
@@ -118,7 +110,7 @@ namespace Shared.UI.Forms
         {
 			if (!string.IsNullOrEmpty(_ent.name)) return;
 
-			string str = nodeTextPages.FirstPageText();
+			string str = nodeTextPagesUC1.FirstPageText();
 
 			// c# 8.0 or higher
 			//using var reader = new StringReader(str);
@@ -141,9 +133,10 @@ namespace Shared.UI.Forms
 
         public event EventHandler Completed;
         public event EventHandler<SaveNodeEventArgs> Save;
-        public event EventHandler<DisplaySessionsPageEventArg> ShowTopSessions;
-		public event EventHandler<INode> CreateSession;
-        public event EventHandler<int> OpenNodeById;
+        public event EventHandler<DisplaySessionsPageEventArg> ShowTopSessions;// вполне пойдет для строкогово запроса
+		public event EventHandler<NodeDTO> CreateSession;// вполне пойдет для строкогово запроса
+        public event EventHandler<int> OpenNodeById;// вполне пойдет для строкогово запроса
+        public event EventHandler<NodeTextPage> DeleteNodeTextPage;
 
         private void FTaskForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
@@ -177,22 +170,6 @@ namespace Shared.UI.Forms
 			ControlPaint.DrawBorder(e.Graphics, p.ClientRectangle, Color.Yellow, ButtonBorderStyle.Solid);
 		}
 
-		private void richTextBoxDescription_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode == Keys.S && e.Control)
-			{
-				//Update?.Invoke(this, _get());
-				//savingObserver.Saved = true;
-				OnNodeSave();
-				e.Handled = true;
-			}
-		}
-
-		private void richTextBoxDescription_TextChanged(object sender, EventArgs e)
-		{
-			savingObserver.Saved = false;
-		}
-
         public void Go(FTask o)
         {
 			_set(o);
@@ -217,73 +194,12 @@ namespace Shared.UI.Forms
 
         private void btnCreateSession_Click(object sender, EventArgs e)
         {
-			CreateSession?.Invoke(this, _ent);
-        }
-
-        private void toolStripMenuItem1OpenNodeById_Click(object sender, EventArgs e)
-        {
-			var txt = richTextBoxDescription.SelectedText;
-
-			if (!string.IsNullOrEmpty(txt))
-            {
-				int i = 0;
-				if (int.TryParse(txt, out i))
-					OpenNodeById?.Invoke(this, i);
-            }
+			CreateSession?.Invoke(this, new NodeDTO { id = _ent.id });
         }
 
         private void btnTimeTag_Click(object sender, EventArgs e)
         {
-			richTextBoxDescription.SelectedText = $">>> {DateTime.Now.ToString("dd-MM-yyyy HH:mm")}";
-
-			//try
-			//{
-			//	Clipboard.Clear();
-			//	Clipboard.SetText(res);
-			//}
-			//catch (Exception)
-			//{
-
-			//}
-		}
-
-        private void btnNextPage_Click(object sender, EventArgs e)
-        {
-			bool saved = savingObserver.Saved;// we want to remember if any page is not saved in db
-			nodeTextPages.Page = richTextBoxDescription.Text;// забираем текст перед сменой страницы.
-			nodeTextPages.nextPage();
-			richTextBoxDescription.Text = nodeTextPages.Page;
-			txtPageText.Text = $"{nodeTextPages.PageNo}/{nodeTextPages.MaxPage}";
-			savingObserver.Saved = saved;
-		}
-
-        private void btnPrevPage_Click(object sender, EventArgs e)
-        {
-			bool saved = savingObserver.Saved;
-			nodeTextPages.Page = richTextBoxDescription.Text;
-			nodeTextPages.prevPage();
-			richTextBoxDescription.Text = nodeTextPages.Page;
-			txtPageText.Text = $"{nodeTextPages.PageNo}/{nodeTextPages.MaxPage}";
-			savingObserver.Saved = saved;
-		}
-
-        private void brnAddPage_Click(object sender, EventArgs e)
-        {
-			bool saved = savingObserver.Saved;
-			nodeTextPages.Page = richTextBoxDescription.Text;
-			nodeTextPages.AddPage("", "");
-			richTextBoxDescription.Text = nodeTextPages.Page;
-			txtPageText.Text = $"{nodeTextPages.PageNo}/{nodeTextPages.MaxPage}";
-			savingObserver.Saved = saved;
-		}
-
-        private void btnKillPage_Click(object sender, EventArgs e)
-        {
-			bool saved = savingObserver.Saved;
-			nodeTextPages.killPage();
-			richTextBoxDescription.Text = nodeTextPages.Page;
-			txtPageText.Text = $"{nodeTextPages.PageNo}/{nodeTextPages.MaxPage}";
-			savingObserver.Saved = saved;
+            nodeTextPagesUC1.SelectedText = $">>> {DateTime.Now.ToString("dd-MM-yyyy HH:mm")}";
 		}
 
         private void FTaskForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -300,6 +216,42 @@ namespace Shared.UI.Forms
 					e.Cancel = true;
                 }
 			}
+        }
+
+        private void nodeTextPagesUC1_AddPageRequired(object sender, EventArgs e)
+        {
+            nodeTextPagesUC1.AddPage("", "");
+        }
+
+        private void nodeTextPagesUC1_ObjectChanged(object sender, EventArgs e)
+        {
+            savingObserver.Saved = false;
+        }
+
+        private void FTaskForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.S && e.Control)
+            {
+                OnNodeSave();
+                e.Handled = true;
+            }
+        }
+
+        private void nodeTextPagesUC1_RemovePageRequired(object sender, NodeTextPage e)
+        {
+			DeleteNodeTextPage?.Invoke(sender, e);
+        }
+
+        private void nodeTextPagesUC1_OpenNodeById(object sender, string e)
+        {
+            //var txt = nodeTextPagesUC1.SelectedText;
+
+            if (!string.IsNullOrEmpty(e))
+            {
+                int i = 0;
+                if (int.TryParse(e, out i))
+                    OpenNodeById?.Invoke(this, i);
+            }
         }
     }
 }

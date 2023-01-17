@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -11,11 +12,8 @@ namespace Domain.Repos
 		void Update(OSession e);
 		int GetSecondsOfDay(DateTime dt, INode dir);
 
-		IEnumerable<OSession> GetSessionOf(int year, int month, INode n);
-		IEnumerable<int> GetAllChildIdOf(INode n);
-		//bool SessionExists(int ownerId, DateTime dt);
-
-		//SessionForNode ForNode(INode n);
+		IEnumerable<OSession> GetSessionOf(int year, int month, NodeDTO n);
+		IEnumerable<int> GetAllChildIdOf(NodeDTO n);
 		SessionForNode ForNode(int parentNode);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Services.Nodes
 {
 	internal class TreeNavigator
 	{
-		Stack<INode> owners = new Stack<INode>();
+		Stack<NodeDTO> owners = new Stack<NodeDTO>();
 
 		public event EventHandler OwnerChanged;
 
@@ -18,7 +19,7 @@ namespace Services.Nodes
 			OnCurrentOwnerChanged();
 		}
 
-		public void Enter(INode dir)
+		public void Enter(NodeDTO dir)
 		{
 			if (dir == null)
 				return;
@@ -40,7 +41,7 @@ namespace Services.Nodes
 			tryToJumpBack();
 		}
 
-		public INode HighlightedNode => _highlightedDir;
+		public NodeDTO HighlightedNode => _highlightedDir;
 		public string CurrentNodeFullName
 		{
 			get
@@ -57,25 +58,25 @@ namespace Services.Nodes
 				return res;
 			}
 		}
-		private INode currentOwner
+		private NodeDTO currentOwner
 		{
 			get
 			{
-				if (!owners.Any()) return Dir.Root;
+				if (!owners.Any()) return NodeDTO.Root;
 				return owners.Peek();
 			}
 		}
 
-		public INode CurrentOwner => currentOwner;
+		public NodeDTO CurrentOwner => currentOwner;
 
-		private INode _highlightedDir;
+		private NodeDTO _highlightedDir;
 
 		void OnCurrentOwnerChanged()
 		{
 			OwnerChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-		private bool IsTopExit(INode r)
+		private bool IsTopExit(NodeDTO r)
 		{
 			return r.type == NType.exit_dir;
 		}

@@ -12,6 +12,8 @@ namespace Shared.UI.Interfaces
     {
         event EventHandler<SaveNodeEventArgs> Save;
         event EventHandler Completed;
+        event EventHandler<NodeTextPage> DeleteNodeTextPage;
+        event EventHandler<int> OpenNodeById;
 
         int ObjId { get; }
 

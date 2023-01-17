@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Services.Sessions.Entities.UI;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,9 @@ namespace SessionCollector.Views
 {
 	public interface IStataView
 	{
-		void Go(INode d);
+		void Go(NodeDTO d);
 
-		INode Node { get; }
+        NodeDTO Node { get; }
 		DateTime CurrentDate { get; }
 
 		event EventHandler DateChanged;

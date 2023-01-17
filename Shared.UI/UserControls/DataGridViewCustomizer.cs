@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace Shared.UI.UserControls
 
 			foreach (DataGridViewRow row in _grid.Rows)
 			{
-				var t = (row.DataBoundItem as INode).type;
+				var t = (row.DataBoundItem as NodeDTO).type;
 
 				DataGridViewImageCell cell = row.Cells[img_col] as DataGridViewImageCell;
 
@@ -63,7 +64,7 @@ namespace Shared.UI.UserControls
 
             var row = _grid.Rows[e.RowIndex];
 
-            NType t = (row.DataBoundItem as INode).type;
+            NType t = (row.DataBoundItem as NodeDTO).type;
 
 			// 13-09-2022 временно, закрытую задачу показываем, но она серая
 
@@ -72,11 +73,11 @@ namespace Shared.UI.UserControls
 			 * Придумать лямбду, условие - функция.
 			 * входные параметры в лямбду: INode, DataGridViewCellStyle
 			 */
-            if ((row.DataBoundItem as INode).pinned)
+            if ((row.DataBoundItem as NodeDTO).pinned)
                 e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
 			else if(t == NType.Task)
 			{
-				if((row.DataBoundItem as FTask).IsCompleted)
+				if((row.DataBoundItem as NodeDTO).IsCompleted)
 				{
                     e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Strikeout);
                     e.CellStyle.ForeColor = ColorTranslator.FromHtml("#9EA3B0");

@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Domain.Enums;
 using Domain.Repos;
 using Services.Nodes;
@@ -23,11 +24,12 @@ namespace TaskBank.Presenters
 {
 	public class TaskBankMainPresenter
 	{
-		List<INode> _clipboard = new List<INode>();
+		List<NodeDTO> _clipboard = new List<NodeDTO>();
 
 		OpenObjectManager _openObjectManager;
+		NodeInstanFactory _nodeInstanFactory;
 
-		private readonly INodeService _service;
+        private readonly INodeService _service;
 		private readonly IMainView _mainView;
 		IDescriptionWindow _descView;
 
@@ -49,6 +51,7 @@ namespace TaskBank.Presenters
         public TaskBankMainPresenter(IMainView mainView,
 			IDescriptionWindow descriptionWindow,
 			OpenObjectManager openObjManager,
+            NodeInstanFactory nodeInstanFactory,
 			SessionManagerMainPresenter sessPres,
 			IInputBox dlg,
 			INodeService srv,
@@ -65,7 +68,8 @@ namespace TaskBank.Presenters
 			_descView = descriptionWindow;
 			_dialogs = dlg;
 			_openObjectManager = openObjManager;
-			_sessionManagerMainPresenter = sessPres;
+			_nodeInstanFactory = nodeInstanFactory;
+            _sessionManagerMainPresenter = sessPres;
 			_bufferTaskRepository = bufferTaskRepository;
 			this.sessionRepository = sessionRepository;
 			_bufferTaskViewFactory = BufferTaskViewFactory;
@@ -75,6 +79,8 @@ namespace TaskBank.Presenters
 			_mainView.NodesView.LeaveNode += _nodesView_LeaveNode;
 			_mainView.NodesView.CurrentNodeChanged += NodesView_CurrentNodeChanged;
 			_mainView.NodesView.Paste += NodesView_Paste;
+			_mainView.NodesView.SendNodesToClipboard += NodesView_SendNodesToClipboard;
+
 			_mainView.StartDesriptionForm += _mainView_StartDesriptionForm;
 			_mainView.StartCurrentBuffer += _mainView_StartCurrentBuffer;
 			_mainView.StartSessionCollector += _mainView_StartSessionCollector;
@@ -82,7 +88,7 @@ namespace TaskBank.Presenters
 			_mainView.CreateNode += _mainView_CreateNode;
 			_mainView.RenameNode += _mainView_RenameNode;
 			_mainView.DeleteNode += _mainView_DeleteNode;
-			_mainView.NodesView.SendNodesToClipboard += NodesView_SendNodesToClipboard;
+
 			_mainView.CreateSession += _mainView_CreateSession;
 			_mainView.RestoreWorkingSessionWindow += _mainView_RestoreWorkingSessionWindow;
 			_mainView.PutTaskToBuffer += _mainView_PutTaskToBuffer;
@@ -96,27 +102,43 @@ namespace TaskBank.Presenters
 			_service.CollectionChanged += _service_CollectionChanged;
 
 			_openObjectManager.SaveNode += _openObjectManager_SaveNode;
-			_openObjectManager.SaveSession += _openObjectManager_SaveSession;
+            _openObjectManager.DeleteNodeTextPage += _openObjectManager_DeleteNodeTextPage;
+            _openObjectManager.SaveSession += _openObjectManager_SaveSession;
 			_openObjectManager.OpenTasksCountChanged += _openObjectManager_OpenTasksCountChanged;
 			_openObjectManager.WorkingSessionWindowOpen += _openObjectManager_WorkingSessionWindowOpen;
 			_openObjectManager.WorkingSessionWindowCompleted += _openObjectManager_WorkingSessionWindowCompleted;
 			_openObjectManager.WorkingSessionPlayStateChanged += _openObjectManager_WorkingSessionPlayStateChanged;
-			_openObjectManager.SessionsRequired += _openObjectManager_SessionsRequired;
+			_openObjectManager.GetSessions += _openObjectManager_GetSessions;
 			_openObjectManager.CreateSession += _openObjectManager_CreateSession;
-			_openObjectManager.FTaskRequired += _openObjectManager_FTaskRequired;
+			_openObjectManager.GetNode += _openObjectManager_GetNode;
 
 			_sessionManagerMainPresenter.StartSession += _sessionManagerMainPresenter_StartSession;
 
-			update();
+			_nodeInstanFactory.AddNodeType<FTask>();
+			_nodeInstanFactory.AddNodeType<Dir>(() =>
+			{
+				var str = _dialogs.Show("Enter dir name");
+				if (!string.IsNullOrEmpty(str))
+					return new Dir { name = str };
+				else return null;
+			});
+			_nodeInstanFactory.AddNodeType<FNote>();
+
+            update();
 		}
 
-		private void _mainView_OpenNode(object sender, EventArgs e)
+        private void _openObjectManager_DeleteNodeTextPage(object sender, NodeTextPage e)
+        {
+			_service.DeleteNodeTextPage(e);
+        }
+
+        private void _mainView_OpenNode(object sender, EventArgs e)
 		{
 			var n = _mainView.NodesView.SelectedNodes.FirstOrDefault();
 			if (n == null) return;
 			if (n.type < NType.Dir) return;
 
-			_openObjectManager.DefaultOpenNode(n);
+			_openObjectManager.DefaultOpenNode(_service.GetNode(n.id));
 		}
 
 		private void _mainView_WorkingSessionPlayStateChanged(object sender, WorkingSessionPlayState e)
@@ -140,9 +162,9 @@ namespace TaskBank.Presenters
 			_mainView.SessionState = true;
 		}
 
-		private void _openObjectManager_FTaskRequired(object sender, RequestFTaskOpenObjectManagerEventArgs e)
+		private void _openObjectManager_GetNode(object sender, GetNodeEventArgs e)
 		{
-			var res = _service.GetNode(e.taskId);
+			var res = _service.GetNode(e.nodeId);
 
 			if (res == null)
 			{
@@ -160,12 +182,12 @@ namespace TaskBank.Presenters
 			e.AnyWorkingWindows = _openObjectManager.AnyWorkingWindow;
 		}
 
-		private void _openObjectManager_CreateSession(object sender, INode e)
+		private void _openObjectManager_CreateSession(object sender, NodeDTO e)
 		{
 			_createSession(e);
 		}
 
-		private void _openObjectManager_SessionsRequired(object sender, RequestSessionsPageOpenObjectManagerEvenArgs e)
+		private void _openObjectManager_GetSessions(object sender, GetSessionsEvenArgs e)
 		{
 			e.Sessions = _service.GetTopSessions(e.Date, e.taskId, e.itemsPerPage, e.page);
 		}
@@ -233,7 +255,7 @@ namespace TaskBank.Presenters
 			_createSession(_mainView.NodesView.SelectedNodes.SingleOrDefault());
 		}
 
-		private void _createSession(INode n)
+		private void _createSession(NodeDTO n)
 		{
 			/*
 			 * >>> 04.10.2022
@@ -251,14 +273,14 @@ namespace TaskBank.Presenters
 					if (n.type >= NType.Dir)
 					{
 						//_sessionManagerMainPresenter.CreateSession((FTask)n);
-						_sessionManagerMainPresenter.CreateSession((Node)n);
+						_sessionManagerMainPresenter.CreateSession(n);
 					}
 				}
 			}
 			else __tmpFuncCreateSessionIfNoSessionCollector(n);
 		}
 
-		private void __tmpFuncCreateSessionIfNoSessionCollector(INode n)
+		private void __tmpFuncCreateSessionIfNoSessionCollector(NodeDTO n)
 		{
 			if (n != null)
 			{
@@ -269,7 +291,7 @@ namespace TaskBank.Presenters
 
 					var d = DateTime.Now;
 
-					if (sessionRepository.ForNode(n.id).SessionExists(d))
+					if (sessionRepository.ForNode(n.id).SessionExistsOnDate(d))
 					{
 						if (_dialogs.UserAnsweredYes($"Session of task you want to create is already created. Do you want to create a duplicate") == false)
 							return;
@@ -295,7 +317,7 @@ namespace TaskBank.Presenters
 			_mainView.ClipboardNodesCount = _clipboard.Count();
 		}
 
-		private void NodesView_SendNodesToClipboard(object sender, IEnumerable<INode> e)
+		private void NodesView_SendNodesToClipboard(object sender, IEnumerable<NodeDTO> e)
 		{
 			_clipboard.Clear();
 			_clipboard.AddRange(e);
@@ -357,7 +379,7 @@ namespace TaskBank.Presenters
 			_currentTaskBufferView.Update(_bufferTaskRepository.GetAll());
 		}
 
-		private void _currentTaskBufferView_CreateSession(object sender, INode e)
+		private void _currentTaskBufferView_CreateSession(object sender, NodeDTO e)
 		{
 			_createSession(e);
 		}
@@ -387,7 +409,7 @@ namespace TaskBank.Presenters
 				return;
 			}
 
-			if (_dialogs.UserAnsweredYes($"Are you sure to kill {i.name} / {i.text}"))
+			if (_dialogs.UserAnsweredYes($"Are you sure to kill `{i.name}` node"))
 			{
 				_service.Delete(i);
 				update();
@@ -405,37 +427,22 @@ namespace TaskBank.Presenters
 			{
 				i.name = new_name;
 
-				_service.Update(i);
+				_service.UpdateName(i);
 				update();
 			}
 		}
 
 		private void _mainView_CreateNode(object sender, EventArgs e)
 		{
-			var res = _dialogs.ChooseNType(new List<NType> { NType.Note, NType.Task, NType.Dir });
+			var res = _dialogs.ChooseNType(_nodeInstanFactory.Members);
 
 			if (res.Ok)
 			{
 				INode n = null;
 
-				switch (res.Data)
-				{
-					case NType.Dir:
-						var str = _dialogs.Show("Enter dir name");
-						if (!string.IsNullOrEmpty(str))
-							n = new Dir { name = str };
-						break;
-					case NType.Task:
-						n = new FTask();
-						break;
-					case NType.Note:
-						n = new FNote();
-						break;
-					default:
-						break;
-				}
+				n = _nodeInstanFactory.CreateNode(res.Data);
 
-				if (n != null)
+                if (n != null)
 				{
 					n.date = DateTime.Now;
 					n.last_modified_date = DateTime.Now;
@@ -448,14 +455,18 @@ namespace TaskBank.Presenters
 
 		private void _mainView_StartDesriptionForm(object sender, EventArgs e)
 		{
-			_descView.Put(_mainView.NodesView.SelectedNodes.FirstOrDefault());
+			var node = _service.GetNode(_mainView.NodesView.SelectedNodes.FirstOrDefault().id);
+
+			_descView.Put(node);
 			_descView.StickTo(_mainView);
 			_descView.Display();
 		}
 
-		private void NodesView_CurrentNodeChanged(object sender, INode e)
+		private void NodesView_CurrentNodeChanged(object sender, NodeDTO e)
 		{
-			_descView.Put(e);
+			var o = _service.GetNode(e.id);
+
+			_descView.Put(o);
 		}
 
 		private void DescView_Save(object sender, INode e)
@@ -490,7 +501,7 @@ namespace TaskBank.Presenters
 			_service.JumpBack();
 		}
 
-		private void _nodesView_ActivateNode(object sender, INode e)
+		private void _nodesView_ActivateNode(object sender, NodeDTO e)
 		{
 			if (e.type == NType.Dir || e.type == NType.exit_dir)
 			{
@@ -498,11 +509,13 @@ namespace TaskBank.Presenters
 			}
 			else if (e.type == NType.Task)
 			{
-				_openObjectManager.OpenTask(e as FTask);
+				var tsk = _service.GetNode(e.id);
+				_openObjectManager.OpenTask(tsk as FTask);
+				//_openObjectManager.OpenTask(e as FTask);
 			}
 			else
 			{
-				_openObjectManager.DefaultOpenNode(e);
+                _openObjectManager.DefaultOpenNode( _service.GetNode(e.id) );
 			}
 		}
 

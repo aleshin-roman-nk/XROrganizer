@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Domain.Enums;
 using Shared.UI.Interfaces;
 using Shared.UI.Interfaces.Enums;
@@ -24,16 +25,18 @@ namespace TaskBank.Presenters
 		Func<ITopSessionsOfTaskView> _topSessionsFactory;
 
 		public event EventHandler<SaveNodeEventArgs> SaveNode;
+		public event EventHandler<NodeTextPage> DeleteNodeTextPage;
+
 		public event EventHandler<OSession> SaveSession;
 		public event EventHandler<int> OpenTasksCountChanged;
 		public event EventHandler WorkingSessionWindowOpen;
 		public event EventHandler WorkingSessionWindowCompleted;
 		public event EventHandler<WorkingSessionPlayState> WorkingSessionPlayStateChanged;
-		public event EventHandler<RequestSessionsPageOpenObjectManagerEvenArgs> SessionsRequired;
-		public event EventHandler<RequestFTaskOpenObjectManagerEventArgs> FTaskRequired;
-		public event EventHandler<INode> CreateSession;
+		public event EventHandler<GetSessionsEvenArgs> GetSessions;
+		public event EventHandler<GetNodeEventArgs> GetNode;
+		public event EventHandler<NodeDTO> CreateSession;
 
-		public bool IsOpened(int inodeId)
+        public bool IsOpened(int inodeId)
         {
 			return _openedTasks.Any(x => x.ObjId == inodeId);
 		}
@@ -56,7 +59,7 @@ namespace TaskBank.Presenters
 			_FTaskWindowfactory = FTaskWindowfactory;
 			_topSessionsFactory = topSessionsFactory;
 			_DefaultWindowfactory = DefaultWindowfactory;
-		}
+        }
 
 		public void TryRestoreSessionWindow()
         {
@@ -85,12 +88,19 @@ namespace TaskBank.Presenters
 
             frmDefaultNode.Save += FrmDefaultNode_Save;
             frmDefaultNode.Completed += FrmDefaultWindow_Completed;
+            frmDefaultNode.DeleteNodeTextPage += event_DeleteNodeTextPage;
+			frmDefaultNode.OpenNodeById += Frm_OpenNodeById;
 
-			_openedNodes.Add(frmDefaultNode);
+            _openedNodes.Add(frmDefaultNode);
 			OpenTasksCountChanged?.Invoke(this, _openedTasks.Count + _openedNodes.Count);
 
 			frmDefaultNode.Go(n);
 		}
+
+        private void event_DeleteNodeTextPage(object sender, NodeTextPage e)
+        {
+            DeleteNodeTextPage?.Invoke(this, e);
+        }
 
         private void FrmDefaultNode_Save(object sender, SaveNodeEventArgs e)
         {
@@ -106,6 +116,8 @@ namespace TaskBank.Presenters
 			{
 				frm.Save -= FrmDefaultNode_Save;
 				frm.Completed -= FrmDefaultWindow_Completed;
+				frm.DeleteNodeTextPage -= event_DeleteNodeTextPage;
+				frm.OpenNodeById -= Frm_OpenNodeById;
 
 				_openedNodes.Remove(frm);
 				OpenTasksCountChanged?.Invoke(this, _openedTasks.Count + _openedNodes.Count);
@@ -186,8 +198,9 @@ namespace TaskBank.Presenters
             frm.ShowTopSessions += Frm_ShowTopSessions;
             frm.CreateSession += Frm_CreateSession;
             frm.OpenNodeById += Frm_OpenNodeById;
+			frm.DeleteNodeTextPage += event_DeleteNodeTextPage;
 
-			_openedTasks.Add(frm);
+            _openedTasks.Add(frm);
 			OpenTasksCountChanged?.Invoke(this, _openedTasks.Count + _openedNodes.Count);
 
 			frm.Go(t);
@@ -195,14 +208,16 @@ namespace TaskBank.Presenters
 
         private void Frm_OpenNodeById(object sender, int e)
         {
-			var args = new RequestFTaskOpenObjectManagerEventArgs(e);
+			var args = new GetNodeEventArgs(e);
 
-			FTaskRequired?.Invoke(this, args);
+			GetNode?.Invoke(this, args);
 
             if (args.NodeExists)
             {
-				//OpenTask(args.Node as FTask);
-				DefaultOpenNode(args.Node);
+				if(args.Node.type == NType.Task)
+					OpenTask(args.Node as FTask);
+				else
+					DefaultOpenNode(args.Node);
 			}
 		}
 
@@ -211,7 +226,7 @@ namespace TaskBank.Presenters
 			SaveNode?.Invoke(this, n);
 		}
 
-		private void Frm_CreateSession(object sender, INode e)
+		private void Frm_CreateSession(object sender, NodeDTO e)
         {
             CreateSession?.Invoke(this, e);
         }
@@ -230,13 +245,13 @@ namespace TaskBank.Presenters
 
         private void _topSessions_PageChanged(object sender, SessionsPageRequiredEventArgs e)
         {
-			var req = new RequestSessionsPageOpenObjectManagerEvenArgs(
+			var req = new GetSessionsEvenArgs(
 				e.page,
 				e.itemsPerPage,
 				e.date,
 				e.taskId);
 
-			SessionsRequired?.Invoke(this, req);
+			GetSessions?.Invoke(this, req);
 			if (req.Sessions == null) return;
 
 			_topSessions.Display(req.Sessions);
@@ -261,8 +276,9 @@ namespace TaskBank.Presenters
 				frm.ShowTopSessions -= Frm_ShowTopSessions;
 				frm.CreateSession -= Frm_CreateSession;
 				frm.OpenNodeById -= Frm_OpenNodeById;
+				frm.DeleteNodeTextPage -= event_DeleteNodeTextPage;
 
-				_openedTasks.Remove(frm);
+                _openedTasks.Remove(frm);
 				OpenTasksCountChanged?.Invoke(this, _openedTasks.Count);
 			}
 		}

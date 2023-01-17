@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Shared.UI;
 using Shared.UI.Interfaces.EventArgsDefinition;
 using System;
@@ -18,7 +19,8 @@ namespace Shared.UI.Interfaces
 		event EventHandler Completed;
 		event EventHandler<SaveNodeEventArgs> Save;
 		event EventHandler<DisplaySessionsPageEventArg> ShowTopSessions;
-		event EventHandler<INode> CreateSession;
+		event EventHandler<NodeDTO> CreateSession;
 		event EventHandler<int> OpenNodeById;
+		event EventHandler<NodeTextPage> DeleteNodeTextPage;
 	}
 }

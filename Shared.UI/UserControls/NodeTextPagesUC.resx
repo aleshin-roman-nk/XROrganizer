@@ -134,7 +134,7 @@
   <data name="brnAddPage.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAUCAYAAAD/Rn+7AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vQAADr0BR/uQrQAAAfRJREFUSEtjGAzgzA7vg0C8Z/8aNw2o0OABQIcd+P8s7j8Ig9hQ4cEDaObAzDi1
+        vAAADrwBlbxySQAAAfRJREFUSEtjGAzgzA7vg0C8Z/8aNw2o0OABQIcd+P8s7j8Ig9hQ4cEDaObAzDi1
         xOuH/JuABktBhcgCNHMg0LCrIENfXgp7+/pyWBopDgU5BIZhjoNhZDmocvIA0ACwA2H4/skgED8MiPE6
         9OwO7zPI+vDhczu914A1ATlSQAwynGj84mLoayCNYei9E4FbgDRIDVaHnt3pfRhZPT58bpfPCrCmqwf8
         2rEpIAaDHHrvRNAedPGn50KmAmmsjkSORnR9yHJQ5YgQxGYRIQw0CBS1Ut/uRcU8PB18G1mOmPSJ7EgU
@@ -166,6 +166,9 @@
         s6CmisMoBUDLQY4cfA6DAaAj4A4cVA6DAZBjQMXFoHPYCAYMDAAb5ocI8XvD8wAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="WorkspaceText.Text" xml:space="preserve">
     <value>Мысли с утреннего поклонения в Вефиле (Казахстан) которое 28.12.2016 проводил представитель главного управления (Бытие 12:2). 
 "Почему Иегова хотел произвести от Авраама целый народ? Не было ли проще выбрать себе отдельных послушных людей, чем возиться столько времени с непослушным народом? 

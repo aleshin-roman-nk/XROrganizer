@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Domain.Repos;
 using Services.Sessions.Entities.UI;
 using System;
@@ -48,7 +49,7 @@ namespace Services.Sessions
 			_items = _repo.GetOfDay(d);
 		}
 
-		public IEnumerable<ChartItem> GetStatistic(int year, int month, INode dir)
+		public IEnumerable<ChartItem> GetStatistic(int year, int month, NodeDTO dir)
 		{
 			var dates = Enumerable.Range(1, DateTime.DaysInMonth(year, month))
 						.Select(day => new DateTime(year, month, day))

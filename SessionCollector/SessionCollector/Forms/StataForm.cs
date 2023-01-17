@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Services.Sessions.Entities.UI;
 using SessionCollector.Views;
 using System;
@@ -12,7 +13,7 @@ namespace SessionCollector.Forms
 {
 	public partial class StataForm : Form, IStataView
 	{
-        INode _dir = null;
+        NodeDTO _dir = null;
 
         BindingSource bs;
         public StataForm()
@@ -22,7 +23,7 @@ namespace SessionCollector.Forms
             dataGridView1.DataSource = bs;
         }
 
-		public void Go(INode d)
+		public void Go(NodeDTO d)
 		{
             _dir = d;
             this.Show();
@@ -84,7 +85,7 @@ namespace SessionCollector.Forms
 
         CurrentDataPoint _CurrentDataPoint = new CurrentDataPoint();
 
-        public INode Node => _dir;
+        public NodeDTO Node => _dir;
         public DateTime CurrentDate => dateTimePicker1.Value;
 
         public event EventHandler DateChanged;

@@ -202,12 +202,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.nodeTextPagesUC1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
-            this.nodeTextPagesUC1.Location = new System.Drawing.Point(3, 101);
+            this.nodeTextPagesUC1.Location = new System.Drawing.Point(3, 105);
             this.nodeTextPagesUC1.Name = "nodeTextPagesUC1";
-            this.nodeTextPagesUC1.Size = new System.Drawing.Size(845, 595);
-            this.nodeTextPagesUC1.TabIndex = 0;
+            this.nodeTextPagesUC1.SelectedText = "";
+            this.nodeTextPagesUC1.Size = new System.Drawing.Size(845, 591);
+            this.nodeTextPagesUC1.TabIndex = 1;
             this.nodeTextPagesUC1.ObjectChanged += new System.EventHandler(this.nodeTextPagesUC1_ObjectChanged);
             this.nodeTextPagesUC1.AddPageRequired += new System.EventHandler(this.nodeTextPagesUC1_AddPageRequired);
+            this.nodeTextPagesUC1.RemovePageRequired += new System.EventHandler<Domain.Entities.NodeTextPage>(this.nodeTextPagesUC1_RemovePageRequired);
+            this.nodeTextPagesUC1.OpenNodeById += new System.EventHandler<string>(this.nodeTextPagesUC1_OpenNodeById);
             // 
             // NodeDefaultForm
             // 
@@ -215,8 +218,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(850, 697);
-            this.Controls.Add(this.lblSaved);
             this.Controls.Add(this.nodeTextPagesUC1);
+            this.Controls.Add(this.lblSaved);
             this.Controls.Add(this.btnCloseAndSave);
             this.Controls.Add(this.textBoxType);
             this.Controls.Add(this.textBoxDate);
@@ -232,6 +235,7 @@
             this.Name = "NodeDefaultForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Node";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NodeDefaultForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NodeDefaultForm_FormClosed);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NodeDefaultForm_KeyDown);
             this.ResumeLayout(false);
@@ -253,7 +257,7 @@
         private System.Windows.Forms.TextBox textBoxType;
         private System.Windows.Forms.Button btnCloseAndSave;
         private UserControls.NodeTextPagesUC nodeTextPaginator;
-        private UserControls.NodeTextPagesUC nodeTextPagesUC1;
         private System.Windows.Forms.Label lblSaved;
+        private UserControls.NodeTextPagesUC nodeTextPagesUC1;
     }
 }

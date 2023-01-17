@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Domain.Enums;
 using Domain.Repos;
 using System;
@@ -14,11 +15,11 @@ namespace Services.Nodes
 		TreeNavigator _navigator = new TreeNavigator();
 		INodeRepository _repo;
 
-		public IEnumerable<INode> Items { get; private set; }
+		public IEnumerable<NodeDTO> Items { get; private set; }
 		public event EventHandler CollectionChanged;
-		public INode CurrentOwner => _navigator.CurrentOwner;
+		public NodeDTO CurrentOwner => _navigator.CurrentOwner;
 		public string CurrentParentFullName => _navigator.CurrentNodeFullName;
-		public INode HighlightedNode => _navigator.HighlightedNode;
+		public NodeDTO HighlightedNode => _navigator.HighlightedNode;
 
 		public NodeService(INodeRepository r)
 		{
@@ -35,7 +36,7 @@ namespace Services.Nodes
 
 		private void updateData()
 		{
-			Items = select(_navigator.CurrentOwner as Dir);
+			Items = select(_navigator.CurrentOwner);
 			OnCollectionChanged();
 		}
 
@@ -44,15 +45,15 @@ namespace Services.Nodes
 			CollectionChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-		private IEnumerable<INode> select(Dir own)
+		private IEnumerable<NodeDTO> select(NodeDTO own)
 		{
 			// Поменять, уйти от всяких _sys_root_dir, exit_dir
 			//	ввести атрибуты директорий, да и вообще узлов.
-			List<INode> res = new List<INode>();
+			List<NodeDTO> res = new List<NodeDTO>();
 			if (own.type != NType._sys_root_dir)
-				res.Add(Dir.ExitTopDir);
+				res.Add(NodeDTO.ExitTopDir);
 
-			var i = _repo.GetAllOf(own, true);
+			var i = _repo.AsParent(own).Children(true);
 
 			//res.AddRange(i.Where(x => x.type == NType.Dir).OrderBy(x=>x.pinned).ThenBy(x=>x.name).ToList());
 			//res.AddRange(i.Where(x => x.type != NType.Dir).OrderByDescending(x=>x.pinned).ThenByDescending(x=>x.date).ToList());
@@ -64,18 +65,18 @@ namespace Services.Nodes
 			return res;
 		}
 
-        public void Move(IEnumerable<INode> nodes)
+        public void Move(IEnumerable<NodeDTO> nodes)
 		{
             _repo.AsParent(_navigator.CurrentOwner).Move(nodes);
             updateData();
         }
 
 
-        public INode Create(INode d)
+        public NodeDTO Create(INode d)
 		{
+			d.last_modified_date = DateTime.Now;
 
 			var res = _repo.AsParent(_navigator.CurrentOwner).Create(d);
-			res.last_modified_date = DateTime.Now;
 			updateData();
 			return res;
 		}
@@ -93,15 +94,15 @@ namespace Services.Nodes
 			return res;
 		}
 
-		public void Delete(INode d)
+		public void Delete(NodeDTO d)
 		{
 			_repo.Delete(d);
 			updateData();
 		}
 
-		public bool HasChildren(INode d)
+		public bool HasChildren(NodeDTO d)
 		{
-			return _repo.HasChildren(d);
+			return _repo.AsParent(d).HasChildren();
 		}
 
 		public void JumpBack()
@@ -109,7 +110,7 @@ namespace Services.Nodes
 			_navigator.JumpBack();
 		}
 
-		public void Enter(INode n)
+		public void Enter(NodeDTO n)
 		{
 			_navigator.Enter(n);
 		}
@@ -121,17 +122,27 @@ namespace Services.Nodes
 
         public IEnumerable<OSession> GetTopSessions(DateTime today, int taskId, int top, int page)
         {
-			return _repo.AsParent(new Node { id = taskId }).GetTopSessions(today, top, page);
+			return _repo.AsParent(new NodeDTO { id = taskId }).GetTopSessions(today, top, page);
         }
 
-        public INode GetNode(int taskId)
+        public INode GetNode(int nodeId)
         {
-			return _repo.Get(taskId);
+			return _repo.Get(nodeId);
 		}
 
-        public bool HasSessions(INode d)
+        public bool HasSessions(NodeDTO d)
         {
-            return _repo.HasSessions(d);
+            return _repo.AsParent(d).HasSessions();
+        }
+
+        public int UpdateName(NodeDTO node)
+        {
+			return _repo.UpdateName(node);
+        }
+
+        public void DeleteNodeTextPage(NodeTextPage ntp)
+        {
+            _repo.DeleteNodeTextPage(ntp);
         }
     }
 }

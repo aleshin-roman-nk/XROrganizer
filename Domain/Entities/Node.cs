@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Domain.Entities
 {
 
-	public class Node : INode
+	public /*abstract*/ class Node : INode
 	{
 		protected NType _type = NType.none;
 		/// <summary>
@@ -27,12 +27,20 @@ namespace Domain.Entities
 		public string NTypeString { get { return type.ToString(); } }
 		[NotMapped]
 		public string path { get; set; }
-        public bool pinned { get; set; }
-        public bool deleted { get; set; }
-        public string DNA { get; set; }
+		public bool pinned { get; set; }
+		public bool deleted { get; set; }
+		public string DNA { get; set; }
 		public DateTime? last_modified_date { get; set; }
+        public ICollection<NodeTextPage> textPages { get; set; }
 
-		public override bool Equals(object obj)
+		//public abstract INode CreateNewNode();
+
+		public Node()
+		{
+            textPages = new List<NodeTextPage>();
+        }
+
+        public override bool Equals(object obj)
 		{
 			INode ob = obj as INode;
 

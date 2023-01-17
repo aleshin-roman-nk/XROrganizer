@@ -31,6 +31,7 @@ namespace TaskBank.Forms
 
 		public void Put(INode n)
 		{
+			if (n == null) return;
 			lblPath.Text = $"{n.path}#{n.id}";
 			descriptionUC1.Put(n);
 		}

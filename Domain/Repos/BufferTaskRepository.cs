@@ -64,7 +64,7 @@ namespace Domain.Repos
 
 				foreach (var item in res)
 				{
-					item.Node.path = _toolRepo.getFullPathOf(item.Node, db);
+					item.Node.path = _toolRepo.getFullPathOf(item.Node.id, db);
                 }
 
 				return res;

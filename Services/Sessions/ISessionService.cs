@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Domain.Repos;
 using Services.Sessions.Entities.UI;
 using System;
@@ -15,6 +16,6 @@ namespace Services.Sessions
 		void SetCollectionOfDate(DateTime d);
 		IEnumerable<OSession> Items { get; }
 		ISessionRepository Repo { get; }
-		IEnumerable<ChartItem> GetStatistic(int year, int month, INode dir);
+		IEnumerable<ChartItem> GetStatistic(int year, int month, NodeDTO dir);
 	}
 }

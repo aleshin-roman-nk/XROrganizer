@@ -1,4 +1,5 @@
 ﻿using Domain.DBContext;
+using Domain.dto;
 using Domain.Entities;
 using Domain.Repos.Shared;
 using System;
@@ -15,8 +16,8 @@ namespace Domain.Repos
 	{
 		IAppDataContextFactory _factory;
 		ToolRepo _toolRepo;
-
-		public NodeRepository(IAppDataContextFactory factory)
+         
+        public NodeRepository(IAppDataContextFactory factory)
 		{
 			_factory = factory;
 			_toolRepo = new ToolRepo();
@@ -28,66 +29,25 @@ namespace Domain.Repos
 
 			using (var db = _factory.Create())
 			{
-				//db.Entry(n).State = n.id == 0 ? EntityState.Added : EntityState.Modified;
-				db.Entry(n).State = EntityState.Modified;
-				var res = db.SaveChanges();
-				n.path = _toolRepo.getFullPathOf(n, db);
+				foreach (var textPage in n.textPages)
+				{
+					textPage.nodeid = n.id;
+					db.Entry(textPage).State = textPage.id == 0 ? EntityState.Added : EntityState.Modified;
+                }
+
+                db.Entry(n).State = EntityState.Modified;
+                var res = db.SaveChanges();
+				n.path = _toolRepo.getFullPathOf(n.id, db);
 				return res;
 			}
 		}
 		
-		public void Delete(INode n)
+		public void Delete(NodeDTO n)
 		{
 			using (var db = _factory.Create())
 			{
-				db.Entry(n).State = EntityState.Deleted;
+				db.Entry(new Node { id = n.id }).State = EntityState.Deleted;
 				db.SaveChanges();
-			}
-		}
-
-		public bool HasChildren(INode d)
-		{
-			using (var db = _factory.Create())
-			{
-				var r = db.Nodes.FirstOrDefault(x => x.owner_id == d.id);
-				return !(r == null);
-			}
-		}
-
-		public IEnumerable<INode> GetAllOf(INode owner, bool includeCompleted)
-		{
-			return _getNodes(owner, includeCompleted);
-		}
-
-		private IEnumerable<INode> _getNodes(INode owner, bool loadCompleted)
-		{
-			using (var db = _factory.Create())
-			{
-				IEnumerable<INode> items;
-
-				// пусть сервисы сортирую как им надо
-				if (loadCompleted)
-					items = db.Nodes.Where(x => x.owner_id == owner.id).ToList();
-				else
-					items = db.Nodes.Where(x => x.owner_id == owner.id && ( (x is FTask) ? ((x as FTask).IsCompleted == false) : (true) )).ToList();
-
-				var path = _toolRepo.getFullPathOf(owner, db);
-
-				foreach (var item in items)
-                {
-					//item.path = item.type == Enums.NType.Dir ? $"{path} \\ {item.name}" : $"{path} \\ #{item.id}";
-					item.path = string.IsNullOrEmpty(item.name) == false ? $"{path} \\ {item.name}" : $"{path} \\ #{item.id}";
-                }
-
-				return items;
-			}
-		}
-
-		public IEnumerable<INode> GetAll()
-		{
-			using (var db = _factory.Create())
-			{
-				return db.Nodes.ToList();
 			}
 		}
 
@@ -95,10 +55,9 @@ namespace Domain.Repos
 		{
 			using (var db = _factory.Create())
 			{
-				var res = db.Nodes.FirstOrDefault(x => x.id == id);
+				var res = db.Nodes.Include(x => x.textPages).FirstOrDefault(x => x.id == id);
 				if(res == null) return null;
-				//res.path = _toolRepo.GetPathOf(res, db);
-				res.path = _toolRepo.getFullPathOf(res, db);
+				res.path = _toolRepo.getFullPathOf(res.id, db);
 
 				return res;
 			}
@@ -115,28 +74,10 @@ namespace Domain.Repos
 				x.completed_date < dt2)).ToList();
 
 				foreach (var item in res)
-					item.path = _toolRepo.getFullPathOf(item, db);
+					item.path = _toolRepo.getFullPathOf(item.id, db);
 
 				return res;
 			};
-		}
-
-        public bool HasSessions(INode d)
-        {
-			using (var db = _factory.Create())
-            {
-				return db.Sessions.Any(x=> x.NodeId == d.id);
-			}
-		}
-
-        public IEnumerable<INode> GetFirstLineChildren(int owner)
-        {
-			using (var db = _factory.Create())
-            {
-				var r = db.Nodes.Where(x => x.owner_id == owner).ToList();
-
-				return r;
-			}
 		}
 
         public void UpdateDNA()
@@ -216,9 +157,32 @@ namespace Domain.Repos
             }
         }
 
-        public ForParentNode AsParent(INode n)
+        public ForParentNode AsParent(NodeDTO n)
         {
 			return new ForParentNode(n, _factory);
+        }
+
+        public int UpdateName(NodeDTO node)
+        {
+			var o = new Node { id = node.id, name = node.name };
+
+            using (var db = _factory.Create())
+			{
+				db.Nodes.Attach(o);
+				db.Entry(o).Property(x => x.name).IsModified = true;
+				return db.SaveChanges();
+			}
+        }
+
+        public void DeleteNodeTextPage(NodeTextPage ntp)
+        {
+			if (ntp == null) return;
+			if (ntp.id == 0) return;
+            using (var db = _factory.Create())
+			{
+				db.Entry(ntp).State = EntityState.Deleted;
+				db.SaveChanges();
+			}
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -6,19 +7,21 @@ namespace Services.Nodes
 {
 	public interface INodeService
 	{
-		INode CurrentOwner { get; }
+        NodeDTO CurrentOwner { get; }
 		string CurrentParentFullName { get; }
-		INode HighlightedNode { get; }
+        NodeDTO HighlightedNode { get; }
 		void JumpBack();
-		void Enter(INode n);
-		INode Create(INode d);
+		void Enter(NodeDTO n);
+        NodeDTO Create(INode d);
 		int Update(INode d);
-		void Delete(INode d);
-		bool HasChildren(INode d);
-		bool HasSessions(INode d);
+		int UpdateName(NodeDTO node);
+		void Delete(NodeDTO d);
+		void DeleteNodeTextPage(NodeTextPage ntp);
+		bool HasChildren(NodeDTO d);
+		bool HasSessions(NodeDTO d);
 		//void MoveNodesToDirectory(Dir owner, IEnumerable<INode> notes);
-		void Move(IEnumerable<INode> notes);
-		IEnumerable<INode> Items { get; }
+		void Move(IEnumerable<NodeDTO> notes);
+		IEnumerable<NodeDTO> Items { get; }
 		event EventHandler CollectionChanged;
 
 		IEnumerable<FTask> GetCompletedTasks(int year, int month);

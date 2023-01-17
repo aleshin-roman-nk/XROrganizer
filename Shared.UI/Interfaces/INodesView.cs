@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -12,20 +13,18 @@ namespace Shared.UI.Interfaces
 	/// </summary>
 	public interface INodesView
 	{
-		void DisplayNodes(IEnumerable<INode> tcollection, string path, INode highlightedNode);
+		void DisplayNodes(IEnumerable<NodeDTO> tcollection, string path, NodeDTO highlightedNode);
 		void SetFileGridCustomizer(INodeTypeCustomizer customizer);
 
-		IEnumerable<INode> SelectedNodes { get; }
+		IEnumerable<NodeDTO> SelectedNodes { get; }
 
-		void SetCursorAt(INode n);
+		void SetCursorAt(NodeDTO n);
 
-		event EventHandler<IEnumerable<INode>> SendNodesToClipboard;
+		event EventHandler<IEnumerable<NodeDTO>> SendNodesToClipboard;
 		event EventHandler Paste;
-		event EventHandler<INode> ActivateNode;
+		event EventHandler<NodeDTO> ActivateNode;
 
 		event EventHandler LeaveNode;
-		event EventHandler<INode> CurrentNodeChanged;
-
-		void RenderData(IEnumerable<INode> nodes, IEnumerable<INode> parents);
+		event EventHandler<NodeDTO> CurrentNodeChanged;
 	}
 }

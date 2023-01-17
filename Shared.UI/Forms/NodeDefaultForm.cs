@@ -20,19 +20,23 @@ namespace Shared.UI.Forms
         SavingObserver savingObserver;
 
         INode _ent;
+        private readonly IInputBox _dlg;
 
         public event EventHandler<SaveNodeEventArgs> Save;
         public event EventHandler Completed;
+        public event EventHandler<NodeTextPage> DeleteNodeTextPage;
+        public event EventHandler<int> OpenNodeById;
 
         public int ObjId => _ent.id;
 
-        public NodeDefaultForm()
+        public NodeDefaultForm(IInputBox dlg)
         {
             InitializeComponent();
 
             savingObserver = new SavingObserver();
             savingObserver.Indicator = lblSaved;
             savingObserver.Saved = true;
+            this._dlg = dlg;
         }
 
         private void OnNodeSave()
@@ -48,7 +52,7 @@ namespace Shared.UI.Forms
             _ent.pinned = checkBoxPinned.Checked;
             _ent.name = textBoxName.Text;
             nodeTextPagesUC1.CommitCurrentPage();
-            _ent.text = nodeTextPagesUC1.DbText;
+            //_ent.text = nodeTextPagesUC1.DbText;
 
             updateName(_ent);
 
@@ -82,7 +86,7 @@ namespace Shared.UI.Forms
             textBoxName.Text = _ent.name;
             checkBoxPinned.Checked = _ent.pinned;
 
-            nodeTextPagesUC1.SetJsonFromDb(_ent.text);
+            nodeTextPagesUC1.SetNode(_ent as Node);
         }
 
         private void NodeDefaultForm_KeyDown(object sender, KeyEventArgs e)
@@ -126,6 +130,37 @@ namespace Shared.UI.Forms
         {
             OnNodeSave();
             Close();
+        }
+
+        private void nodeTextPagesUC1_RemovePageRequired(object sender, NodeTextPage e)
+        {
+            DeleteNodeTextPage?.Invoke(sender, e);
+        }
+
+        private void NodeDefaultForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!savingObserver.Saved)
+            {
+                var resp = _dlg.AskUser("There are something unsaved. Do you want to save?");
+                if (resp == DlgAnswerCode.yes)
+                {
+                    OnNodeSave();
+                }
+                else if (resp == DlgAnswerCode.cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void nodeTextPagesUC1_OpenNodeById(object sender, string e)
+        {
+            if (!string.IsNullOrEmpty(e))
+            {
+                int i = 0;
+                if (int.TryParse(e, out i))
+                    OpenNodeById?.Invoke(this, i);
+            }
         }
     }
 }
