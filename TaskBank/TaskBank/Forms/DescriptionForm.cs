@@ -22,16 +22,23 @@ namespace TaskBank.Forms
 		{
 			InitializeComponent();
 
-			//descriptionUC1.Save += DescriptionUC1_Save;
-		}
+            //descriptionUC1.Save += DescriptionUC1_Save;
+            descriptionUC1.OpenNodeById += DescriptionUC1_OpenNodeById;
+        }
 
-		private void DescriptionUC1_Save(object sender, INode e)
+        private void DescriptionUC1_OpenNodeById(object sender, int e)
+        {
+            OpenById?.Invoke(this, e);
+        }
+
+        private void DescriptionUC1_Save(object sender, INode e)
 		{
 			Save?.Invoke(this, e);
 		}
 
 		public event EventHandler<INode> Save;
         public event EventHandler<NodeDTO> OpenNode;
+        public event EventHandler<int> OpenById;
 
         public void Put(NodeDTO n)
 		{

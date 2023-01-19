@@ -29,9 +29,13 @@ namespace Shared.UI.UserControls
 		/// </summary>
 		private void InitializeComponent()
 		{
+            this.components = new System.ComponentModel.Container();
             this.rtxNodeDescription = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openNodeByIdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // rtxNodeDescription
@@ -39,6 +43,7 @@ namespace Shared.UI.UserControls
             this.rtxNodeDescription.AcceptsTab = true;
             this.rtxNodeDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(90)))), ((int)(((byte)(32)))));
             this.rtxNodeDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtxNodeDescription.ContextMenuStrip = this.contextMenuStrip1;
             this.rtxNodeDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtxNodeDescription.EnableAutoDragDrop = true;
             this.rtxNodeDescription.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -64,6 +69,20 @@ namespace Shared.UI.UserControls
             this.panel1.Size = new System.Drawing.Size(376, 581);
             this.panel1.TabIndex = 21;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openNodeByIdToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 28);
+            // 
+            // openNodeByIdToolStripMenuItem
+            // 
+            this.openNodeByIdToolStripMenuItem.Name = "openNodeByIdToolStripMenuItem";
+            this.openNodeByIdToolStripMenuItem.Size = new System.Drawing.Size(189, 24);
+            this.openNodeByIdToolStripMenuItem.Text = "Open node by id";
+            this.openNodeByIdToolStripMenuItem.Click += new System.EventHandler(this.openNodeByIdToolStripMenuItem_Click);
+            // 
             // DescriptionUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -73,6 +92,7 @@ namespace Shared.UI.UserControls
             this.Name = "DescriptionUC";
             this.Size = new System.Drawing.Size(376, 581);
             this.panel1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
@@ -80,5 +100,7 @@ namespace Shared.UI.UserControls
 		#endregion
 		private System.Windows.Forms.RichTextBox rtxNodeDescription;
 		private System.Windows.Forms.Panel panel1;
-	}
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem openNodeByIdToolStripMenuItem;
+    }
 }

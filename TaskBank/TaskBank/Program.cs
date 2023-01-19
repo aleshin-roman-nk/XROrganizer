@@ -75,7 +75,7 @@ namespace TaskBank
 					.RegisterType<ICompletedTasksView, CompletedTasksForm>()
 
 					// presenter
-					.RegisterType<OpenObjectManager>()
+					.RegisterType<IOpenObjectManager, OpenObjectManager>()
 					.RegisterType<SessionManagerMainPresenter>()
                     .RegisterType<NodeInstanFactory>()
                     

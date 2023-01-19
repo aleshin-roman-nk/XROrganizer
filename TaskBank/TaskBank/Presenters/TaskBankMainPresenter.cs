@@ -27,7 +27,7 @@ namespace TaskBank.Presenters
 	{
 		List<NodeDTO> _clipboard = new List<NodeDTO>();
 
-		OpenObjectManager _openObjectManager;
+        IOpenObjectManager _openObjectManager;
 		NodeInstanFactory _nodeInstanFactory;
 
         private readonly INodeService _service;
@@ -51,7 +51,7 @@ namespace TaskBank.Presenters
 
         public TaskBankMainPresenter(IMainView mainView,
 			IDescriptionWindow descriptionWindow,
-			OpenObjectManager openObjManager,
+            IOpenObjectManager openObjManager,
             NodeInstanFactory nodeInstanFactory,
 			SessionManagerMainPresenter sessPres,
 			IInputBox dlg,
@@ -100,7 +100,7 @@ namespace TaskBank.Presenters
 
             //_descView.Save += DescView_Save;
             _descView.OpenNode += _descView_OpenNode;
-
+            _descView.OpenById += _descView_OpenById;
 
             _service.CollectionChanged += _service_CollectionChanged;
 
@@ -481,7 +481,10 @@ namespace TaskBank.Presenters
         {
 			_openNodeRouter(e);
         }
-
+        private void _descView_OpenById(object sender, int e)
+        {
+            _openObjectManager.OpenNodeById(e);
+        }
         private void DescView_Save(object sender, INode e)
 		{
 			if (e.type >= 0)

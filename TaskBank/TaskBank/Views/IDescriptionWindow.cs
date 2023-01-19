@@ -17,5 +17,6 @@ namespace TaskBank.Views
 		void Display();
 		void StickTo(IStickable to);
 		event EventHandler<NodeDTO> OpenNode;
+		event EventHandler<int> OpenById;
 	}
 }

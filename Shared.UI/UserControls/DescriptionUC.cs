@@ -79,7 +79,24 @@ namespace Shared.UI.UserControls
 
 		bool _dontObserveSavingState = false;
 
-		public void Put(NodeDTO n)
+        public event EventHandler<int> OpenNodeById;
+
+        public int SelectedId
+		{
+			get
+			{
+				int res = 0;
+                
+                if (!string.IsNullOrEmpty(rtxNodeDescription.SelectedText))
+                {
+					int.TryParse(rtxNodeDescription.SelectedText, out res);
+                }
+
+				return res;
+            }
+		}
+
+        public void Put(NodeDTO n)
 		{
 			//_dontObserveSavingState = true;
 
@@ -90,5 +107,10 @@ namespace Shared.UI.UserControls
 
 			//_dontObserveSavingState = false;
 		}
-	}
+
+        private void openNodeByIdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			OpenNodeById?.Invoke(this, SelectedId);
+        }
+    }
 }

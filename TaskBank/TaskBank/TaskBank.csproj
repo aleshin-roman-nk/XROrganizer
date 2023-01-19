@@ -274,6 +274,7 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\IOpenObjectManager.cs" />
     <Compile Include="Presenters\NodeInstanFactory.cs" />
     <Compile Include="Presenters\OpenObjectManager.cs" />
     <Compile Include="Presenters\TaskBankMainPresenter.cs" />

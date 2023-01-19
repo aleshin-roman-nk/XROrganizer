@@ -12,5 +12,7 @@ namespace Shared.UI.Interfaces
 	{
 		void Put(NodeDTO n);
 		//event EventHandler<INode> Save;
+		int SelectedId { get; }
+		event EventHandler<int> OpenNodeById;
 	}
 }
