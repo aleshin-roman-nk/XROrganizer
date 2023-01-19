@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Shared.UI.Interfaces;
 using Shared.UI.tools;
 using System;
@@ -28,66 +29,66 @@ namespace Shared.UI.UserControls
 
 	public partial class DescriptionUC : UserControl, IDescriptionView
 	{
-		SavingObserver savingObserver;
+		//SavingObserver savingObserver;
 
-		INode _node = null;
+		//NodeDTO _node = null;
 
-		public event EventHandler<INode> Save;
+		//public event EventHandler<INode> Save;
 
 		public DescriptionUC()
 		{
 			InitializeComponent();
 
-			savingObserver = new SavingObserver();
+			//savingObserver = new SavingObserver();
 
-			savingObserver.Indicator = lblSaved;
+			//savingObserver.Indicator = lblSaved;
 		}
 
 		private void rtxNodeDescription_TextChanged(object sender, EventArgs e)
 		{
-			if(!_dontObserveSavingState)
-				savingObserver.Saved = false;
+			//if(!_dontObserveSavingState)
+			//	savingObserver.Saved = false;
 		}
 
 		private void rtxNodeDescription_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.Control && e.KeyCode == Keys.S)
-			{
-				_commitAndSave();
-				e.Handled = true;
-			}
+			//if (e.Control && e.KeyCode == Keys.S)
+			//{
+			//	_commitAndSave();
+			//	e.Handled = true;
+			//}
 		}
 
-		void _commitAndSave()
-		{
-			if (_node != null)
-			{
-				if (string.IsNullOrEmpty(_node.text)) _node.text = "";
+		//void _commitAndSave()
+		//{
+		//	if (_node != null)
+		//	{
+		//		if (string.IsNullOrEmpty(_node.text)) _node.text = "";
 
-				// We only need to know if rtxNodeDescription.Text has changed.
-				//if (!_node.description.Equals(rtxNodeDescription.Text))
-				if (savingObserver.Saved == false)
-				{
-					_node.text = rtxNodeDescription.Text;
+		//		// We only need to know if rtxNodeDescription.Text has changed.
+		//		//if (!_node.description.Equals(rtxNodeDescription.Text))
+		//		if (savingObserver.Saved == false)
+		//		{
+		//			_node.text = rtxNodeDescription.Text;
 					
-					Save?.Invoke(this, _node);
-				}
-			}
-			savingObserver.Saved = true;
-		}
+		//			Save?.Invoke(this, _node);
+		//		}
+		//	}
+		//	savingObserver.Saved = true;
+		//}
 
 		bool _dontObserveSavingState = false;
 
-		public void Put(INode n)
+		public void Put(NodeDTO n)
 		{
-			_dontObserveSavingState = true;
+			//_dontObserveSavingState = true;
 
-			_commitAndSave();
+			//_commitAndSave();
 
-			_node = n;
-			rtxNodeDescription.Text = _node.text;
+			//_node = n;
+			rtxNodeDescription.Text = n.text;
 
-			_dontObserveSavingState = false;
+			//_dontObserveSavingState = false;
 		}
 	}
 }

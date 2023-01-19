@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using TaskBank.Presenters.EventDefinition;
 using TaskBank.Views;
 using Unity;
@@ -97,9 +98,11 @@ namespace TaskBank.Presenters
 			_mainView.WorkingSessionPlayStateChanged += _mainView_WorkingSessionPlayStateChanged;
 			_mainView.OpenNode += _mainView_OpenNode;
 
-			_descView.Save += DescView_Save;
+            //_descView.Save += DescView_Save;
+            _descView.OpenNode += _descView_OpenNode;
 
-			_service.CollectionChanged += _service_CollectionChanged;
+
+            _service.CollectionChanged += _service_CollectionChanged;
 
 			_openObjectManager.SaveNode += _openObjectManager_SaveNode;
             _openObjectManager.DeleteNodeTextPage += _openObjectManager_DeleteNodeTextPage;
@@ -126,6 +129,8 @@ namespace TaskBank.Presenters
 
             update();
 		}
+
+
 
         private void _openObjectManager_DeleteNodeTextPage(object sender, NodeTextPage e)
         {
@@ -446,6 +451,7 @@ namespace TaskBank.Presenters
 				{
 					n.date = DateTime.Now;
 					n.last_modified_date = DateTime.Now;
+
 					var node = _service.Create(n);
 					update();
 					_mainView.NodesView.SetCursorAt(node);
@@ -455,21 +461,28 @@ namespace TaskBank.Presenters
 
 		private void _mainView_StartDesriptionForm(object sender, EventArgs e)
 		{
-			var node = _service.GetNode(_mainView.NodesView.SelectedNodes.FirstOrDefault().id);
+			// в случае оптимизации, добавить в сервисы получить только строку, путь и id
 
-			_descView.Put(node);
+			//var node = _service.GetNode(_mainView.NodesView.SelectedNodes.FirstOrDefault().id);
+
+			_descView.Put(_mainView.NodesView.SelectedNodes.FirstOrDefault());
 			_descView.StickTo(_mainView);
 			_descView.Display();
 		}
 
 		private void NodesView_CurrentNodeChanged(object sender, NodeDTO e)
 		{
-			var o = _service.GetNode(e.id);
+			//var o = _service.GetNode(e.id);
 
-			_descView.Put(o);
+			_descView.Put(e);
 		}
 
-		private void DescView_Save(object sender, INode e)
+        private void _descView_OpenNode(object sender, NodeDTO e)
+        {
+			_openNodeRouter(e);
+        }
+
+        private void DescView_Save(object sender, INode e)
 		{
 			if (e.type >= 0)
 			{
@@ -503,22 +516,25 @@ namespace TaskBank.Presenters
 
 		private void _nodesView_ActivateNode(object sender, NodeDTO e)
 		{
-			if (e.type == NType.Dir || e.type == NType.exit_dir)
-			{
-				_service.Enter(e);
-			}
-			else if (e.type == NType.Task)
-			{
-				var tsk = _service.GetNode(e.id);
-				_openObjectManager.OpenTask(tsk as FTask);
-				//_openObjectManager.OpenTask(e as FTask);
-			}
-			else
-			{
-                _openObjectManager.DefaultOpenNode( _service.GetNode(e.id) );
-			}
-		}
+			_openNodeRouter(e);
+        }
 
+		private void _openNodeRouter(NodeDTO node)
+		{
+            if (node.type == NType.Dir || node.type == NType.exit_dir)
+            {
+                _service.Enter(node);
+            }
+            else if (node.type == NType.Task)
+            {
+                var tsk = _service.GetNode(node.id);
+                _openObjectManager.OpenTask(tsk as FTask);
+            }
+            else
+            {
+                _openObjectManager.DefaultOpenNode(_service.GetNode(node.id));
+            }
+        }
 
 		//==== tree state manager
 

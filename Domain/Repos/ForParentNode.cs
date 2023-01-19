@@ -188,6 +188,7 @@ namespace Domain.Repos
 						pinned = x.pinned,
 						type = x.type,
 						date = x.date,
+						text = x.text,
 						IsCompleted = (x as FTask).IsCompleted
 					}
 					:
@@ -197,7 +198,8 @@ namespace Domain.Repos
                         name = x.name,
                         pinned = x.pinned,
                         type = x.type,
-                        date = x.date
+                        date = x.date,
+                        text = x.text,
                     }
                     );
 

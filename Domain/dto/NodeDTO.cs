@@ -8,11 +8,15 @@ using System.Threading.Tasks;
 
 namespace Domain.dto
 {
+    /*
+     * Тип для системы навигации по дереву и передачи для открытия конкретной ноды
+     */
 	public class NodeDTO
 	{
 		public int id { get; set; }
 		public NType type { get; set; }
-		public string name { get; set; }
+        public string text { get; set; }
+        public string name { get; set; }
 		public string NTypeString { get { return type.ToString(); } }
 		public string path { get; set; }
 		public bool pinned { get; set; }

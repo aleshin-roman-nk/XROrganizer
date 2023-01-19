@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.dto;
+using Domain.Entities;
 using Shared.UI.UserControls;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,13 @@ namespace TaskBank.Forms
 {
 	public partial class DescriptionForm : Form, IDescriptionWindow
 	{
+		NodeDTO node;
+
 		public DescriptionForm()
 		{
 			InitializeComponent();
 
-			descriptionUC1.Save += DescriptionUC1_Save;
+			//descriptionUC1.Save += DescriptionUC1_Save;
 		}
 
 		private void DescriptionUC1_Save(object sender, INode e)
@@ -28,11 +31,15 @@ namespace TaskBank.Forms
 		}
 
 		public event EventHandler<INode> Save;
+        public event EventHandler<NodeDTO> OpenNode;
 
-		public void Put(INode n)
+        public void Put(NodeDTO n)
 		{
-			if (n == null) return;
-			lblPath.Text = $"{n.path}#{n.id}";
+			node = n;
+
+            if (n == null) return;
+
+            lblPath.Text = string.IsNullOrEmpty(n.name) ? $"#{n.id}" : $"#{n.id} | {n.name}";
 			descriptionUC1.Put(n);
 		}
 
@@ -51,5 +58,27 @@ namespace TaskBank.Forms
 			e.Cancel = true;
 			Hide();
 		}
-	}
+
+        private void lblPath_Click(object sender, EventArgs e)
+        {
+			OpenNode?.Invoke(this, node);
+        }
+
+		Color color;
+
+        private void lblPath_MouseEnter(object sender, EventArgs e)
+        {
+			Label l = sender as Label;
+
+			color = l.ForeColor;
+
+			l.ForeColor = Color.Thistle;
+        }
+
+        private void lblPath_MouseLeave(object sender, EventArgs e)
+        {
+            Label l = sender as Label;
+            l.ForeColor = color;
+        }
+    }
 }

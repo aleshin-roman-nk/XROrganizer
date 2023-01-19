@@ -36,13 +36,16 @@ namespace TaskBank.Forms
             // lblPath
             // 
             this.lblPath.AutoSize = true;
-            this.lblPath.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPath.Font = new System.Drawing.Font("Roboto Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblPath.ForeColor = System.Drawing.Color.White;
-            this.lblPath.Location = new System.Drawing.Point(7, 9);
+            this.lblPath.Location = new System.Drawing.Point(2, 4);
             this.lblPath.Name = "lblPath";
-            this.lblPath.Size = new System.Drawing.Size(17, 19);
+            this.lblPath.Size = new System.Drawing.Size(25, 29);
             this.lblPath.TabIndex = 1;
             this.lblPath.Text = "0";
+            this.lblPath.Click += new System.EventHandler(this.lblPath_Click);
+            this.lblPath.MouseEnter += new System.EventHandler(this.lblPath_MouseEnter);
+            this.lblPath.MouseLeave += new System.EventHandler(this.lblPath_MouseLeave);
             // 
             // descriptionUC1
             // 
@@ -50,10 +53,10 @@ namespace TaskBank.Forms
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.descriptionUC1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(90)))), ((int)(((byte)(32)))));
-            this.descriptionUC1.Location = new System.Drawing.Point(3, 50);
+            this.descriptionUC1.Location = new System.Drawing.Point(1, 41);
             this.descriptionUC1.Name = "descriptionUC1";
-            this.descriptionUC1.Size = new System.Drawing.Size(461, 217);
-            this.descriptionUC1.TabIndex = 0;
+            this.descriptionUC1.Size = new System.Drawing.Size(464, 590);
+            this.descriptionUC1.TabIndex = 2;
             // 
             // DescriptionForm
             // 
@@ -61,8 +64,8 @@ namespace TaskBank.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(90)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(465, 632);
-            this.Controls.Add(this.lblPath);
             this.Controls.Add(this.descriptionUC1);
+            this.Controls.Add(this.lblPath);
             this.Name = "DescriptionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "DescriptionForm";
@@ -73,8 +76,7 @@ namespace TaskBank.Forms
 		}
 
 		#endregion
-
-		private Shared.UI.UserControls.DescriptionUC descriptionUC1;
 		private System.Windows.Forms.Label lblPath;
-	}
+        private Shared.UI.UserControls.DescriptionUC descriptionUC1;
+    }
 }
