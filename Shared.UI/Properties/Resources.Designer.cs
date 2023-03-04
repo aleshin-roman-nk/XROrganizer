@@ -103,6 +103,16 @@ namespace Shared.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap goal_24 {
+            get {
+                object obj = ResourceManager.GetObject("goal_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_task_completed_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8_task_completed_48", resourceCulture);

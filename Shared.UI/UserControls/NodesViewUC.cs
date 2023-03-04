@@ -162,7 +162,7 @@ namespace Shared.UI.UserControls
 			_customizer.RowColors[NType.Task] = Color.Green;
 
 			var d = new Dictionary<NType, Image>();
-			d[NType.Task] = Properties.Resources.task_list_24;
+			d[NType.Task] = Properties.Resources.goal_24;
 			d[NType.Dir] = Properties.Resources.folder_241;
 			d[NType.Note] = Properties.Resources.note_24;
 			d[NType.exit_dir] = Properties.Resources.exit_24;
