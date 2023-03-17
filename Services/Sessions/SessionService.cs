@@ -67,7 +67,7 @@ namespace Services.Sessions
 			return dates.Select(x => new ChartItem(_getSeconds(x), x.Day.ToString())).ToList();
 		}
 
-		public decimal AllocatedHours
+        public decimal AllocatedHours
 		{
 			get
 			{

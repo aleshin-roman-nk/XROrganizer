@@ -73,18 +73,25 @@ namespace TestingConsole
 
 		static void test1(IUnityContainer container)
 		{
-			INodeRepository repo = container.Resolve<INodeRepository>();
+			ISessionRepository repo = container.Resolve<ISessionRepository>();
 
-			//var i = repo.Get(1);//xorg
-			//var items = repo.GetAllChildTasksOf(i);
+			var items = repo.GetSessionExtraOf(4069);
 
-			//var items = repo.GetFirstLineChildren(1567);//xorg
+			foreach (var item in items)
+			{
+                Console.WriteLine($"{item.Id} | {item.Description} | {item.Start.ToShortDateString()}");
+            }
 
-			//foreach (var item in items)
-			//{
-			//	Console.WriteLine($"{item.name}#{item.id}");
-			//	//Console.WriteLine($"session:{item.Start} #{item.Id} task:{item.Owner.path}#{item.NodeId}");
-			//}
-		}
+            //var i = repo.Get(1);//xorg
+            //var items = repo.GetAllChildTasksOf(i);
+
+            //var items = repo.GetFirstLineChildren(1567);//xorg
+
+            //foreach (var item in items)
+            //{
+            //	Console.WriteLine($"{item.name}#{item.id}");
+            //	//Console.WriteLine($"session:{item.Start} #{item.Id} task:{item.Owner.path}#{item.NodeId}");
+            //}
+        }
 	}
 }

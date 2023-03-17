@@ -17,5 +17,7 @@ namespace Services.Sessions
 		IEnumerable<OSession> Items { get; }
 		ISessionRepository Repo { get; }
 		IEnumerable<ChartItem> GetStatistic(int year, int month, NodeDTO dir);
+
+
 	}
 }

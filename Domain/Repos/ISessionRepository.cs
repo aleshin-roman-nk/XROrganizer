@@ -15,5 +15,7 @@ namespace Domain.Repos
 		IEnumerable<OSession> GetSessionOf(int year, int month, NodeDTO n);
 		IEnumerable<int> GetAllChildIdOf(NodeDTO n);
 		SessionForNode ForNode(int parentNode);
+
+        IEnumerable<OSession> GetSessionExtraOf(int nodeId);
     }
 }
