@@ -1,0 +1,43 @@
+WITH RECURSIVE tree_path AS (
+  SELECT id, owner_id, name
+  FROM Nodes
+  WHERE id = 2727
+  UNION ALL
+  SELECT t.id, t.owner_id, t.name
+  FROM Nodes t
+  JOIN tree_path tp ON t.owner_id = tp.id
+)
+SELECT id, owner_id, name
+FROM tree_path;
+
+
+
+
+SELECT *
+FROM Sessions
+WHERE NodeId IN (
+
+	WITH RECURSIVE tree_path AS (
+	  SELECT id, owner_id, name
+	  FROM Nodes
+	  WHERE id = 2091
+	  UNION ALL
+	  SELECT t.id, t.owner_id, t.name
+	  FROM Nodes t
+	  JOIN tree_path tp ON t.owner_id = tp.id
+	)
+	SELECT id
+	FROM tree_path
+
+);
+
+
+var nodeId = 2091;
+var sessionQuery = from s in context.Sessions
+                   where (
+                      from t in context.Nodes
+                      where t.id == nodeId ||
+                            context.Nodes.Where(tp => tp.owner_id == t.id).Any(tp => tp.id == nodeId)
+                      select t.id
+                   ).Contains(s.NodeId)
+                   select s;
