@@ -18,9 +18,19 @@ namespace Domain.DBContext
 
 		public AppData Create()
 		{
-			AppData res = new AppData(db_connection_string);
-			//res.Database.Log = Logger.Write;
-			return res;
+			try
+			{
+				AppData res = new AppData(db_connection_string);
+				//Logger.Write("Data base is successful");
+				//res.Database.Log = Logger.Write;
+				return res;
+			}
+			catch (Exception ex)
+			{
+				Logger.Write(ex.Message);
+			}
+
+			throw new InvalidOperationException("Wrong with creating data base");
 		}
 	}
 }

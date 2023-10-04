@@ -54,6 +54,15 @@ namespace Domain.Entities
 			}
 		}
 
+		public string ShortName
+		{
+			get
+			{
+				if (Owner == null) return "not loaded";
+				return $"{Owner.name}";
+			}
+		}
+
 		//private List<NodeTextPage> _deser(string txt)
 		//{
 		//	// here strange thing happends.

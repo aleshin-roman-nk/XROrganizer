@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using xorg.Tools;
 
 namespace Domain.Repos
 {
@@ -162,11 +163,20 @@ namespace Domain.Repos
 
 				IEnumerable<Node> items_db;
 
-                if (includeCompleted)
+				try
 				{
-					items_db = db.Nodes.Where(x => x.owner_id == _parentNode.id).ToList();
-                }
-				else items_db = db.Nodes.Where(x => x.owner_id == _parentNode.id && ((x is FTask) ? ((x as FTask).IsCompleted == false) : (true))).ToList();
+					if (includeCompleted)
+					{
+						items_db = db.Nodes.Where(x => x.owner_id == _parentNode.id).ToList();
+					}
+					else items_db = db.Nodes.Where(x => x.owner_id == _parentNode.id && ((x is FTask) ? ((x as FTask).IsCompleted == false) : (true))).ToList();
+				}
+				catch (Exception ex)
+				{
+					Logger.Write(ex.Message);
+					Logger.Write("1. Update entity framework things; 2. Update x64 and x86 folders in the working release");
+					throw;
+				}
 
                 //var items = items_db.Select(x => new { 
                 //	dto = new NodeDTO {

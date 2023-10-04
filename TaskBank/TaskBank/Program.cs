@@ -94,7 +94,15 @@ namespace TaskBank
 				var presenter = container.Resolve<TaskBankMainPresenter>();
 
 				//Application.Run((Form)container.Resolve<IMainView>());
-				Application.Run((Form)mainWind);
+
+				try
+				{
+					Application.Run((Form)mainWind);
+				}
+				catch (Exception ex)
+				{
+                    Console.WriteLine(ex.Message);
+                }
 			}
 		}
 	}
